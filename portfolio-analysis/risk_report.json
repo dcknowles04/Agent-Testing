@@ -1,0 +1,69 @@
+{
+  "top_flags_summary": [
+    "Health Care sector concentration: LLY (13.40%) + WST (12.70%) = 26.10% — exceeds the ~20-25% comfort band (the strongest single flag).",
+    "Energy sector concentration / oil-price correlation: FANG (12.32%) + XOM (10.35%) = 22.67% — inside the ~20-25% band, high internal correlation.",
+    "Information Technology sector concentration: MSFT (7.01%) + PANW (8.71%) + SKHY (7.11%) = 22.83% — inside the ~20-25% band.",
+    "Cross-label AI-infrastructure thematic cluster: AMZN (8.21%) + MSFT (7.01%) + PANW (8.71%) + SKHY (7.11%) = 31.04% — spans Consumer Discretionary and IT sector labels; moderate-confidence qualitative judgment that standard sector grouping understates this common-driver exposure.",
+    "PANW event-driven volatility: 8.71% of portfolio, currently elevated due to acquisition rumors and pending earnings; price itself uncertain ($339-$388 cross-source range).",
+    "Single-position concentration: LLY 13.40%, WST 12.70%, FANG 12.32%, XOM 10.35% all above ~10%; none above the ~15% stronger-flag threshold (LLY closest)."
+  ],
+  "concentration": {
+    "single_position_above_10pct": [
+      { "ticker": "LLY", "pct": 13.40 },
+      { "ticker": "WST", "pct": 12.70 },
+      { "ticker": "FANG", "pct": 12.32 },
+      { "ticker": "XOM", "pct": 10.35 }
+    ],
+    "no_position_exceeds_15pct": true,
+    "sector_breakdown": [
+      { "sector": "Health Care", "tickers": ["LLY", "WST"], "pct": 26.10, "flag": "exceeds 20-25% band" },
+      { "sector": "Energy", "tickers": ["FANG", "XOM"], "pct": 22.67, "flag": "inside 20-25% band" },
+      { "sector": "Information Technology", "tickers": ["MSFT", "PANW", "SKHY"], "pct": 22.83, "flag": "inside 20-25% band" },
+      { "sector": "Consumer Staples", "tickers": ["COST"], "pct": 9.31, "flag": "none" },
+      { "sector": "Consumer Discretionary", "tickers": ["AMZN"], "pct": 8.21, "flag": "none" },
+      { "sector": "Financials", "tickers": ["BRK/B"], "pct": 6.52, "flag": "none" },
+      { "sector": "Utilities", "tickers": ["PNW"], "pct": 4.36, "flag": "none" }
+    ],
+    "geographic": "SKHY (7.11%) is the portfolio's only non-U.S.-domiciled holding (South Korea, via ADR); all other 10 holdings are U.S.-domiciled."
+  },
+  "volatility": {
+    "portfolio_composition": "100% single-stock equity exposure across 11 individual names; no funds/bonds/cash in this dataset.",
+    "higher_beta_or_event_driven": ["FANG", "SKHY", "PANW", "AMZN", "WST"],
+    "defensive_counterweights": { "tickers": ["BRK/B", "COST", "PNW"], "combined_pct": 20.19 },
+    "elevated_near_term_uncertainty": ["PANW (active acquisition-rumor/earnings volatility)", "SKHY (short trading history, listed 2026-07-10)"],
+    "note": "No numeric beta/standard-deviation figures sourced; characterizations are qualitative."
+  },
+  "correlation": {
+    "clusters": [
+      { "name": "Energy / oil price", "tickers": ["FANG", "XOM"], "combined_pct": 22.67, "strength": "high — direct shared driver (crude oil price)" },
+      { "name": "Health Care sector sentiment", "tickers": ["LLY", "WST"], "combined_pct": 26.10, "strength": "moderate — indirect, sector sentiment/policy rather than one price driver" },
+      { "name": "AI-infrastructure / AI-capex theme (cross-label)", "tickers": ["AMZN", "MSFT", "PANW", "SKHY"], "combined_pct": 31.04, "strength": "moderate confidence, qualitative — spans two sector labels, likely understated by sector-level view" },
+      { "name": "Growth / rate-sensitivity (soft)", "tickers": ["AMZN", "MSFT", "PANW", "LLY (lesser extent)"], "combined_pct": null, "strength": "soft macro-level flag, no % assigned" },
+      { "name": "Power-demand / AI (soft, weak link)", "tickers": ["PNW"], "combined_pct": 4.36, "strength": "weak, low-confidence indirect link to AI cluster" }
+    ],
+    "no_cluster_flag": ["BRK/B", "COST"]
+  },
+  "risk_flags_registry": [
+    "1. LLY single-position concentration at 13.40%",
+    "2. WST single-position concentration at 12.70%",
+    "3. FANG single-position concentration at 12.32%",
+    "4. XOM single-position concentration at 10.35%",
+    "5. Health Care sector concentration (LLY+WST) at 26.10%",
+    "6. Energy sector concentration (FANG+XOM) at 22.67%",
+    "7. Information Technology sector concentration (MSFT+PANW+SKHY) at 22.83%",
+    "8. Foreign/non-U.S. exposure via SKHY at 7.11%",
+    "9. PANW elevated event-driven volatility at 8.71%",
+    "10. SKHY volatility/data-quality risk (recent listing) at 7.11%",
+    "11. FANG+XOM oil-price correlation cluster at 22.67% combined",
+    "12. LLY+WST Health Care sector-label correlation at 26.10% combined",
+    "13. AI-infrastructure cross-label thematic cluster (AMZN+MSFT+PANW+SKHY) at 31.04% combined",
+    "14. Growth/rate-sensitivity soft cluster (AMZN, MSFT, PANW, LLY) — qualitative, no % assigned",
+    "15. PNW weak/low-confidence indirect link to AI cluster via power-demand narratives, at 4.36%",
+    "16. No individual position exceeds the ~15% stronger-flag threshold (LLY closest at 13.40%)",
+    "17. BRK/B (6.52%) and COST (9.31%) carry no concentration or correlation-cluster flag — relative diversifiers"
+  ],
+  "cross_check_status": {
+    "research_reviewed_risk_output": "CONFIRMED — 0 discrepancies (all percentages, sector groupings, and holdings verified against source data)",
+    "risk_reviewed_strategy_output": "CONFIRMED — 0 contradictions, all 17 registry items addressed, no new issues introduced, confidence levels preserved, no trade-directive language found"
+  }
+}

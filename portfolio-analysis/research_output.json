@@ -1,0 +1,27 @@
+{
+  "as_of": "2026-08-27 to 2026-08-30 (prices not synchronized to a single timestamp)",
+  "total_portfolio_value_usd": 11330.26,
+  "percent_of_portfolio_sum_check": 100.00,
+  "holdings": [
+    { "ticker": "AMZN", "name": "Amazon.com, Inc.", "asset_type": "Individual equity", "sector": "Consumer Discretionary — Broadline Retail", "price_usd": 266.43, "price_date": "2026-08-28 (close)", "shares": 3.4908, "market_value_usd": 930.05, "pct_of_portfolio": 8.21, "price_confidence": "high" },
+    { "ticker": "BRK/B", "name": "Berkshire Hathaway Inc. — Class B", "asset_type": "Individual equity", "sector": "Financials — Multi-Sector Holdings", "price_usd": 505.44, "price_date": "2026-08-28", "shares": 1.4611, "market_value_usd": 738.50, "pct_of_portfolio": 6.52, "price_confidence": "high" },
+    { "ticker": "COST", "name": "Costco Wholesale Corporation", "asset_type": "Individual equity", "sector": "Consumer Staples — Merchandise Retail", "price_usd": 934.66, "price_date": "2026-08-27 (close, prior-day used)", "shares": 1.1287, "market_value_usd": 1054.95, "pct_of_portfolio": 9.31, "price_confidence": "moderate" },
+    { "ticker": "FANG", "name": "Diamondback Energy, Inc.", "asset_type": "Individual equity", "sector": "Energy — Oil & Gas Exploration & Production", "price_usd": 200.52, "price_date": "2026-08-27", "shares": 6.9636, "market_value_usd": 1396.34, "pct_of_portfolio": 12.32, "price_confidence": "high" },
+    { "ticker": "LLY", "name": "Eli Lilly and Company", "asset_type": "Individual equity", "sector": "Health Care — Pharmaceuticals", "price_usd": 1176.10, "price_date": "2026-08-28 (close)", "shares": 1.2913, "market_value_usd": 1518.70, "pct_of_portfolio": 13.40, "price_confidence": "high" },
+    { "ticker": "MSFT", "name": "Microsoft Corporation", "asset_type": "Individual equity", "sector": "Information Technology — Systems Software", "price_usd": 513.06, "price_date": "2026-08-28 (close)", "shares": 1.5472, "market_value_usd": 793.81, "pct_of_portfolio": 7.01, "price_confidence": "high" },
+    { "ticker": "PANW", "name": "Palo Alto Networks, Inc.", "asset_type": "Individual equity", "sector": "Information Technology — Software (Cybersecurity)", "price_usd": 376.86, "price_date": "~2026-08-29/30", "shares": 2.6187, "market_value_usd": 986.88, "pct_of_portfolio": 8.71, "price_confidence": "LOW — cross-source range $339.31-$388.50 (acquisition-rumor and earnings-driven volatility)" },
+    { "ticker": "PNW", "name": "Pinnacle West Capital Corporation", "asset_type": "Individual equity", "sector": "Utilities — Electric Utilities", "price_usd": 99.74, "price_date": "recent, exact date unconfirmed", "shares": 4.9553, "market_value_usd": 494.24, "pct_of_portfolio": 4.36, "price_confidence": "moderate" },
+    { "ticker": "SKHY", "name": "SK hynix Inc. — American Depositary Shares (ADR)", "asset_type": "Individual equity (foreign ADR, South Korea)", "sector": "Information Technology — Semiconductors & Semiconductor Equipment", "price_usd": 161.04, "price_date": "2026-08-28, 4:00:01 PM EDT (close)", "shares": 5, "market_value_usd": 805.20, "pct_of_portfolio": 7.11, "price_confidence": "moderate — recently listed (began trading 2026-07-10), limited historical corroboration" },
+    { "ticker": "WST", "name": "West Pharmaceutical Services, Inc.", "asset_type": "Individual equity", "sector": "Health Care — Health Care Equipment & Supplies", "price_usd": 346.09, "price_date": "2026-08-27 (close)", "shares": 4.1579, "market_value_usd": 1439.01, "pct_of_portfolio": 12.70, "price_confidence": "moderate — cross-source spread $337.47-$358.24" },
+    { "ticker": "XOM", "name": "Exxon Mobil Corporation", "asset_type": "Individual equity", "sector": "Energy — Integrated Oil & Gas", "price_usd": 156.71, "price_date": "2026-08-28 (close)", "shares": 7.4825, "market_value_usd": 1172.58, "pct_of_portfolio": 10.35, "price_confidence": "high" }
+  ],
+  "data_quality_notes": [
+    "Direct financial-data-feed access (WebFetch to stockanalysis.com/Yahoo/CNBC) was blocked in this session; all prices sourced via web search snippets, cross-corroborated where possible.",
+    "SKHY verified as SK hynix Inc.'s ADR (not an ETF, not a typo) — began trading on Nasdaq 2026-07-10.",
+    "BRK/B verified as Berkshire Hathaway Class B common stock (single entity, not two tickers).",
+    "PANW price carries the widest cross-source disagreement ($339.31-$388.50) due to acquisition-rumor volatility and pending Sept 1 2026 earnings.",
+    "WST, PNW, and COST prices carry moderate uncertainty (cross-source spread, undated quote, and prior-day close respectively).",
+    "No fields required an UNAVAILABLE flag — all 11 holdings fully identified with usable data.",
+    "Sector/GICS classifications assigned from standard mappings, not independently re-verified per-ticker against an official GICS lookup this session."
+  ]
+}
