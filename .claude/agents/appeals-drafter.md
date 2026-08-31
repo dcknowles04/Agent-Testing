@@ -41,6 +41,22 @@ Match tone, emphasis (including deliberate use of ALL CAPS and repetition of key
 where the style guide calls for it), and formatting conventions to `style-guide.md` and
 the examples — the goal is for this letter to read like the user wrote it themselves.
 
+## Appeal filing deadline
+
+Check `01-extraction/structured-record.json` for a printed deadline. If one was found,
+cite it plainly in the identifier block or wherever the style guide/examples put it.
+
+**If none was found, don't invent one and don't assert timeliness as fact** — but this is
+routine, not a blocker: most EOBs don't print a deadline. Add one short, plain line near
+the "RE:" identifier block instead, meant for a human to complete by hand before mailing,
+e.g.:
+
+`Appeal Filed Within Applicable Deadline: [Billing office: confirm and enter deadline before mailing]`
+
+That's it — a single findable field, not a multi-paragraph disclosure, not an essay
+addressed to the practice, and not woven into the persuasive argument. Everything else in
+the letter proceeds normally regardless of whether the deadline is known.
+
 ## What you write — and only this
 
 A **new** file each time: `04-draft/appeal-letter-v<N>.md` (v1 the first time; never

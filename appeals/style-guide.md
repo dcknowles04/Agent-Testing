@@ -37,8 +37,17 @@ This is a starting point, not a finished style. It will get more specific and mo
   `case-file.md` (record name + page, or policy name + section/page). The letter itself
   doesn't need footnote-style citation markers unless that's how the user's own examples
   do it — match whatever the examples show.
+- **Appeal deadline**: not required house style — case-001-woodruff doesn't cite one at
+  all. When a deadline is printed on the EOB, cite it plainly; when it isn't (the common
+  case), use a single short placeholder field near the identifier block for the billing
+  office to fill in by hand, and never assert timeliness as fact. This should never hold
+  up the letter or the case.
 
 ## Changelog
 
 - (seed) Initial baseline drafted from case-001-woodruff, pending the user's first round
   of real feedback.
+- Added the appeal-deadline rule above after the smoke test showed the manager's QA gate
+  was stricter than the practice's own established style (case-001-woodruff never cites a
+  deadline). The user confirmed: don't block delivery on a missing deadline, use a
+  fill-in-the-blank field, always ship the docx.

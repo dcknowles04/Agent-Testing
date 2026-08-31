@@ -63,6 +63,12 @@ every factual claim in it traces back to an actual citation in your `case-file.m
 claim in the letter that isn't backed by a citation you wrote is a fabrication risk and
 must be flagged.
 
+A missing appeal deadline is the normal case, not a defect — most EOBs don't print one.
+If the letter honestly marks it with a fill-in-the-blank placeholder rather than
+asserting a fabricated date or claiming unverified timeliness, that's correct behavior,
+not something to REVISE over. Only flag the deadline if the letter asserts a specific
+date or timeliness claim that isn't actually backed by a printed source.
+
 Write **only** `04-draft/review/case-review-vN.md` (matching the version reviewed). First
 line must be exactly `VERDICT: APPROVE` or `VERDICT: REVISE`, followed by specifics if
 revising.

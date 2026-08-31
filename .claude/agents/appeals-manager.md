@@ -43,18 +43,27 @@ Once all three reviewer agents (`appeals-extraction`, `appeals-denial-interprete
 that version against this checklist:
 
 - Every patient/claim identifier in the letter matches `01-extraction/structured-record.json`.
-- The appeal filing deadline is cited in the letter, and it has not already passed
-  (compare against today's date).
 - There is a specific, explicit ask (a dollar amount and/or requested action) — not a
   vague request for "reconsideration."
 - No reviewer comment from the approved round was left unaddressed (cross-check against
   `04-draft/changelog.md`).
 
-If the checklist fails anywhere, write specifics to `05-manager-audit/qa-checklist.md`
-and send it back — the orchestrator will route this to `appeals-drafter` for another
-revision round; do not proceed to producing a document from a letter you've flagged.
+**The appeal filing deadline is never a pass/fail gate.** Most EOBs don't print one, and
+that's expected, not a defect — do not withhold the deliverable over it. If
+`01-extraction/structured-record.json` shows a deadline was printed, confirm the letter
+cites it. If none was found, just confirm the drafter left the placeholder field
+described in its own instructions (a short, findable line for a human to fill in by
+hand) rather than silence or a fabricated date — this is a presence check, not something
+that can fail QA.
 
-If it passes, produce the deliverable:
+If the three checklist items above fail anywhere, write specifics to
+`05-manager-audit/qa-checklist.md` and send it back — the orchestrator will route this to
+`appeals-drafter` for another revision round; do not proceed to producing a document from
+a letter you've flagged. Otherwise, **always proceed to produce the `.docx`** — the final
+output for a case that reaches this duty should always be a Word document, never a stop
+with nothing delivered.
+
+Once the checklist passes, produce the deliverable:
 1. Use the `docx` skill to render the approved `appeal-letter-vN.md` into
    `06-final/Appeal_Letter_<case-id>.docx`, following that skill's own instructions for
    creating a properly formatted business letter (correct page size, no literal `\n`,

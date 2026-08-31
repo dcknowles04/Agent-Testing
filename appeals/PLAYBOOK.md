@@ -138,12 +138,20 @@ be fully self-contained).
    **Cap: 5 rounds.** If still not unanimous, write `04-draft/UNRESOLVED.md` summarizing
    the standing disagreement and **stop — ask the user** rather than shipping a
    best-effort letter.
-7. **Manager final QA**: identifiers match extraction, appeal deadline cited (and not
-   already past), a specific dollar/action ask is present, no open reviewer comments. On
-   failure, loop back to step 6 with the manager's checklist as extra input. On pass,
+7. **Manager final QA**: identifiers match extraction, a specific dollar/action ask is
+   present, no open reviewer comments. On failure, loop back to step 6 with the manager's
+   checklist as extra input. **The appeal filing deadline is never a QA gate** — most
+   EOBs don't print one, and that's expected. If a deadline was printed, the letter
+   should cite it; if not, the drafter leaves a short placeholder field for a human to
+   fill in by hand (see §7's drafter instructions), and QA passes regardless. On pass,
    render to `.docx` via the `docx` skill and verify by converting to images and looking
-   at the render.
+   at the render — **the pipeline should always end in a delivered `.docx`** once the
+   three checklist items above are satisfied, never a stop over a missing deadline.
 8. Report the `.docx` path to the user and ask for feedback for next time (§7).
+
+The only case where the pipeline stops without producing a `.docx` is step 6's 5-round
+cap on genuine, substantive disagreement between reviewers — a missing deadline is not
+that kind of problem and never triggers it.
 
 ## 7. Style guide & example corpus
 
@@ -225,7 +233,7 @@ until then, but letters will be more accurate once these are known:
 | Standard signature block — whose name/title signs | **"Medical Billing/Collection Specialist"** (title only — no individual signer name is used; matches the first example) |
 | NPI / Tax ID (if payers require it on appeals) | TBD |
 | Payers dealt with regularly, and each one's appeal mailing/fax/portal address | Anthem Blue Cross confirmed: appeals to P.O. Box 60007, Los Angeles, CA 90060, Fax: 800-927-4092. Other payers TBD. |
-| Typical appeal filing deadline per payer | TBD |
+| Typical appeal filing deadline per payer | TBD — informational only; per §6, a missing deadline never blocks delivery. The drafter leaves a placeholder field and the billing office fills it in by hand before mailing. |
 | Appeal levels this practice pursues (first-level only, or also second-level/external
   review) | TBD (v1 scope is first-level internal appeals only) |
 | State-specific external review rights that might matter | TBD |
