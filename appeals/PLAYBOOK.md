@@ -221,15 +221,17 @@ until then, but letters will be more accurate once these are known:
 
 | Question | Answer |
 |---|---|
-| Practice name, address, phone/fax/email for the signature block | TBD |
+| Practice name, address, phone/fax/email for the signature block | **West Coast Center for Orthopedic Surgery & Sports Medicine**, 1200 Rosecrans Avenue Suite 208, Manhattan Beach, CA 90266. PHN: (310) 416-9700, FAX: (310) 416-1120, billing contact email: Fiorella@wcsportsmed.com. Confirmed by the user as the standing contact info to use on outgoing appeals. |
+| Standard signature block — whose name/title signs | **"Medical Billing/Collection Specialist"** (title only — no individual signer name is used; matches the first example) |
 | NPI / Tax ID (if payers require it on appeals) | TBD |
-| Payers dealt with regularly, and each one's appeal mailing/fax/portal address | TBD |
+| Payers dealt with regularly, and each one's appeal mailing/fax/portal address | Anthem Blue Cross confirmed: appeals to P.O. Box 60007, Los Angeles, CA 90060, Fax: 800-927-4092. Other payers TBD. |
 | Typical appeal filing deadline per payer | TBD |
-| Standard signature block — whose name/title signs (e.g. "Medical Billing/Collection
-  Specialist") | TBD (first example used this exact title) |
 | Appeal levels this practice pursues (first-level only, or also second-level/external
   review) | TBD (v1 scope is first-level internal appeals only) |
 | State-specific external review rights that might matter | TBD |
+
+`appeals-drafter` should treat the practice/signature-block row above as the standing
+default for every case's signature block unless a specific case says otherwise.
 
 ## 12. Troubleshooting / known limitations
 
