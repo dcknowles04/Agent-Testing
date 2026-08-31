@@ -37,6 +37,11 @@ and structure what's actually on the page.
 For each EOB (current + any comparable ones), produce:
 - Patient name, DOB, member/subscriber ID, claim number
 - Payer name, provider name/ID, network status if stated
+- **Every payer contact channel printed anywhere on the document or its instructions
+  pages** — mailing address, every fax number (there may be more than one, e.g. a
+  general fax and a separate appeals/dispute fax), every email address, department
+  names. Capture all of them, not just the first one found — the drafter needs the
+  full set for the letter's address block.
 - Appeal filing deadline, if printed anywhere on the document
 - A `service_lines[]` array, one entry per billed service, each with: CPT/HCPCS code,
   date of service, billed amount, allowed amount, paid amount, patient responsibility,

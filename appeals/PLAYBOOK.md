@@ -168,21 +168,28 @@ that kind of problem and never triggers it.
   candidate for a new `examples/` entry — ask them.
 
 **Observed style baseline** (from the first real example — Woodruff/Anthem, redacted into
-`examples/eob-appeal-pairs/case-001-woodruff/`), until the user's own feedback refines it
-further:
-- Assertive, advocacy tone; ALL CAPS used for the letter's most important assertions.
+`examples/eob-appeal-pairs/case-001-woodruff/`; refined once already after the user
+compared the original letter directly against a pipeline-generated one for the same
+case — see `style-guide.md`'s changelog for the full comparison). The authoritative,
+up-to-date rules live in `style-guide.md`; this is a short pointer, not a duplicate:
+- Assertive, advocacy tone, stated with total confidence — never self-qualified or
+  hedged.
+- ALL CAPS used heavily — full sentences routinely, not just short phrases.
 - Core facts (codes, dates of service, dollar amounts) are repeated multiple times through
   the letter, not stated once and left — repetition is deliberate emphasis, not sloppiness.
 - Denial codes are quoted verbatim, then rebutted one at a time: *"Contrary to denial code
   X: ..."*.
-- **Precedent argument**: when a comparable prior EOB shows the payer already paid the
-  *same* CPT/HCPCS code correctly for the *same* patient, that comparison is a primary
-  argument — lead with it when `00-intake/comparable-eobs/` has a match.
-- Medical necessity is argued by quoting the payer's own plan/SPD definition, then stating
-  plainly how the treatment meets each prong of that definition.
-- Explicit, specific ask at the end (exact dollar amount and what to do), followed by a
-  practice billing-department signature block (name/title, address, phone, fax, email) —
-  not a patient signature.
+- **Argument breadth**: every supportable argument thread goes in (precedent, medical
+  necessity, CPT/documentation compliance, coverage), not only the one the primary
+  dispute category implies — see `appeals-case-builder`'s instructions.
+- **The ask defaults to 100% of billed charges**, even when a precedent/ratio argument
+  only mathematically supports a smaller corrected figure — that math is supporting
+  evidence for the demand, not a cap on it.
+- Header/address block should capture every fax number, email address, and department
+  name printed on the intake documents, not just one — `appeals-extraction` should pull
+  all of them into `structured-record.json`, not stop at the first match.
+- Signature block is title + address lines only — no practice-name line, no separate
+  email line; phone and email go together in the closing sentence instead.
 
 ## 8. Payer policy documents
 
