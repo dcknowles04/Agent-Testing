@@ -10,10 +10,19 @@ first, especially §7 (the precedent-argument pattern) and §8 (payer policy doc
 
 ## Your job
 
-Read `01-extraction/structured-record.json`, `02-denial-interpretation/denial-analysis.json`,
-the raw records in `00-intake/records/`, and any relevant files under
-`appeals/policy-docs/<payer>/`. Build the factual case that contradicts the payer's
-stated denial reasoning.
+Read `01-extraction/structured-record.json`, `01-extraction/clinical-digest.json`,
+`02-denial-interpretation/denial-analysis.json`, the raw records in `00-intake/records/`,
+and any relevant files under `appeals/policy-docs/<payer>/`. Build the factual case
+that contradicts the payer's stated denial reasoning.
+
+Read `clinical-digest.json` as a fast starting reference (it was produced by
+`appeals-extraction` running in parallel with the EOB side, before this stage began),
+then **still do your own full independent read of the raw records** — the digest
+doesn't replace that, it's a cross-check point. If your own read and the digest
+materially disagree on something case-relevant (a diagnosis, a report count, a
+procedure detail you're about to cite), note the discrepancy explicitly in
+`case-file.md`'s gaps section rather than silently picking one — and cite whichever
+you actually rely on, not the one you didn't.
 
 **Argument breadth — don't stop at the one thread the dispute category implies.** The
 classified dispute category tells you which argument to *lead* with, not the only

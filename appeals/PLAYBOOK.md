@@ -12,20 +12,28 @@ properly cited appeal letter as a Word document (`.docx`), written from the pers
 of the **treating practice's billing/collections office** (not the patient in first
 person), addressed to the payer's appeals department.
 
-Five specialized agents work a strict sequential pipeline (each stage depends on the
-previous one's output — this is deliberately built as plain Claude Code subagents, not
-the experimental live "Agent Teams" feature; see `docs/agent-teams.md` §4, which lists
-"sequential tasks with dependencies" as a poor fit for that feature, and §6/§12, which
-note team state is session-scoped and cannot be made persistent). A single command,
-`/appeals:run`, drives the whole pipeline end-to-end for one case.
+Five specialized agents work a pipeline that's sequential where the real dependencies
+require it and parallel everywhere else (this is deliberately built as plain Claude
+Code subagents, not the experimental live "Agent Teams" feature; see
+`docs/agent-teams.md` §4, which lists "sequential tasks with dependencies" as a poor
+fit for that feature, and §6/§12, which note team state is session-scoped and cannot
+be made persistent). A single command, `/appeals:run`, drives the whole pipeline
+end-to-end for one case. Two things run concurrently rather than strictly in sequence
+— see §6 for the full detail:
+- **Extraction splits into two independent calls** (EOB vs. clinical records), since
+  neither depends on the other.
+- **The manager's ownership audit of a stage overlaps with the next stage's work**,
+  since an audit only checks files that already exist and won't change — there's no
+  correctness reason to wait for it before starting what's next, only a reason to redo
+  that next stage if the rare audit failure turns up.
 
 ## 2. Roles
 
 | Agent | Job | Reads | Writes |
 |---|---|---|---|
-| `appeals-extraction` | Pulls structured data out of the EOB(s) and records; OCR/vision cleanup | `00-intake/**` | `01-extraction/**`, later `04-draft/review/extraction-review-vN.md` |
+| `appeals-extraction` | Pulls structured data out of the EOB(s) and records; OCR/vision cleanup. Runs as **two parallel duties**: Duty A (EOB) and Duty B (clinical records) — see §6 | `00-intake/**` | `01-extraction/**` (`structured-record.json`+`extraction-notes.md` from Duty A, `clinical-digest.json` from Duty B), later `04-draft/review/extraction-review-vN.md` |
 | `appeals-denial-interpreter` | Translates denial/EXPL/CARC/RARC codes into plain language + dispute category | `01-extraction/**` | `02-denial-interpretation/**`, later `04-draft/review/denial-review-vN.md` |
-| `appeals-case-builder` | Builds the cited factual argument against the denial | `01-*`, `02-*`, `00-intake/records/**`, `policy-docs/**` | `03-case-file/**`, later `04-draft/review/case-review-vN.md` |
+| `appeals-case-builder` | Builds the cited factual argument against the denial (reads Duty B's clinical digest as a fast reference, but still independently re-reads the raw records as a cross-check) | `01-*` (including `clinical-digest.json`), `02-*`, `00-intake/records/**`, `policy-docs/**` | `03-case-file/**`, later `04-draft/review/case-review-vN.md` |
 | `appeals-drafter` | Writes the formal appeal letter; revises on feedback | `03-case-file/**`, `style-guide.md`, `examples/**`, `04-draft/review/*` | `04-draft/appeal-letter-vN.md`, `04-draft/changelog.md` |
 | `appeals-manager` | Enforces file ownership, QA gate, final `.docx` delivery | everything (read-only outside its own lane except audits) | `manifest.json`, `status.md`, `05-manager-audit/**`, `06-final/**` |
 
@@ -59,8 +67,10 @@ appeals/
         │                                            # patient/code that paid correctly —
         │                                            # used for the "precedent" argument
         ├── 01-extraction/
-        │   ├── structured-record.json             # owner: appeals-extraction
-        │   └── extraction-notes.md                # owner: appeals-extraction
+        │   ├── structured-record.json             # owner: appeals-extraction (Duty A: EOB)
+        │   ├── extraction-notes.md                # owner: appeals-extraction (Duty A: EOB)
+        │   └── clinical-digest.json                # owner: appeals-extraction (Duty B: records,
+        │                                              runs in parallel with Duty A — see §6)
         ├── 02-denial-interpretation/
         │   └── denial-analysis.json               # owner: appeals-denial-interpreter
         ├── 03-case-file/
@@ -124,12 +134,29 @@ be fully self-contained).
 ## 6. Pipeline stages in detail
 
 0. **Scaffold** (mechanical — case ID, folder tree, copy intake files, seed manifest).
-1. **Extraction** — one structured record per EOB found in `00-intake/eob/` and
-   `00-intake/comparable-eobs/`.
-2. Manager audits stage 1 → halt and report on failure.
-3. **Denial interpretation** → audit.
-4. **Case building** → audit.
-5. **Draft v1** → audit.
+1. **Extraction — two parallel calls, not one.** Duty A reads `00-intake/eob/` and
+   `00-intake/comparable-eobs/`, writing `structured-record.json`. Duty B reads
+   `00-intake/records/` only, writing `clinical-digest.json`. Neither depends on the
+   other — fire both as parallel Task calls to `appeals-extraction`.
+2. **Denial interpretation starts the moment Duty A finishes** — it never needed
+   Duty B, so don't wait for it. The manager's audit of stage 1 needs *both* duties
+   done (it checks the whole `01-extraction/` folder), so it may start slightly later
+   than denial-interpretation — that's fine, per the overlap principle below, run it
+   concurrently with whatever's already in progress rather than waiting for a clean
+   moment to insert it.
+3. **Case building** — needs Duty A, Duty B, *and* denial-interpretation all done.
+   Fire it alongside the manager's audit of stage 2 (denial-interpretation).
+4. **Draft v1** — fire alongside the manager's audit of stage 3 (case-building).
+5. Audit stage 4 (the draft).
+
+**The overlap principle, applied at every boundary above:** a manager audit checks
+files that already exist and won't change — there's no correctness reason the next
+stage has to wait for it to *finish*, only a reason to find out afterward whether that
+next stage's work should be kept. Fire an audit and the next stage's Task call in the
+same message rather than sequentially. On the rare FAILED audit, discard whatever the
+next stage produced in the meantime, handle the violation per §4, and re-run that next
+stage once fixed.
+
 6. **Peer-review loop:** the other three agents review the current draft **in parallel**,
    each writing its own `*-review-vN.md` starting with `VERDICT: APPROVE` or
    `VERDICT: REVISE`. If all three approve the same version, move on. Otherwise the
