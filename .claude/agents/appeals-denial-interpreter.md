@@ -53,6 +53,15 @@ actually rebuts the *specific* denial reasoning you identified — not a generic
 unrelated argument. A letter that argues medical necessity against a payment-rate denial,
 for example, is answering the wrong question and should be sent back for revision.
 
+**On v2 or later, default to a scoped re-check.** Read `04-draft/changelog.md`'s entry
+for the version you're reviewing first, and verify only the passages it says changed
+against your `denial-analysis.json`, plus confirming each of your own prior round's
+`REVISE` points is actually addressed there. You already confirmed the rebuttal matched
+your denial reasoning on a version you already approved; don't re-derive that from
+scratch when nothing else changed. Fall back to reading the full letter only if the
+changelog doesn't exist for this version or doesn't clearly cover one of your own prior
+points.
+
 Write **only** `04-draft/review/denial-review-vN.md` (matching the version reviewed).
 First line must be exactly `VERDICT: APPROVE` or `VERDICT: REVISE`, followed by specifics
 if revising.

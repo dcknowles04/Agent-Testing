@@ -18,14 +18,21 @@ Code subagents, not the experimental live "Agent Teams" feature; see
 `docs/agent-teams.md` §4, which lists "sequential tasks with dependencies" as a poor
 fit for that feature, and §6/§12, which note team state is session-scoped and cannot
 be made persistent). A single command, `/appeals:run`, drives the whole pipeline
-end-to-end for one case. Two things run concurrently rather than strictly in sequence
-— see §6 for the full detail:
+end-to-end for one case. Four things keep it fast rather than strictly sequential — see
+§6 for the full detail:
 - **Extraction splits into two independent calls** (EOB vs. clinical records), since
   neither depends on the other.
 - **The manager's ownership audit of a stage overlaps with the next stage's work**,
   since an audit only checks files that already exist and won't change — there's no
   correctness reason to wait for it before starting what's next, only a reason to redo
-  that next stage if the rare audit failure turns up.
+  that next stage if the rare audit failure turns up. One audit call can also cover
+  several tightly-clustered micro-steps at once, rather than firing one per micro-step.
+- **The manager's ownership-audit duty runs on a lighter model** (a per-call override,
+  not a change to its default) — it's mechanical checksum/glob work with no judgment
+  in it, unlike the manager's other two duties or any of the content-generating agents.
+- **A shared root cause found during peer review gets fixed everywhere at once** — every
+  agent whose owned file the root cause touches is corrected in the same batch of
+  parallel calls, not discovered and dispatched one at a time.
 
 ## 2. Roles
 
@@ -155,13 +162,24 @@ stage has to wait for it to *finish*, only a reason to find out afterward whethe
 next stage's work should be kept. Fire an audit and the next stage's Task call in the
 same message rather than sequentially. On the rare FAILED audit, discard whatever the
 next stage produced in the meantime, handle the violation per §4, and re-run that next
-stage once fixed.
+stage once fixed. When several micro-steps land close together (e.g. a correction pass
+across two agents plus the drafter's next version, all from the same review round), one
+audit call can cover the whole cluster against a single before/after snapshot pair
+instead of firing one per micro-step — same coverage, less overhead. Every ownership-
+audit Task call also carries a lighter model override (not the pipeline's default Opus)
+since the duty itself is mechanical; the manager's other two duties, and every other
+agent, stay on their normal model.
 
 6. **Peer-review loop:** the other three agents review the current draft **in parallel**,
    each writing its own `*-review-vN.md` starting with `VERDICT: APPROVE` or
    `VERDICT: REVISE`. If all three approve the same version, move on. Otherwise the
    drafter revises (only once all three have responded to the *same* version — never on
-   partial feedback), producing the next version, and the loop repeats.
+   partial feedback), producing the next version, and the loop repeats. On round 2+,
+   each reviewer defaults to checking only what `04-draft/changelog.md` says changed
+   plus its own prior `REVISE` points, not a fresh full re-review — falling back to a
+   full pass only if the changelog doesn't clearly account for one of its own points.
+   When peer review converges on one root cause spanning more than one agent's files,
+   fix all of them in one batch of parallel Task calls, not one at a time.
    **Cap: 5 rounds.** If still not unanimous, write `04-draft/UNRESOLVED.md` summarizing
    the standing disagreement and **stop — ask the user** rather than shipping a
    best-effort letter.

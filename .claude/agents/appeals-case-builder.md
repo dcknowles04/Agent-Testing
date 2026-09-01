@@ -142,6 +142,14 @@ needlessly split into per-code tracks (flag it if it's split without a real reas
 to be); and the letter contains no filing-deadline line or placeholder at all —
 deadlines don't appear in the letter, per house style.
 
+**On v2 or later, default to a scoped re-check.** Read `04-draft/changelog.md`'s entry
+for the version you're reviewing first, and verify only the citations/claims it says
+changed against your `case-file.md`, plus confirming each of your own prior round's
+`REVISE` points is actually addressed there — don't re-verify every citation in the
+letter again from scratch when the rest of it is unchanged. Fall back to a full
+citation-by-citation pass only if the changelog entry is missing, doesn't exist for this
+version, or doesn't clearly account for one of your own previous points.
+
 Write **only** `04-draft/review/case-review-vN.md` (matching the version reviewed). First
 line must be exactly `VERDICT: APPROVE` or `VERDICT: REVISE`, followed by specifics if
 revising.

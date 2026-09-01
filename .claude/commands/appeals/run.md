@@ -19,7 +19,7 @@ see less context than it needs — subagents share no memory with this session o
 other, so every Task prompt you send must restate the case ID and the exact file paths
 involved (see PLAYBOOK.md §5-6).
 
-**Two speed principles run throughout the steps below** (PLAYBOOK.md §6 has the full
+**Four speed principles run throughout the steps below** (PLAYBOOK.md §6 has the full
 rationale):
 1. **A manager audit never blocks the next stage.** An audit only checks files that
    already exist and won't change, so there's no correctness reason to wait for it to
@@ -27,11 +27,46 @@ rationale):
    agent call together (same message, parallel Task calls) rather than sequentially.
    If an audit comes back FAILED, discard whatever the next stage produced in the
    meantime, handle the violation per PLAYBOOK §4, and re-run that next stage once
-   fixed — don't just stop and show the user without redoing this.
+   fixed — don't just stop and show the user without redoing this. An audit's scope
+   isn't limited to exactly one stage, either: when several micro-steps land close
+   together in time — e.g. two agents' self-corrections and the drafter's next version,
+   all following the same review round — cover all of them with **one** audit call
+   against a single snapshot pair spanning the whole cluster, rather than firing a
+   separate audit per micro-step. The only requirement is picking the right baseline:
+   the pre-stage snapshot is whatever was last known-good *before the first* of the
+   clustered writes, and the post-stage snapshot is taken once *all* of them have
+   landed. Default to this batching whenever changes are tightly clustered — one audit
+   per micro-step is not the safer choice, just a slower one that catches the same
+   violations no sooner.
 2. **Extraction is two independent calls, not one.** The EOB and the clinical records
    don't depend on each other — fire both as parallel Task calls, and let
    denial-interpretation proceed the moment the EOB half is done, without waiting for
    the clinical half.
+3. **The manager's ownership-audit duty (Duty 1) doesn't need Opus.** It's mechanical —
+   checksum, diff, glob lookup against `manifest.json`'s `owners` map — with no legal or
+   medical judgment involved. Every Task call to `appeals-manager` for an ownership-audit
+   invocation only should pass a model override of `haiku` for that call specifically.
+   **Never** apply this override to a Duty 2 (final QA) or Duty 3 (style-guide proposal)
+   call — both require real judgment (ask-adequacy, reviewer-comment coverage, actual
+   writing) and stay on `appeals-manager.md`'s default `opus`. This is a per-invocation
+   override at the Task-call level, not an edit to `appeals-manager.md`'s frontmatter —
+   that file has one `model:` field shared by all three duties, so changing it there
+   would downgrade Duty 2 and Duty 3 along with Duty 1. `appeals-drafter` stays on Opus
+   always, on every case — its judgment calls (tone/register matching, where ALL
+   CAPS/bold spans start and stop, picking the closest examples) are not the kind of
+   mechanical work Duty 1's audit is.
+4. **When peer review converges on one root cause that touches more than one agent's
+   files, fire every implicated correction in the same message.** Don't discover and
+   dispatch fixes one at a time as you work through each reviewer's report. Before
+   sending anything, read every `REVISE` verdict from the round, group findings by root
+   cause, and for each root cause identify every owned file it touches via
+   `manifest.json`'s `owners` map — a single mis-sourced quote might implicate
+   `appeals-extraction`'s `structured-record.json`, `appeals-case-builder`'s
+   `case-file.md`, *and* the next drafter version. Fire all of those corrections as
+   parallel Task calls in one message once you have the corrected text in hand (e.g.
+   straight from the reviewers' own reports) — there's no dependency between one agent
+   fixing its own file and another fixing its own, only between those fixes and the
+   *next* drafter version, which still needs all of them landed first.
 
 ## Step 0 — scaffold the case (do this yourself, no subagent needed)
 
@@ -102,7 +137,12 @@ Repeat up to 5 rounds:
    told exactly which draft version to review and where to write its review file:
    `appeals-extraction` → `04-draft/review/extraction-review-v<N>.md`,
    `appeals-denial-interpreter` → `04-draft/review/denial-review-v<N>.md`,
-   `appeals-case-builder` → `04-draft/review/case-review-v<N>.md`.
+   `appeals-case-builder` → `04-draft/review/case-review-v<N>.md`. **On round 2 or
+   later, scope the prompt to the specific fixes just made**: point each reviewer at
+   `04-draft/changelog.md`'s entry for this version and ask it to verify only the
+   passages that entry says changed, plus its own prior round's `REVISE` points — not a
+   fresh full re-review of the whole letter. Only ask for a full re-review if the
+   changelog entry doesn't cleanly account for one of that reviewer's own prior points.
 2. Read the first line of each of the three review files.
 3. If all three say exactly `VERDICT: APPROVE` → exit the loop, go to Step 7.
 4. Otherwise, Task → `appeals-drafter` again, giving it the case ID and all three review

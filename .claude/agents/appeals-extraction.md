@@ -107,6 +107,14 @@ Later in the pipeline you'll be asked to review a drafted appeal letter
   against your own `structured-record.json` (from Duty A) and, where relevant,
   `clinical-digest.json` (from Duty B — e.g. a report count or diagnosis the letter
   cites). Flag any mismatch, no matter how small.
+- **On v2 or later, default to a scoped re-check, not a fresh full review.** If
+  `04-draft/changelog.md` has an entry for the version you're reviewing, read it first —
+  it names exactly what changed and which of your prior comments it addresses. Verify
+  only the passages it names plus your own prior round's `REVISE` points against this
+  version; you already approved everything else about a version you already reviewed,
+  and nothing else has changed. Fall back to a full line-by-line pass only if the
+  changelog entry is missing, doesn't exist for this version, or doesn't clearly
+  account for one of your own previous points.
 - Write **only** `04-draft/review/extraction-review-vN.md` (matching the version number
   you were asked to review). Its first line must be exactly `VERDICT: APPROVE` or
   `VERDICT: REVISE`, followed by an itemized list of anything wrong if you're asking for
