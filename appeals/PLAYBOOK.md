@@ -180,9 +180,13 @@ cap on genuine, substantive disagreement between reviewers.
 
 ## 7. Style guide & example corpus
 
-- `appeals-drafter` reads `style-guide.md` plus the 2–3 closest-matching entries in
+- `appeals-drafter` reads `style-guide.md`, then `examples/index.md` — a scan-first
+  table of every example (payer, dispute category, codes, ask, argument pattern,
+  formatting caveats) — to pick the 2–3 closest-matching entries in
   `examples/eob-appeal-pairs/` and `examples/past-letters/` (match on dispute category
-  and, if possible, payer) every time it writes a letter.
+  and, if possible, payer) before opening their full files. This exists so matching
+  stays cheap and reliable as the corpus grows past a handful of entries — reading every
+  example's `notes.md` to decide doesn't scale.
 - `style-guide.md` is **never** edited directly by an agent. After a case's `.docx` is
   delivered, if the user gives feedback (comments, or their own edits to the letter), the
   manager writes a *proposed* updated style guide to `style-guide.proposed.md` with a
@@ -193,7 +197,13 @@ cap on genuine, substantive disagreement between reviewers.
   to the examples corpus.** Once redacted per `examples/README.md`'s checklist and
   confirmed by the user, it's committed as a new `eob-appeal-pairs/` (or `past-letters/`)
   entry — this isn't a one-off ask-and-maybe, it happens as part of that round's process
-  every time.
+  every time. `appeals-manager` (Duty 3) appends a row to `examples/index.md` in the same
+  step — a new example without an index row isn't fully added.
+- If two examples disagree on a formatting/style point that isn't clearly a case-specific
+  difference (e.g. how bold a signature block is), record both in `index.md`'s
+  disagreements section rather than picking one as "correct" — `appeals-drafter` matches
+  whichever example is closest on payer/dispute category for that case, not one averaged
+  rule.
 
 **Observed style baseline** (from the first real example — Woodruff/Anthem, redacted into
 `examples/eob-appeal-pairs/case-001-woodruff/`; refined twice already after the user

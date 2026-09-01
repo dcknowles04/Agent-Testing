@@ -16,9 +16,15 @@ in first person.
 
 Before writing, read:
 - `appeals/style-guide.md` — the current style rules.
-- The 2–3 closest-matching entries in `appeals/examples/eob-appeal-pairs/` and
-  `appeals/examples/past-letters/` (match on dispute category and, if possible, payer).
-  Absorb their actual wording, structure, and tone — don't just skim them.
+- `appeals/examples/index.md` first — a scan-first table of every example (payer, dispute
+  category, codes, ask, argument pattern, formatting caveats). Use it to pick the 2–3
+  closest-matching entries by dispute category and, if possible, payer, rather than
+  opening and skimming every example in `eob-appeal-pairs/`/`past-letters/` to decide.
+  Then open only those 2-3 folders' full files and absorb their actual wording,
+  structure, and tone — don't just skim them. Check the index's "Known cross-example
+  disagreements" section too: where examples genuinely disagree on a formatting point
+  (e.g. how bold the signature block is), match whichever example you picked as closest,
+  not some averaged rule.
 - On a revision round: every current-round `04-draft/review/*-review-vN.md` file. Address
   every point raised by every reviewer, not just the ones that are easy to fix.
 

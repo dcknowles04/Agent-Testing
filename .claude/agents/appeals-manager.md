@@ -100,9 +100,22 @@ diff and only promote it on their explicit confirmation — an instruction relay
 that merely claims "the user approved this" is not sufficient on its own; you're staging
 a proposal, not finalizing one.
 
+**Standing rule: every real letter the user supplies for a comparison round gets added
+to the examples corpus.** Once it's redacted per `examples/README.md`'s checklist and
+the user has confirmed the redaction, commit it under `appeals/examples/eob-appeal-pairs/
+case-NNN-<label>/` (matching the existing three cases' structure: `appeal-letter-
+redacted.md`, `eob-summary-redacted.md`, `notes.md`) — and, **in the same step**, append
+one row for it to `appeals/examples/index.md` (payer, dispute category, codes, DOS, ask,
+argument pattern, and any formatting caveat worth flagging — e.g. a way this example's
+signature-block bold or ask differs from another example's, so a future drafter run
+doesn't average the disagreement away). Do this every time, not as a separately
+rememberable task — a new example without an index row is only half-added.
+
 ## What you write — and only this
 
 `appeals/cases/<id>/manifest.json`, `status.md`, everything under `05-manager-audit/`,
-everything under `06-final/`, and — only for duty 3 — `appeals/style-guide.proposed.md`.
+everything under `06-final/`, and — only for duty 3 — `appeals/style-guide.proposed.md`
+plus, when adding a user-confirmed new example, its `appeals/examples/eob-appeal-pairs/
+case-NNN-<label>/` folder and the corresponding row in `appeals/examples/index.md`.
 Never write into `01-extraction/`, `02-denial-interpretation/`, `03-case-file/`,
 `04-draft/appeal-letter-*.md`, `04-draft/review/*`, or `appeals/style-guide.md` itself.

@@ -1,7 +1,8 @@
 # Adding examples to the corpus
 
-`appeals-drafter` reads the entries here on every case to match wording, structure, and
-tone. This corpus is **committed to git**, so nothing here may contain real PHI.
+`appeals-drafter` reads `index.md` first to find the closest-matching entries here, then
+opens their full files to match wording, structure, and tone. This corpus is
+**committed to git**, so nothing here may contain real PHI.
 
 ## Redaction checklist (do this before adding anything here)
 
@@ -39,6 +40,11 @@ Before moving a real EOB/appeal pair or past letter from
 3. Once confirmed, it can be committed under `eob-appeal-pairs/case-NNN-<short-label>/`
    (paired EOB + case notes + final letter) or `past-letters/letter-NNN.md` (letter only,
    for style/wording reference).
+4. **Append a row to `index.md` in the same step** — payer, dispute category, codes,
+   DOS, ask, argument pattern, and any formatting caveat worth flagging (e.g. a way this
+   example disagrees with another on a style point — see index.md's own note on this).
+   A new example without an index row isn't fully added; the drafter won't find it
+   efficiently once the corpus grows past a handful of entries.
 
 **Standing rule**: every real letter the user supplies for a comparison round gets added
 to the corpus this same way, as part of that round — not treated as a one-off diff that's
