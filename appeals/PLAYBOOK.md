@@ -139,19 +139,17 @@ be fully self-contained).
    the standing disagreement and **stop — ask the user** rather than shipping a
    best-effort letter.
 7. **Manager final QA**: identifiers match extraction, a specific dollar/action ask is
-   present, no open reviewer comments. On failure, loop back to step 6 with the manager's
-   checklist as extra input. **The appeal filing deadline is never a QA gate** — most
-   EOBs don't print one, and that's expected. If a deadline was printed, the letter
-   should cite it; if not, the drafter leaves a short placeholder field for a human to
-   fill in by hand (see §7's drafter instructions), and QA passes regardless. On pass,
-   render to `.docx` via the `docx` skill and verify by converting to images and looking
-   at the render — **the pipeline should always end in a delivered `.docx`** once the
-   three checklist items above are satisfied, never a stop over a missing deadline.
+   present covering 100% of billed charges on every line without affirmative proof of
+   payment, no open reviewer comments, and no filing-deadline line or placeholder
+   anywhere in the letter (deadlines never appear in the letter — see §7). On failure,
+   loop back to step 6 with the manager's checklist as extra input. On pass, render to
+   `.docx` via the `docx` skill and verify by converting to images and looking at the
+   render — **the pipeline should always end in a delivered `.docx`** once the checklist
+   items above are satisfied.
 8. Report the `.docx` path to the user and ask for feedback for next time (§7).
 
 The only case where the pipeline stops without producing a `.docx` is step 6's 5-round
-cap on genuine, substantive disagreement between reviewers — a missing deadline is not
-that kind of problem and never triggers it.
+cap on genuine, substantive disagreement between reviewers.
 
 ## 7. Style guide & example corpus
 
@@ -168,28 +166,37 @@ that kind of problem and never triggers it.
   candidate for a new `examples/` entry — ask them.
 
 **Observed style baseline** (from the first real example — Woodruff/Anthem, redacted into
-`examples/eob-appeal-pairs/case-001-woodruff/`; refined once already after the user
-compared the original letter directly against a pipeline-generated one for the same
-case — see `style-guide.md`'s changelog for the full comparison). The authoritative,
-up-to-date rules live in `style-guide.md`; this is a short pointer, not a duplicate:
+`examples/eob-appeal-pairs/case-001-woodruff/`; refined twice already after the user
+compared original letters they wrote directly against pipeline-generated ones for the
+same cases — see `style-guide.md`'s changelog for the full comparisons). The
+authoritative, up-to-date rules live in `style-guide.md`; this is a short pointer, not a
+duplicate:
 - Assertive, advocacy tone, stated with total confidence — never self-qualified or
   hedged.
-- ALL CAPS used heavily — full sentences routinely, not just short phrases.
-- Core facts (codes, dates of service, dollar amounts) are repeated multiple times through
-  the letter, not stated once and left — repetition is deliberate emphasis, not sloppiness.
-- Denial codes are quoted verbatim, then rebutted one at a time: *"Contrary to denial code
-  X: ..."*.
+- ALL CAPS used heavily — full sentences routinely, not just short phrases. Repetition
+  extends to whole argument blocks repeated nearly verbatim, not just individual facts.
+- Denial codes are quoted verbatim, then rebutted with **one unified argument by
+  default** — not a separate track per denial-code label. Only split into separate
+  tracks when the codes genuinely require materially different arguments to win.
 - **Argument breadth**: every supportable argument thread goes in (precedent, medical
   necessity, CPT/documentation compliance, coverage), not only the one the primary
   dispute category implies — see `appeals-case-builder`'s instructions.
-- **The ask defaults to 100% of billed charges**, even when a precedent/ratio argument
-  only mathematically supports a smaller corrected figure — that math is supporting
-  evidence for the demand, not a cap on it.
+- **The ask defaults to 100% of billed charges on every line without affirmative proof
+  of payment.** A precedent/ratio argument that only mathematically supports a smaller
+  figure is supporting evidence for the demand, not a cap on it. Payer language like
+  "reconsidered," "processed per member benefits," or "supported" is not proof a line
+  was actually paid — it stays in the ask unless a real paid dollar amount is shown.
 - Header/address block should capture every fax number, email address, and department
   name printed on the intake documents, not just one — `appeals-extraction` should pull
   all of them into `structured-record.json`, not stop at the first match.
 - Signature block is title + address lines only — no practice-name line, no separate
   email line; phone and email go together in the closing sentence instead.
+- **No filing-deadline line anywhere in the letter** — neither real example includes
+  one, even when the deadline was unknown. Deadlines are not part of the document.
+- If `appeals-case-builder` has no payer policy document to cite for a bundling/coding
+  or similar argument, it says so explicitly rather than proceeding silently — the user
+  may have a relevant policy or regulatory citation (e.g. a CMS Medicare Manual
+  provision, a payer's own named policy) to supply even when the pipeline doesn't.
 
 ## 8. Payer policy documents
 
@@ -240,7 +247,7 @@ until then, but letters will be more accurate once these are known:
 | Standard signature block — whose name/title signs | **"Medical Billing/Collection Specialist"** (title only — no individual signer name is used; matches the first example) |
 | NPI / Tax ID (if payers require it on appeals) | TBD |
 | Payers dealt with regularly, and each one's appeal mailing/fax/portal address | Anthem Blue Cross confirmed: appeals to P.O. Box 60007, Los Angeles, CA 90060, Fax: 800-927-4092. Other payers TBD. |
-| Typical appeal filing deadline per payer | TBD — informational only; per §6, a missing deadline never blocks delivery. The drafter leaves a placeholder field and the billing office fills it in by hand before mailing. |
+| Typical appeal filing deadline per payer | TBD — informational only; per §6/§7, deadlines never appear in the letter at all and never block delivery. The billing office confirms timeliness separately, outside the document. |
 | Appeal levels this practice pursues (first-level only, or also second-level/external
   review) | TBD (v1 scope is first-level internal appeals only) |
 | State-specific external review rights that might matter | TBD |

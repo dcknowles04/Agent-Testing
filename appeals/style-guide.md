@@ -23,11 +23,19 @@ This is a starting point, not a finished style. It will get more specific and mo
   Entire sentences, and sometimes multiple consecutive sentences, run in caps whenever
   the point is one of the letter's core assertions. Don't under-use it out of a
   politeness instinct; match the real examples' density.
-- **Repetition is deliberate**: restate the key facts (codes, dates of service, dollar
-  amounts) more than once through the letter. This is not redundancy to trim — it's
-  how the original examples make sure a skimming claims reviewer can't miss them.
-- **Denial-code rebuttal pattern**: quote each denial code and its stated reason
-  verbatim, then respond directly underneath: *"Contrary to denial code X: ..."*.
+- **Repetition is deliberate, and runs deeper than facts.** Restate the key facts
+  (codes, dates of service, dollar amounts) more than once through the letter. The
+  real examples go further than that: a large multi-sentence argument block can be
+  repeated nearly verbatim a second time later in the letter for emphasis, not just
+  individual facts. This is not redundancy to trim — it's how the originals make sure
+  a skimming claims reviewer can't miss the point.
+- **Denial-code rebuttal pattern, unified by default**: quote the denial code(s) and
+  stated reason(s) verbatim, then respond directly: *"Contrary to denial code X: ..."*.
+  Default to **one unified rebuttal covering every disputed line**, even when the
+  payer's table shows more than one denial-code label — the real examples treat the
+  whole denial as one issue with one overarching rebuttal rather than splitting into
+  parallel tracks by code. Only split into separate tracks when the codes genuinely
+  require materially different arguments to win (not just because the labels differ).
 - **Precedent argument (use when available)**: if a comparable prior EOB shows the
   same payer already paid the same CPT/HCPCS code correctly for the same patient, lead
   with that comparison — it's the strongest, most concrete argument available.
@@ -41,22 +49,30 @@ This is a starting point, not a finished style. It will get more specific and mo
   that definition — don't just assert necessity in the abstract. Include this thread
   whenever supporting documentation exists, per "Argument breadth" above, even if the
   denial itself wasn't a necessity denial.
-- **The ask: default to 100% of billed charges.** Even when a precedent or ratio
-  argument only mathematically supports a smaller corrected figure, the letter's
-  demand is the full billed amount — state that as the ask. Show the precedent/ratio
-  math in the letter as supporting evidence for why the current payment is wrong, not
-  as a cap on what's being requested.
+- **The ask: default to 100% of billed charges, on every line without affirmative
+  proof of payment.** Even when a precedent or ratio argument only mathematically
+  supports a smaller corrected figure, the letter's demand is the full billed amount —
+  state that as the ask. Show the precedent/ratio math in the letter as supporting
+  evidence for why the current payment is wrong, not as a cap on what's being
+  requested. This extends to lines the payer's letter doesn't explicitly deny:
+  language like "reconsidered," "processed per member benefits," or "supported" is
+  **not proof of actual payment**. Include a line in the ask unless a remittance/PRA
+  in evidence shows a real dollar amount was actually paid on it — don't voluntarily
+  exclude a line just because the payer's language about it sounds favorable.
 - **Structure**: payer address block (capture every fax number, email, and department
   name printed on the intake documents — not just one) → "RE:" identifier block
-  (exactly: patient name, DOB, ID#, date(s) of service, claim #, billed amount — no
-  other fields; add nothing here beyond what the real examples include) → what's being
-  appealed, stated plainly → denial-code quote-and-rebuttal → cited factual argument →
-  precedent argument (if any) → medical necessity/policy citation and any other
-  supportable argument thread → explicit ask for 100% of billed charges → practice
-  billing-department signature block: title, then address lines only — **no practice
-  name line**, no separate "Email:" line. Phone and email both go in the closing
-  "Contact our billing department..." sentence instead, together. No "Enclosures:"
-  list unless a real example shows one.
+  (patient name, DOB, ID#, date(s) of service, claim #, billed amount, plus a
+  conditional **"Non-Paid Amount"** line when the case is about total non-payment of
+  the billed amount — omit that line when the case is a partial-underpayment/rate
+  dispute instead, as case-001-woodruff shows) → what's being appealed, stated plainly
+  → denial-code quote-and-rebuttal (unified by default, see above) → cited factual
+  argument → precedent argument (if any) → medical necessity/policy citation and any
+  other supportable argument thread → explicit ask for 100% of billed charges →
+  practice billing-department signature block: title, then address lines only — **no
+  practice name line**, no separate "Email:" line. Phone and email both go in the
+  closing "Contact our billing department..." sentence instead, together. No
+  "Enclosures:" list unless a real example shows one. **No filing-deadline line
+  anywhere in the letter** — see "Appeal deadline" below.
 - **Punctuation conventions**: no comma before "Suite" (`1200 Rosecrans Avenue Suite
   208`); no space between an area-code's closing parenthesis and the number
   (`(310)416-9700`, not `(310) 416-9700`).
@@ -68,11 +84,13 @@ This is a starting point, not a finished style. It will get more specific and mo
   — it is not the same thing as hedging. A citable, arguable interpretation (a
   professional judgment call about what the records support) gets asserted
   confidently, per "Tone" above; an unconfirmable or invented fact never does.
-- **Appeal deadline**: not required house style — case-001-woodruff doesn't cite one at
-  all. When a deadline is printed on the EOB, cite it plainly; when it isn't (the common
-  case), use a single short placeholder field near the identifier block for the billing
-  office to fill in by hand, and never assert timeliness as fact. This should never hold
-  up the letter or the case.
+- **Appeal deadline: not mentioned in the letter at all, in either direction.** Neither
+  real example (case-001-woodruff or the Wright/UHC case) cites a filing deadline
+  anywhere in the letter text, even when one wasn't known. **Don't add a deadline line,
+  placeholder, or fill-in-the-blank field to the letter** — deadline confirmation, when
+  it matters, is a pre-mailing check the billing office does separately, not something
+  that appears in the document. This should never hold up producing the letter or the
+  case.
 
 ## Changelog
 
@@ -93,3 +111,16 @@ This is a starting point, not a finished style. It will get more specific and mo
   (2) argue every supportable thread confidently, including one an agent had flagged as
   carrying some interpretive/coding risk — that risk still gets recorded for the human in
   case-file.md, but no longer suppresses the claim in the shipped letter.
+- Revised Repetition, the denial-code rebuttal pattern, the ask, Structure, and Appeal
+  deadline after the user compared their own real letter for the Wright/UHC bundling
+  case against the pipeline's generated letter for the same case. Four confirmed
+  decisions: (1) the ask now includes every billed line without affirmative proof of
+  payment — "reconsidered"/"processed"/"supported" language on the payer's letter is
+  not proof a line was actually paid; (2) denial-code rebuttals default to one unified
+  argument instead of splitting into a separate track per denial code, unless the
+  codes genuinely need different arguments; (3) the filing deadline is dropped from
+  the letter entirely — no placeholder field, matching both real examples; (4) the RE
+  block gets a conditional "Non-Paid Amount" line for total-non-payment cases. The
+  user declined giving `appeals-case-builder` web-search access for outside policy/
+  regulatory citations (e.g. CMS Medicare Manual sections) and will supply payer
+  policy documents directly instead.

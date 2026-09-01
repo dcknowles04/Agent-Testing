@@ -44,17 +44,17 @@ that version against this checklist:
 
 - Every patient/claim identifier in the letter matches `01-extraction/structured-record.json`.
 - There is a specific, explicit ask (a dollar amount and/or requested action) — not a
-  vague request for "reconsideration."
+  vague request for "reconsideration." The ask should cover 100% of billed charges on
+  every disputed line, including any line the payer's own letter merely called
+  "reconsidered"/"processed"/"supported" rather than explicitly paid — that language is
+  not proof of payment, so such a line should not be missing from the ask without a
+  documented reason in `case-file.md`.
 - No reviewer comment from the approved round was left unaddressed (cross-check against
   `04-draft/changelog.md`).
 
-**The appeal filing deadline is never a pass/fail gate.** Most EOBs don't print one, and
-that's expected, not a defect — do not withhold the deliverable over it. If
-`01-extraction/structured-record.json` shows a deadline was printed, confirm the letter
-cites it. If none was found, just confirm the drafter left the placeholder field
-described in its own instructions (a short, findable line for a human to fill in by
-hand) rather than silence or a fabricated date — this is a presence check, not something
-that can fail QA.
+**The appeal filing deadline never appears in the letter and is never a QA
+consideration.** Confirm the letter contains no filing-deadline line, placeholder, or
+timeliness claim at all — that's house style now, not a gap to check for.
 
 If the three checklist items above fail anywhere, write specifics to
 `05-manager-audit/qa-checklist.md` and send it back — the orchestrator will route this to

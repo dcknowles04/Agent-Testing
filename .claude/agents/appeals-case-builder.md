@@ -36,6 +36,25 @@ If you can't find documentation to support an argument you'd otherwise want to m
 **say so explicitly** — write it as a documented gap, don't paper over it with a vague
 or invented claim.
 
+**No policy document for this payer? Say so, don't just proceed.** If
+`appeals/policy-docs/<payer>/` has nothing relevant and a specific outside authority
+(a payer policy section, a CMS/Medicare manual provision, a regulation) would
+materially strengthen the argument, note that explicitly in `case-file.md`'s gaps
+section and flag it for the user — they may have it on file even when the pipeline
+doesn't. Don't silently build the case on the EOB's own printed text alone when a
+stronger citation plausibly exists elsewhere.
+
+## Ask scope: what counts as "not paid"
+
+**A line stays in the ask unless payment is affirmatively documented** — a real dollar
+amount shown as actually paid on a remittance/PRA in evidence. Language on the payer's
+letter like "reconsidered," "processed per member benefits," or "supported" is *not*
+proof of payment; it describes an adjudication outcome, not a paid amount. Don't
+voluntarily narrow the ask by excluding a line just because the payer's language about
+it sounds favorable — if there's no affirmative proof it was paid, it belongs in the
+100%-of-billed demand along with everything else. Note the ambiguity in `case-file.md`
+if it's genuinely unclear, but default to including the line.
+
 **Confident interpretation is not the same thing as fabrication.** A citable, arguable
 interpretation — a professional judgment call about what the documented facts support
 (e.g., "these records satisfy CPT 20611's documentation requirements") — should be
@@ -53,6 +72,15 @@ style (see `appeals/style-guide.md`).
 
 Use the classified category to pick your **lead** argument; layer in whichever of the
 others below the documentation also supports, per "Argument breadth" above.
+
+**Default to one unified rebuttal, not a separate track per denial code.** Even when
+the payer's table shows more than one denial-code label across different lines,
+default to building a single overarching argument that covers every disputed line,
+matching the real examples. Only organize the case file into genuinely separate
+tracks when the codes actually require materially different arguments to win (e.g.
+one line is a true rate dispute and another is a true medical-necessity denial) — a
+different code *label* alone (like two variants of the same bundling edit) is not
+enough reason to split.
 
 - **out_of_network_rate_dispute**: check `01-extraction/structured-record.json` for any
   comparable EOB where the same payer paid the same CPT/HCPCS code correctly for the same
@@ -97,14 +125,13 @@ must be flagged. A confidently-worded interpretive argument that *is* backed by 
 citation (e.g. asserting the records satisfy a code's documentation requirements, where
 the underlying records are cited) is not a fabrication risk and should not be
 flagged just for being assertive rather than hedged — that's house style now. Also
-confirm the letter's ask is the full billed amount, with any precedent/ratio figure
-presented as supporting evidence rather than substituted in as the demand.
-
-A missing appeal deadline is the normal case, not a defect — most EOBs don't print one.
-If the letter honestly marks it with a fill-in-the-blank placeholder rather than
-asserting a fabricated date or claiming unverified timeliness, that's correct behavior,
-not something to REVISE over. Only flag the deadline if the letter asserts a specific
-date or timeliness claim that isn't actually backed by a printed source.
+confirm: the letter's ask is 100% of billed charges on every line without affirmative
+proof of payment (not narrowed just because the payer's language on some line sounds
+favorable), with any precedent/ratio figure presented as supporting evidence rather
+than substituted in as the demand; the rebuttal is unified by default rather than
+needlessly split into per-code tracks (flag it if it's split without a real reason
+to be); and the letter contains no filing-deadline line or placeholder at all —
+deadlines don't appear in the letter, per house style.
 
 Write **only** `04-draft/review/case-review-vN.md` (matching the version reviewed). First
 line must be exactly `VERDICT: APPROVE` or `VERDICT: REVISE`, followed by specifics if
