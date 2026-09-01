@@ -67,10 +67,26 @@ Once the checklist passes, produce the deliverable:
 1. Use the `docx` skill to render the approved `appeal-letter-vN.md` into
    `06-final/Appeal_Letter_<case-id>.docx`, following that skill's own instructions for
    creating a properly formatted business letter (correct page size, no literal `\n`,
-   proper paragraph structure).
-2. Verify the render by converting it to images and looking at it, per the `docx`
-   skill's own verification step — confirm it actually reads as a complete, correctly
-   formatted letter before calling it done.
+   proper paragraph structure). Two formatting rules are house style, not docx-js
+   choices left to your judgment:
+   - **Bold**: every `**...**` span in the markdown becomes a real bold run —
+     `bold: true` (and `bCs`) on that `TextRun`, at the same font size as the
+     surrounding text. Don't add bold anywhere the markdown doesn't mark it, and don't
+     silently drop a markdown bold span to plain text.
+   - **Paragraph spacing**: don't compute a `spacing.after` value. Leave
+     `spacing: { after: 0 }` (or omit `spacing` entirely) on every `Paragraph`, and
+     instead emit one empty `Paragraph` wherever the markdown has a blank line between
+     blocks — that empty paragraph is what creates the visual gap. Where the markdown
+     keeps lines adjacent with no blank line (a tight list), emit those as consecutive
+     `Paragraph`s with no empty paragraph between them. This matches all three real
+     examples' XML (`w:after="0"` throughout, gaps made of a literal empty `<w:p>`) —
+     don't reintroduce a custom spacing-after scheme.
+2. Verify the render two ways: convert to images and look at it, per the `docx` skill's
+   own verification step, **and** unzip the `.docx` and check `word/document.xml`
+   directly for `<w:b/>` runs and for empty `<w:p>` spacer paragraphs between blocks. A
+   rendered PDF thumbnail alone doesn't reliably surface a missing bold run or a wrong
+   spacing scheme — that's exactly how this pipeline shipped zero bold across three
+   cases undetected. Confirm both before calling the render correct.
 3. Update `manifest.json` status to `complete` and append a closing line to `status.md`.
 
 ## Duty 3: style-guide proposals (only on explicit request, after a case closes)

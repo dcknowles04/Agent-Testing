@@ -25,15 +25,24 @@ Before moving a real EOB/appeal pair or past letter from
 - Dollar amounts (billed/allowed/paid) and the dispute category they illustrate
 - The argument structure, wording, tone, and formatting of the original letter
 - Dates of service (relative dates are fine to keep exact; only DOB is sensitive)
+- **Bold formatting on emphasis/key facts/labels** — verify it survived any docx→markdown
+  conversion; a plain-text or rendered-view extraction silently drops it. Redact from the
+  raw `word/document.xml` runs, or via `pandoc -t markdown` (which preserves `**bold**`)
+  — never by retyping from a plain-text or rendered view, which is how it was lost the
+  first time (case-001-woodruff had to be backfilled after this was caught).
 
 ## Process
 
-1. Draft the redacted version.
+1. Draft the redacted version, preserving bold per the note above.
 2. Show it to the user for review — **do not commit until they've confirmed** the
    redaction is complete and nothing sensitive slipped through.
 3. Once confirmed, it can be committed under `eob-appeal-pairs/case-NNN-<short-label>/`
    (paired EOB + case notes + final letter) or `past-letters/letter-NNN.md` (letter only,
    for style/wording reference).
+
+**Standing rule**: every real letter the user supplies for a comparison round gets added
+to the corpus this same way, as part of that round — not treated as a one-off diff that's
+then discarded.
 
 ## Folder contents
 

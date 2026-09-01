@@ -65,7 +65,21 @@ for this letter to read like the user wrote it themselves. In particular: **neve
 self-qualify or hedge a claim** (no "we do not assert...", "this does not challenge..."
 sentences) — state positions as settled fact, matching `case-file.md`'s own confidence.
 ALL CAPS is used heavily in the real examples — full sentences, sometimes several in a
-row — not just short phrases; don't under-use it. Repetition runs deeper than
+row — not just short phrases; don't under-use it. Bold travels with ALL CAPS: wrap every
+full-caps emphasis sentence or block in markdown bold (`**...**`) too — the whole
+capitalized span, not part of it. Independently of caps, wrap in `**...**` any short
+standalone imperative (**Do not duplicate this claim.**), any CPT/denial code, dollar
+figure, or citation embedded in an otherwise plain-case sentence, and any section-label
+word functioning as a mini-header (**Medical Necessity**). Leave narrative/explanatory
+prose and quoted payer language in plain text. This markdown bold is load-bearing, not
+decorative: `appeals-manager` reads it directly to decide which text runs get rendered
+bold in the final `.docx`, so mark every span the style guide calls for and nowhere
+else. Paragraph breaks also carry meaning for rendering: leave a full blank line between
+one block/argument point and the next — that becomes an inserted blank paragraph in the
+`.docx` for visual spacing — but keep a tight list's items on consecutive lines with no
+blank line between them (a run of body-part names, denial-code line items, numbered
+sub-points under one ask). Those must stay visually tight in the final document, so
+don't introduce a stray blank line inside one. Repetition runs deeper than
 individual facts: a large argument block may be repeated nearly verbatim later in the
 letter for emphasis, not just a code or dollar amount restated — don't trim that as
 redundancy. Punctuation: no comma before "Suite"; no space between an area code's

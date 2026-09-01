@@ -189,8 +189,11 @@ cap on genuine, substantive disagreement between reviewers.
   rationale. The user is shown a diff and must explicitly confirm before it's promoted to
   `style-guide.md` (with a dated changelog entry appended). An agent's own claim that "the
   user approved this" is never sufficient on its own.
-- If the user hand-edits a delivered letter, that edited version (redacted) is a strong
-  candidate for a new `examples/` entry — ask them.
+- **Standing rule: every real letter the user supplies for a comparison round gets added
+  to the examples corpus.** Once redacted per `examples/README.md`'s checklist and
+  confirmed by the user, it's committed as a new `eob-appeal-pairs/` (or `past-letters/`)
+  entry — this isn't a one-off ask-and-maybe, it happens as part of that round's process
+  every time.
 
 **Observed style baseline** (from the first real example — Woodruff/Anthem, redacted into
 `examples/eob-appeal-pairs/case-001-woodruff/`; refined twice already after the user
@@ -202,6 +205,13 @@ duplicate:
   hedged.
 - ALL CAPS used heavily — full sentences routinely, not just short phrases. Repetition
   extends to whole argument blocks repeated nearly verbatim, not just individual facts.
+- **Bold travels with ALL CAPS** — every capitalized emphasis block is also bold — and is
+  additionally used alone for short imperatives, embedded key figures/citations, and
+  label-style mini-headers, never for narrative prose. See `style-guide.md`'s Emphasis/
+  Bold rules for the exact pattern.
+- **Paragraph spacing** comes from an inserted blank paragraph between blocks, never a
+  computed spacing-after value; tight lists stay blank-line-free internally.
+  `appeals-manager` Duty 2 implements this directly when writing the docx-js script.
 - Denial codes are quoted verbatim, then rebutted with **one unified argument by
   default** — not a separate track per denial-code label. Only split into separate
   tracks when the codes genuinely require materially different arguments to win.
@@ -296,3 +306,10 @@ default for every case's signature block unless a specific case says otherwise.
   extraction agent relies on Claude's native multimodal reading of images/PDFs first,
   falling back to the `pdf` skill's OCR pipeline for pages that don't read cleanly — and
   flags, rather than guesses, anything still illegible.
+- **Text-based comparisons can't see run-level formatting.** Two rounds of style-guide
+  refinement compared extracted plain text/markdown against pipeline output and missed
+  that the real letters use bold extensively — the pipeline had never produced any.
+  Catching formatting differences (bold, italics, underline, spacing) requires opening
+  the actual `word/document.xml` inside the `.docx`, not diffing rendered or extracted
+  text. Do this on every future user-supplied comparison letter, not only after a
+  formatting mismatch is already suspected.

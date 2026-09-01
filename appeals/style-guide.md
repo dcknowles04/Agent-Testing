@@ -23,6 +23,21 @@ This is a starting point, not a finished style. It will get more specific and mo
   Entire sentences, and sometimes multiple consecutive sentences, run in caps whenever
   the point is one of the letter's core assertions. Don't under-use it out of a
   politeness instinct; match the real examples' density.
+- **Bold**: used as heavily and deliberately as ALL CAPS, and travels with it in a fixed
+  pattern — confirmed across all three real examples (case-001-woodruff, Wright/UHC, and
+  Gregory Wong) by reading the actual `word/document.xml` runs, not just extracted text.
+  - Every ALL-CAPS emphasis sentence or block is also bold. Caps never appears alone —
+    if a sentence is capitalized for emphasis, bold the whole capitalized span too.
+  - Bold-only (no caps) marks three things inside otherwise plain-case sentences: (1) a
+    short standalone imperative, e.g. **Do not duplicate this claim.**; (2) a specific
+    figure embedded in a sentence — a CPT/denial code, dollar amount, or citation — e.g.
+    denial codes **016** and **19**, **Pub. 100-04, Chapter 13, §§100–100.1**; (3) a
+    section-label word or short phrase used as a mini-header inside running text, e.g.
+    **Medical Necessity** — plain bold at body text size, no font-size bump, no
+    underline; it's a bolded label, not a heading style.
+  - Narrative and explanatory prose — the medical-necessity narrative paragraphs, most
+    quoted external payer language — stays plain. Bold marks assertions and key facts,
+    not description.
 - **Repetition is deliberate, and runs deeper than facts.** Restate the key facts
   (codes, dates of service, dollar amounts) more than once through the letter. The
   real examples go further than that: a large multi-sentence argument block can be
@@ -73,6 +88,13 @@ This is a starting point, not a finished style. It will get more specific and mo
   closing "Contact our billing department..." sentence instead, together. No
   "Enclosures:" list unless a real example shows one. **No filing-deadline line
   anywhere in the letter** — see "Appeal deadline" below.
+- **Paragraph spacing**: the extra visual space between paragraphs comes from an actual
+  blank paragraph inserted between them — never a spacing-after style property. Put one
+  blank paragraph at every block-to-block transition (one argument point moving to the
+  next, one section moving to the next). Keep a tight list's items adjacent with no blank
+  paragraph between them — a run of body-part names, line-item entries, or numbered
+  sub-points under one ask all stay tight; spacing is for the gaps *between* blocks, not
+  within one.
 - **Punctuation conventions**: no comma before "Suite" (`1200 Rosecrans Avenue Suite
   208`); no space between an area-code's closing parenthesis and the number
   (`(310)416-9700`, not `(310) 416-9700`).
@@ -124,3 +146,17 @@ This is a starting point, not a finished style. It will get more specific and mo
   user declined giving `appeals-case-builder` web-search access for outside policy/
   regulatory citations (e.g. CMS Medicare Manual sections) and will supply payer
   policy documents directly instead.
+- Added Bold and Paragraph spacing rules after directly comparing the raw
+  `word/document.xml` of three real letters (case-001-woodruff, Wright/UHC, and a new
+  Gregory Wong case) against the pipeline's delivered Wong letter — a comparison at the
+  XML-run level, not the text/markdown level the first two rounds used. This surfaced
+  that the pipeline had never produced a single bold run across any of the three
+  delivered cases, undetected by those earlier rounds because plain-text/markdown
+  extraction silently drops run-level formatting. Confirmed: bold travels with every
+  ALL-CAPS block, and is used alone for short imperatives, embedded key figures/
+  citations, and label-style mini-headers; paragraph spacing in the real letters comes
+  from an inserted blank paragraph between blocks (most paragraphs carry no
+  spacing-after property at all), not a computed value, with tight lists kept
+  blank-line-free internally. The user also confirmed a standing rule going forward:
+  every real letter supplied for a comparison round gets added to the examples corpus
+  (after redaction and confirmation), not just diffed and discarded.
