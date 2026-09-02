@@ -19,7 +19,7 @@ see less context than it needs — subagents share no memory with this session o
 other, so every Task prompt you send must restate the case ID and the exact file paths
 involved (see PLAYBOOK.md §5-6).
 
-**Five speed principles run throughout the steps below** (PLAYBOOK.md §6 has the full
+**Six speed principles run throughout the steps below** (PLAYBOOK.md §6 has the full
 rationale):
 1. **A manager audit never blocks the next stage.** An audit only checks files that
    already exist and won't change, so there's no correctness reason to wait for it to
@@ -73,6 +73,19 @@ rationale):
    concurrently with `appeals-denial-interpreter` rather than waiting for it. Only Duty
    B (argument synthesis) needs `denial-analysis.json`, and it also needs Duty A's own
    output, so it fires once *both* of those exist.
+6. **Never wait passively past a stage's expected-duration ceiling.** PLAYBOOK.md §12
+   has the per-stage ceiling table (extraction ~40 min, denial-interp ~15 min, most
+   other stages ~15-20 min, haiku audits ~5 min) built from real timed runs. Check in no
+   less often than every ~20 minutes while any stage is active. If a check-in finds a
+   stage past its ceiling with no completion notification, don't just re-arm another
+   wait — check whether the agent is still actually alive first. If it's no longer
+   listed as a live/reachable agent, treat it as dead, not slow: respawn it fresh,
+   reusing any already-completed work from its transcript instead of starting over
+   where possible (this is exactly what turned a would-be 7-hour loss into a
+   same-duration clean re-run in practice, after a user's client fully disconnected
+   mid-run). If it's still alive and genuinely working, that's an unusually complex
+   case, not a stall — keep waiting, but tell the user it's running long rather than
+   going quiet for another long interval.
 
 ## Step 0 — scaffold the case (do this yourself, no subagent needed)
 

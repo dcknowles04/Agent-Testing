@@ -355,3 +355,36 @@ default for every case's signature block unless a specific case says otherwise.
   the actual `word/document.xml` inside the `.docx`, not diffing rendered or extracted
   text. Do this on every future user-supplied comparison letter, not only after a
   formatting mismatch is already suspected.
+- **A stage can silently stall for hours, and the orchestrator must not just wait it
+  out.** Observed cause: the user's client fully disconnecting mid-run (e.g. closing a
+  laptop lid, which suspends the machine and drops its network connection, as opposed
+  to just the display idling) — this can leave a background agent invocation orphaned
+  with no completion notification ever arriving, even though the case folder shows no
+  progress. This is a known limitation of the underlying session infrastructure, not a
+  defect in this pipeline's design, but the pipeline still has to handle it rather than
+  wait passively. **Expected-duration ceilings**, from real timed runs this session —
+  treat a stage as *possibly stalled* once it clearly exceeds these, not just "slow":
+
+  | Stage | Worst observed so far | Treat as possibly stalled beyond |
+  |---|---|---|
+  | Extraction (either duty) | ~20 min | 40 min |
+  | Denial-interpretation | ~6 min | 15 min |
+  | Case-builder Duty A (record review) | ~9 min (pre-split estimate; recalibrate once Duty A alone has been timed a few times) | 20 min |
+  | Case-builder Duty B (synthesis) | not yet measured standalone | 15 min |
+  | Drafting (any version) | ~10 min | 20 min |
+  | Peer review (each reviewer, any round) | ~9 min | 20 min |
+  | Final QA/render | ~8 min | 20 min |
+  | Ownership audit (haiku-model, per principle 3) | ~1.5 min | 5 min |
+
+  **When a scheduled check-in fires and a stage has exceeded its ceiling with no
+  completion notification**, don't just re-arm another wait: check whether the agent is
+  still actually alive (the tool that lists reachable agents) before deciding what to
+  do. If it's no longer listed as live, treat it as dead rather than merely slow —
+  respawn it fresh, reusing any already-completed sub-work from its transcript instead
+  of starting over from nothing where possible (this is what turned a would-be 7-hour
+  loss into a same-duration clean re-run in practice). If it *is* still listed as
+  live and genuinely still working, that's a legitimately unusual case, not a stall —
+  keep waiting, but say so to the user rather than going quiet for another long
+  interval. Either way, never let a single wait stretch past roughly 20 minutes without
+  a check-in during an active stage — a stall found at the 25-minute mark costs
+  minutes; one found at the 7-hour mark costs hours.
