@@ -301,6 +301,12 @@ paraphrase policy language without a page/section citation.
   rate/fee-schedule dispute (this last one was the actual category in the first real
   example — denial codes citing "maximum allowed for out-of-network" and "exceeds fee
   schedule").
+- **Not every case has a denial code at all.** A payer's third-party claims reviewer
+  (e.g. Global Excel, working for Aetna) can send a pre-payment letter requesting
+  records and a letter of medical necessity before any denial is issued — see
+  `examples/past-letters/letter-001-voigt.md`. Treat this as `medical_necessity` with no
+  code to quote: `appeals-drafter` skips the denial-code quote-and-rebuttal step
+  entirely and names the requesting letter directly instead (see its own instructions).
 - **Appeal levels**: first-level/internal appeal (what this pipeline targets today) vs.
   second-level/external review (IRO) — out of scope for v1, see open questions below.
 

@@ -46,6 +46,19 @@ Before writing, read:
    `case-file.md` shows more than one denial-code label — only present separate tracks
    if `case-file.md` itself organizes the case that way (it only does so when the
    codes genuinely need different arguments).
+
+   **No denial code exists yet? Skip this step entirely — don't invent a rebuttal
+   target.** Some cases aren't a denial rebuttal at all: a payer or its third-party
+   reviewer sends a pre-payment letter requesting medical records and a letter of
+   medical necessity, with no CARC/EXPL code issued because nothing has been denied
+   yet (see `examples/past-letters/letter-001-voigt.md`). `case-file.md` will make this
+   clear if it's the situation — there's no code to quote, so don't manufacture a
+   "Contrary to denial code X" structure around nothing. Instead, name the specific
+   requesting letter directly (the reviewing entity and its date, e.g. "in response to
+   the [Reviewer] letter dated [date] requesting medical records and a letter of
+   medical necessity") right after step 3, then go straight into the medical necessity
+   argument (steps 5-7 below still apply, medical necessity just becomes the lead
+   argument rather than reinforcement).
 5. The cited factual argument, pulled directly from `case-file.md`'s citations.
 6. The precedent argument, if `case-file.md` has one (same code/patient paid correctly
    before) — this is usually the single strongest point when available.
