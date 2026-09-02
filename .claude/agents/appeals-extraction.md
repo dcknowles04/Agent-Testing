@@ -107,6 +107,16 @@ Later in the pipeline you'll be asked to review a drafted appeal letter
   against your own `structured-record.json` (from Duty A) and, where relevant,
   `clinical-digest.json` (from Duty B — e.g. a report count or diagnosis the letter
   cites). Flag any mismatch, no matter how small.
+- **Verbatim payer-text quotes are a priority check, not an afterthought.** Any quotation
+  mark in the letter around denial-code legend text or remittance boilerplate must match
+  the source page character for character — this exact defect (one wrong word inside a
+  quotation mark) has independently recurred across separate pipeline runs of the same
+  case, so treat every such quote as unverified until you personally re-read the source
+  glyphs, even if it looks familiar. If `case-file.md` marks a quote
+  `[UNVERIFIED — needs appeals-extraction confirmation]` (case-builder sourced it from a
+  raw intake page outside your normal extraction scope), that quote is priority #1 to
+  verify — re-read the actual page yourself and confirm or correct the wording before
+  approving.
 - **On v2 or later, default to a scoped re-check, not a fresh full review.** If
   `04-draft/changelog.md` has an entry for the version you're reviewing, read it first —
   it names exactly what changed and which of your prior comments it addresses. Verify

@@ -24,3 +24,34 @@ step.
 - **The ask**: case-001 predates the "always 100% of billed" rule and shouldn't be
   copied literally on that point — the rule in `style-guide.md` governs, not that one
   example's specific number.
+
+## Coverage — what's represented vs. what isn't
+
+So a drafter or case-builder hitting a case with no close match knows that's a real gap,
+not a search failure. Update this section every time a new example is added.
+
+**Dispute categories** (per `appeals-denial-interpreter`'s taxonomy):
+- Covered: `out_of_network_rate_dispute` (case-001), `bundling_coding_edit` (case-002),
+  a procedural/timeliness rebuttal combined with a wrong-payer liability misattribution
+  that reads closest to `non_covered_service` (case-003), and a pure `medical_necessity`
+  case with **no denial code at all** — a pre-payment documentation/LMN request
+  (letter-001-voigt).
+- **Not yet represented by any example**: `missing_documentation` as the primary/lead
+  category, `eligibility`, and a straightforward `medical_necessity` case that has an
+  actual denial code to quote-and-rebut (letter-001-voigt's necessity argument is the
+  no-denial-code variant, not this one). If a live case lands in one of these categories,
+  say so explicitly rather than forcing a fit to the nearest existing example.
+- **No example yet demonstrates quoting a payer's own plan/SPD medical-necessity
+  definition** (the pattern `appeals-case-builder.md`'s `medical_necessity` argument
+  pattern calls for) — every real case so far has had an empty `appeals/policy-docs/`
+  folder for its payer, so the necessity arguments in the corpus are built from the
+  clinical record alone. If a case ever ships with an actual policy document in
+  `policy-docs/`, add it as a new example specifically to fill this gap.
+
+**Payers**: Anthem Blue Cross (case-001, case-003 — 2 of 4 examples), United Healthcare /
+Optum (case-002), Aetna / Global Excel as third-party reviewer (letter-001-voigt). Not yet
+represented: Cigna, Humana, Blue Shield, Medicare/Medicare Advantage, or any state
+Medicaid plan. Anthem's own house style (verbatim EXPL/ANSI legend quoting, the
+`out_of_network_rate_dispute` precedent pattern) is the best-covered payer by a wide
+margin — treat a same-payer match as materially more reliable than a same-category match
+with a different payer until more payers are represented.

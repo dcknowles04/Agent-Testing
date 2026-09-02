@@ -35,15 +35,44 @@ Before moving a real EOB/appeal pair or past letter from
 ## Process
 
 1. Draft the redacted version, preserving bold per the note above.
-2. Show it to the user for review — **do not commit until they've confirmed** the
+2. **If the source is a real `.docx`, run the systematic formatting diff below before
+   showing anything to the user** — this replaced an earlier, opportunistic process that
+   only checked whatever formatting question happened to be top-of-mind for a given round
+   (that's how the bold-formatting gap survived two full comparison rounds, and how the
+   "Do not duplicate this claim." italic+underline pattern went unnoticed across three
+   examples before a systematic pass caught it on the fourth). Unzip the `.docx` and check
+   `word/document.xml`, `styles.xml`, and `theme/theme1.xml` against **every** existing
+   example on **every** dimension below, not just the one or two that motivated this
+   round:
+   - Run-level formatting: bold, italic, underline, strikethrough, super/subscript — for
+     each, note which specific text spans carry it, not just whether it appears anywhere.
+   - Font family and size (check actual `<w:sz>` usage on body runs, not just
+     `docDefaults` — a document's declared default can be unused template noise; see
+     style-guide.md's changelog for a worked example of this exact false alarm).
+   - Page setup: paper size, margins, orientation.
+   - Headers/footers, paragraph alignment/justification (`w:jc`), list auto-numbering
+     (`w:numPr`).
+   - Paragraph spacing mechanism (blank inserted paragraph vs. a `spacing.after` value)
+     and signature-block bold density.
+   - Structural order of the letter (where the RE block, denial-code rebuttal, ask, and
+     signature land relative to each other) and argument pattern.
+
+   For each dimension: if all existing examples agree and the new one matches, no action
+   needed. If all existing examples agree and the new one **disagrees**, that's either a
+   new rule to add to `style-guide.md` (if the new one is clearly the more representative
+   pattern) or a new entry in index.md's "Known cross-example disagreements" section (if
+   it's genuinely inconsistent, letter-specific variation). If examples already disagree
+   on a dimension, record where the new one falls rather than averaging it away.
+3. Show it to the user for review — **do not commit until they've confirmed** the
    redaction is complete and nothing sensitive slipped through.
-3. Once confirmed, it can be committed under `eob-appeal-pairs/case-NNN-<short-label>/`
+4. Once confirmed, it can be committed under `eob-appeal-pairs/case-NNN-<short-label>/`
    (paired EOB + case notes + final letter) or `past-letters/letter-NNN.md` (letter only,
    for style/wording reference).
-4. **Append a row to `index.md` in the same step** — payer, dispute category, codes,
+5. **Append a row to `index.md` in the same step** — payer, dispute category, codes,
    DOS, ask, argument pattern, and any formatting caveat worth flagging (e.g. a way this
    example disagrees with another on a style point — see index.md's own note on this).
-   A new example without an index row isn't fully added; the drafter won't find it
+   Update index.md's "Coverage" section too if this example fills a previously-listed
+   gap. A new example without an index row isn't fully added; the drafter won't find it
    efficiently once the corpus grows past a handful of entries.
 
 **Standing rule**: every real letter the user supplies for a comparison round gets added

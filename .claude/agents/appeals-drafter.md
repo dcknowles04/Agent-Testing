@@ -24,7 +24,12 @@ Before writing, read:
   structure, and tone — don't just skim them. Check the index's "Known cross-example
   disagreements" section too: where examples genuinely disagree on a formatting point
   (e.g. how bold the signature block is), match whichever example you picked as closest,
-  not some averaged rule.
+  not some averaged rule. Check the index's "Coverage" section as well: if this case's
+  dispute category or payer is listed there as not yet represented, there is no close
+  match to find — pick the nearest available example for tone/structure only, note the
+  gap in the letter's changelog so the manager and user know less-precedented ground was
+  covered, and don't force the case into an ill-fitting argument pattern just because it's
+  the only example on hand.
 - On a revision round: every current-round `04-draft/review/*-review-vN.md` file. Address
   every point raised by every reviewer, not just the ones that are easy to fix.
 
@@ -42,7 +47,13 @@ Before writing, read:
 3. A plain statement of what's being appealed and why.
 4. Denial-code quote-and-rebuttal, **unified by default**: quote the denial code(s)
    and stated reason(s), then respond directly (see style-guide.md for the exact
-   pattern). Default to one overarching rebuttal covering every disputed line, even if
+   pattern). Copy any text `case-file.md` presents in quotation marks **character for
+   character** — don't retype it from memory of what a code "usually says" or
+   paraphrase it while keeping the quotation marks. A quote inside quotation marks that
+   drifts even one word from `case-file.md`'s own citation is a real defect (this has
+   recurred across pipeline runs), and if `case-file.md` marks a quote
+   `[UNVERIFIED — needs appeals-extraction confirmation]`, carry that flag forward rather
+   than presenting it to the payer as settled. Default to one overarching rebuttal covering every disputed line, even if
    `case-file.md` shows more than one denial-code label — only present separate tracks
    if `case-file.md` itself organizes the case that way (it only does so when the
    codes genuinely need different arguments).
@@ -87,13 +98,19 @@ ALL CAPS is used heavily in the real examples — full sentences, sometimes seve
 row — not just short phrases; don't under-use it. Bold travels with ALL CAPS: wrap every
 full-caps emphasis sentence or block in markdown bold (`**...**`) too — the whole
 capitalized span, not part of it. Independently of caps, wrap in `**...**` any short
-standalone imperative (**Do not duplicate this claim.**), any CPT/denial code, dollar
-figure, or citation embedded in an otherwise plain-case sentence, and any section-label
-word functioning as a mini-header (**Medical Necessity**). Leave narrative/explanatory
-prose and quoted payer language in plain text. This markdown bold is load-bearing, not
-decorative: `appeals-manager` reads it directly to decide which text runs get rendered
-bold in the final `.docx`, so mark every span the style guide calls for and nowhere
-else. Paragraph breaks also carry meaning for rendering: leave a full blank line between
+standalone imperative, any CPT/denial code, dollar figure, or citation embedded in an
+otherwise plain-case sentence, and any section-label word functioning as a mini-header
+(**Medical Necessity**). One specific imperative is a fixed exception to plain bold:
+write the opening admonition as `***Do not duplicate this claim.***` (bold+italic, triple
+asterisk) — this exact sentence is bold, italic, *and* underlined in every real example
+at the XML level, the only place italic or underline appears anywhere in the corpus.
+`appeals-manager` special-cases this literal sentence to add the underline (markdown has
+no underline syntax) — you only need to mark the bold+italic with `***...***`. Don't use
+italic or triple-asterisk anywhere else in the letter; italic doesn't appear anywhere
+else in any real example. Leave narrative/explanatory prose and quoted payer language in
+plain text. This markdown bold is load-bearing, not decorative: `appeals-manager` reads
+it directly to decide which text runs get rendered bold in the final `.docx`, so mark
+every span the style guide calls for and nowhere else. Paragraph breaks also carry meaning for rendering: leave a full blank line between
 one block/argument point and the next — that becomes an inserted blank paragraph in the
 `.docx` for visual spacing — but keep a tight list's items on consecutive lines with no
 blank line between them (a run of body-part names, denial-code line items, numbered

@@ -394,3 +394,31 @@ default for every case's signature block unless a specific case says otherwise.
   interval. Either way, never let a single wait stretch past roughly 20 minutes without
   a check-in during an active stage — a stall found at the 25-minute mark costs
   minutes; one found at the 7-hour mark costs hours.
+- **Recurring defect patterns, found by a retroactive review of every peer-review round
+  across all real cases (Wright, both Wong runs, the Woodruff smoke test).** Subagents
+  carry no memory between invocations, so a defect caught and fixed in one case's review
+  round does not stop it from happening again in a fresh run — one of these recurred
+  verbatim across two separate pipeline runs of the same case. These are now encoded as
+  standing verification rules in the relevant agent files (not just recorded here):
+  - **Verbatim payer-text quotes drift from the source wording.** A denial-code legend or
+    remittance-boilerplate quote inside quotation marks must match the source character
+    for character; a wrong word inside a quote is a real defect even when it doesn't
+    change the meaning, because a reviewer who pulls the source page will find the
+    mismatch. See `appeals-case-builder.md` ("Recurring defect patterns") and
+    `appeals-drafter.md` (Letter structure step 4) for the fix, and
+    `appeals-extraction.md`'s peer-review duty for the priority-check rule.
+  - **A scoped finding, mark, or figure gets extended to items never individually
+    verified** — a "positive" listed for a finding the source marks negative, or one
+    numeric range (e.g. a pain score) applied across body regions whose own documented
+    scores differ or are qualitative. See `appeals-case-builder.md`.
+  - **A same-patient prior example letter contributes facts, not just style** — a
+    patient-characterization phrase copied from an old letter for the same patient,
+    presented as a fact about the current encounter. See `appeals-case-builder.md`.
+  - **Actor misattribution after rewriting a table fact into prose** — "the payer billed"
+    when the practice billed and the payer only reduced/allowed/denied. See
+    `appeals-case-builder.md`.
+  - Two things checked in this review and found **not** to be systemic problems, so they
+    were not turned into new rules: the appeal-filing-deadline fabrication risk (already
+    fully resolved by the "never mention a deadline" house style) and the Wright
+    line-count ambiguity (the `[Billing office: confirm ...]` placeholder convention
+    already handles this class of genuinely-ambiguous inferred quantity correctly).

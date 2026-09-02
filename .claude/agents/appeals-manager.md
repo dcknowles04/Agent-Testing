@@ -73,6 +73,12 @@ Once the checklist passes, produce the deliverable:
      `bold: true` (and `bCs`) on that `TextRun`, at the same font size as the
      surrounding text. Don't add bold anywhere the markdown doesn't mark it, and don't
      silently drop a markdown bold span to plain text.
+   - **The one italic+underline exception**: when the markdown contains
+     `***Do not duplicate this claim.***` (bold+italic via triple asterisk), render that
+     run with `bold: true`, `italics: true`, **and** `underline: {}` (docx-js single
+     underline) — confirmed at the XML level as the only place italic or underline
+     appears in any of the four real examples. Never apply italic or underline to any
+     other text, even other bold-only imperatives or mini-header labels.
    - **Paragraph spacing**: don't compute a `spacing.after` value. Leave
      `spacing: { after: 0 }` (or omit `spacing` entirely) on every `Paragraph`, and
      instead emit one empty `Paragraph` wherever the markdown has a blank line between
@@ -83,10 +89,13 @@ Once the checklist passes, produce the deliverable:
      don't reintroduce a custom spacing-after scheme.
 2. Verify the render two ways: convert to images and look at it, per the `docx` skill's
    own verification step, **and** unzip the `.docx` and check `word/document.xml`
-   directly for `<w:b/>` runs and for empty `<w:p>` spacer paragraphs between blocks. A
-   rendered PDF thumbnail alone doesn't reliably surface a missing bold run or a wrong
-   spacing scheme — that's exactly how this pipeline shipped zero bold across three
-   cases undetected. Confirm both before calling the render correct.
+   directly for `<w:b/>` runs, for empty `<w:p>` spacer paragraphs between blocks, and
+   for exactly one run carrying `<w:i/>` + `<w:u w:val="single"/>` together (the "Do not
+   duplicate this claim." sentence) — no `<w:i/>` or `<w:u/>` should appear anywhere
+   else in the document. A rendered PDF thumbnail alone doesn't reliably surface a
+   missing bold/italic/underline run or a wrong spacing scheme — that's exactly how this
+   pipeline shipped zero bold across three cases undetected. Confirm all of this before
+   calling the render correct.
 3. Update `manifest.json` status to `complete` and append a closing line to `status.md`.
 
 ## Duty 3: style-guide proposals (only on explicit request, after a case closes)
@@ -108,8 +117,11 @@ redacted.md`, `eob-summary-redacted.md`, `notes.md`) — and, **in the same step
 one row for it to `appeals/examples/index.md` (payer, dispute category, codes, DOS, ask,
 argument pattern, and any formatting caveat worth flagging — e.g. a way this example's
 signature-block bold or ask differs from another example's, so a future drafter run
-doesn't average the disagreement away). Do this every time, not as a separately
-rememberable task — a new example without an index row is only half-added.
+doesn't average the disagreement away). Also update the index's "Coverage" section if the
+new example fills a gap it lists (a previously-missing dispute category or payer) — move
+it from the "not yet represented" list to "covered." Do this every time, not as a
+separately rememberable task — a new example without an index row (and an updated
+coverage note, when applicable) is only half-added.
 
 ## What you write — and only this
 

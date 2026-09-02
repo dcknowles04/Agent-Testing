@@ -38,6 +38,13 @@ This is a starting point, not a finished style. It will get more specific and mo
   - Narrative and explanatory prose — the medical-necessity narrative paragraphs, most
     quoted external payer language — stays plain. Bold marks assertions and key facts,
     not description.
+  - **One fixed exception gets italic and underline too**: the opening admonition
+    **"Do not duplicate this claim."** is bold, italic, *and* underlined in all four real
+    examples now in the corpus (case-001-woodruff, Wright/UHC, Gregory Wong, and
+    letter-001-voigt) — confirmed by reading the actual XML runs, not extracted text —
+    and italic/underline appear nowhere else in any of the four documents. Treat this as
+    a single fixed literal exception, not a general rule: this exact sentence always
+    gets all three; no other text in the letter is ever italic or underlined.
 - **Repetition is deliberate, and runs deeper than facts.** Restate the key facts
   (codes, dates of service, dollar amounts) more than once through the letter. The
   real examples go further than that: a large multi-sentence argument block can be
@@ -160,3 +167,12 @@ This is a starting point, not a finished style. It will get more specific and mo
   blank-line-free internally. The user also confirmed a standing rule going forward:
   every real letter supplied for a comparison round gets added to the examples corpus
   (after redaction and confirmation), not just diffed and discarded.
+- Added the "Do not duplicate this claim." bold+italic+underline exception after a
+  systematic raw-XML formatting audit across all four real examples (case-001-woodruff,
+  Wright/UHC, Gregory Wong, and the newly-added letter-001-voigt) — checking not just
+  bold but every run-level property (italic, underline, strikethrough, super/subscript,
+  font, size, page setup, headers/footers, alignment, list numbering). This was the one
+  unanimous, previously-missed finding: italic and underline are otherwise never used in
+  any of the four documents. The audit also confirmed the pipeline's existing 11pt Aptos
+  body font and 1"-margin US Letter page setup already match all four examples exactly —
+  no other gaps found on those dimensions.

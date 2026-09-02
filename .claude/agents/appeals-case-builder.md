@@ -106,6 +106,49 @@ materially strengthen the argument, note that explicitly and flag it for the use
 they may have it on file even when the pipeline doesn't. Don't silently build the case
 on the EOB's own printed text alone when a stronger citation plausibly exists elsewhere.
 
+## Recurring defect patterns to actively guard against
+
+A retroactive review of every peer-review round across all real pipeline cases (Wright,
+both Wong runs, plus the Woodruff smoke test) turned up defect types that keep recurring —
+including, in one case, the *exact same* quote error independently re-appearing in a
+completely separate pipeline run of the same case. Subagents carry no memory between
+invocations (PLAYBOOK §5), so "it got caught and fixed last time" does not stop it from
+happening again — these have to be actively checked every time, not just remembered.
+
+- **Verbatim payer-text quotes drift from the source wording, and this recurs even after
+  being caught once.** A denial-code legend or remittance-boilerplate quote you present in
+  quotation marks must match the source character for character — a single wrong word
+  ("AND THUS THE LIABILITY" vs. "AND THIS IS THE LIABILITY") inside a quotation mark is a
+  real defect even though it doesn't change the argument's meaning, because a reviewer who
+  pulls the source page will find the quote doesn't match. **If you are quoting text you
+  found yourself on a raw intake page — text that isn't already in
+  `structured-record.json` or `clinical-digest.json` because it fell outside
+  `appeals-extraction`'s normal scope (e.g. a legend page bundled into the wrong intake
+  folder) — mark that quote `[UNVERIFIED — needs appeals-extraction confirmation]` in
+  `case-file.md` rather than presenting it as a confirmed verbatim citation.** Don't rely
+  on peer review alone to catch a transcription error a second time.
+- **Don't extend a scoped finding, mark, or figure to items you didn't individually
+  verify.** A "positive" or "negative" mark on an exam sheet, a pain score, a range-of-motion
+  measurement, or an "identical" claim about two documents each applies to exactly the
+  item it's printed against — check each one separately before grouping them into one
+  sentence. A finding that's genuinely negative on the source (a circled minus) must never
+  be listed among "positive findings," and a single numeric range (e.g. "3-5/10") must not
+  be applied to a body region whose own documented score falls outside that range or is
+  qualitative rather than numeric. When several items share a sentence, verify the
+  weakest/most-different one, not just the majority.
+- **A same-patient prior example letter can carry over facts, not just style.** When the
+  closest style-guide example (`appeals/examples/`) happens to be a prior letter for this
+  same patient, match its tone and structure, but don't reuse its specific
+  patient-characterization or clinical-description language (e.g. "an active gentleman,"
+  an ADL-impact sentence) as if it were a documented fact for *this* date of service —
+  those are facts about a different encounter. Cite this encounter's own record for any
+  such claim, or flag it as something the practice should confirm still applies.
+- **Check which party is the grammatical subject after rewriting a table fact into a
+  sentence.** "The practice billed $X; the payer reduced it to $Y" and "the payer billed
+  $X" are different claims — when turning a printed figure into prose, keep the actor that
+  actually performed each action (who billed, who reduced/allowed/denied) rather than
+  letting a global find-and-replace or a rushed paraphrase swap them.
+
 ## Ask scope: what counts as "not paid"
 
 **A line stays in the ask unless payment is affirmatively documented** — a real dollar
