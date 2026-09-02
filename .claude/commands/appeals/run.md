@@ -19,7 +19,7 @@ see less context than it needs — subagents share no memory with this session o
 other, so every Task prompt you send must restate the case ID and the exact file paths
 involved (see PLAYBOOK.md §5-6).
 
-**Four speed principles run throughout the steps below** (PLAYBOOK.md §6 has the full
+**Five speed principles run throughout the steps below** (PLAYBOOK.md §6 has the full
 rationale):
 1. **A manager audit never blocks the next stage.** An audit only checks files that
    already exist and won't change, so there's no correctness reason to wait for it to
@@ -67,6 +67,12 @@ rationale):
    straight from the reviewers' own reports) — there's no dependency between one agent
    fixing its own file and another fixing its own, only between those fixes and the
    *next* drafter version, which still needs all of them landed first.
+5. **Case-building is two calls, not one.** `appeals-case-builder`'s Duty A
+   (independent record review) doesn't need `denial-analysis.json` — it only needs both
+   extraction duties done — so it fires the moment they're both complete, running
+   concurrently with `appeals-denial-interpreter` rather than waiting for it. Only Duty
+   B (argument synthesis) needs `denial-analysis.json`, and it also needs Duty A's own
+   output, so it fires once *both* of those exist.
 
 ## Step 0 — scaffold the case (do this yourself, no subagent needed)
 
@@ -97,29 +103,40 @@ Fire **two Task calls to `appeals-extraction` in the same message**:
 
 The moment **Duty A** completes, move to Step 2 — do not wait for Duty B.
 
-## Step 2 — Denial interpretation, with the stage-1 audit overlapped
+## Step 2 — Denial interpretation + case-builder Duty A, with the stage-1 audit overlapped
 
-Task → `appeals-denial-interpreter` with the case ID and the path to
-`01-extraction/structured-record.json`. Fire this **in the same message as** the
-manager's audit of stage 1 — but the stage-1 audit needs *both* extraction duties
-done, so if Duty B is still running when Duty A finishes, send the denial-interpreter
-call alone first and fire the stage-1 audit as soon as Duty B also completes (it can
-run concurrently with denial-interpretation, already in progress by then — per
-principle 1 above, it never needs to block). If the audit reports FAILED, discard and
-re-run whatever downstream work happened on the bad data.
+Fire **two Task calls together, per principle 5**:
+- `appeals-denial-interpreter` with the case ID and the path to
+  `01-extraction/structured-record.json`. This only needs extraction Duty A, so send it
+  the moment Duty A completes even if Duty B (clinical) is still running.
+- `appeals-case-builder`, **Duty A (independent record review)**, with the case ID and
+  paths to `structured-record.json`, `clinical-digest.json`, `00-intake/records/`, and
+  any relevant `appeals/policy-docs/<payer>/` folder. This needs *both* extraction
+  duties, so if Duty B (clinical) is still running when extraction Duty A finishes,
+  send the denial-interpreter call alone first and fire this one as soon as extraction
+  Duty B also completes — it then runs concurrently with denial-interpretation, already
+  in progress by then.
 
-## Step 3 — Case building, with the stage-2 audit overlapped
+Fire the manager's audit of stage 1 **in the same message as whichever of the two
+above is still pending** — it needs both extraction duties done, so it can usually
+join case-builder Duty A's launch. If the audit reports FAILED, discard and re-run
+whatever downstream work happened on the bad data.
 
-Task → `appeals-case-builder` with the case ID and paths to `structured-record.json`,
-`clinical-digest.json`, the denial-analysis JSON, `00-intake/records/`, and any
-relevant `appeals/policy-docs/<payer>/` folder. Fire this **in the same message as**
-the manager's audit of stage 2 (denial-interpretation) — don't wait for that audit to
-finish first.
+## Step 3 — Case-builder Duty B (synthesis), with the stage-2 audit overlapped
+
+Task → `appeals-case-builder`, **Duty B (argument synthesis)**, with the case ID. This
+needs *both* `02-denial-interpretation/denial-analysis.json` (from denial-interpretation)
+and `03-case-file/clinical-record-review.md` (from case-builder's own Duty A) — fire it
+the moment whichever of those two finishes last is done. Fire the manager's audit of
+stage 2 (denial-interpretation *and* case-builder Duty A together — both are "stage 2"
+now, per principle 1's batching allowance) in the same message rather than waiting for
+it first.
 
 ## Step 4 — Draft v1, with the stage-3 audit overlapped
 
 Task → `appeals-drafter` with the case ID and the path to `03-case-file/case-file.md`.
-Fire this **in the same message as** the manager's audit of stage 3 (case-building).
+Fire this **in the same message as** the manager's audit of stage 3 (case-building
+Duty B / synthesis).
 
 ## Step 5 — Audit stage 4
 

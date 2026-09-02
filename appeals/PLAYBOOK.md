@@ -18,7 +18,7 @@ Code subagents, not the experimental live "Agent Teams" feature; see
 `docs/agent-teams.md` §4, which lists "sequential tasks with dependencies" as a poor
 fit for that feature, and §6/§12, which note team state is session-scoped and cannot
 be made persistent). A single command, `/appeals:run`, drives the whole pipeline
-end-to-end for one case. Four things keep it fast rather than strictly sequential — see
+end-to-end for one case. Five things keep it fast rather than strictly sequential — see
 §6 for the full detail:
 - **Extraction splits into two independent calls** (EOB vs. clinical records), since
   neither depends on the other.
@@ -33,6 +33,10 @@ end-to-end for one case. Four things keep it fast rather than strictly sequentia
 - **A shared root cause found during peer review gets fixed everywhere at once** — every
   agent whose owned file the root cause touches is corrected in the same batch of
   parallel calls, not discovered and dispatched one at a time.
+- **Case-building splits into two calls**, the same pattern as extraction: an
+  independent record review that doesn't need to know the denial classification, and
+  an argument synthesis that does. The independent review runs concurrently with
+  denial-interpretation instead of waiting for it.
 
 ## 2. Roles
 
@@ -40,7 +44,7 @@ end-to-end for one case. Four things keep it fast rather than strictly sequentia
 |---|---|---|---|
 | `appeals-extraction` | Pulls structured data out of the EOB(s) and records; OCR/vision cleanup. Runs as **two parallel duties**: Duty A (EOB) and Duty B (clinical records) — see §6 | `00-intake/**` | `01-extraction/**` (`structured-record.json`+`extraction-notes.md` from Duty A, `clinical-digest.json` from Duty B), later `04-draft/review/extraction-review-vN.md` |
 | `appeals-denial-interpreter` | Translates denial/EXPL/CARC/RARC codes into plain language + dispute category | `01-extraction/**` | `02-denial-interpretation/**`, later `04-draft/review/denial-review-vN.md` |
-| `appeals-case-builder` | Builds the cited factual argument against the denial (reads Duty B's clinical digest as a fast reference, but still independently re-reads the raw records as a cross-check) | `01-*` (including `clinical-digest.json`), `02-*`, `00-intake/records/**`, `policy-docs/**` | `03-case-file/**`, later `04-draft/review/case-review-vN.md` |
+| `appeals-case-builder` | Builds the cited factual argument against the denial. Runs as **two duties** (see §6): Duty A (independent record review, reads Duty B's clinical digest as a fast reference but still independently re-reads the raw records as a cross-check) runs concurrently with denial-interpretation; Duty B (argument synthesis) applies the denial classification to Duty A's gathered facts | Duty A: `01-*` (including `clinical-digest.json`), `00-intake/records/**`, `policy-docs/**`. Duty B: `02-*`, `03-case-file/clinical-record-review.md`, plus the same sources as Duty A for load-bearing verification | `03-case-file/**` (`clinical-record-review.md` from Duty A, `case-file.md` from Duty B), later `04-draft/review/case-review-vN.md` |
 | `appeals-drafter` | Writes the formal appeal letter; revises on feedback | `03-case-file/**`, `style-guide.md`, `examples/**`, `04-draft/review/*` | `04-draft/appeal-letter-vN.md`, `04-draft/changelog.md` |
 | `appeals-manager` | Enforces file ownership, QA gate, final `.docx` delivery | everything (read-only outside its own lane except audits) | `manifest.json`, `status.md`, `05-manager-audit/**`, `06-final/**` |
 
@@ -81,7 +85,10 @@ appeals/
         ├── 02-denial-interpretation/
         │   └── denial-analysis.json               # owner: appeals-denial-interpreter
         ├── 03-case-file/
-        │   └── case-file.md                       # owner: appeals-case-builder
+        │   ├── clinical-record-review.md           # owner: appeals-case-builder (Duty A,
+        │   │                                          runs in parallel with denial-
+        │   │                                          interpretation — see §6)
+        │   └── case-file.md                       # owner: appeals-case-builder (Duty B)
         ├── 04-draft/
         │   ├── appeal-letter-v1.md ... vN.md       # owner: appeals-drafter (never overwrite)
         │   ├── changelog.md                        # owner: appeals-drafter
@@ -145,15 +152,22 @@ be fully self-contained).
    `00-intake/comparable-eobs/`, writing `structured-record.json`. Duty B reads
    `00-intake/records/` only, writing `clinical-digest.json`. Neither depends on the
    other — fire both as parallel Task calls to `appeals-extraction`.
-2. **Denial interpretation starts the moment Duty A finishes** — it never needed
-   Duty B, so don't wait for it. The manager's audit of stage 1 needs *both* duties
-   done (it checks the whole `01-extraction/` folder), so it may start slightly later
-   than denial-interpretation — that's fine, per the overlap principle below, run it
-   concurrently with whatever's already in progress rather than waiting for a clean
-   moment to insert it.
-3. **Case building** — needs Duty A, Duty B, *and* denial-interpretation all done.
-   Fire it alongside the manager's audit of stage 2 (denial-interpretation).
-4. **Draft v1** — fire alongside the manager's audit of stage 3 (case-building).
+2. **Denial interpretation and case-builder Duty A both start the moment extraction's
+   two duties are done — not sequentially, and not waiting on each other.**
+   Denial-interpretation only ever needed extraction Duty A, so it starts as soon as
+   that's done. Case-builder's Duty A (independent record review) needs *both*
+   extraction duties (it reads `clinical-digest.json` too), so it starts as soon as
+   extraction Duty B also finishes — by which point denial-interpretation is usually
+   already running, and the two proceed concurrently since neither depends on the
+   other. The manager's audit of stage 1 also needs both extraction duties done, so it
+   joins whichever of the two hasn't started yet rather than waiting for a clean moment
+   to insert it.
+3. **Case-builder Duty B (argument synthesis)** — needs denial-interpretation's
+   `denial-analysis.json` *and* case-builder's own Duty A output
+   (`clinical-record-review.md`), so it fires once whichever of those two finishes
+   last is done. Fire it alongside the manager's audit of stage 2 (denial-interpretation
+   and case-builder Duty A together).
+4. **Draft v1** — fire alongside the manager's audit of stage 3 (case-builder Duty B).
 5. Audit stage 4 (the draft).
 
 **The overlap principle, applied at every boundary above:** a manager audit checks
