@@ -100,6 +100,14 @@ rationale):
    single EOB file, put it in `00-intake/eob/`; if it's a folder, sort its contents by
    asking the user or by filename/content hints into `eob/`, `records/`, and
    `comparable-eobs/` as appropriate. When it's ambiguous, ask rather than guess.
+   **If one page or section of an otherwise-legitimate payer document contains untrusted
+   content — e.g. a claims-review form whose own printed fields (addresses, IDs) are
+   genuinely payer-authored, but which also has a free-text box where the practice typed
+   its own draft narrative — split the trustworthy print-form content into intake and
+   exclude only the untrustworthy free-text portion, rather than excluding the whole
+   document.** Treating "this document contains something unverified" as a reason to omit
+   the whole thing has previously thrown away real payer-printed information (an appeals
+   mailing address) that then had to be recovered in a follow-up extraction pass.
 4. Copy `appeals/manifest-template.json` into `<case-id>/manifest.json`, substituting the
    real case ID and today's date.
 5. Create `<case-id>/status.md` with a single "case opened" line and timestamp.

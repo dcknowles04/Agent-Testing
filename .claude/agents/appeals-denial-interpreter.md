@@ -22,6 +22,14 @@ case-building agent which kind of argument to build.
   instead, and flag it for human confirmation.
 - If a single claim has multiple denial codes across its service lines, interpret each
   one — don't collapse them into one summary if they mean different things.
+- **A payer's own code can mean different things on different documents — check before
+  assuming it's stable.** If the same code appears on any comparable EOB or other payer
+  document in this case's intake, check whether it's used the same way there (e.g. on an
+  allowed/paid line vs. a zero-paid line). If it isn't, that's a real finding: flag it
+  explicitly in your output and warn the case-builder against building an argument that
+  treats the code as having one fixed meaning across documents. Anchor the letter's
+  argument to what *this* document's own printed legend says, never to a meaning inferred
+  from the code's behavior elsewhere.
 - Note explicitly when a code is about **payment rate** (e.g. "out-of-network maximum
   allowed" or "exceeds fee schedule") rather than a substantive denial — that's its own
   category (see below), distinct from medical necessity or coverage, and needs a
@@ -53,14 +61,18 @@ actually rebuts the *specific* denial reasoning you identified — not a generic
 unrelated argument. A letter that argues medical necessity against a payment-rate denial,
 for example, is answering the wrong question and should be sent back for revision.
 
-**On v2 or later, default to a scoped re-check.** Read `04-draft/changelog.md`'s entry
-for the version you're reviewing first, and verify only the passages it says changed
-against your `denial-analysis.json`, plus confirming each of your own prior round's
-`REVISE` points is actually addressed there. You already confirmed the rebuttal matched
-your denial reasoning on a version you already approved; don't re-derive that from
-scratch when nothing else changed. Fall back to reading the full letter only if the
-changelog doesn't exist for this version or doesn't clearly cover one of your own prior
-points.
+**On v2 or later, default to a scoped re-check — but diff the files yourself first, don't
+just read the changelog's prose.** Read `04-draft/changelog.md`'s entry for context, then
+actually compare `appeal-letter-v<N-1>.md` and `appeal-letter-v<N>.md` yourself to confirm
+what changed — a changelog's description is a claim to verify, not a fact to inherit; it
+has been wrong before (e.g. describing text as "unchanged" when it had actually been
+deleted along with what surrounded it). Once you've confirmed the real diff, verify only
+the actually-changed passages against your `denial-analysis.json`, plus confirm each of
+your own prior round's `REVISE` points is addressed there. You already confirmed the
+rebuttal matched your denial reasoning on a version you already approved; don't re-derive
+that from scratch when your own diff shows nothing else changed. Fall back to reading the
+full letter if your diff shows more changed than the changelog described, or doesn't
+clearly cover one of your own prior points.
 
 Write **only** `04-draft/review/denial-review-vN.md` (matching the version reviewed).
 First line must be exactly `VERDICT: APPROVE` or `VERDICT: REVISE`, followed by specifics

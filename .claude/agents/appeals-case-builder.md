@@ -136,6 +136,22 @@ happening again — these have to be actively checked every time, not just remem
   be applied to a body region whose own documented score falls outside that range or is
   qualitative rather than numeric. When several items share a sentence, verify the
   weakest/most-different one, not just the majority.
+  **This is still the single most common defect category even after being named above —
+  make it an actual pre-submission sweep, not just something to keep in mind: before
+  writing `case-file.md`, find every specific count, "all"/"every"/"each," or span you're
+  about to assert (how many sites, how many regions, how many pages) and re-count it
+  against the primary source rather than carrying forward a number from the digest, a
+  prior draft, or a plausible-sounding recollection. A confidently-worded count and an
+  overreaching one read identically on the page — the only way to catch the gap is to
+  recount, not to write more carefully.**
+- **A user-supplied "benchmark" or reference letter needs its own identifiers checked
+  before it's treated as evidence about this case.** If you're given a real letter to
+  compare against or learn from, check that its claim number, date of service, and
+  billed amount actually match this case's own intake before using anything in it —
+  a superficially similar letter (same patient, same practice, same general subject) can
+  be for a different claim entirely, especially when a practice reuses a template across
+  a patient's recurring visits. A mismatch means it's evidence about a different claim,
+  not additional information about this one, no matter how confidently it's written.
 - **A same-patient prior example letter can carry over facts, not just style.** When the
   closest style-guide example (`appeals/examples/`) happens to be a prior letter for this
   same patient, match its tone and structure, but don't reuse its specific
@@ -229,13 +245,18 @@ needlessly split into per-code tracks (flag it if it's split without a real reas
 to be); and the letter contains no filing-deadline line or placeholder at all —
 deadlines don't appear in the letter, per house style.
 
-**On v2 or later, default to a scoped re-check.** Read `04-draft/changelog.md`'s entry
-for the version you're reviewing first, and verify only the citations/claims it says
-changed against your `case-file.md`, plus confirming each of your own prior round's
-`REVISE` points is actually addressed there — don't re-verify every citation in the
-letter again from scratch when the rest of it is unchanged. Fall back to a full
-citation-by-citation pass only if the changelog entry is missing, doesn't exist for this
-version, or doesn't clearly account for one of your own previous points.
+**On v2 or later, default to a scoped re-check — but diff the files yourself first,
+don't just read the changelog's prose.** Read `04-draft/changelog.md`'s entry for context,
+then actually compare `appeal-letter-v<N-1>.md` and `appeal-letter-v<N>.md` yourself
+(read both, or run a diff) to confirm what changed — a changelog's description of a
+change is a claim to verify, not a fact to inherit, and it has been wrong before (e.g.
+describing a sentence as "unchanged" when it had actually been deleted along with
+surrounding text). Once you've confirmed the real diff, verify only the citations/claims
+in the actually-changed passages against your `case-file.md`, plus confirm each of your
+own prior round's `REVISE` points is actually addressed — don't re-verify every citation
+in the letter again from scratch when the rest of it is genuinely unchanged. Fall back to
+a full citation-by-citation pass if your own diff shows more changed than the changelog
+described, or doesn't clearly account for one of your own previous points.
 
 Write **only** `04-draft/review/case-review-vN.md` (matching the version reviewed). First
 line must be exactly `VERDICT: APPROVE` or `VERDICT: REVISE`, followed by specifics if

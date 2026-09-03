@@ -128,6 +128,19 @@ letter for emphasis, not just a code or dollar amount restated — don't trim th
 redundancy. Punctuation: no comma before "Suite"; no space between an area code's
 closing parenthesis and the number.
 
+## Before you finish: recount every quantifier
+
+The single most common defect across real pipeline cases is a specific count, span, or
+"all"/"every"/"each" claim that reads confidently but doesn't match the primary source —
+"tenderness across seven sites" when one row was blank, "five regional blocks" when a
+fifth was never filled in, a body-region count copied from a nearby similar sentence
+instead of counted fresh. A confidently-worded overreach and a genuinely correct count
+look identical on the page — the only way to catch the gap is to recount. Before calling
+a draft finished, find every specific number, "all"/"every"/"each," or span you wrote and
+verify it traces to an actual count in `case-file.md` (or the record it cites), rather
+than assuming a count is right because it sounds plausible or matches a similar sentence
+elsewhere in the letter.
+
 ## Appeal filing deadline: not in the letter
 
 **Never add a filing-deadline line, placeholder, or fill-in-the-blank field anywhere in

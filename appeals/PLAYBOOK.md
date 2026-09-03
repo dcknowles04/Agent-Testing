@@ -422,3 +422,38 @@ default for every case's signature block unless a specific case says otherwise.
     fully resolved by the "never mention a deadline" house style) and the Wright
     line-count ambiguity (the `[Billing office: confirm ...]` placeholder convention
     already handles this class of genuinely-ambiguous inferred quantity correctly).
+- **Four more process fixes, from a reflective review after the Merriman/Cigna case**
+  (the pipeline's first `missing_documentation` case run end-to-end from real intake
+  documents rather than from a comparison letter). None of these are new failure
+  categories exactly — they're the same "confident but ungrounded" family as above,
+  surfacing in new spots — but each is now a standing rule where it wasn't one before:
+  - **The scoped-finding-overreach pattern (above) is still the single most common
+    defect even after being named as a rule**, and it kept recurring specifically as
+    *quantifiers* — "seven sites" where one row was blank, "five regional blocks" where
+    a fifth was never filled in. Turned into an explicit pre-submission sweep in both
+    `appeals-case-builder.md` and `appeals-drafter.md`: find every specific count,
+    "all"/"every"/"each," or span before finishing, and recount it against the primary
+    source rather than trusting how plausible it sounds.
+  - **A payer's own denial code can mean something different on different documents
+    within the same case** (the same code appeared on one EOB's zero-paid line and
+    another EOB's allowed line) — `appeals-denial-interpreter.md` now has a standing
+    instruction to check for this and flag it rather than relying on a reviewer to
+    happen to notice.
+  - **Scoped reviewers were trusting a changelog's prose description of "what changed"
+    instead of diffing the files themselves** — usually harmless, but a changelog was
+    once wrong (describing a sentence as unchanged when it had actually been deleted
+    along with its surrounding text). All three reviewer roles' scoped-review
+    instructions now require an actual file comparison before trusting the changelog's
+    characterization.
+  - **Excluding an entire document from intake because part of it is untrusted throws
+    away the trustworthy part too.** A Cigna claims-review form was excluded wholesale
+    because it also contained the practice's own draft narrative, which discarded the
+    form's own genuinely payer-printed appeals address — recovered only via a follow-up
+    extraction pass. `run.md`'s intake-staging step now says to split out and exclude
+    only the untrustworthy portion of a mixed document, not the whole thing.
+  - Also worth recording since it came from the same case: a user-supplied "benchmark"
+    letter can be for a different claim than the one being compared against, even when
+    it looks superficially similar (same patient, same practice) — the giveaway is its
+    own identifiers (claim #, DOS, billed amount) not matching the case's real intake.
+    `appeals-case-builder.md`'s peer-review duty now checks this before treating such a
+    letter as evidence about the current case.
