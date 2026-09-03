@@ -102,6 +102,21 @@ This is a starting point, not a finished style. It will get more specific and mo
   paragraph between them — a run of body-part names, line-item entries, or numbered
   sub-points under one ask all stay tight; spacing is for the gaps *between* blocks, not
   within one.
+- **Documentation-checklist blocks are real bulleted lists, not plain lines.** When the
+  letter includes a short checklist of criteria or enclosed items — a policy's numbered
+  requirements ("There is a regional pain complaint...", "There is spot tenderness...",
+  etc.), a "documentation supports the following" list, or "the enclosed records
+  include" list (with its own sub-list of "muscle groups injected / number of trigger
+  points / laterality / medication and dosage") — six of the nine real examples now in
+  the corpus render these as genuine Word bulleted lists (`<w:numPr>`, bullet format),
+  including a nested sub-list where one exists. Write these as markdown bullet lists
+  (`- item`, with a nested `- ` under a parent item where the source shows one) rather
+  than plain consecutive lines, and render them as real bulleted paragraphs in the
+  `.docx`, not flattened into a run-on sentence or plain unbulleted lines. This exact
+  loss already happened twice during example transcription (case-001-woodruff and
+  letter-001-voigt both had a real bulleted list flattened to prose/plain lines) before
+  being caught and backfilled — treat a checklist-shaped block as a strong signal to
+  check for real list formatting, not just read it as prose.
 - **Punctuation conventions**: no comma before "Suite" (`1200 Rosecrans Avenue Suite
   208`); no space between an area-code's closing parenthesis and the number
   (`(310)416-9700`, not `(310) 416-9700`).
@@ -176,3 +191,10 @@ This is a starting point, not a finished style. It will get more specific and mo
   any of the four documents. The audit also confirmed the pipeline's existing 11pt Aptos
   body font and 1"-margin US Letter page setup already match all four examples exactly —
   no other gaps found on those dimensions.
+- Added the real-bulleted-list rule after five new real examples (two McCracken/Aetna
+  letters and three Fleischman/Anthem letters) confirmed a pattern already present but
+  previously mis-transcribed in two existing examples: a "documentation supports" or
+  "enclosed records include" checklist renders as a genuine Word bulleted list (with a
+  nested sub-list in the records-enclosed block) in 6 of 9 real examples. Backfilled
+  case-001-woodruff and letter-001-voigt, which had each flattened this into prose or
+  plain lines during their original transcription.

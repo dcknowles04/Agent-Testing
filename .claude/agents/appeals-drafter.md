@@ -115,7 +115,14 @@ one block/argument point and the next — that becomes an inserted blank paragra
 `.docx` for visual spacing — but keep a tight list's items on consecutive lines with no
 blank line between them (a run of body-part names, denial-code line items, numbered
 sub-points under one ask). Those must stay visually tight in the final document, so
-don't introduce a stray blank line inside one. Repetition runs deeper than
+don't introduce a stray blank line inside one. **A documentation-checklist block is a
+real bulleted list, not plain lines**: a policy's numbered criteria, a "documentation
+supports" list, or an "enclosed records include" list (with its own nested sub-list for
+"muscle groups injected / number of trigger points / laterality / medication and
+dosage") should be written as markdown bullets (`- item`, nested `- ` for a sub-list)
+so `appeals-manager` renders them as genuine bulleted paragraphs — six of nine real
+examples use real Word bullet lists for exactly this kind of content, and it has
+already been lost to flat prose twice in past examples before being caught. Repetition runs deeper than
 individual facts: a large argument block may be repeated nearly verbatim later in the
 letter for emphasis, not just a code or dollar amount restated — don't trim that as
 redundancy. Punctuation: no comma before "Suite"; no space between an area code's

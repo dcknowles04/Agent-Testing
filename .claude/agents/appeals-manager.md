@@ -73,6 +73,13 @@ Once the checklist passes, produce the deliverable:
      `bold: true` (and `bCs`) on that `TextRun`, at the same font size as the
      surrounding text. Don't add bold anywhere the markdown doesn't mark it, and don't
      silently drop a markdown bold span to plain text.
+   - **Real bulleted lists**: a markdown bullet list (`- item`, with nested `- ` items)
+     becomes a genuine bulleted paragraph in the `.docx` — use the `docx` library's
+     `bullet: { level: 0 }` (or `numbering` reference to a bullet-format list) on each
+     item's `Paragraph`, matching the nesting level. Don't render a markdown bullet list
+     as plain consecutive paragraphs with no list formatting — six of nine real examples
+     use genuine Word bullets for this kind of content, and it was silently lost to plain
+     paragraphs in two examples before being caught.
    - **The one italic+underline exception**: when the markdown contains
      `***Do not duplicate this claim.***` (bold+italic via triple asterisk), render that
      run with `bold: true`, `italics: true`, **and** `underline: {}` (docx-js single
@@ -92,7 +99,8 @@ Once the checklist passes, produce the deliverable:
    directly for `<w:b/>` runs, for empty `<w:p>` spacer paragraphs between blocks, and
    for exactly one run carrying `<w:i/>` + `<w:u w:val="single"/>` together (the "Do not
    duplicate this claim." sentence) — no `<w:i/>` or `<w:u/>` should appear anywhere
-   else in the document. A rendered PDF thumbnail alone doesn't reliably surface a
+   else in the document — and, if the markdown had any `- item` bullet lists, for
+   `<w:numPr>` on those same paragraphs in the rendered `.docx`. A rendered PDF thumbnail alone doesn't reliably surface a
    missing bold/italic/underline run or a wrong spacing scheme — that's exactly how this
    pipeline shipped zero bold across three cases undetected. Confirm all of this before
    calling the render correct.

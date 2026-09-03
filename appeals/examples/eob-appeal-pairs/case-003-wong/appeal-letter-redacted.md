@@ -22,7 +22,7 @@ Date of Service: 07/08/2024
 Claim: [Redacted]
 Billed Amount: $5,450.00
 
-**Do not duplicate this claim.**
+***Do not duplicate this claim.***
 This letter is the **FOURTH RESUBMISSION** appeal/dispute of the denial of payment of
 code (**99214-25, 73610x2, 73630x2, 73660x2, 76881x2** on DOS **07/08/2024.**
 

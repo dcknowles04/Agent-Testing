@@ -18,7 +18,7 @@ Claim: [Redacted]
 Billed Amount: $6,300.00
 Non-Paid Amount: $6,300.00
 
-**Do not duplicate this claim.**
+***Do not duplicate this claim.***
 This letter is an appeal/dispute of the denial of payment of **99205-25, 72052, 73030x2,
 76881x2**
 on DOS **05/12/2025.**

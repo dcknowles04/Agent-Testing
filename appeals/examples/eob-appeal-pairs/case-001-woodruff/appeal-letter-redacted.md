@@ -20,7 +20,7 @@ Date of Service: 09/23/2025
 Original Claim #: [Redacted]
 Billed Amount: $14,250.00
 
-**Do not duplicate this claim.**
+***Do not duplicate this claim.***
 This letter is the appeal/dispute of the UNDERPAYMENT **20611x2 and J3490x2 NDC#[Redacted]**
 on DOS **09/23/2025**.
 
@@ -167,12 +167,25 @@ insurance policy, and is medically indicated and medically necessary for this pa
 Please review the detailed radiology/injection procedure report in the attached medical
 records, which fully documents that the patient was administered J3490 NDC#[Redacted] to
 the right elbow on DOS 09/23/2025, and which fully meets all CPT/AMA/Medicare/Anthem Blue
-Cross/DGA criteria for full payment of **20611x2** (ultrasound-guided arthrocentesis,
-aspiration, and/or injection): documentation of a focused ultrasound evaluation, image
-interpretation of the specific area of concern, documentation of normal anatomic
-structures and pathologic findings, documentation of the procedure performed, and
-documentation of the specific therapeutic medication and dosage — all of which are
-present in the attached report.
+Cross/DGA criteria/guidelines for FULL payment of **20611x2** ultrasound guided
+therapeutic injection.
+
+**CPT 20611 ultrasound guided arthrocentesis, aspiration, and/or injection.**
+Procedure **20611x2** was performed, see attached full US guided therapeutic injection
+radiology report.
+The attached radiology report of US images includes the full documentation necessary for
+payment. **Definition CPT code 20611 requires the following:**
+
+- Documentation of a focused ultrasound evaluation.
+- Documentation of US images in the specific area of concern.
+- Documentation of the US images of normal anatomic structures and any pathologic
+  findings.
+- Documentation of the US guided therapeutic procedure performed.
+- Documentation of the specific medication and dosage of therapeutic US guided injection
+  performed.
+
+All above requirements meet the criteria necessary for payment of **20611x2** were
+documented in the Radiology Injection Procedure Report on **page 3**.
 
 **The diagnosis codes for DOS 09/23/2025 are M17.31, M17.32, M54.2, M77.11, M77.12,
 M77.01, and M77.02.**

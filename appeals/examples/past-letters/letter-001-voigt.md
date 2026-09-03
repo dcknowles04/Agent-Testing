@@ -48,7 +48,7 @@ Original Claim #: [Redacted]
 Billed amount: $14,750.00
 Non-paid: $14,750.00
 
-**Do not duplicate this claim.**
+***Do not duplicate this claim.***
 This letter is an appeal/letter of medical necessity of a nonpayment of codes
 **99214–25, 20553, J3490x3 NDC #[Redacted]** on DOS **07/14/2025.**
 This letter is an appeal/dispute of the NONPAYMENT of **99214-25, 20553, J3490x3.**
@@ -213,25 +213,26 @@ functional impairment and pain.
 20553 is utilized appropriately to indicate a distinct procedural service, consistent
 with CMS-aligned modifier principles followed by Aetna. Documentation supports that the
 trigger point injections were:
-3 separately identifiable separate and distinct musculature.
-Performed in 3 distinct anatomic regions.
-Not incidental to, mutually exclusive to, or bundled with any other procedure performed
-on DOS 07/14/2025.
+
+- 3 separately identifiable separate and distinct musculature.
+- Performed in 3 distinct anatomic regions.
+- Not incidental to, mutually exclusive to, or bundled with any other procedure performed
+  on DOS 07/14/2025.
 
 Based on clear and definitive medical indications, medical necessity and full and
 complete supporting documentation/medical records, we respectfully request that Aetna
 complete its medical review and reprocess this claim for payment.
 
 The enclosed records include:
-Office visit note documenting cervical myofascial pain syndrome
-Physical examination identifying trigger points and functional limitation
-Procedure note specifying:
-Muscle groups injected
-Number of trigger points
-Laterality
-Medication and dosage
 
-History of failed conservative therapy
+- Office visit note documenting cervical myofascial pain syndrome
+- Physical examination identifying trigger points and functional limitation
+- Procedure note specifying:
+  - Muscle groups injected
+  - Number of trigger points
+  - Laterality
+  - Medication and dosage
+- History of failed conservative therapy
 
 Based on clear and definitive medically indicated, medically necessary and standard of
 care treatment performed/received by this patient on DOS 07/14/2025 and the full and
