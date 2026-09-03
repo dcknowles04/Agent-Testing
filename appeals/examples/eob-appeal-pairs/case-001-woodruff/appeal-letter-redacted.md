@@ -5,8 +5,8 @@ P.O. Box 60007
 Los Angeles, CA 90060
 Fax: 800-927-4092
 
-Email: [payer appeals email]
-Fax: [payer appeals fax]
+Email: HPclaims@DGAplans.org
+Fax: (323)782-9287
 
 APPEAL/DISPUTE LETTER/UNDERPAYMENT/LETTER OF MEDICAL NECESSITY
 
@@ -30,7 +30,7 @@ MEDICAL SERVICES (20611x2, J3490x2) ON DOS 09/23/2025.
 **We vigorously insist that this appeal/dispute/letter of medical necessity be immediately
 read and reviewed in its entirety.**
 
-Please see attached Anthem Blue Cross **INCORRECT/UNDER PAYMENT EOB DATED [date] DOS
+Please see attached Anthem Blue Cross **INCORRECT/UNDER PAYMENT EOB DATED 04/17/2026 DOS
 09/23/2025:**
 **20611x2**
 Billed at $5,000.00
@@ -47,7 +47,7 @@ DEFINITIVELY NOT CORRECTLY ALLOWED/PAID.**
 
 IN CLEAR AND DEFINITIVE SUPPORT FOR THE PROPER PAYMENT FOR 20611x2, J3490x2, please see
 attached Anthem Blue Cross EOB FOR THE SAME PATIENT FOR THE SAME MEDICAL SERVICES dated
-[date] for DOS **10/14/2024:**
+12/19/2025 for DOS **10/14/2024:**
 **20611x2**
 Billed at $3,600.00 EACH
 Anthem Blue Cross allowed at $2,483.16 EACH
@@ -203,11 +203,11 @@ full payment at 100% of billed charges for J3490x2 NDC#[Redacted] at $13,000.00.
 Thank you in advance for your consideration and assistance in correcting this **payment
 issue**.
 
-Contact our billing department with any further questions: [phone] or [email].
+Contact our billing department with any further questions (310)416-9700 or [Redacted].
 
 Sincerely,
 
 **Medical Billing/Collection Specialist**
-**[Practice Name]**
-**[Practice Address]**
-**PHN: [Redacted]  FAX: [Redacted]**
+**1200 Rosecrans Avenue Suite 208**
+**Manhattan Beach, CA 90266**
+**PHN: (310)416-9700 FAX: (310)416-1120**

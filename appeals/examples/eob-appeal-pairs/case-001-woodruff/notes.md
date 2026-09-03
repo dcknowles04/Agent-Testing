@@ -26,8 +26,23 @@ The originals remain in `appeals/examples/_raw-unredacted/` (git-ignored, local 
 ## What was redacted vs. kept
 
 Redacted: patient name, DOB, member/subscriber ID, claim numbers, patient account
-number, provider name/ID, practice address/phone/fax/email.
+number, treating provider name, and the staff member's email address.
 
-Kept: payer name, CPT/HCPCS/ICD-10 codes, denial codes and their stated meanings, dollar
-amounts, dates of service, and the full argument structure/wording/tone of the letter —
-these are what make the example useful and none of them identify the patient.
+Kept: payer name, the payer's plan-specific claims email/fax, CPT/HCPCS/ICD-10 codes,
+denial codes and their stated meanings, dollar amounts, all dates (service dates and EOB
+processing/determination dates alike), the practice's own address/phone/fax, and the full
+argument structure/wording/tone of the letter — these are what make the example useful
+and none of them identify the patient.
+
+**Backfilled 2026-09-03** after a fresh copy of this same real letter was supplied for
+comparison: this example was redacted first, before the phone/address-kept,
+email-redacted convention was established on later examples (Wright, Wong, Voigt). It had
+several fields left as generic bracket placeholders (`[date]`, `[phone]`, `[email]`,
+`[Practice Name]`, `[Practice Address]`) instead of being filled with real, non-sensitive
+values or properly redacted per the now-current convention. Corrected to match: payer
+claims email/fax, both EOB dates, and the practice's phone/address/fax are now filled in
+with real values; the erroneous stray `[Practice Name]` signature line is removed (no
+real example has ever had one). The treating-provider name placeholder (`[Treating
+provider]`) was deliberately left as-is pending explicit user confirmation on whether
+this physician's name should be named directly, matching or diverging from later
+examples' treatment of it.
