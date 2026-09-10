@@ -15,12 +15,20 @@ step.
 | [case-002-wright](eob-appeal-pairs/case-002-wright/) | United Healthcare / Optum | `bundling_coding_edit` | CPT 99205-25, 72052, 73030x2, 76881x2 | 05/12/2025 | 100% of billed ($6,300.00) | Cites the payer's own component-billing policy plus an outside CMS citation to show the radiology interpretation-and-report is separately payable from the E/M visit | Signature block bolds only the title line, not the address/phone lines below it |
 | [case-003-wong](eob-appeal-pairs/case-003-wong/) | Anthem Blue Cross | Two-pronged: workers'-comp liability misattribution (codes 016/19) + a timely-filing rebuttal of the payer's own dispute-rejection | CPT 99214, 73610x2, 73630x2, 73660x2, 76881x2; denial codes 016, 19 | 07/08/2024 | 100% of billed ($5,450.00) | Two separate points argued in one letter (procedural timeliness math, then WC-misattribution on the merits) rather than the usual single unified rebuttal — only do this when two threads genuinely rest on disjoint evidence, per `case-file.md`'s guidance | Signature block mostly plain, not bold |
 | [letter-001-voigt](past-letters/letter-001-voigt.md) | Aetna Insurance (reviewed via Global Excel, a third-party claims-review TPA) | `medical_necessity` — **no denial code at all**; this is a direct response to a pre-payment documentation/LMN request, not a denial rebuttal | CPT 99214-25, 20553, J3490x3; no CARC/EXPL codes present | 07/14/2025 | 100% of billed ($14,750.00) | Pure medical-necessity case: failed-conservative-treatment history, objective trigger-point exam findings, successful outcome after injection — opens by naming the requesting letter (payer/TPA + date) directly, no denial-code quote-and-rebuttal section since nothing was denied yet | Heavy bold-with-caps throughout, consistent with the other examples; two isolated sentences use caps with no bold at all — read as inconsistency in this one letter, not a new rule |
+| [letter-002-mccracken-05162025](past-letters/letter-002-mccracken-05162025.md) | Aetna Insurance | Mixed — reads closest to `bundling_coding_edit` (99214-25 "included in procedure performed on same date," J3490x3 "incidental to another procedure") layered with a fee-schedule/underpayment point on 20553; no single taxonomy label covers all three | CPT 99214-25, 20553, J3490x3; denial codes #1, #4, #3 | 05/16/2025 | 100% of billed ($13,250.00) | Same-patient/same-codes prior-EOB precedent lead, then a direct quote-and-match against the payer's own Clinical Policy Bulletin (Aetna CPB 0016), then a per-denial-code rebuttal | Heavy bold-with-caps; ***Do not duplicate this claim.*** convention holds |
+| [letter-003-mccracken-08082025](past-letters/letter-003-mccracken-08082025.md) | Aetna Insurance | `missing_documentation` — direct response to denial code #1 ("we do not have the information we need... we requested specific information"); same patient as letter-002 but a different claim, not a revision | CPT 99214-25, 20553, J3490x2; denial code #1 | 08/08/2025 | 100% of billed ($13,250.00) | Same same-patient prior-EOB precedent lead as letter-002, plus full medical-necessity narrative, used to answer a documentation request rather than rebut a substantive denial | Heavy bold-with-caps; ***Do not duplicate this claim.*** convention holds |
+| [letter-004-fleischman-10132025](past-letters/letter-004-fleischman-10132025.md) | Anthem Blue Cross (billed through MPI, a billing/practice-management intermediary) | `missing_documentation` — denial codes 904/252, both documentation-request codes | CPT 99214-25, 20553, J3490x3; denial codes 904, 252 | 10/13/2025 | 100% of billed ($9,950.00) | **New precedent variant**: cites the payer's own prior Grievance and Appeals "OVERTURN" letter (a separate earlier dispute) as proof a code is on the payer's fee schedule, instead of a same-patient comparable EOB | Heavy bold-with-caps; ***Do not duplicate this claim.*** convention holds |
+| [letter-005-wong-06282025](past-letters/letter-005-wong-06282025.md) | Anthem Blue Cross (billed through MPI) | `missing_documentation` — denial codes 904/252 | CPT 99214-25, 20553, J3490x3; denial codes 904, 252 | 06/28/2025 | 100% of billed ($16,250.00) | Same-patient comparable-EOB precedent, but the cited comparable claim was itself only partially allowed (not 100%-paid like every other precedent example) | Heavy bold-with-caps; only example so far using a bulleted key-value list for the per-code billed/allowed breakdown — a formatting variant to watch, not yet a rule. Same patient as case-003-wong but a different claim (different DOS, denial reason, and codes breakdown) |
 
 ## Known cross-example disagreements (don't average these away — pick per case)
 
 - **Signature-block bold**: varies between fully bold (case-001), title-only bold
   (case-002), and plain (case-003). Match whichever example is closest on payer/dispute
-  category rather than assuming one universal rule.
+  category rather than assuming one universal rule. The four West Coast Center for
+  Orthopedic Surgery examples (letter-002 through letter-005) all bold the
+  address/phone/fax lines, but only letter-005 also bolds the title line above them —
+  another instance of this same practice's letters not being fully internally consistent
+  on this point.
 - **The ask**: case-001 predates the "always 100% of billed" rule and shouldn't be
   copied literally on that point — the rule in `style-guide.md` governs, not that one
   example's specific number.
@@ -31,16 +39,21 @@ So a drafter or case-builder hitting a case with no close match knows that's a r
 not a search failure. Update this section every time a new example is added.
 
 **Dispute categories** (per `appeals-denial-interpreter`'s taxonomy):
-- Covered: `out_of_network_rate_dispute` (case-001), `bundling_coding_edit` (case-002),
-  a procedural/timeliness rebuttal combined with a wrong-payer liability misattribution
-  that reads closest to `non_covered_service` (case-003), and a pure `medical_necessity`
-  case with **no denial code at all** — a pre-payment documentation/LMN request
-  (letter-001-voigt).
-- **Not yet represented by any example**: `missing_documentation` as the primary/lead
-  category, `eligibility`, and a straightforward `medical_necessity` case that has an
-  actual denial code to quote-and-rebut (letter-001-voigt's necessity argument is the
-  no-denial-code variant, not this one). If a live case lands in one of these categories,
-  say so explicitly rather than forcing a fit to the nearest existing example.
+- Covered: `out_of_network_rate_dispute` (case-001), `bundling_coding_edit` (case-002,
+  and partially letter-002-mccracken-05162025), a procedural/timeliness rebuttal
+  combined with a wrong-payer liability misattribution that reads closest to
+  `non_covered_service` (case-003), a pure `medical_necessity` case with **no denial
+  code at all** — a pre-payment documentation/LMN request (letter-001-voigt), and now
+  `missing_documentation` with an actual denial code to quote-and-rebut
+  (letter-003-mccracken-08082025, letter-004-fleischman-10132025,
+  letter-005-wong-06282025 — three examples across two payers, Aetna and Anthem/MPI).
+- **Not yet represented by any example**: `eligibility`, and a straightforward
+  `medical_necessity` case that has an actual denial code to quote-and-rebut
+  (letter-001-voigt's necessity argument is the no-denial-code variant, not this one —
+  none of the three new `missing_documentation` examples fill this either, since their
+  denial codes are documentation-request codes, not medical-necessity codes). If a live
+  case lands in one of these categories, say so explicitly rather than forcing a fit to
+  the nearest existing example.
 - **No example yet demonstrates quoting a payer's own plan/SPD medical-necessity
   definition** (the pattern `appeals-case-builder.md`'s `medical_necessity` argument
   pattern calls for) — every real case so far has had an empty `appeals/policy-docs/`
@@ -48,10 +61,16 @@ not a search failure. Update this section every time a new example is added.
   clinical record alone. If a case ever ships with an actual policy document in
   `policy-docs/`, add it as a new example specifically to fill this gap.
 
-**Payers**: Anthem Blue Cross (case-001, case-003 — 2 of 4 examples), United Healthcare /
-Optum (case-002), Aetna / Global Excel as third-party reviewer (letter-001-voigt). Not yet
+**Payers**: Anthem Blue Cross (case-001, case-003, letter-004, letter-005 — 4 of 9
+examples), Aetna Insurance (letter-002, letter-003-mccracken, plus Aetna/Global Excel as
+third-party reviewer for letter-001-voigt), United Healthcare / Optum (case-002). Not yet
 represented: Cigna, Humana, Blue Shield, Medicare/Medicare Advantage, or any state
-Medicaid plan. Anthem's own house style (verbatim EXPL/ANSI legend quoting, the
-`out_of_network_rate_dispute` precedent pattern) is the best-covered payer by a wide
-margin — treat a same-payer match as materially more reliable than a same-category match
-with a different payer until more payers are represented.
+Medicaid plan — Cigna in particular has been worked as a live case
+(`appeals/cases/2026-09-03-merriman-shawne-022425/`, git-ignored PHI) but has no
+corresponding redacted corpus example yet. Anthem's own house style (verbatim EXPL/ANSI
+legend quoting, the `out_of_network_rate_dispute` precedent pattern, and now the
+`missing_documentation` 904/252 pattern) and Aetna's own house style (CPB-citation
+pattern, denial code #1/#3/#4 numbering) are now both reasonably well-covered — treat a
+same-payer match as materially more reliable than a same-category match with a different
+payer, but this matters less than it used to now that two payers have multiple examples
+each.
