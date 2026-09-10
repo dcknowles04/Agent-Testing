@@ -19,6 +19,8 @@ step.
 | [letter-003-mccracken-08082025](past-letters/letter-003-mccracken-08082025.md) | Aetna Insurance | `missing_documentation` — direct response to denial code #1 ("we do not have the information we need... we requested specific information"); same patient as letter-002 but a different claim, not a revision | CPT 99214-25, 20553, J3490x2; denial code #1 | 08/08/2025 | 100% of billed ($13,250.00) | Same same-patient prior-EOB precedent lead as letter-002, plus full medical-necessity narrative, used to answer a documentation request rather than rebut a substantive denial | Heavy bold-with-caps; ***Do not duplicate this claim.*** convention holds |
 | [letter-004-fleischman-10132025](past-letters/letter-004-fleischman-10132025.md) | Anthem Blue Cross (billed through MPI, a billing/practice-management intermediary) | `missing_documentation` — denial codes 904/252, both documentation-request codes | CPT 99214-25, 20553, J3490x3; denial codes 904, 252 | 10/13/2025 | 100% of billed ($9,950.00) | **New precedent variant**: cites the payer's own prior Grievance and Appeals "OVERTURN" letter (a separate earlier dispute) as proof a code is on the payer's fee schedule, instead of a same-patient comparable EOB | Heavy bold-with-caps; ***Do not duplicate this claim.*** convention holds |
 | [letter-005-wong-06282025](past-letters/letter-005-wong-06282025.md) | Anthem Blue Cross (billed through MPI) | `missing_documentation` — denial codes 904/252 | CPT 99214-25, 20553, J3490x3; denial codes 904, 252 | 06/28/2025 | 100% of billed ($16,250.00) | Same-patient comparable-EOB precedent, but the cited comparable claim was itself only partially allowed (not 100%-paid like every other precedent example) | Heavy bold-with-caps; only example so far using a bulleted key-value list for the per-code billed/allowed breakdown — a formatting variant to watch, not yet a rule. Same patient as case-003-wong but a different claim (different DOS, denial reason, and codes breakdown) |
+| [letter-006-mccracken-08062025](past-letters/letter-006-mccracken-08062025.md) | Aetna Insurance | `missing_documentation` — denial code #1, same text as letter-003 | CPT 99214-25, 20553, J3490x2; denial code #1 | 08/06/2025 | 100% of billed ($13,250.00) | Near-identical template to letter-003 (same precedent lead, same Aetna CPB 0016 citation) — a third, separate McCracken/Aetna claim confirming this is a stable house template, not one-off phrasing | Heavy bold-with-caps; ***Do not duplicate this claim.*** convention holds |
+| [letter-007-merriman-08182025](past-letters/letter-007-merriman-08182025.md) | **Cigna Health — first Cigna example in the corpus** | Two-pronged in one letter: a unit/frequency-limit coding edit (`bundling_coding_edit`, denial code A2) plus a documentation/duplicate-submission dispute (`missing_documentation`, denial code(s) cited inconsistently as A3/A0/A1 — flagged in the file, not resolved) | CPT 99214-25, 20611x2, J3490x2; denial codes A2, A3/A0/A1 | 08/18/2025 | 100% of billed ($23,250.00) | **New pattern**: quotes the payer's own written medical coverage policy directly (Cigna Medical Coverage Policy 0515) to rebut a frequency-limit denial, the same quote-the-policy shape as the Aetna CPB 0016 examples but for a different payer's actual language; also cites proof of prior document submission (fax confirmation) plus a same-patient comparable-EOB precedent | Heavy bold-with-caps; **no** ***Do not duplicate this claim.*** line at all (unlike every Aetna/Anthem example); signature block fully plain, not bold |
 
 ## Known cross-example disagreements (don't average these away — pick per case)
 
@@ -46,7 +48,9 @@ not a search failure. Update this section every time a new example is added.
   code at all** — a pre-payment documentation/LMN request (letter-001-voigt), and now
   `missing_documentation` with an actual denial code to quote-and-rebut
   (letter-003-mccracken-08082025, letter-004-fleischman-10132025,
-  letter-005-wong-06282025 — three examples across two payers, Aetna and Anthem/MPI).
+  letter-005-wong-06282025, letter-006-mccracken-08062025, and partially
+  letter-007-merriman-08182025 — five examples across three payers, Aetna, Anthem/MPI,
+  and now Cigna).
 - **Not yet represented by any example**: `eligibility`, and a straightforward
   `medical_necessity` case that has an actual denial code to quote-and-rebut
   (letter-001-voigt's necessity argument is the no-denial-code variant, not this one —
@@ -61,16 +65,19 @@ not a search failure. Update this section every time a new example is added.
   clinical record alone. If a case ever ships with an actual policy document in
   `policy-docs/`, add it as a new example specifically to fill this gap.
 
-**Payers**: Anthem Blue Cross (case-001, case-003, letter-004, letter-005 — 4 of 9
-examples), Aetna Insurance (letter-002, letter-003-mccracken, plus Aetna/Global Excel as
-third-party reviewer for letter-001-voigt), United Healthcare / Optum (case-002). Not yet
-represented: Cigna, Humana, Blue Shield, Medicare/Medicare Advantage, or any state
-Medicaid plan — Cigna in particular has been worked as a live case
-(`appeals/cases/2026-09-03-merriman-shawne-022425/`, git-ignored PHI) but has no
-corresponding redacted corpus example yet. Anthem's own house style (verbatim EXPL/ANSI
-legend quoting, the `out_of_network_rate_dispute` precedent pattern, and now the
-`missing_documentation` 904/252 pattern) and Aetna's own house style (CPB-citation
-pattern, denial code #1/#3/#4 numbering) are now both reasonably well-covered — treat a
+**Payers**: Anthem Blue Cross (case-001, case-003, letter-004, letter-005 — 4 of 11
+examples), Aetna Insurance (letter-002, letter-003-mccracken, letter-006-mccracken, plus
+Aetna/Global Excel as third-party reviewer for letter-001-voigt — 4 examples), United
+Healthcare / Optum (case-002), and now **Cigna Health** (letter-007-merriman — the first
+Cigna example, closing the gap noted below). Not yet represented: Humana, Blue Shield,
+Medicare/Medicare Advantage, or any state Medicaid plan. Cigna has also been worked as a
+live case (`appeals/cases/2026-09-03-merriman-shawne-022425/`, git-ignored PHI) — that
+case's own claim (DOS 02/24/2025) is a **different claim** from letter-007 (DOS
+08/18/2025); don't conflate the two just because both are Merriman/Cigna. Anthem's own
+house style (verbatim EXPL/ANSI legend quoting, the `out_of_network_rate_dispute`
+precedent pattern, and now the `missing_documentation` 904/252 pattern) and Aetna's own
+house style (CPB-citation pattern, denial code #1/#3/#4 numbering) are now both
+reasonably well-covered — treat a
 same-payer match as materially more reliable than a same-category match with a different
 payer, but this matters less than it used to now that two payers have multiple examples
 each.
