@@ -34,6 +34,28 @@ Before moving a real EOB/appeal pair or past letter from
 
 ## Process
 
+0. **Before drafting anything, work out what the upload actually is — never assume from
+   the filename or from it being "newer."** Filenames often carry words like "updated,"
+   "new," or "corrected," and it's tempting to read those as "this supersedes/corrects an
+   existing example for the same claim." Don't — a same-patient upload is just as likely
+   to be a genuinely separate appeal (different claim, different DOS, different
+   procedure) as it is a revision of one already in the corpus, and the user has
+   explicitly corrected this assumption more than once. Verify with actual
+   claim-level identifiers before treating two uploads as "the same thing, one version
+   just better":
+   - **Identical** (byte-for-byte, or extracts to a byte-for-byte identical raw
+     transcription) → it's a duplicate re-upload; skip it, nothing to add.
+   - **Same DOS and same claim-specific facts, different completeness/redaction state**
+     (e.g. the original intake PDF vs. a cleaner standalone `.docx` of the same letter)
+     → safe to treat as the same claim and pull real values from the more complete
+     version into an existing example — but confirm the DOS (or claim #, if visible)
+     actually matches before doing this, not just the patient's name and the filename's
+     "updated"/"new" label.
+   - **Different DOS, different codes, or different denial reason** → it's a separate
+     appeal for the same patient. Add it as its own new example; never merge its facts
+     into an existing entry for "the same patient," and never treat it as making an
+     existing entry stale.
+   If it's ambiguous which of these applies, say so and ask rather than picking one.
 1. Draft the redacted version, preserving bold per the note above.
 2. **If the source is a real `.docx`, run the systematic formatting diff below before
    showing anything to the user** — this replaced an earlier, opportunistic process that

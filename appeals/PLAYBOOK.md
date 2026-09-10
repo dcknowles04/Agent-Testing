@@ -457,3 +457,17 @@ default for every case's signature block unless a specific case says otherwise.
     own identifiers (claim #, DOS, billed amount) not matching the case's real intake.
     `appeals-case-builder.md`'s peer-review duty now checks this before treating such a
     letter as evidence about the current case.
+  - **The same mistake as above, but for the example corpus itself: a same-patient
+    upload with a filename saying "updated"/"new"/"corrected" is not necessarily a
+    revision of an existing example.** The user first framed some repeat-patient
+    uploads as "newer, correct versions" of ones already processed, then explicitly
+    retracted that: "there aren't any 'corrected' appeals, just different appeals for
+    the same patients." A concrete near-miss: `case-001-woodruff`'s placeholder fields
+    were once backfilled with real values pulled from a same-patient "-new" upload —
+    which happened to check out because every version of that file shared the exact
+    same DOS, but that verification (matching DOS/claim identifiers) is what made it
+    safe, not the filename or the user calling it newer. `examples/README.md`'s Process
+    section now has a standing step-0 rule: classify every same-patient upload as an
+    exact duplicate, a more-complete version of the *same* claim (verified by matching
+    DOS/claim #), or a genuinely separate claim — never infer which from the filename
+    or from recency alone.
