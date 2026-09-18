@@ -76,7 +76,13 @@ Before writing, read:
 7. Every other argument thread `case-file.md` supports (medical necessity, CPT/
    documentation compliance, coverage/billability) — case-file.md now builds these
    whenever the records support them, not only when they match the primary dispute
-   category, so include what it gives you.
+   category, so include what it gives you. When a thread argues from a specific code's
+   documentation requirements, open that code's section with its own descriptor from
+   `case-file.md` before listing what it requires — don't jump straight to "CPT code X
+   requires the following." Carry an established modifier with the code everywhere it's
+   cited afterward (99214-25, not bare 99214). When quoting a denial code's definition,
+   quote only the substantive reason, not the payer's procedural instructions for how to
+   submit documentation through their portal.
 8. An explicit ask for **100% of the billed amount, on every line without affirmative
    proof of payment** — not a precedent-derived or ratio-corrected figure, and not
    narrowed just because the payer's own language about a line sounds favorable

@@ -128,6 +128,24 @@ This is a starting point, not a finished style. It will get more specific and mo
   — it is not the same thing as hedging. A citable, arguable interpretation (a
   professional judgment call about what the records support) gets asserted
   confidently, per "Tone" above; an unconfirmable or invented fact never does.
+- **CPT/HCPCS code citations**: when a letter argues from a specific code's documentation
+  requirements (the `bundling_coding_edit` pattern), open that code's section with its
+  own official descriptor before listing what it requires — e.g. **"CPT 20611
+  ultrasound guided arthrocentesis, aspiration, and/or injection"** — matching how
+  letter-007 and letter-008 (Merriman/Cigna) both do it. Don't jump straight to "CPT
+  code X requires the following" without first saying what the code *is*. Once a
+  modifier has been established as applying, carry it with the code everywhere the code
+  is cited afterward (**99214-25**, not bare 99214), not just in the section that
+  discusses the modifier. When asserting that the records satisfy a code's
+  documentation requirements, name the actual governing authority
+  (**CPT/AMA/Medicare/[payer name]**) rather than a generic "required documentation" —
+  naming the source reads as substantiated rather than asserted.
+- **Quote only the substantive denial reason.** When quoting a denial code's own
+  definition/remark text, include the stated reason for the denial, not the payer's
+  procedural boilerplate about how to submit documentation (portal navigation, which
+  button to click, where to fax) — that's operational instruction to the practice, not
+  part of the payer's stated reasoning, and quoting it adds length without adding
+  argument.
 - **Appeal deadline: not mentioned in the letter at all, in either direction.** Neither
   real example (case-001-woodruff or the Wright/UHC case) cites a filing deadline
   anywhere in the letter text, even when one wasn't known. **Don't add a deadline line,
@@ -198,3 +216,23 @@ This is a starting point, not a finished style. It will get more specific and mo
   nested sub-list in the records-enclosed block) in 6 of 9 real examples. Backfilled
   case-001-woodruff and letter-001-voigt, which had each flattened this into prose or
   plain lines during their original transcription.
+- Added the CPT/HCPCS code-citation rule and the "quote only the substantive denial
+  reason" rule after the user hand-revised the pipeline's own Paimany-Kenzie delivered
+  letter (cutting it from 3,377 to 1,903 words) and flagged a "Missing definition" at the
+  CPT 20611 section. Checking the existing corpus confirmed the gap was real and already
+  had precedent the drafter simply didn't follow: letter-007 and letter-008 (Merriman)
+  both open their CPT 20611 discussion with the code's own descriptor
+  ("**CPT 20611 ultrasound guided arthrocentesis, aspiration, and/or injection**")
+  before listing requirements; the Paimany-Kenzie letter never did. The revision also cut
+  the quoted denial-code ANC boilerplate about submitting documentation via the payer's
+  portal, kept only the substantive "additional information is required" reason, and
+  changed a bare "99214" to "99214-25" in the RE-block dispute line. **Several deeper
+  findings from this same comparison are still under user review and deliberately not
+  yet encoded**: how aggressively to cut explanatory reasoning once a conclusion is
+  stated (the revision also dropped a clever "the payer's own non-coverage codes don't
+  appear on this claim" argument, and most of the medical-necessity section's specific
+  exam findings, in both cases replacing detailed reasoning with a shorter assertion) and
+  whether "the patient failed first-line conservative treatment" is a claim the records
+  actually support (the original letter described conservative care continuing alongside
+  the injections, not a sequential trial-and-failure). This letter has not yet been added
+  to the examples corpus pending that follow-up.

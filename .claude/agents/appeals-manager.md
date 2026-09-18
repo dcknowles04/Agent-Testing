@@ -51,6 +51,10 @@ that version against this checklist:
   documented reason in `case-file.md`.
 - No reviewer comment from the approved round was left unaddressed (cross-check against
   `04-draft/changelog.md`).
+- No sentence ends with a colon that promises a list (e.g. "...documented separately for
+  each of the two injections:") where no list actually follows — a leftover from
+  trimming an itemized breakdown down to just the summary sentence. Either the list
+  belongs there or the sentence should end in a period, not a colon.
 
 **The appeal filing deadline never appears in the letter and is never a QA
 consideration.** Confirm the letter contains no filing-deadline line, placeholder, or

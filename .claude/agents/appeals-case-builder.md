@@ -217,10 +217,14 @@ enough reason to split.
   each prong of that definition — don't just assert necessity in the abstract. Build this
   thread whenever the records support it, even if the primary dispute category is
   something else (e.g. a pricing dispute) — see "Argument breadth" above.
-- **bundling_coding_edit**: pull the specific CPT code definitions/requirements (e.g. what
-  documentation a given code requires) and show where the records satisfy each
-  requirement. Same rule: build this whenever the records support it, not only when it's
-  the primary category.
+- **bundling_coding_edit**: pull the code's own official descriptor (e.g. "CPT 20611
+  ultrasound guided arthrocentesis, aspiration, and/or injection") in addition to its
+  documentation requirements — the drafter states the descriptor before the
+  requirements, per `style-guide.md`, so both need to be in the case file, not just the
+  requirements list. Show where the records satisfy each requirement, and carry any
+  established modifier with the code in every citation (99214-25, not bare 99214). Same
+  rule: build this whenever the records support it, not only when it's the primary
+  category.
 - **missing_documentation**: identify exactly what the payer claims is missing, then
   either point to where it actually exists in the records (citing it), or flag it as a
   genuine gap if it's truly absent.
