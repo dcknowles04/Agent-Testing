@@ -70,7 +70,15 @@ This is a starting point, not a finished style. It will get more specific and mo
   necessity, then state plainly how the documented treatment satisfies each prong of
   that definition — don't just assert necessity in the abstract. Include this thread
   whenever supporting documentation exists, per "Argument breadth" above, even if the
-  denial itself wasn't a necessity denial.
+  denial itself wasn't a necessity denial. **Don't build this argument out of exam-form
+  granularity** — specific positive/negative findings grids, range-of-motion figures
+  against printed norms, and structure-by-structure rule-outs belong in the attached
+  records, not transcribed into the letter body; assert the conclusion the records
+  support rather than walking through the exam mechanics. **When conservative treatment
+  was tried and didn't resolve the condition before the procedure, say so plainly as a
+  failure** (e.g. "the patient failed extensive first-line conservative treatment")
+  rather than softening it to treatment that was merely "also documented" or
+  "continued" — state the strongest characterization the records actually support.
 - **The ask: default to 100% of billed charges, on every line without affirmative
   proof of payment.** Even when a precedent or ratio argument only mathematically
   supports a smaller corrected figure, the letter's demand is the full billed amount —
@@ -226,13 +234,20 @@ This is a starting point, not a finished style. It will get more specific and mo
   before listing requirements; the Paimany-Kenzie letter never did. The revision also cut
   the quoted denial-code ANC boilerplate about submitting documentation via the payer's
   portal, kept only the substantive "additional information is required" reason, and
-  changed a bare "99214" to "99214-25" in the RE-block dispute line. **Several deeper
-  findings from this same comparison are still under user review and deliberately not
-  yet encoded**: how aggressively to cut explanatory reasoning once a conclusion is
-  stated (the revision also dropped a clever "the payer's own non-coverage codes don't
-  appear on this claim" argument, and most of the medical-necessity section's specific
-  exam findings, in both cases replacing detailed reasoning with a shorter assertion) and
-  whether "the patient failed first-line conservative treatment" is a claim the records
-  actually support (the original letter described conservative care continuing alongside
-  the injections, not a sequential trial-and-failure). This letter has not yet been added
-  to the examples corpus pending that follow-up.
+  changed a bare "99214" to "99214-25" in the RE-block dispute line. **One deeper finding
+  from this same comparison is still under user review and deliberately not yet
+  encoded**: how aggressively to cut explanatory reasoning once a conclusion is stated
+  (the revision also dropped a clever "the payer's own non-coverage codes don't appear on
+  this claim" argument, replacing detailed reasoning with a shorter assertion) — that
+  broader question is still open. This letter has not yet been added to the examples
+  corpus pending that.
+- Follow-up to the entry above: the user confirmed the other two open items from the same
+  Paimany-Kenzie comparison. (1) "The patient failed extensive first-line conservative
+  treatment" is accurate — the records do support a sequential failure, not merely
+  concurrent conservative care, so the letter's stronger framing was correct, not an
+  overreach. (2) The medical-necessity section should never cite exam-form granularity
+  (positive/negative findings grids, range-of-motion figures, structure-by-structure
+  rule-outs) as a standing rule, not just for this case. Both are now encoded under
+  "Medical necessity argument" above. The remaining items (title-line double slash, a
+  couple of dropped periods, "or" for "for") were confirmed as plain typos, not style
+  signals — corrected directly in the letter, not encoded as rules.

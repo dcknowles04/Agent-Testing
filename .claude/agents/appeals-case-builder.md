@@ -216,7 +216,12 @@ enough reason to split.
   `policy-docs/`, quote it, then match the documented diagnosis/treatment/notes against
   each prong of that definition — don't just assert necessity in the abstract. Build this
   thread whenever the records support it, even if the primary dispute category is
-  something else (e.g. a pricing dispute) — see "Argument breadth" above.
+  something else (e.g. a pricing dispute) — see "Argument breadth" above. Never pull
+  exam-form granularity into this thread — positive/negative findings grids,
+  range-of-motion figures, structure-by-structure rule-outs stay in the cited record,
+  not in `case-file.md`'s prose for this argument. If conservative treatment was tried
+  and didn't resolve the condition before the procedure, cite it as a failure, not as
+  treatment that was merely "also documented."
 - **bundling_coding_edit**: pull the code's own official descriptor (e.g. "CPT 20611
   ultrasound guided arthrocentesis, aspiration, and/or injection") in addition to its
   documentation requirements — the drafter states the descriptor before the
