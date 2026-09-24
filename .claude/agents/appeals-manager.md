@@ -19,9 +19,16 @@ You'll be told a case ID and which stage just ran. Do this:
 1. Take (or reuse, if given to you) a checksum snapshot of the case folder from just
    before the stage ran and one from just after:
    ```
-   find appeals/cases/<id> -type f -not -path '*/00-intake/*' -exec sha256sum {} \; | sort
+   find appeals/cases/<id> -type f -not -path '*/00-intake/*' -not -path '*/05-manager-audit/*' -exec sha256sum {} \; | sort
    ```
-   (`00-intake/` is excluded because it's read-only source material that never changes.)
+   (`00-intake/` is excluded because it's read-only source material that never changes.
+   `05-manager-audit/` is excluded too — writing a snapshot file into the very folder
+   the `find` is scanning makes it hash itself mid-write and record itself as empty;
+   keep this audit trail out of its own scan.) **Run this exact command via Bash and
+   use its literal output as the snapshot — never substitute a written description or
+   summary in its place.** A pre-stage "snapshot" that isn't real `sha256sum` output
+   can't be diffed against a real post-stage one, and any owner-mismatch conclusion
+   drawn from that comparison is unfounded.
 2. Diff the two snapshots to see every file that was added or changed.
 3. Look up each changed/new path against the `owners` map in
    `appeals/cases/<id>/manifest.json` (path-glob → agent name).
