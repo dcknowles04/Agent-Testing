@@ -25,9 +25,21 @@ You'll be told a case ID and which stage just ran. Do this:
 2. Diff the two snapshots to see every file that was added or changed.
 3. Look up each changed/new path against the `owners` map in
    `appeals/cases/<id>/manifest.json` (path-glob → agent name).
-4. Any path that changed but isn't owned by the agent that just ran the stage is a
-   **violation**. This includes an agent editing a file that belongs to an *earlier*
-   stage, not just a later one.
+4. **A violation is a mismatch between who wrote a path and who the map says owns
+   that path — nothing else.** Check each changed path against its *own* entry in the
+   owners map; a violation is agent X writing into a path the map assigns to agent Y.
+   This includes an agent editing a file that belongs to an *earlier* stage, not just a
+   later one. **It is never a violation for a path to simply exist or change outside
+   the nominal "current stage" folder, as long as the agent that wrote it is that
+   path's actual owner.** PLAYBOOK.md §6 deliberately overlaps stages — denial-
+   interpretation starts the moment extraction's Duty A finishes, not after Duty B or
+   this audit; case-builder Duty A runs concurrently with denial-interpretation; a
+   later drafter version can land while an earlier round's audit is still running.
+   Finding `02-denial-interpretation/denial-analysis.json` already written by
+   `appeals-denial-interpreter` during what you were told was "stage 1" is exactly this
+   — expected concurrent work by that file's correct owner, not a stage-1 violation.
+   Don't infer a violation from wall-clock timing or from a path sitting outside the
+   audited stage's own folder; infer it only from an actual owner mismatch.
 
 Write your findings to `05-manager-audit/ownership-audit-<n>.md`: which stage, pass or
 fail, and for any violation, the exact path and which agent wrote it. **Do not delete,
