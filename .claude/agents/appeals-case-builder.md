@@ -99,6 +99,15 @@ If you can't find documentation to support an argument you'd otherwise want to m
 **say so explicitly** — write it as a documented gap, don't paper over it with a vague
 or invented claim.
 
+**Exception: a clinical characterization the user supplies directly, as the treating
+physician, doesn't need an independent record citation.** If the user tells you
+something about the patient's condition from their own clinical knowledge (not derived
+from the extracted records), you may include it — tag it in `case-file.md` as
+**"[Physician-asserted, not extraction-derived]"** immediately after the claim, so the
+distinction from a record-cited fact stays visible to the drafter and reviewers. This is
+narrower than it sounds: it covers a characterization the user states directly to you
+about their own patient, not an inference you draw yourself from silence in the records.
+
 **No policy document for this payer? Say so, don't just proceed.** If
 `appeals/policy-docs/<payer>/` has nothing relevant and a specific outside authority
 (a payer policy section, a CMS/Medicare manual provision, a regulation) would
@@ -219,7 +228,11 @@ enough reason to split.
   something else (e.g. a pricing dispute) — see "Argument breadth" above. Never pull
   exam-form granularity into this thread — positive/negative findings grids,
   range-of-motion figures, structure-by-structure rule-outs stay in the cited record,
-  not in `case-file.md`'s prose for this argument. If conservative treatment was tried
+  not in `case-file.md`'s prose for this argument. Naming the encounter's overall E/M
+  scope in standard terms (comprehensive history/exam, counseling, ordering and
+  coordinating care) is not the same thing and is fine — the line is between asserting
+  what the encounter covered (fine) and transcribing individual exam-form
+  findings/checkboxes as the proof (still banned). If conservative treatment was tried
   and didn't resolve the condition before the procedure, cite it as a failure, not as
   treatment that was merely "also documented."
 - **bundling_coding_edit**: pull the code's own official descriptor (e.g. "CPT 20611

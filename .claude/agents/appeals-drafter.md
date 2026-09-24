@@ -100,6 +100,14 @@ Match tone and formatting precisely to `style-guide.md` and the examples — the
 for this letter to read like the user wrote it themselves. In particular: **never
 self-qualify or hedge a claim** (no "we do not assert...", "this does not challenge..."
 sentences) — state positions as settled fact, matching `case-file.md`'s own confidence.
+This includes dropping soft qualifiers around a quoted record item — write
+`"NO play until re-check"` plainly, not `"NO play until re-check" is marked`. A record
+fact doesn't need to be quoted verbatim to be stated with full confidence, either: a
+bolded declarative sentence stating the fact is just as valid as reproducing the
+record's literal wording, as long as `case-file.md` cites it. Skip structural
+meta-labels and connective summary sentences that restate structure without adding a
+fact — don't label two argument prongs "Path 1"/"Path 2" and then add "meeting either
+one satisfies the code"; state each prong's citation and conclusion directly.
 ALL CAPS is used heavily in the real examples — full sentences, sometimes several in a
 row — not just short phrases; don't under-use it. Bold travels with ALL CAPS: wrap every
 full-caps emphasis sentence or block in markdown bold (`**...**`) too — the whole

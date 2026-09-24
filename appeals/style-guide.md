@@ -18,7 +18,10 @@ This is a starting point, not a finished style. It will get more specific and mo
   pre-concede a limit on their own argument — they state the practice's position as
   settled fact, supported by citations, full stop. If a claim is arguable rather than
   ironclad, argue it with full confidence anyway (see "Argument breadth" below) rather
-  than qualifying it in the letter itself.
+  than qualifying it in the letter itself. This includes dropping soft qualifiers
+  around a quoted item: write `"NO play until re-check"` plainly rather than
+  `"NO play until re-check" is marked` — the quotation marks already show it's quoted
+  from the record; the qualifier only softens it.
 - **Emphasis**: ALL CAPS is used heavily and routinely — not just on isolated phrases.
   Entire sentences, and sometimes multiple consecutive sentences, run in caps whenever
   the point is one of the letter's core assertions. Don't under-use it out of a
@@ -51,6 +54,12 @@ This is a starting point, not a finished style. It will get more specific and mo
   repeated nearly verbatim a second time later in the letter for emphasis, not just
   individual facts. This is not redundancy to trim — it's how the originals make sure
   a skimming claims reviewer can't miss the point.
+- **State each criterion's citation and conclusion directly — skip meta-labels and
+  connective summary sentences that don't add a new fact.** Don't label argument prongs
+  "Path 1"/"Path 2" and then add a sentence like "meeting either one satisfies the code"
+  or "the practice and payer agree on the standard" — those restate structure without
+  adding a citation or a fact. State each criterion, its citation, and its bolded
+  conclusion; let them stand on their own.
 - **Denial-code rebuttal pattern, unified by default**: quote the denial code(s) and
   stated reason(s) verbatim, then respond directly: *"Contrary to denial code X: ..."*.
   Default to **one unified rebuttal covering every disputed line**, even when the
@@ -74,7 +83,13 @@ This is a starting point, not a finished style. It will get more specific and mo
   granularity** — specific positive/negative findings grids, range-of-motion figures
   against printed norms, and structure-by-structure rule-outs belong in the attached
   records, not transcribed into the letter body; assert the conclusion the records
-  support rather than walking through the exam mechanics. **When conservative treatment
+  support rather than walking through the exam mechanics. **This doesn't bar naming the
+  encounter's overall E/M scope in standard terms** — comprehensive history,
+  comprehensive examination, counseling/education, ordering and independently
+  interpreting tests, coordinating the care plan — asserted as what the encounter
+  covered. The line is between naming the E/M components an encounter included (fine)
+  and transcribing individual exam-form findings/checkboxes as the proof (still banned).
+  **When conservative treatment
   was tried and didn't resolve the condition before the procedure, say so plainly as a
   failure** (e.g. "the patient failed extensive first-line conservative treatment")
   rather than softening it to treatment that was merely "also documented" or
@@ -136,6 +151,14 @@ This is a starting point, not a finished style. It will get more specific and mo
   — it is not the same thing as hedging. A citable, arguable interpretation (a
   professional judgment call about what the records support) gets asserted
   confidently, per "Tone" above; an unconfirmable or invented fact never does.
+  **A letter sentence doesn't have to reproduce a record's literal wording** (a
+  handwritten margin notation, a checked box's exact label) to satisfy this — a
+  confident, bolded declarative statement of the underlying fact is equally valid, as
+  long as the fact itself is cited in `case-file.md`. Quoting the literal on-page text
+  is a strong option, not a requirement. **A clinical characterization the user
+  supplies directly, as the treating physician** (not derived from the extracted
+  records), may go in the letter even without an independent record citation — see
+  `appeals-case-builder.md` for how that gets tagged in `case-file.md`.
 - **CPT/HCPCS code citations**: when a letter argues from a specific code's documentation
   requirements (the `bundling_coding_edit` pattern), open that code's section with its
   own official descriptor before listing what it requires — e.g. **"CPT 20611
@@ -251,3 +274,26 @@ This is a starting point, not a finished style. It will get more specific and mo
   "Medical necessity argument" above. The remaining items (title-line double slash, a
   couple of dropped periods, "or" for "for") were confirmed as plain typos, not style
   signals — corrected directly in the letter, not encoded as rules.
+- Added four rules after the user hand-revised the pipeline's delivered Khurana 99214
+  letter (Track 1 of the split case). Unlike the Paimany-Kenzie round, this revision
+  added content rather than cutting it, and the draft also contained several clear
+  errors (a wrong date of service, "Aetna" in place of the actual payer twice, a page-
+  count contradiction, and a cluster of typos) that the user confirmed were just
+  mistakes in a non-final draft, not style signals — not encoded, same treatment as the
+  Paimany-Kenzie round's plain typos. Four other changes were confirmed intentional:
+  (1) general E/M-scope language (comprehensive history/exam, counseling,
+  ordering/coordinating care) is fine for the medical-necessity thread as long as it's
+  asserted as the encounter's scope, not walked through as an exam-form checklist —
+  refines, doesn't reverse, the existing exam-form-granularity ban; (2) a letter
+  sentence can state a record fact as a confident bolded declarative instead of
+  quoting the record's literal wording, and a clinical characterization the user
+  supplies directly as the treating physician can go in without an independent record
+  citation; (3) drop explicit structural meta-labels ("Path 1"/"Path 2") and connective
+  summary sentences that restate structure without adding a fact; (4) drop soft
+  qualifiers like "is marked" around an already-quoted record item. The
+  "CPT/AMA/Medicare/[payer]" phrasing the draft also used repeatedly (even though this
+  patient's payer is UnitedHealthcare, not Medicare) was confirmed as the existing
+  standard reference-chain phrasing from the Merriman precedent above, not a new rule.
+  This comparison letter was not added to the examples corpus — it contains confirmed
+  errors, and per the user's standing instruction from the Paimany-Kenzie round, is for
+  learning only.
