@@ -45,7 +45,10 @@ Before writing, read:
    belong in the body's factual argument or don't belong in the letter at all (see
    the deadline note below).
 3. A plain statement of what's being appealed and why.
-4. Denial-code quote-and-rebuttal, **unified by default**: quote the denial code(s)
+4. A bolded section label, **"WITH RESPECT TO THE DENIAL OF PAYMENT FOR [code(s)]
+   (DENIAL CODE [X]):"**, immediately before the rebuttal begins — same fixed-label
+   pattern as the **Medical Necessity** mini-header later in the letter.
+5. Denial-code quote-and-rebuttal, **unified by default**: quote the denial code(s)
    and stated reason(s), then respond directly (see style-guide.md for the exact
    pattern). Copy any text `case-file.md` presents in quotation marks **character for
    character** — don't retype it from memory of what a code "usually says" or
@@ -68,12 +71,12 @@ Before writing, read:
    requesting letter directly (the reviewing entity and its date, e.g. "in response to
    the [Reviewer] letter dated [date] requesting medical records and a letter of
    medical necessity") right after step 3, then go straight into the medical necessity
-   argument (steps 5-7 below still apply, medical necessity just becomes the lead
+   argument (steps 6-8 below still apply, medical necessity just becomes the lead
    argument rather than reinforcement).
-5. The cited factual argument, pulled directly from `case-file.md`'s citations.
-6. The precedent argument, if `case-file.md` has one (same code/patient paid correctly
+6. The cited factual argument, pulled directly from `case-file.md`'s citations.
+7. The precedent argument, if `case-file.md` has one (same code/patient paid correctly
    before) — this is usually the single strongest point when available.
-7. Every other argument thread `case-file.md` supports (medical necessity, CPT/
+8. Every other argument thread `case-file.md` supports (medical necessity, CPT/
    documentation compliance, coverage/billability) — case-file.md now builds these
    whenever the records support them, not only when they match the primary dispute
    category, so include what it gives you. When a thread argues from a specific code's
@@ -82,15 +85,18 @@ Before writing, read:
    requires the following." Carry an established modifier with the code everywhere it's
    cited afterward (99214-25, not bare 99214). When quoting a denial code's definition,
    quote only the substantive reason, not the payer's procedural instructions for how to
-   submit documentation through their portal.
-8. An explicit ask for **100% of the billed amount, on every line without affirmative
+   submit documentation through their portal. Where the argument asserts a treatment or
+   procedure was warranted, use the stock reinforcing phrase "medically indicated,
+   medically necessary, and standard of care" alongside (not instead of) the record
+   citation for it.
+9. An explicit ask for **100% of the billed amount, on every line without affirmative
    proof of payment** — not a precedent-derived or ratio-corrected figure, and not
    narrowed just because the payer's own language about a line sounds favorable
    ("reconsidered," "processed," "supported" are not proof of payment). Present any
    precedent/ratio math in the letter as supporting evidence for why the current
    payment is wrong; state the demand itself as the full billed charges on every
    disputed line `case-file.md` includes.
-9. Practice billing-department signature block: title, then address lines. **No
+10. Practice billing-department signature block: title, then address lines. **No
    practice-name line, no separate "Email:" line.** Put phone and email together in the
    closing "Contact our billing department with any questions" sentence instead. No
    "Enclosures:" list unless a real example in `appeals/examples/` shows one for this
@@ -104,7 +110,12 @@ This includes dropping soft qualifiers around a quoted record item — write
 `"NO play until re-check"` plainly, not `"NO play until re-check" is marked`. A record
 fact doesn't need to be quoted verbatim to be stated with full confidence, either: a
 bolded declarative sentence stating the fact is just as valid as reproducing the
-record's literal wording, as long as `case-file.md` cites it. Skip structural
+record's literal wording, as long as `case-file.md` cites it. The same latitude covers
+a specific number or a reasoning chain, not just a quote: a shorter confident
+conclusion ("no surgery was performed or documented") can stand in for spelling out
+every supporting figure or the full chain behind it, as long as the fuller version
+stays cited in `case-file.md` — this is about what the letter displays, not about
+skipping the "recount every quantifier" check below for anything it does state. Skip structural
 meta-labels and connective summary sentences that restate structure without adding a
 fact — don't label two argument prongs "Path 1"/"Path 2" and then add "meeting either
 one satisfies the code"; state each prong's citation and conclusion directly.

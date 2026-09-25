@@ -94,6 +94,9 @@ This is a starting point, not a finished style. It will get more specific and mo
   failure** (e.g. "the patient failed extensive first-line conservative treatment")
   rather than softening it to treatment that was merely "also documented" or
   "continued" — state the strongest characterization the records actually support.
+  **A recurring reinforcing phrase**: "medically indicated, medically necessary, and
+  standard of care" — use it where the letter is asserting that a treatment/procedure
+  was warranted, alongside (not instead of) the record citation for that treatment.
 - **The ask: default to 100% of billed charges, on every line without affirmative
   proof of payment.** Even when a precedent or ratio argument only mathematically
   supports a smaller corrected figure, the letter's demand is the full billed amount —
@@ -110,7 +113,10 @@ This is a starting point, not a finished style. It will get more specific and mo
   conditional **"Non-Paid Amount"** line when the case is about total non-payment of
   the billed amount — omit that line when the case is a partial-underpayment/rate
   dispute instead, as case-001-woodruff shows) → what's being appealed, stated plainly
-  → denial-code quote-and-rebuttal (unified by default, see above) → cited factual
+  → a bolded section label, **"WITH RESPECT TO THE DENIAL OF PAYMENT FOR [code(s)]
+  (DENIAL CODE [X]):"**, immediately before the main rebuttal begins (same fixed-label
+  pattern as the **Medical Necessity** mini-header below it) → denial-code
+  quote-and-rebuttal (unified by default, see above) → cited factual
   argument → precedent argument (if any) → medical necessity/policy citation and any
   other supportable argument thread → explicit ask for 100% of billed charges →
   practice billing-department signature block: title, then address lines only — **no
@@ -158,7 +164,16 @@ This is a starting point, not a finished style. It will get more specific and mo
   is a strong option, not a requirement. **A clinical characterization the user
   supplies directly, as the treating physician** (not derived from the extracted
   records), may go in the letter even without an independent record citation — see
-  `appeals-case-builder.md` for how that gets tagged in `case-file.md`.
+  `appeals-case-builder.md` for how that gets tagged in `case-file.md`. This same
+  latitude extends to specific numbers and detailed reasoning chains, not just literal
+  quotes: the letter can state a shorter, confident conclusion (e.g. "no surgery was
+  performed or documented") instead of spelling out every supporting number or the
+  full chain of reasoning behind it (a specific day-count, or which exact fields on a
+  form were checked to reach that conclusion) — **as long as the fuller version stays
+  cited in `case-file.md`.** This is about what the letter chooses to display, never
+  about relaxing what `case-file.md` itself has to verify and cite —
+  `appeals-drafter`'s "recount every quantifier" check still applies in full to
+  anything the letter does state.
 - **CPT/HCPCS code citations**: when a letter argues from a specific code's documentation
   requirements (the `bundling_coding_edit` pattern), open that code's section with its
   own official descriptor before listing what it requires — e.g. **"CPT 20611
@@ -297,3 +312,22 @@ This is a starting point, not a finished style. It will get more specific and mo
   This comparison letter was not added to the examples corpus — it contains confirmed
   errors, and per the user's standing instruction from the Paimany-Kenzie round, is for
   learning only.
+- Added three more rules and confirmed one edit as permitted latitude (not a rule)
+  after the user hand-revised the pipeline's delivered Khurana castmods letter (Track 2
+  of the same split case). Same treatment as the 99214 round for draft noise: a
+  sentence that cut off mid-parenthetical, several dropped words, and the same
+  recurring typos ("OPTIMUM," "ATTACH," "standard of care" mangled three different
+  ways) were not encoded. Four items were confirmed intentional: (1) a new fixed
+  section label, **"WITH RESPECT TO THE DENIAL OF PAYMENT FOR [code(s)] (DENIAL CODE
+  [X]):"**, goes immediately before the main rebuttal — now in "Structure" above; (2) a
+  new stock reinforcing phrase, "medically indicated, medically necessary, and standard
+  of care," for treatment-justification arguments — now under "Medical necessity
+  argument" above; (3) the declarative-over-literal-citation latitude from the 99214
+  round extends to specific numbers and reasoning chains too, not just quotes — a
+  shorter confident conclusion can stand in for a detailed chain, as long as the fuller
+  version stays cited in `case-file.md` — now under "Citations" above; (4) cutting the
+  delivered letter's closing rhetorical line ("A provider cannot correct a deficiency
+  the payer has not identified") was confirmed intentional, but doesn't generalize into
+  a rule of its own — a strong rhetorical line can be trimmed for concision like any
+  other sentence, it isn't specially protected. This comparison letter was not added to
+  the examples corpus, for the same reason as the 99214 letter.
