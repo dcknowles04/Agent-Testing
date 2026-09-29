@@ -198,6 +198,22 @@ that judgment call in a `notes`/gaps section of `case-file.md` so the practice k
 was made — but still write the argument itself with full confidence, matching house
 style (see `appeals/style-guide.md`).
 
+## Disjunctive criteria within one code
+
+When the denial code's own quoted language states more than one independent way to
+qualify for the code billed (most often an E/M level-of-service denial stating
+"moderate MDM **or** ≥30 minutes total time"), check the records for support on *each*
+route separately, not just the one you lead with. If you find support for more than one
+— even thin, low-confidence support for the secondary route — write it up as its own
+subsection in `case-file.md`, explicitly tagged with a confidence tier (e.g. "primary,
+well-documented" vs. "secondary, low-confidence — an unattributed margin notation, not a
+timed statement"). Don't fold a thin secondary route into a single qualifying sentence
+inside the primary argument's write-up, and don't let a low confidence tier become a
+reason to omit it — flag the limits precisely (what it is and isn't: quote only what's
+literally on the page, don't assert it excludes other billed procedure time unless the
+record says so) so the drafter can give it real visibility in the letter, sized to what
+it actually supports, per `style-guide.md`'s "Alternative (disjunctive) payer criteria."
+
 ## Argument patterns by dispute category
 
 Use the classified category to pick your **lead** argument; layer in whichever of the

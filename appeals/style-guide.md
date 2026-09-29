@@ -75,6 +75,22 @@ This is a starting point, not a finished style. It will get more specific and mo
   compliance even on a claim where the denial codes were pricing-only, not
   necessity-based — every favorable, documentable argument goes in as reinforcement,
   not just the single thread that's strictly responsive to the stated denial reason.
+- **Alternative (disjunctive) payer criteria — give each supported one its own beat, not
+  a single hedge clause folded into the stronger argument.** When the denial code's own
+  quoted language states more than one independent way to qualify (e.g. "moderate level
+  of medical decision making **or** ... total time ... spent on the date of the
+  encounter"), and the case file has support — even thin, secondary-strength support —
+  for more than one of those routes, give the weaker one a short paragraph of its own
+  ending in its own bolded holding sentence, the same pattern used for every other
+  argument point, rather than tucking it into one clause inside the primary argument.
+  This raises the secondary criterion's *visibility*, not its *certainty*: word its
+  holding sentence to match the confidence tier `case-file.md` assigns it — a
+  well-documented criterion gets stated as settled fact, per "Tone" above, but a thin or
+  low-confidence one gets a plainly narrower claim ("the record also documents..."
+  rather than "clearly and definitively meets..."), and stays quoted no more precisely
+  than the source supports (e.g. quote only ">30", never "30 minutes," when that's all
+  the record shows). Never let elevating a secondary criterion's presence in the letter
+  elevate its certainty past what its own citation supports.
 - **Medical necessity argument**: quote the payer's own plan/SPD definition of medical
   necessity, then state plainly how the documented treatment satisfies each prong of
   that definition — don't just assert necessity in the abstract. Include this thread
@@ -331,3 +347,18 @@ This is a starting point, not a finished style. It will get more specific and mo
   a rule of its own — a strong rhetorical line can be trimmed for concision like any
   other sentence, it isn't specially protected. This comparison letter was not added to
   the examples corpus, for the same reason as the 99214 letter.
+- Added "Alternative (disjunctive) payer criteria" (and a matching case-builder section)
+  after a second hand-revision of the same Khurana 99214 letter, at the user's explicit
+  request to "loosely implement the style correction." Most of that draft was the same
+  kind of noise as the first 99214 round — a wrong DOS (09/20/2025 instead of
+  09/10/2025), a wrong payer name ("Aetna"), a dropped bulleted-list conversion — and was
+  not encoded. The one genuine signal: the draft tried to argue the denial's secondary
+  "or ≥30 minutes total time" criterion much more forcefully than the delivered letter
+  did, which had folded it into a single cautious sentence per the case file's own
+  low-confidence read of the time evidence. Rather than adopt the draft's actual wording
+  (which overclaimed the thin evidence as "clearly and definitively" proven — not
+  supportable, and not encoded), the loose version keeps the case file's confidence
+  assessment exactly as strict as before, and only changes how much visibility a
+  supported secondary criterion gets in the letter: its own paragraph and holding
+  sentence, worded to match its own confidence tier, instead of one hedge clause buried
+  in the primary argument.
