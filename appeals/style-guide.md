@@ -75,6 +75,10 @@ This is a starting point, not a finished style. It will get more specific and mo
   compliance even on a claim where the denial codes were pricing-only, not
   necessity-based — every favorable, documentable argument goes in as reinforcement,
   not just the single thread that's strictly responsive to the stated denial reason.
+  When arguing a service is "separate and apart from" same-day procedures, name every
+  other same-day disputed service it's separate from, not just the one the specific
+  denial code accuses it of being bundled into — a stronger separateness claim than the
+  denial itself requires, same logic as not limiting to the single responsive thread.
 - **Alternative (disjunctive) payer criteria — give each supported one its own beat, not
   a single hedge clause folded into the stronger argument.** When the denial code's own
   quoted language states more than one independent way to qualify (e.g. "moderate level
@@ -362,3 +366,19 @@ This is a starting point, not a finished style. It will get more specific and mo
   supported secondary criterion gets in the letter: its own paragraph and holding
   sentence, worded to match its own confidence tier, instead of one hedge clause buried
   in the primary argument.
+- Added one line to "Argument breadth" after a hand-revision of the 09/23/2025 Khurana
+  76881+99214-25 letter. Most of that revision was disregarded: a large inserted block
+  argued a different denial code (QI) and DOS (09/20/2025) than this letter's own (AD,
+  09/23/2025) — copy-pasted template text, not a case-specific edit — and didn't answer
+  the actual denial theory (AD is a global-period/modifier-25 bundling denial, not the
+  MDM-or-time disjunction QI uses); a new claim that a radiology report "was performed by
+  the physician" had no signature or attribution in the record to support it, the same
+  defect pattern already corrected in this patient's castmods letter; and the revision
+  dropped the quoted denial Reason/Claim-Coding-Logic text for 76881, which conflicts
+  with the citation rules elsewhere in this file. The one genuine signal: the revision
+  added 76881 to the list of services 99214-25 is argued "separate and apart from,"
+  where the delivered letter had only named the two procedures the AD denial itself
+  points to. That's a real strengthening — arguing separateness from every same-day
+  disputed service, not just the ones a specific denial code names — consistent with
+  "Argument breadth"'s existing logic, so it's folded into that bullet rather than
+  given its own.
