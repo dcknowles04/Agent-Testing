@@ -1,1 +1,7 @@
 .claude/settings.local.json
+
+# Real per-case PHI (EOBs, medical records, drafts) — never committed.
+appeals/cases/
+# Unredacted source files for examples, before a human-reviewed redacted
+# version is promoted into appeals/examples/.
+appeals/examples/_raw-unredacted/
