@@ -16,6 +16,23 @@ Upload → Intake → Triage → Evidence & Policy Match → (Coding Check) → 
 
 ---
 
+## No-install option: browser demo
+
+If you can't run the app locally, open **`static-demo/appeals-demo.html`**. Double-click it, or
+download it from GitHub and open it in Chrome, Safari or Edge. It's one self-contained file with
+every screen and all 5 sample cases. The agent pipeline animates step by step using the
+pre-written (demo-mode) responses.
+
+How it differs from the full app:
+- There is no live AI; it always runs in demo mode.
+- Progress is saved in that browser only. **Reset demo** restores the sample cases.
+- The letter has a **Copy letter** button instead of a download.
+
+After changing anything in `web/`, `seed/`, `demo_responses/` or `config/`, rebuild it with
+`python3 static-demo/build.py`.
+
+---
+
 ## 1. Setup (one time)
 
 You need **Python 3.10 or newer** (`python3 --version`). Nothing else is required: no Node, no
@@ -189,8 +206,9 @@ template output in demo mode; in live mode they get a full analysis.
 
 ## 5. Five-minute demo script
 
-**Setup (before your partner sits down):** run `./start.sh`, click **Reset demo**, and decide
-live or demo mode with the badge in the top-right corner. Start on the **Dashboard**.
+**Setup (before your partner sits down):** run `./start.sh` (or open the browser demo file),
+click **Reset demo**, and decide live or demo mode with the badge in the top-right corner.
+Start on the **Dashboard**.
 
 **0:00 - The problem (Dashboard, 30 sec)**
 > "This is what a 6-surgeon ortho practice sees. They have $120K tied up in open denials, and two

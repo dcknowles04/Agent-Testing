@@ -1,7 +1,10 @@
 // Appeals prototype frontend - plain JS, hash routing, no build step.
+// Talks to the FastAPI server, or to an in-page engine (window.APPEALS_BACKEND) in the
+// browser-only build produced by static-demo/build.py.
 "use strict";
 
 const $app = document.getElementById("app");
+const BACKEND = window.APPEALS_BACKEND || null;
 
 // ---------------------------------------------------------------- helpers
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
@@ -14,6 +17,7 @@ const fmtDate = (iso) => {
 };
 
 async function api(path, opts = {}) {
+  if (BACKEND) return BACKEND.request(opts.method || "GET", path, opts.body);
   const res = await fetch(path, {
     headers: { "Content-Type": "application/json" },
     ...opts,
@@ -22,6 +26,36 @@ async function api(path, opts = {}) {
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.detail || `Request failed (${res.status})`);
   return data;
+}
+
+// Live pipeline updates: server-sent events, or the in-page engine's subscription.
+function openStream(caseId, on) {
+  if (BACKEND) return { close: BACKEND.subscribe(caseId, (type, data) => on[type] && on[type](data)) };
+  const es = new EventSource(`/cases/${caseId}/stream`);
+  ["step", "case", "done"].forEach((t) => es.addEventListener(t, (ev) => on[t] && on[t](JSON.parse(ev.data))));
+  if (on.done) es.addEventListener("done", () => es.close());
+  return es;
+}
+
+// In-page confirmation (browser dialogs are unavailable in some embedded viewers).
+function confirmBox(message, okLabel = "Continue") {
+  return new Promise((resolve) => {
+    const wrap = document.createElement("div");
+    wrap.className = "modal-backdrop";
+    wrap.innerHTML = `<div class="modal" role="dialog" aria-modal="true"><p>${esc(message).replace(/\n/g, "<br>")}</p>
+      <div class="actions"><button class="btn" id="modal-ok">${esc(okLabel)}</button><button class="btn btn-ghost" id="modal-cancel">Cancel</button></div></div>`;
+    document.body.appendChild(wrap);
+    const done = (v) => { wrap.remove(); resolve(v); };
+    wrap.querySelector("#modal-ok").onclick = () => done(true);
+    wrap.querySelector("#modal-cancel").onclick = () => done(false);
+    wrap.onclick = (e) => { if (e.target === wrap) done(false); };
+    wrap.querySelector("#modal-ok").focus();
+  });
+}
+
+async function copyText(text, fallbackEl) {
+  try { await navigator.clipboard.writeText(text); toast("Copied to clipboard."); }
+  catch { if (fallbackEl) { fallbackEl.focus(); fallbackEl.select(); } toast("Press Cmd+C / Ctrl+C to copy the selected text."); }
 }
 
 function toast(msg, ms = 3200) {
@@ -72,27 +106,41 @@ async function refreshMode() {
   MODE = await api("/status");
   const b = document.getElementById("mode-badge");
   b.className = "mode-badge " + MODE.mode;
-  b.textContent = MODE.mode === "live" ? `● LIVE · ${MODE.model}` : (MODE.has_key ? "● DEMO MODE (forced)" : "● DEMO MODE · no API key");
+  b.textContent = MODE.mode === "live" ? `● LIVE · ${MODE.model}`
+    : MODE.browser_only ? "● DEMO · browser version"
+    : (MODE.has_key ? "● DEMO MODE (forced)" : "● DEMO MODE · no API key");
 }
 document.getElementById("mode-badge").onclick = async () => {
+  if (MODE.browser_only) return toast("This browser version uses pre-written agent responses. Live AI runs in the full local app.", 5000);
   if (!MODE.has_key) return toast("No ANTHROPIC_API_KEY in .env - running on canned demo responses.");
   await api("/settings/mode", { method: "POST", body: { force_demo: MODE.mode === "live" } });
   await refreshMode();
   toast(MODE.mode === "live" ? "Live mode: agents call the Claude API." : "Demo mode: agents use canned responses.");
 };
 document.getElementById("reset-btn").onclick = async () => {
-  if (!confirm("Reset the demo? This restores the 5 seeded cases and deletes any cases you created.")) return;
+  if (!(await confirmBox("Reset the demo? This restores the 5 sample cases and deletes any cases you created.", "Reset demo"))) return;
   await api("/demo/reset", { method: "POST" });
   toast("Demo data restored.");
-  location.hash = "#/dashboard";
-  route();
+  if (currentPath() === "#/dashboard") route(); else navigate("#/dashboard");
 };
 
 // ---------------------------------------------------------------- router
+// Routing: URL hash with the server; an in-memory path in the browser-only build.
 let activeStream = null;
+let memoryPath = "#/dashboard";
+const currentPath = () => (BACKEND ? memoryPath : location.hash);
+function navigate(path) {
+  if (BACKEND) { memoryPath = path; route(); } else location.hash = path;
+}
+if (BACKEND) {
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#/"]');
+    if (a) { e.preventDefault(); navigate(a.getAttribute("href")); }
+  });
+}
 function route() {
   if (activeStream) { activeStream.close(); activeStream = null; }
-  const parts = (location.hash.replace(/^#\/?/, "") || "dashboard").split("/");
+  const parts = (currentPath().replace(/^#\/?/, "") || "dashboard").split("/");
   document.querySelectorAll("nav a").forEach((a) =>
     a.classList.toggle("active", a.dataset.nav === parts[0] || (parts[0] === "case" && a.dataset.nav === "queue")));
   const views = { dashboard: viewDashboard, queue: viewQueue, new: viewNew, case: viewCase, review: viewReview, business: viewBusiness };
@@ -152,7 +200,7 @@ async function viewDashboard() {
 }
 
 function bindRowLinks() {
-  $app.querySelectorAll("[data-href]").forEach((el) => (el.onclick = () => (location.hash = el.dataset.href)));
+  $app.querySelectorAll("[data-href]").forEach((el) => (el.onclick = () => navigate(el.dataset.href)));
 }
 
 // ---------------------------------------------------------------- 2. queue
@@ -269,7 +317,7 @@ async function viewNew() {
     if (sample) Object.assign(body, { sample_key: sample.key, date_ctx: sample.date_ctx });
     const c = await api("/cases", { method: "POST", body });
     if (run) await api(`/cases/${c.id}/run`, { method: "POST" });
-    location.hash = `#/case/${c.id}`;
+    navigate(`#/case/${c.id}`);
   };
   document.getElementById("create-run").onclick = () => create(true).catch((e) => toast(e.message));
   document.getElementById("create-only").onclick = () => create(false).catch((e) => toast(e.message));
@@ -436,22 +484,20 @@ async function viewCase(id) {
 
   const listen = () => {
     if (activeStream) activeStream.close();
-    const es = new EventSource(`/cases/${c.id}/stream`);
-    activeStream = es;
-    es.addEventListener("step", (ev) => {
-      const r = JSON.parse(ev.data);
-      c.runs = AGENT_ORDER.map((a) => (a === r.agent ? r : (c.runs || []).find((x) => x.agent === a) || { agent: a, status: "queued", label: a }));
-      render(r.status === "done" ? r.agent : undefined);
+    activeStream = openStream(c.id, {
+      step: (r) => {
+        c.runs = AGENT_ORDER.map((a) => (a === r.agent ? r : (c.runs || []).find((x) => x.agent === a) || { agent: a, status: "queued", label: a }));
+        render(r.status === "done" ? r.agent : undefined);
+      },
+      case: (d) => Object.assign(c, d),
+      done: async () => {
+        if (activeStream) { activeStream.close(); activeStream = null; }
+        c = await api(`/cases/${c.id}`);
+        render("qa");
+        toast(`Pipeline finished (${c.run_mode === "live" ? "live AI" : c.run_mode === "mixed" ? "partly demo - see step notes" : "demo mode"}). Ready for staff review.`, 5000);
+        refreshMode();
+      },
     });
-    es.addEventListener("case", (ev) => { Object.assign(c, JSON.parse(ev.data)); });
-    es.addEventListener("done", async () => {
-      es.close(); activeStream = null;
-      c = await api(`/cases/${c.id}`);
-      render("qa");
-      toast(`Pipeline finished (${c.run_mode === "live" ? "live AI" : c.run_mode === "mixed" ? "partly demo - see step notes" : "demo mode"}). Ready for staff review.`, 5000);
-      refreshMode();
-    });
-    es.onerror = () => { /* browser auto-reconnects; the stream replays current state */ };
   };
 
   render();
@@ -504,8 +550,9 @@ async function viewReview(id) {
     <div class="grid" style="grid-template-columns: 1.6fr 1fr">
       <div class="card">
         <div class="page-head" style="margin:0 0 8px"><h2 style="margin:0">Appeal letter ${c.draft_edited ? '<span class="badge b-purple">edited by staff</span>' : ""}</h2>
-          <a class="btn btn-ghost btn-sm" href="/cases/${c.id}/letter.txt">Download .txt</a></div>
-        <textarea id="letter" rows="34" ${locked ? "readonly" : ""} style="font-family: Georgia, serif; font-size: 13.5px">${esc(c.draft_letter || "")}</textarea>
+          <span class="actions" style="margin:0"><button class="btn btn-ghost btn-sm" id="copy-letter">Copy letter</button>
+          ${BACKEND ? "" : `<a class="btn btn-ghost btn-sm" href="/cases/${c.id}/letter.txt">Download .txt</a>`}</span></div>
+        <textarea id="letter" rows="34" ${locked ? "readonly" : ""} style="font-family: var(--font-letter); font-size: 13.5px">${esc(c.draft_letter || "")}</textarea>
         ${locked ? "" : `<div class="actions"><button class="btn btn-ghost" id="save-draft">Save edits</button><span id="save-state" class="muted small"></span></div>`}
       </div>
       <div>
@@ -536,6 +583,7 @@ async function viewReview(id) {
         </div>`}
       </div>
     </div>`;
+  document.getElementById("copy-letter").onclick = () => copyText(document.getElementById("letter").value, document.getElementById("letter"));
   if (locked) return;
   const save = async () => {
     await api(`/cases/${c.id}/draft`, { method: "PATCH", body: { draft_letter: document.getElementById("letter").value } });
@@ -545,12 +593,12 @@ async function viewReview(id) {
   document.getElementById("approve").onclick = async () => {
     $app.querySelectorAll("[data-att]").forEach((cb) => (atts[cb.dataset.att].checked = cb.checked));
     const missing = atts.filter((a) => a.required && !a.checked);
-    if (missing.length && !confirm(`${missing.length} required attachment(s) not checked:\n\n- ${missing.map((m) => m.item).join("\n- ")}\n\nApprove anyway?`)) return;
+    if (missing.length && !(await confirmBox(`${missing.length} required attachment(s) not checked:\n\n- ${missing.map((m) => m.item).join("\n- ")}\n\nApprove anyway?`, "Approve anyway"))) return;
     try {
       if (document.getElementById("letter").value !== (c.draft_letter || "")) await save();
       await api(`/cases/${c.id}/approve`, { method: "POST", body: { approved_by: document.getElementById("approver").value || "Office staff", attachments: atts } });
       toast("Approved and marked Submitted.");
-      location.hash = `#/case/${c.id}`;
+      navigate(`#/case/${c.id}`);
     } catch (e) { toast(e.message); }
   };
 }
@@ -597,7 +645,7 @@ async function viewBusiness() {
       <h3>Dollars recovered vs. subscription cost (90 days)</h3>
       ${b.practices.map((p) => `
         <div class="hbar"><div class="lbl">${esc(p.name)}</div><div class="track"><div class="fill" style="width:${(100 * p.dollars_recovered) / maxRec}%"></div></div><div class="val">${money(p.dollars_recovered)}</div></div>
-        <div class="hbar"><div class="lbl muted small">subscription (3 mo)</div><div class="track"><div class="fill" style="width:${(100 * p.price_per_month * 3) / maxRec}%; background:#c0352b"></div></div><div class="val muted">${money(p.price_per_month * 3)}</div></div>`).join("")}
+        <div class="hbar"><div class="lbl muted small">subscription (3 mo)</div><div class="track"><div class="fill" style="width:${(100 * p.price_per_month * 3) / maxRec}%; background:var(--red)"></div></div><div class="val muted">${money(p.price_per_month * 3)}</div></div>`).join("")}
     </div>
 
     <div class="card" style="margin-top:16px">

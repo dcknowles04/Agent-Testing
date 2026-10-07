@@ -1,0 +1,1347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+</head>
+<body>
+<title>Appeals Prototype</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+:root {
+  /* Layout: sticky top bar, centered 1280px work area, cards for each working surface. */
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --subtle: #f8f9fb;
+  --hover: #f3f6fb;
+  --ink: #1c2433;
+  --muted: #627089;
+  --line: #e1e5ec;
+  --line-strong: #c3c9d4;
+  --accent: #1f5fbf;
+  --accent-soft: #e7effb;
+  --on-accent: #ffffff;
+  --green: #1b7f49;
+  --green-soft: #e1f3e8;
+  --green-line: #9fc5a8;
+  --yellow: #9a6200;
+  --yellow-soft: #fff3d3;
+  --amber: #d99a00;
+  --red: #bf3328;
+  --red-soft: #fce6e3;
+  --gray-soft: #edf0f4;
+  --purple: #6643bd;
+  --purple-soft: #eee8fa;
+  --note-ink: #6b4800;
+  --info-ink: #173f7a;
+  --paper: #fffef8;
+  --code-bg: #f5f7fa;
+  --banner-bg: #252a35;
+  --banner-fg: #ffd166;
+  --toast-bg: #252a35;
+  --toast-fg: #ffffff;
+  --shadow: rgba(16, 24, 40, 0.18);
+  --font-ui: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-letter: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161d; --card: #1a2029; --subtle: #1f2631; --hover: #222b38; --ink: #e5e9f0; --muted: #98a3b6;
+    --line: #2d3644; --line-strong: #46516a; --accent: #6ea2f2; --accent-soft: #1d2d47; --on-accent: #0d1420;
+    --green: #5cc98b; --green-soft: #173225; --green-line: #2f6a49; --yellow: #f0bf55; --yellow-soft: #3a2f14;
+    --amber: #e8b33a; --red: #f07a6f; --red-soft: #3d1f1d; --gray-soft: #262e3a; --purple: #b39af0; --purple-soft: #2c2445;
+    --note-ink: #f3d79a; --info-ink: #b9d2f7; --paper: #1d222b; --code-bg: #161b23; --banner-bg: #0b0e13;
+    --banner-fg: #ffd166; --toast-bg: #e5e9f0; --toast-fg: #12161d; --shadow: rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161d; --card: #1a2029; --subtle: #1f2631; --hover: #222b38; --ink: #e5e9f0; --muted: #98a3b6;
+  --line: #2d3644; --line-strong: #46516a; --accent: #6ea2f2; --accent-soft: #1d2d47; --on-accent: #0d1420;
+  --green: #5cc98b; --green-soft: #173225; --green-line: #2f6a49; --yellow: #f0bf55; --yellow-soft: #3a2f14;
+  --amber: #e8b33a; --red: #f07a6f; --red-soft: #3d1f1d; --gray-soft: #262e3a; --purple: #b39af0; --purple-soft: #2c2445;
+  --note-ink: #f3d79a; --info-ink: #b9d2f7; --paper: #1d222b; --code-bg: #161b23; --banner-bg: #0b0e13;
+  --banner-fg: #ffd166; --toast-bg: #e5e9f0; --toast-fg: #12161d; --shadow: rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 14px/1.45 var(--font-ui);
+  background: var(--bg);
+  color: var(--ink);
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1 { font-size: 22px; margin: 0 0 4px; }
+h2 { font-size: 17px; margin: 0 0 12px; }
+h3 { font-size: 14px; margin: 16px 0 8px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.hidden { display: none !important; }
+
+.banner {
+  background: var(--banner-bg); color: var(--banner-fg); text-align: center; font-weight: 600;
+  padding: 6px 12px; font-size: 12px; letter-spacing: .04em;
+}
+.topbar {
+  display: flex; align-items: center; gap: 24px; padding: 10px 24px;
+  background: var(--card); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; flex-wrap: wrap;
+}
+.brand { font-weight: 700; font-size: 16px; white-space: nowrap; }
+.brand .muted { font-weight: 400; font-size: 13px; }
+nav { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
+nav a { padding: 6px 12px; border-radius: 6px; color: var(--ink); }
+nav a.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+nav a:hover { text-decoration: none; background: var(--gray-soft); }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+
+main { max-width: 1280px; margin: 0 auto; padding-block: 24px; padding-inline: clamp(16px, 3vw, 24px); }
+h1, h2 { text-wrap: balance; }
+.grid > *, .kpis > * { min-width: 0; }
+.card, details.panel .body { overflow-x: auto; }
+td.num, .kpi .value, .hbar .val { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.btn {
+  border: 1px solid var(--accent); background: var(--accent); color: var(--on-accent); border-radius: 6px;
+  padding: 8px 14px; font: inherit; font-weight: 600; cursor: pointer;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-ghost { background: var(--card); color: var(--accent); }
+.btn-green { background: var(--green); border-color: var(--green); }
+.btn-red { background: var(--red); border-color: var(--red); }
+.btn-sm { padding: 4px 10px; font-size: 12px; }
+.btn-lg { padding: 12px 20px; font-size: 15px; }
+
+.mode-badge {
+  border: none; border-radius: 999px; padding: 5px 12px; font-weight: 700; font-size: 12px; cursor: pointer;
+}
+.mode-badge.live { background: var(--green-soft); color: var(--green); }
+.mode-badge.demo { background: var(--yellow-soft); color: var(--yellow); }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: 1fr 1fr; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 16px 0; }
+.kpi { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.kpi .value { font-size: 26px; font-weight: 700; margin-top: 4px; }
+.kpi .sub { color: var(--muted); font-size: 12px; }
+.kpi.alert .value { color: var(--red); }
+.page-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
+
+.bar { height: 10px; background: var(--gray-soft); border-radius: 999px; overflow: hidden; margin-top: 8px; }
+.bar > span { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .03em; font-weight: 600; }
+tr.clickable { cursor: pointer; }
+tr.clickable:hover td { background: var(--hover); }
+td.num, th.num { text-align: right; white-space: nowrap; }
+
+.badge {
+  display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700;
+  white-space: nowrap; background: var(--gray-soft); color: var(--muted);
+}
+.b-green { background: var(--green-soft); color: var(--green); }
+.b-yellow { background: var(--yellow-soft); color: var(--yellow); }
+.b-red { background: var(--red-soft); color: var(--red); }
+.b-blue { background: var(--accent-soft); color: var(--accent); }
+.b-purple { background: var(--purple-soft); color: var(--purple); }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; background: var(--line-strong); }
+.dot.red { background: var(--red); } .dot.yellow { background: var(--amber); } .dot.green { background: var(--green); }
+
+.filters { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; align-items: center; }
+select, input[type=text], input[type=number], textarea {
+  font: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; background: var(--card); color: var(--ink); max-width: 100%;
+}
+textarea { width: 100%; font-family: var(--font-mono); font-size: 12.5px; }
+label.field { display: block; font-weight: 600; margin-bottom: 4px; }
+
+/* Pipeline */
+.pipeline { display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding: 8px 0 4px; }
+.stage { flex: 1; min-width: 96px; display: flex; flex-direction: column; align-items: center; position: relative; }
+.stage:not(:last-child)::after {
+  content: ""; position: absolute; top: 21px; left: calc(50% + 22px); right: calc(-50% + 22px);
+  height: 3px; background: var(--line);
+}
+.stage.done:not(:last-child)::after, .stage.skipped:not(:last-child)::after { background: var(--green-line); }
+.node {
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-weight: 700;
+  background: var(--gray-soft); color: var(--muted); border: 3px solid var(--line); z-index: 1; font-size: 16px;
+}
+.stage.agent .node { border-radius: 12px; }
+.stage.done .node { background: var(--green-soft); color: var(--green); border-color: var(--green); }
+.stage.running .node { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); animation: pulse 1s infinite; }
+.stage.skipped .node { background: var(--card); border-style: dashed; color: var(--muted); }
+.stage.error .node { background: var(--red-soft); color: var(--red); border-color: var(--red); }
+.stage .name { font-size: 12px; font-weight: 600; margin-top: 6px; text-align: center; }
+.stage .meta { font-size: 10.5px; margin-top: 2px; text-align: center; min-height: 16px; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 var(--accent-soft); } 50% { box-shadow: 0 0 0 8px transparent; } }
+@media (prefers-reduced-motion: reduce) { .stage.running .node { animation: none; } }
+
+details.panel { background: var(--card); border: 1px solid var(--line); border-radius: 10px; margin-top: 10px; }
+details.panel > summary {
+  cursor: pointer; padding: 12px 16px; font-weight: 600; display: flex; gap: 10px; align-items: center; list-style: none;
+}
+details.panel > summary::-webkit-details-marker { display: none; }
+details.panel > summary::before { content: "▸"; color: var(--muted); }
+details.panel[open] > summary::before { content: "▾"; }
+details.panel .body { padding: 0 16px 16px; }
+.kv { display: grid; grid-template-columns: 200px 1fr; gap: 4px 16px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; }
+pre.letter {
+  white-space: pre-wrap; font-family: var(--font-letter); font-size: 13.5px; background: var(--paper); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 8px; padding: 16px; max-height: 420px; overflow: auto;
+}
+pre.json { white-space: pre-wrap; font-size: 11.5px; background: var(--code-bg); color: var(--ink); font-family: var(--font-mono); border-radius: 6px; padding: 10px; max-height: 300px; overflow: auto; }
+blockquote.cite { margin: 4px 0 0; padding: 4px 10px; border-left: 3px solid var(--line); color: var(--muted); font-style: italic; font-size: 12.5px; }
+ul.tight { margin: 4px 0; padding-left: 18px; }
+.note { background: var(--yellow-soft); color: var(--note-ink); border-radius: 6px; padding: 8px 12px; font-size: 12.5px; margin: 8px 0; }
+.note.info { background: var(--accent-soft); color: var(--info-ink); }
+.flag { border-left: 4px solid var(--line); padding: 6px 10px; margin: 6px 0; background: var(--subtle); border-radius: 0 6px 6px 0; }
+.flag.high { border-color: var(--red); } .flag.medium { border-color: var(--amber); } .flag.low { border-color: var(--line-strong); }
+.checklist label { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+.doc-box { margin-bottom: 14px; }
+.doc-box .doc-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; gap: 8px; }
+.toast {
+  position: fixed; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); right: 16px; left: auto; background: var(--toast-bg); color: var(--toast-fg); padding: 10px 16px;
+  border-radius: 8px; box-shadow: 0 6px 20px var(--shadow); z-index: 50; max-width: min(420px, calc(100vw - 32px));
+}
+.hbar { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.hbar .lbl { width: min(220px, 35%); font-size: 12.5px; }
+.hbar .track { flex: 1; background: var(--gray-soft); height: 16px; border-radius: 4px; overflow: hidden; }
+.hbar .fill { height: 100%; background: var(--accent); }
+.hbar .val { width: 90px; text-align: right; font-size: 12.5px; font-weight: 600; }
+.big-number { font-size: 30px; font-weight: 800; }
+.modal-backdrop { position: fixed; inset: 0; background: var(--shadow); display: grid; place-items: center; z-index: 60; padding: 16px; }
+.modal { background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 20px; max-width: 460px; width: 100%; box-shadow: 0 12px 40px var(--shadow); }
+.modal p { margin: 0 0 4px; }
+@media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .kv { grid-template-columns: 1fr; } .topbar { gap: 10px; padding: 10px 16px; } .brand .muted { display: none; } }
+
+</style>
+<div class="banner">PROTOTYPE &ndash; FICTIONAL DATA &middot; Browser demo version &middot; No real patients, payers or PHI. All policy and clinical-criteria content is illustrative.</div>
+  <header class="topbar">
+    <div class="brand">Denial&rarr;Appeal <span class="muted">for Riverbend Orthopedic Associates</span></div>
+    <nav>
+      <a href="#/dashboard" data-nav="dashboard">Dashboard</a>
+      <a href="#/queue" data-nav="queue">Case Queue</a>
+      <a href="#/new" data-nav="new">New Case</a>
+      <a href="#/business" data-nav="business">Outcomes &amp; Business</a>
+    </nav>
+    <div class="top-actions">
+      <button id="mode-badge" class="mode-badge" title="Click to switch between live and demo mode">&hellip;</button>
+      <button id="reset-btn" class="btn btn-ghost btn-sm" title="Restore the seed data">Reset demo</button>
+    </div>
+  </header>
+  <main id="app"><p class="muted">Loading&hellip;</p></main>
+  <div id="toast" class="toast hidden"></div>
+<script>window.APPEALS_DATA = {"seed_order":["tka_prior_auth","lumbar_mri","knee_scope_coding","rotator_cuff_timely","spine_fusion"],"samples":{"tka_prior_auth":{"meta":{"key":"tka_prior_auth","title":"Total knee arthroplasty - prior auth denied","label":"Total knee replacement (prior auth) - strong","practice_id":1,"dates":{"INJ1":-240,"PT_START":-205,"PT_END":-118,"XRAY":-120,"INJ2":-95,"CONSULT":-30,"PA_REQUEST":-16,"DENIAL_DATE":-9,"PLANNED_DOS":21},"seed_state":{"status":"New"}},"docs":{"denial_letter":"*** FICTIONAL DOCUMENT - PROTOTYPE DEMONSTRATION ONLY ***\n\nSUMMIT HEALTH PLAN\nUtilization Management Department\nPO Box 4400, Lakemont, ST 00000   |   Fax (555) 010-4471\n\nNOTICE OF ADVERSE DETERMINATION - PRIOR AUTHORIZATION\n\nDate of notice: {{DENIAL_DATE}}\n\nTo: Elena Marsh, MD - Riverbend Orthopedic Associates\nMember: Dorothy Kessler          DOB: 03/14/1958\nMember ID: SHP-448210937          Group: 77120\nAuthorization reference #: SHP-PA-118734\nRequested service: Total knee arthroplasty, right knee (CPT 27447-RT)\nDiagnosis: M17.11 Unilateral primary osteoarthritis, right knee\nRequested date of service: {{PLANNED_DOS}}\nFacility: Riverbend Surgery Center (in network)\n\nDETERMINATION: DENIED\n\nReason for denial (denial code PA-DN-14 - Clinical criteria not met / insufficient documentation):\nSummit Health Plan reviewed the request against Medical Policy MP-ORTHO-031, Total Knee\nArthroplasty. The policy requires documented failure of at least 12 weeks of non-operative\ntreatment within the past 12 months (Criterion 3). The records submitted reference prior\nphysical therapy, but no physical therapy notes were provided documenting the dates,\nfrequency, duration or response to therapy. The reviewer was unable to confirm that\nCriterion 3 was met. All other criteria were not evaluated in full because Criterion 3 was\nnot met.\n\nThis decision was made by a licensed physician reviewer (Board certified, Orthopaedic Surgery).\n\nYOUR RIGHT TO APPEAL\nYou or the member may request an appeal within 60 calendar days of the date of this notice.\nSubmit the appeal with any additional medical records that support the request to:\n  Summit Health Plan - Appeals Unit, PO Box 4410, Lakemont, ST 00000\n  Fax: (555) 010-4480   |   Provider portal: Appeals > New pre-service appeal\nStandard pre-service appeals are decided within 30 calendar days. A peer-to-peer review may\nbe requested within 14 days of this notice by calling (555) 010-4400.\n","clinical_notes":"*** FICTIONAL CLINICAL RECORD - PROTOTYPE DEMONSTRATION ONLY ***\nPatient: Dorothy Kessler   DOB: 03/14/1958   MRN: RB-20931\n\n=====================================================================\nNOTE 1 - INJECTION PROCEDURE NOTE - {{INJ1}}\nProvider: Elena Marsh, MD\nProcedure: Right knee intra-articular corticosteroid injection (triamcinolone 40 mg +\nlidocaine), ultrasound guided. Indication: right knee osteoarthritis with persistent pain\ndespite oral NSAIDs (meloxicam 15 mg daily since about 9 months ago). Tolerated well.\nPlan: start formal physical therapy; follow up in 3 months.\n\n=====================================================================\nNOTE 2 - NORTHGATE PHYSICAL THERAPY - DISCHARGE SUMMARY - {{PT_END}}\nTherapist: Jordan Pell, PT, DPT  (Northgate Physical Therapy - outside facility)\nReferral: Right knee OA, Dr. E. Marsh\nPlan of care: 2x/week x 12 weeks. Start of care: {{PT_START}}. Discharge: {{PT_END}}.\nVisits attended: 14 of 16 scheduled (2 cancellations due to pain flare).\nInterventions: quadriceps/hip strengthening, ROM, gait training, aquatic therapy x 4,\nhome exercise program (HEP) issued and reviewed at each visit.\nOutcome: Initial KOOS JR 48.0 -> discharge KOOS JR 46.5 (no meaningful change).\nPain 7/10 -> 7/10 with stairs. ROM right knee 5-105 deg (unchanged).\nAssessment: Patient participated fully but plateaued with persistent pain and functional\nlimitation. Discharged to HEP. Recommend orthopedic follow-up for surgical consideration.\n\n=====================================================================\nNOTE 3 - X-RAY REPORT - RIGHT KNEE, 3 VIEWS WEIGHT-BEARING - {{XRAY}}\nRadiologist: K. Osei, MD\nFindings: Severe medial compartment joint space narrowing with bone-on-bone apposition.\nLarge marginal osteophytes, subchondral sclerosis and subchondral cysts. Moderate\npatellofemoral narrowing. Mild varus alignment (approx. 6 deg).\nImpression: Severe tricompartmental osteoarthritis, medial predominant,\nKellgren-Lawrence grade 4.\n\n=====================================================================\nNOTE 4 - INJECTION PROCEDURE NOTE - {{INJ2}}\nProvider: Elena Marsh, MD\nProcedure: Repeat right knee corticosteroid injection, ultrasound guided.\nPatient reports relief from prior injection lasted about 5 weeks. PT completed without\nimprovement. Continues meloxicam 15 mg daily and uses a cane for community distances.\n\n=====================================================================\nNOTE 5 - SURGICAL CONSULTATION - {{CONSULT}}\nProvider: Elena Marsh, MD\nHPI: 66-year-old woman with right knee pain for more than 3 years, progressively worse.\nPain 8/10, worse with stairs and standing more than 15 minutes; night pain 4-5 nights/week.\nWalking tolerance under 1 block. Uses a cane. Difficulty with stairs, getting in and out of\na car and grocery shopping. KOOS JR today: 44.8.\nNon-operative treatment to date: meloxicam 15 mg daily (more than 12 months), activity\nmodification and cane, 2 corticosteroid injections ({{INJ1}}, {{INJ2}}), formal PT at\nNorthgate PT {{PT_START}} to {{PT_END}} (14 visits) with HEP, without lasting benefit.\nWeight counseling provided (BMI 31.4); patient lost 9 lb over 6 months.\nPMH: Type 2 diabetes (HbA1c 6.4% two months ago), hypertension (controlled).\nNever smoker. No history of knee infection. Skin intact.\nExam: Antalgic gait, varus deformity, medial joint-line tenderness, small effusion,\nROM 5-100 deg, crepitus. Stable ligaments. Neurovascularly intact.\nImaging: Weight-bearing X-rays from {{XRAY}} reviewed; KL grade 4 medial, bone on bone.\nAssessment: End-stage primary OA right knee (M17.11) that has failed more than 12 weeks of\ncomprehensive non-operative management.\nPlan: Right total knee arthroplasty. Risks, benefits and alternatives discussed; shared\ndecision-making completed and the patient wishes to proceed. Medical clearance requested.\n","claim_data":"*** FICTIONAL DATA - PROTOTYPE DEMONSTRATION ONLY ***\n\nPRIOR AUTHORIZATION REQUEST SUMMARY (from practice management system)\nPractice: Riverbend Orthopedic Associates  |  NPI: 0000000001 (placeholder)\nRendering surgeon: Elena Marsh, MD (Orthopaedic Surgery - Adult Reconstruction)\n\nPatient: Dorothy Kessler   DOB: 03/14/1958   Sex: F\nPayer: Summit Health Plan   Member ID: SHP-448210937   Group: 77120\nAuthorization reference #: SHP-PA-118734\nPA request submitted: {{PA_REQUEST}} via payer portal\nRecords attached to original request: Surgical consult note ({{CONSULT}}), Knee X-ray report ({{XRAY}})\nRecords NOT attached: Northgate Physical Therapy notes, injection procedure notes\n\nRequested services\nLine  CPT    Mod  Description                                   ICD-10   Est. charge\n1     27447  RT   Arthroplasty, knee, condyle and plateau;     M17.11   $6,850.00\n                  medial AND lateral compartments (TKA)\n2     Facility fee - Riverbend Surgery Center (est.)                  M17.11   $29,950.00\n\nTotal estimated charges: $36,800.00\nPlanned date of service: {{PLANNED_DOS}}\nPlace of service: 24 (Ambulatory surgical center)\n","payer_policy":"*** ILLUSTRATIVE POLICY - FICTIONAL PAYER - NOT A REAL COVERAGE POLICY ***\n\nSUMMIT HEALTH PLAN\nMedical Policy MP-ORTHO-031: Total Knee Arthroplasty (Illustrative)\nEffective: 01/01 of current plan year\n\nSummit Health Plan considers primary total knee arthroplasty (CPT 27447) medically\nnecessary when ALL of the following criteria are met:\n\nCriterion 1 - Imaging. Weight-bearing radiographs within the past 12 months demonstrate\nadvanced arthritis: Kellgren-Lawrence grade 3 or 4, OR bone-on-bone articulation, OR\nsevere joint space narrowing.\n\nCriterion 2 - Function. Moderate to severe pain and functional impairment interfering with\nactivities of daily living for at least 3 months, documented with a validated outcome\nmeasure (e.g., KOOS JR, WOMAC) or a detailed functional description.\n\nCriterion 3 - Conservative care. Failure of at least 12 weeks of non-operative treatment\nwithin the past 12 months, including at least TWO of the following:\n  a) supervised physical therapy or a documented home exercise program;\n  b) NSAIDs or other analgesics, unless contraindicated;\n  c) intra-articular injection (corticosteroid or viscosupplement);\n  d) weight-loss counseling when BMI is 30 or greater; activity modification or an\n     assistive device.\nDocumentation must include dates and response to treatment. Physical therapy must be\nsupported by therapy notes or a discharge summary.\n\nCriterion 4 - BMI below 40, or a documented optimization plan.\n\nCriterion 5 - No active local or systemic infection; for patients with diabetes, HbA1c\nbelow 8.0% within the past 3 months.\n\nCriterion 6 - Documented shared decision-making between the surgeon and the patient.\n"},"canned":{"intake":"{\n  \"patient_name\": \"Dorothy Kessler\",\n  \"patient_dob\": \"1958-03-14\",\n  \"member_id\": \"SHP-448210937\",\n  \"payer_name\": \"Summit Health Plan\",\n  \"claim_or_reference_number\": \"SHP-PA-118734\",\n  \"rendering_provider\": \"Elena Marsh, MD\",\n  \"procedure_description\": \"Right total knee arthroplasty (pre-service prior authorization)\",\n  \"cpt_codes\": [\n    {\"code\": \"27447\", \"description\": \"Arthroplasty, knee, condyle and plateau; medial and lateral compartments (total knee arthroplasty)\", \"modifiers\": [\"RT\"]}\n  ],\n  \"icd10_codes\": [\n    {\"code\": \"M17.11\", \"description\": \"Unilateral primary osteoarthritis, right knee\"}\n  ],\n  \"date_of_service\": \"{{PLANNED_DOS|iso}}\",\n  \"denial_date\": \"{{DENIAL_DATE|iso}}\",\n  \"billed_amount\": 36800,\n  \"amount_at_stake\": 36800,\n  \"stated_denial_reason\": \"Insufficient documentation of conservative therapy: the request referenced prior physical therapy, but no PT notes documenting dates, frequency, duration or response were provided, so Criterion 3 of MP-ORTHO-031 could not be confirmed.\",\n  \"denial_codes\": [\n    {\"code\": \"PA-DN-14\", \"description\": \"Clinical criteria not met / insufficient documentation\"}\n  ],\n  \"appeal_window_days\": 60,\n  \"appeal_submission_method\": \"Summit Health Plan Appeals Unit, PO Box 4410, Lakemont, ST 00000; fax (555) 010-4480; or provider portal (Appeals > New pre-service appeal). Peer-to-peer available within 14 days at (555) 010-4400.\",\n  \"summary\": \"Pre-service prior authorization for a right TKA (27447-RT) was denied because PT documentation was not included with the request. The Northgate PT discharge summary and injection notes exist in the chart but were not sent.\"\n}\n","triage":"{\n  \"denial_type\": \"prior_authorization\",\n  \"denial_type_rationale\": \"Pre-service authorization for 27447 was denied under the payer's TKA medical policy (PA-DN-14) before surgery was performed.\",\n  \"winnability\": \"strong\",\n  \"winnability_score\": 88,\n  \"reasons_for\": [\n    \"The denial rests solely on missing PT documentation; a Northgate PT discharge summary documents 14 visits over about 12 weeks with no improvement (KOOS JR 48.0 to 46.5).\",\n    \"Conservative care far exceeds the two-modality minimum: NSAIDs for more than 12 months, two corticosteroid injections, PT with HEP, cane, and weight counseling.\",\n    \"Weight-bearing X-rays show KL grade 4 bone-on-bone medial OA, meeting the imaging criterion.\",\n    \"BMI 31.4, HbA1c 6.4%, never smoker and documented shared decision-making satisfy the remaining criteria.\"\n  ],\n  \"reasons_against\": [\n    \"The payer did not evaluate criteria 1, 2 and 4-6 in full, so it could raise new issues on appeal.\",\n    \"The HbA1c date should be confirmed as within 3 months of the planned surgery date.\"\n  ],\n  \"recommended_strategy\": \"File a standard pre-service appeal with the Northgate PT discharge summary and both injection notes attached, walking through all six MP-ORTHO-031 criteria. Consider requesting a peer-to-peer within the 14-day window to speed up approval before the planned surgery date.\",\n  \"route_to_coding_check\": false\n}\n","evidence":"{\n  \"policy_name\": \"Summit Health Plan MP-ORTHO-031: Total Knee Arthroplasty (illustrative)\",\n  \"criteria\": [\n    {\n      \"criterion\": \"Criterion 1 - Weight-bearing X-rays within 12 months show KL grade 3-4, bone-on-bone or severe joint space narrowing\",\n      \"status\": \"met\",\n      \"evidence\": \"3-view weight-bearing right knee X-rays on {{XRAY}} show severe medial narrowing with bone-on-bone apposition, KL grade 4.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 3 - X-ray report {{XRAY}}\", \"excerpt\": \"Severe tricompartmental osteoarthritis, medial predominant, Kellgren-Lawrence grade 4.\"},\n      \"action_needed\": \"None - the report was included in the original request.\"\n    },\n    {\n      \"criterion\": \"Criterion 2 - Moderate-severe pain and functional impairment for 3+ months, documented with a validated measure\",\n      \"status\": \"met\",\n      \"evidence\": \"Pain 8/10 for more than 3 years, walking tolerance under 1 block, cane use, night pain; KOOS JR 44.8 at the surgical consult.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 5 - Surgical consultation {{CONSULT}}\", \"excerpt\": \"Walking tolerance under 1 block. Uses a cane... KOOS JR today: 44.8.\"},\n      \"action_needed\": \"None.\"\n    },\n    {\n      \"criterion\": \"Criterion 3 - Failure of 12+ weeks of non-operative treatment in the past 12 months, including at least two modalities, with PT supported by therapy notes\",\n      \"status\": \"missing_documentation\",\n      \"evidence\": \"The chart documents PT {{PT_START}} to {{PT_END}} (14 visits, about 12 weeks, plateaued), meloxicam for more than 12 months, and corticosteroid injections on {{INJ1}} and {{INJ2}}. The PT discharge summary was NOT sent with the original request, which is the stated reason for the denial.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 2 - Northgate PT discharge summary {{PT_END}}\", \"excerpt\": \"Visits attended: 14 of 16 scheduled... Patient participated fully but plateaued with persistent pain and functional limitation.\"},\n      \"action_needed\": \"Attach the Northgate PT discharge summary and both injection procedure notes; once attached, this criterion is met.\"\n    },\n    {\n      \"criterion\": \"Criterion 4 - BMI below 40 or a documented optimization plan\",\n      \"status\": \"met\",\n      \"evidence\": \"BMI 31.4 with weight counseling and a 9 lb weight loss documented.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 5 - Surgical consultation {{CONSULT}}\", \"excerpt\": \"Weight counseling provided (BMI 31.4); patient lost 9 lb over 6 months.\"},\n      \"action_needed\": \"None.\"\n    },\n    {\n      \"criterion\": \"Criterion 5 - No active infection; HbA1c below 8.0% within 3 months for diabetic patients\",\n      \"status\": \"met\",\n      \"evidence\": \"HbA1c 6.4% about 2 months before the consult; no history of knee infection; skin intact.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 5 - Surgical consultation {{CONSULT}}\", \"excerpt\": \"Type 2 diabetes (HbA1c 6.4% two months ago)... No history of knee infection. Skin intact.\"},\n      \"action_needed\": \"Attach the HbA1c lab result; confirm it falls within 3 months of the surgery date or repeat it at pre-op.\"\n    },\n    {\n      \"criterion\": \"Criterion 6 - Documented shared decision-making\",\n      \"status\": \"met\",\n      \"evidence\": \"The consult documents a risks/benefits/alternatives discussion and the patient's decision to proceed.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 5 - Surgical consultation {{CONSULT}}\", \"excerpt\": \"Risks, benefits and alternatives discussed; shared decision-making completed and the patient wishes to proceed.\"},\n      \"action_needed\": \"None.\"\n    }\n  ],\n  \"overall_assessment\": \"Every MP-ORTHO-031 criterion is supported by the chart. The denial resulted from a documentation gap (PT notes not sent), not from a clinical shortfall. With the PT discharge summary and injection notes attached, all six criteria are met.\",\n  \"documents_to_attach\": [\n    \"Northgate Physical Therapy discharge summary ({{PT_END}})\",\n    \"Injection procedure notes ({{INJ1}} and {{INJ2}})\",\n    \"Surgical consultation note ({{CONSULT}})\",\n    \"Weight-bearing right knee X-ray report ({{XRAY}})\",\n    \"HbA1c lab result\"\n  ],\n  \"gaps\": [\n    \"HbA1c lab report is referenced but not in the uploaded record.\",\n    \"The PT plan of care called for 16 visits and 14 were attended; frame this as full participation with a plateau.\"\n  ]\n}\n","drafting":"{\n  \"subject_line\": \"Pre-service appeal - Dorothy Kessler - Auth ref SHP-PA-118734 - Right TKA (27447-RT)\",\n  \"letter_text\": \"@letter.txt\",\n  \"key_arguments\": [\n    \"The denial was based only on missing PT documentation; the enclosed Northgate PT discharge summary documents 14 visits over about 12 weeks with no functional improvement.\",\n    \"The patient failed four conservative modalities within 12 months: PT with HEP, NSAIDs, two corticosteroid injections, and activity modification with a cane plus weight counseling.\",\n    \"Weight-bearing X-rays show KL grade 4 bone-on-bone medial osteoarthritis (Criterion 1).\",\n    \"Severe functional limitation is documented with KOOS JR 44.8 and walking tolerance under 1 block (Criterion 2).\",\n    \"BMI 31.4, HbA1c 6.4%, no infection, and documented shared decision-making satisfy Criteria 4-6.\"\n  ],\n  \"enclosures\": [\n    \"Northgate Physical Therapy discharge summary ({{PT_END}})\",\n    \"Injection procedure notes ({{INJ1}} and {{INJ2}})\",\n    \"Surgical consultation note, Elena Marsh, MD ({{CONSULT}})\",\n    \"Weight-bearing right knee X-ray report ({{XRAY}})\",\n    \"HbA1c laboratory result\",\n    \"Copy of the denial notice dated {{DENIAL_DATE}}\"\n  ]\n}\n","qa":"{\n  \"overall\": \"ready_with_edits\",\n  \"score\": 91,\n  \"flags\": [\n    {\"severity\": \"medium\", \"issue\": \"The HbA1c lab result is cited as Enclosure 5 but is not in the uploaded documents.\", \"location\": \"Criteria 4 through 6 paragraph; Enclosure 5\", \"suggested_fix\": \"Pull the HbA1c result from the chart and attach it, and confirm the draw date is within 3 months of the planned surgery.\"},\n    {\"severity\": \"low\", \"issue\": \"The signature and practice phone placeholders still need to be filled in.\", \"location\": \"Signature block\", \"suggested_fix\": \"Have Dr. Marsh sign, and add the practice phone number.\"},\n    {\"severity\": \"low\", \"issue\": \"The peer-to-peer window (14 days from the notice) is still open.\", \"location\": \"Closing paragraph\", \"suggested_fix\": \"Consider scheduling a peer-to-peer in parallel to speed approval before the planned surgery date.\"}\n  ],\n  \"unsupported_claims\": [],\n  \"attachments_checklist\": [\n    {\"item\": \"Northgate PT discharge summary ({{PT_END}})\", \"source\": \"clinical_notes - Note 2\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"Injection procedure notes ({{INJ1}}, {{INJ2}})\", \"source\": \"clinical_notes - Notes 1 and 4\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"Surgical consultation note ({{CONSULT}})\", \"source\": \"clinical_notes - Note 5\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"Weight-bearing X-ray report ({{XRAY}})\", \"source\": \"clinical_notes - Note 3\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"HbA1c laboratory result\", \"source\": \"Practice EHR - labs\", \"required\": true, \"status\": \"needs_upload\"},\n    {\"item\": \"Copy of denial notice ({{DENIAL_DATE}})\", \"source\": \"denial_letter\", \"required\": false, \"status\": \"in_file\"}\n  ],\n  \"summary\": \"Strong, well-supported letter that directly cures the stated denial reason and addresses all six policy criteria. Before submitting: attach the HbA1c result, sign, and fill in the phone placeholder.\"\n}\n"},"letter":"Riverbend Orthopedic Associates\n1200 Riverbend Parkway, Suite 300\nFairhaven, ST 00000\n\n{{TODAY|long}}\n\nSummit Health Plan - Appeals Unit\nPO Box 4410\nLakemont, ST 00000\nVia fax: (555) 010-4480\n\nRE: Request for reconsideration - pre-service prior authorization\nMember: Dorothy Kessler    DOB: 03/14/1958    Member ID: SHP-448210937\nAuthorization reference #: SHP-PA-118734\nRequested service: Right total knee arthroplasty, CPT 27447-RT\nDiagnosis: M17.11 Unilateral primary osteoarthritis, right knee\nPlanned date of service: {{PLANNED_DOS|long}}\nDate of denial: {{DENIAL_DATE|long}}\n\nDear Appeals Reviewer:\n\nOn behalf of my patient, Ms. Dorothy Kessler, I request reconsideration and reversal of the\ndenial dated {{DENIAL_DATE|long}} for a right total knee arthroplasty. The denial states that\nCriterion 3 of Medical Policy MP-ORTHO-031 could not be confirmed because physical therapy\nnotes were not provided. Those records are enclosed and confirm that Ms. Kessler meets every\ncriterion of the policy.\n\nCriterion 3 - Failure of at least 12 weeks of non-operative treatment. Within the past 12\nmonths Ms. Kessler completed supervised physical therapy at Northgate Physical Therapy from\n{{PT_START|long}} to {{PT_END|long}}, attending 14 visits with a home exercise program. Her\ntherapist documented that she \"participated fully but plateaued,\" with KOOS JR essentially\nunchanged (48.0 to 46.5) and pain still 7/10 on stairs (Enclosure 1). In addition, she has\ntaken meloxicam 15 mg daily for more than 12 months, received ultrasound-guided corticosteroid\ninjections on {{INJ1|long}} and {{INJ2|long}} with only about five weeks of relief\n(Enclosure 2), uses a cane, and has received weight-loss counseling. This exceeds the policy's\nrequirement of at least two modalities.\n\nCriterion 1 - Imaging. Weight-bearing radiographs dated {{XRAY|long}} show severe medial\ncompartment narrowing with bone-on-bone apposition, Kellgren-Lawrence grade 4 (Enclosure 4).\n\nCriterion 2 - Function. Ms. Kessler has had right knee pain for more than three years, now\n8/10, with night pain most nights, walking tolerance under one block, and difficulty with\nstairs and car transfers. Her KOOS JR score on {{CONSULT|long}} was 44.8 (Enclosure 3).\n\nCriteria 4 through 6. Her BMI is 31.4, below the policy threshold, with documented weight\nloss. Her diabetes is well controlled (HbA1c 6.4%, Enclosure 5), she has no history of\ninfection, and she has never smoked. Shared decision-making regarding risks, benefits and\nalternatives is documented in my consultation note.\n\nMs. Kessler has exhausted appropriate non-operative care and has end-stage osteoarthritis\nthat limits her daily activities. Total knee arthroplasty is the medically necessary next\nstep. Because surgery is planned for {{PLANNED_DOS|long}}, we respectfully ask for a timely\ndecision. I am available for a peer-to-peer discussion at your convenience.\n\nSincerely,\n\n[Surgeon signature]\nElena Marsh, MD\nOrthopaedic Surgery - Adult Reconstruction\nRiverbend Orthopedic Associates\nPhone: [Practice phone]\n\nEnclosures:\n1. Northgate Physical Therapy discharge summary ({{PT_END}})\n2. Injection procedure notes ({{INJ1}} and {{INJ2}})\n3. Surgical consultation note ({{CONSULT}})\n4. Weight-bearing right knee X-ray report ({{XRAY}})\n5. HbA1c laboratory result\n6. Copy of the denial notice dated {{DENIAL_DATE}}\n"},"lumbar_mri":{"meta":{"key":"lumbar_mri","title":"Lumbar MRI - medical necessity denial","label":"Lumbar MRI (medical necessity) - borderline","practice_id":1,"dates":{"ONSET":-100,"VISIT1":-92,"PT_START":-88,"PT_LAST":-66,"VISIT2":-63,"DOS":-62,"CLAIM_SUBMITTED":-58,"DENIAL_DATE":-50},"seed_state":{"status":"Ready for Review"}},"docs":{"denial_letter":"*** FICTIONAL DOCUMENT - PROTOTYPE DEMONSTRATION ONLY ***\n\nCRESTVIEW MUTUAL HEALTH\nExplanation of Benefits / Provider Remittance - Medical Necessity Denial\nNotice date: {{DENIAL_DATE}}\n\nProvider: Riverbend Orthopedic Associates - Samuel Okafor, MD\nPatient: Raymond Toller     DOB: 08/02/1978     Member ID: CMH-30219844\nClaim #: CMH-25-7781203      Date of service: {{DOS}}\n\nLine 1  CPT 72148  MRI lumbar spine without contrast\n        Billed: $1,850.00   Allowed: $0.00   Paid: $0.00\n        CARC 50 - These are non-covered services because this is not deemed a \"medical\n        necessity\" by the payer.\n        RARC N115 - This decision was based on a Local/Plan Clinical Guideline.\n\nReviewer comment: Per Clinical Guideline CG-RAD-12 (Lumbar Spine MRI), advanced imaging\nfor low back pain with radiculopathy requires at least 6 weeks of documented conservative\ntherapy unless red-flag findings are present. The records show symptom duration of less\nthan 6 weeks and no red-flag findings were identified. Not medically necessary.\n\nAPPEAL RIGHTS: A first-level provider appeal must be received within 60 days of the date\nof this notice. Send a written appeal with supporting medical records to:\nCrestview Mutual Health, Provider Appeals, 88 Harbor Row, Brookfield, ST 00000,\nor upload via the CrestLink provider portal.\n","clinical_notes":"*** FICTIONAL CLINICAL RECORD - PROTOTYPE DEMONSTRATION ONLY ***\nPatient: Raymond Toller   DOB: 08/02/1978   MRN: RB-44812\n\n=====================================================================\nNOTE 1 - NEW PATIENT VISIT (SPINE) - {{VISIT1}}\nProvider: Samuel Okafor, MD\nHPI: 47-year-old warehouse supervisor with low back pain radiating down the left leg to\nthe dorsum of the foot since a lifting episode on about {{ONSET}}. Pain 7/10, worse with\nsitting. No bowel/bladder changes, no saddle anesthesia, no fever, no weight loss, no\nhistory of cancer.\nExam: Positive straight-leg raise on the left at 40 deg. Decreased light-touch sensation in\nthe left L5 dermatome. Strength 5/5 throughout, including left EHL and ankle dorsiflexion.\nReflexes symmetric.\nAssessment: Acute left L5 radiculopathy, likely disc herniation.\nPlan: Naproxen 500 mg twice daily, methylprednisolone dose pack, physical therapy 2x/week,\nactivity modification and work restrictions. Return in 4 weeks or sooner if weakness.\n\n=====================================================================\nNOTE 2 - PHYSICAL THERAPY PROGRESS NOTE - {{PT_LAST}}\nTherapist: A. Brandt, PT (Riverbend in-house PT)\nVisits to date: 6 (start of care {{PT_START}}). McKenzie extension protocol, core\nstabilization, neural glides. Patient reports no centralization; leg pain unchanged 6-7/10.\nNotes new difficulty with heel walking on the left at today's visit. Recommended that the\npatient follow up with the physician before next visit.\n\n=====================================================================\nNOTE 3 - FOLLOW-UP VISIT - {{VISIT2}}\nProvider: Samuel Okafor, MD\nInterval: About 5 weeks since symptom onset; completed oral steroids, on naproxen, 6 PT\nvisits. Leg pain persistent 7/10; new subjective weakness (\"foot slaps when tired\").\nExam: Left EHL 4/5 (previously 5/5), left ankle dorsiflexion 4+/5 (previously 5/5).\nPositive SLR left at 35 deg. Diminished L5 sensation unchanged. No saddle anesthesia.\nAssessment: Left L5 radiculopathy with NEW motor deficit (EHL and dorsiflexion weakness),\nprogressing since the initial exam despite conservative care.\nPlan: MRI lumbar spine without contrast to evaluate for a compressive lesion and guide\npossible epidural steroid injection or surgical referral. Continue PT and naproxen.\n\n=====================================================================\nNOTE 4 - MRI LUMBAR SPINE WITHOUT CONTRAST - {{DOS}}\nRadiologist: L. Fennimore, MD\nFindings: L4-5 left paracentral disc extrusion (9 mm) with caudal migration compressing\nthe traversing left L5 nerve root in the lateral recess. Mild facet arthropathy L4-5 and\nL5-S1. No fracture, no marrow-replacing lesion. Conus normal.\nImpression: L4-5 left paracentral extrusion with compression of the left L5 nerve root,\nconcordant with the clinical presentation.\n","claim_data":"*** FICTIONAL DATA - PROTOTYPE DEMONSTRATION ONLY ***\n\nCLAIM SUMMARY (CMS-1500 data from practice management system)\nBilling provider: Riverbend Orthopedic Associates (in-office imaging)\nRendering / ordering provider: Samuel Okafor, MD (Orthopaedic Spine)\nPatient: Raymond Toller   DOB: 08/02/1978   Sex: M\nPayer: Crestview Mutual Health   Member ID: CMH-30219844\nClaim #: CMH-25-7781203   Submitted: {{CLAIM_SUBMITTED}} (electronic)\nPrior authorization: Not required for this plan's in-office MRI at the time of service (per\npayer eligibility check on {{VISIT2}}; reference CMH-ELIG-55120).\n\nLine  DOS          CPT    Mod  ICD-10 pointers     Units  Charge\n1     {{DOS}}  72148  -    M54.16, M51.16      1      $1,850.00\n\nICD-10:\n  M54.16  Radiculopathy, lumbar region\n  M51.16  Intervertebral disc disorders with radiculopathy, lumbar region\n\nTotal billed: $1,850.00   Paid: $0.00   Patient responsibility: $0.00 (pending appeal)\n","payer_policy":"*** ILLUSTRATIVE POLICY - FICTIONAL PAYER - NOT A REAL COVERAGE POLICY ***\n\nCRESTVIEW MUTUAL HEALTH\nClinical Guideline CG-RAD-12: MRI of the Lumbar Spine (Illustrative)\n\nLumbar spine MRI (CPT 72148, 72149, 72158) is considered medically necessary for ONE of the\nfollowing indications:\n\nIndication A - Persistent low back pain with or without radiculopathy after at least 6\nweeks of documented conservative therapy in the past 6 months (e.g., physical therapy,\nmedication, activity modification), with continued symptoms, in a patient who is a\ncandidate for intervention.\n\nIndication B - Red-flag findings, for which no conservative-therapy period is required:\n  B1. Progressive or severe neurological deficit (e.g., new or worsening motor weakness);\n  B2. Suspected cauda equina syndrome;\n  B3. Suspected infection, malignancy or fracture.\n\nIndication C - Pre-operative or pre-procedural planning (e.g., epidural steroid injection\nor surgery) once a procedure is being actively considered.\n\nDocumentation requirements: Office notes must describe symptom duration, conservative\ntreatments and their dates, and the neurological examination. When Indication B1 is used,\nthe notes should document the progression (comparison of serial examinations).\n"},"canned":{"intake":"{\n  \"patient_name\": \"Raymond Toller\",\n  \"patient_dob\": \"1978-08-02\",\n  \"member_id\": \"CMH-30219844\",\n  \"payer_name\": \"Crestview Mutual Health\",\n  \"claim_or_reference_number\": \"CMH-25-7781203\",\n  \"rendering_provider\": \"Samuel Okafor, MD\",\n  \"procedure_description\": \"MRI lumbar spine without contrast\",\n  \"cpt_codes\": [{\"code\": \"72148\", \"description\": \"MRI, spinal canal and contents, lumbar; without contrast material\", \"modifiers\": []}],\n  \"icd10_codes\": [\n    {\"code\": \"M54.16\", \"description\": \"Radiculopathy, lumbar region\"},\n    {\"code\": \"M51.16\", \"description\": \"Intervertebral disc disorders with radiculopathy, lumbar region\"}\n  ],\n  \"date_of_service\": \"{{DOS|iso}}\",\n  \"denial_date\": \"{{DENIAL_DATE|iso}}\",\n  \"billed_amount\": 1850,\n  \"amount_at_stake\": 1850,\n  \"stated_denial_reason\": \"Not medically necessary under CG-RAD-12: symptom duration was under 6 weeks of conservative therapy and no red-flag findings were identified.\",\n  \"denial_codes\": [\n    {\"code\": \"CARC 50\", \"description\": \"Non-covered: not deemed a medical necessity by the payer\"},\n    {\"code\": \"RARC N115\", \"description\": \"Decision based on a Local/Plan Clinical Guideline\"}\n  ],\n  \"appeal_window_days\": 60,\n  \"appeal_submission_method\": \"Crestview Mutual Health, Provider Appeals, 88 Harbor Row, Brookfield, ST 00000, or upload via the CrestLink provider portal.\",\n  \"summary\": \"A post-service lumbar MRI was denied for medical necessity because the payer saw under 6 weeks of conservative care and no red flags. The chart documents a new, progressive L5 motor deficit on the visit before the MRI.\"\n}\n","triage":"{\n  \"denial_type\": \"medical_necessity\",\n  \"denial_type_rationale\": \"Post-service claim denied with CARC 50 under the payer's imaging clinical guideline; no prior authorization was required.\",\n  \"winnability\": \"borderline\",\n  \"winnability_score\": 58,\n  \"reasons_for\": [\n    \"The follow-up note documents a NEW motor deficit (EHL 5/5 to 4/5, dorsiflexion 5/5 to 4+/5) compared with the initial exam, which is the red flag under Indication B1.\",\n    \"The PT note independently records new heel-walk difficulty, which corroborates the progression.\",\n    \"The MRI found a 9 mm extrusion compressing the L5 root, concordant with the deficit, and was used to plan intervention (Indication C).\"\n  ],\n  \"reasons_against\": [\n    \"Documented conservative care lasted about 4.3 weeks (about 5.4 weeks from symptom onset), short of Indication A's 6 weeks.\",\n    \"The motor deficit is mild (4/5 and 4+/5) and documented on a single follow-up exam, so a reviewer may not consider it 'progressive or severe'.\",\n    \"The payer's reviewer explicitly stated that no red flags were found, so the appeal must point them to the specific exam comparison.\"\n  ],\n  \"recommended_strategy\": \"Appeal under Indication B1 (progressive neurological deficit) with a side-by-side comparison of the {{VISIT1}} and {{VISIT2}} exams, the PT note corroborating the decline, and Indication C as a secondary basis. File quickly: the deadline is close.\",\n  \"route_to_coding_check\": false\n}\n","evidence":"{\n  \"policy_name\": \"Crestview Mutual Health CG-RAD-12: MRI of the Lumbar Spine (illustrative)\",\n  \"criteria\": [\n    {\n      \"criterion\": \"Indication A - At least 6 weeks of documented conservative therapy with persistent symptoms\",\n      \"status\": \"not_met\",\n      \"evidence\": \"Symptoms began about {{ONSET}}; conservative care (NSAIDs, oral steroids, 6 PT visits) is documented from {{VISIT1}}, about 4.3 weeks before the MRI on {{DOS}}.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 3 - Follow-up visit {{VISIT2}}\", \"excerpt\": \"About 5 weeks since symptom onset; completed oral steroids, on naproxen, 6 PT visits.\"},\n      \"action_needed\": \"Do not rely on Indication A; argue Indication B1.\"\n    },\n    {\n      \"criterion\": \"Indication B1 - Progressive or severe neurological deficit, documented by comparing serial examinations\",\n      \"status\": \"met\",\n      \"evidence\": \"Initial exam {{VISIT1}}: strength 5/5 including left EHL and dorsiflexion. Follow-up {{VISIT2}}: left EHL 4/5 and dorsiflexion 4+/5, documented by the physician as a new motor deficit progressing despite conservative care.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 3 - Follow-up visit {{VISIT2}}\", \"excerpt\": \"Left EHL 4/5 (previously 5/5), left ankle dorsiflexion 4+/5 (previously 5/5).\"},\n      \"action_needed\": \"Quote both exams side by side in the appeal.\"\n    },\n    {\n      \"criterion\": \"Corroborating documentation of progression\",\n      \"status\": \"met\",\n      \"evidence\": \"PT progress note on {{PT_LAST}} records new difficulty heel-walking on the left and refers the patient back to the physician.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 2 - PT progress note {{PT_LAST}}\", \"excerpt\": \"Notes new difficulty with heel walking on the left at today's visit.\"},\n      \"action_needed\": \"Attach the PT progress note.\"\n    },\n    {\n      \"criterion\": \"Indication C - Pre-procedural planning once a procedure is actively considered\",\n      \"status\": \"missing_documentation\",\n      \"evidence\": \"The MRI order states it will 'guide possible epidural steroid injection or surgical referral', but no injection or surgical plan is documented afterward in the uploaded records.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 3 - Follow-up visit {{VISIT2}}\", \"excerpt\": \"MRI... to evaluate for a compressive lesion and guide possible epidural steroid injection or surgical referral.\"},\n      \"action_needed\": \"If an ESI or surgical consult followed the MRI, attach that note to strengthen Indication C.\"\n    },\n    {\n      \"criterion\": \"No red flags for cauda equina, infection, malignancy or fracture (B2/B3)\",\n      \"status\": \"not_met\",\n      \"evidence\": \"The notes explicitly document no bowel/bladder change, no saddle anesthesia, no fever, weight loss or cancer history. B2/B3 do not apply.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 1 - New patient visit {{VISIT1}}\", \"excerpt\": \"No bowel/bladder changes, no saddle anesthesia, no fever, no weight loss, no history of cancer.\"},\n      \"action_needed\": \"None - do not argue B2/B3.\"\n    }\n  ],\n  \"overall_assessment\": \"The case turns on Indication B1. Serial exams document a new motor deficit, which the policy explicitly lists as a red flag, and the MRI confirmed a concordant compressive lesion. The deficit is mild and was seen on one follow-up, so the outcome depends on the reviewer accepting it as 'progressive'.\",\n  \"documents_to_attach\": [\n    \"New patient visit note ({{VISIT1}}) - baseline 5/5 strength\",\n    \"Follow-up visit note ({{VISIT2}}) - new 4/5 EHL weakness\",\n    \"PT progress note ({{PT_LAST}})\",\n    \"MRI report ({{DOS}})\",\n    \"Any post-MRI ESI or surgical referral note\"\n  ],\n  \"gaps\": [\n    \"Conservative care is under 6 weeks, so Indication A cannot be used.\",\n    \"No post-MRI treatment plan is documented in the uploaded record.\"\n  ]\n}\n","drafting":"{\n  \"subject_line\": \"First-level appeal - Raymond Toller - Claim CMH-25-7781203 - MRI lumbar spine (72148)\",\n  \"letter_text\": \"@letter.txt\",\n  \"key_arguments\": [\n    \"CG-RAD-12 Indication B1 waives the 6-week conservative therapy requirement for a progressive neurological deficit.\",\n    \"Serial exams document new left EHL (5/5 to 4/5) and dorsiflexion (5/5 to 4+/5) weakness between {{VISIT1}} and {{VISIT2}}.\",\n    \"The physical therapist independently documented new heel-walk difficulty.\",\n    \"The MRI found a 9 mm L4-5 extrusion compressing the left L5 root, concordant with the deficit, and was ordered to plan intervention.\"\n  ],\n  \"enclosures\": [\n    \"New patient visit note ({{VISIT1}})\",\n    \"Follow-up visit note ({{VISIT2}})\",\n    \"Physical therapy progress note ({{PT_LAST}})\",\n    \"MRI lumbar spine report ({{DOS}})\",\n    \"Copy of the EOB dated {{DENIAL_DATE}}\"\n  ]\n}\n","qa":"{\n  \"overall\": \"ready_with_edits\",\n  \"score\": 82,\n  \"flags\": [\n    {\"severity\": \"high\", \"issue\": \"The appeal deadline is close; submit this week.\", \"location\": \"Case header\", \"suggested_fix\": \"Prioritize approval and send via the CrestLink portal for a time-stamped receipt.\"},\n    {\"severity\": \"medium\", \"issue\": \"The Indication C argument is thin: no post-MRI ESI or surgical referral is documented in the uploaded record.\", \"location\": \"Paragraph 5\", \"suggested_fix\": \"Attach the post-MRI plan if one exists; otherwise keep Indication C as a single supporting sentence (as drafted).\"},\n    {\"severity\": \"low\", \"issue\": \"Physician signature placeholder.\", \"location\": \"Signature block\", \"suggested_fix\": \"Have Dr. Okafor sign before submission.\"}\n  ],\n  \"unsupported_claims\": [],\n  \"attachments_checklist\": [\n    {\"item\": \"New patient visit note ({{VISIT1}})\", \"source\": \"clinical_notes - Note 1\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"Follow-up visit note ({{VISIT2}})\", \"source\": \"clinical_notes - Note 3\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"PT progress note ({{PT_LAST}})\", \"source\": \"clinical_notes - Note 2\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"MRI report ({{DOS}})\", \"source\": \"clinical_notes - Note 4\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"Post-MRI ESI or surgical referral note (if any)\", \"source\": \"Practice EHR\", \"required\": false, \"status\": \"verify\"},\n    {\"item\": \"Copy of EOB ({{DENIAL_DATE}})\", \"source\": \"denial_letter\", \"required\": false, \"status\": \"in_file\"}\n  ],\n  \"summary\": \"The letter correctly pivots from the 6-week rule to the red-flag exception and supports it with a serial-exam comparison. The facts all match the record. The outcome is uncertain because the deficit is mild; the timing is the main risk.\"\n}\n"},"letter":"Riverbend Orthopedic Associates\n1200 Riverbend Parkway, Suite 300\nFairhaven, ST 00000\n\n{{TODAY|long}}\n\nCrestview Mutual Health\nProvider Appeals\n88 Harbor Row\nBrookfield, ST 00000\n\nRE: First-level provider appeal - medical necessity\nPatient: Raymond Toller    DOB: 08/02/1978    Member ID: CMH-30219844\nClaim #: CMH-25-7781203    Date of service: {{DOS|long}}\nService: MRI lumbar spine without contrast, CPT 72148\nDiagnoses: M54.16, M51.16\nDenial date: {{DENIAL_DATE|long}} (CARC 50, RARC N115)\n\nDear Appeals Reviewer:\n\nWe request reversal of the medical necessity denial for the lumbar MRI performed on\n{{DOS|long}}. The denial states that no red-flag findings were identified. The enclosed\nrecords show that Mr. Toller developed a new and progressing motor deficit before the MRI\nwas ordered, which meets Clinical Guideline CG-RAD-12, Indication B1, \"Progressive or\nsevere neurological deficit (e.g., new or worsening motor weakness).\" Under Indication B1,\nno conservative-therapy period is required.\n\nSerial examinations document the progression, as the guideline requests:\n- {{VISIT1|long}} (Enclosure 1): strength 5/5 throughout, including the left extensor\n  hallucis longus and ankle dorsiflexion; left L5 sensory change only.\n- {{VISIT2|long}} (Enclosure 2): left EHL 4/5 and left ankle dorsiflexion 4+/5, with the\n  patient reporting that his \"foot slaps when tired.\" Dr. Okafor documented a \"NEW motor\n  deficit... progressing since the initial exam despite conservative care.\"\n\nHis treating physical therapist independently recorded new difficulty with heel walking\non the left on {{PT_LAST|long}} and referred him back to the physician (Enclosure 3).\nThis decline occurred despite oral steroids, scheduled naproxen, activity modification and\nsix physical therapy visits.\n\nThe MRI confirmed the clinical concern: a 9 mm left paracentral L4-5 disc extrusion\ncompressing the traversing left L5 nerve root, concordant with his deficit (Enclosure 4).\nThe study was ordered to determine whether epidural steroid injection or surgical referral\nwas needed, which is also consistent with Indication C (pre-procedural planning).\n\nA new motor deficit from nerve root compression is exactly the situation in which\nCG-RAD-12 calls for prompt imaging rather than waiting out a six-week course of therapy.\nWe respectfully request that the claim be reprocessed for payment.\n\nSincerely,\n\n[Physician signature]\nSamuel Okafor, MD\nOrthopaedic Spine Surgery\nRiverbend Orthopedic Associates\n\nEnclosures:\n1. New patient visit note ({{VISIT1}})\n2. Follow-up visit note ({{VISIT2}})\n3. Physical therapy progress note ({{PT_LAST}})\n4. MRI lumbar spine report ({{DOS}})\n5. Copy of the EOB dated {{DENIAL_DATE}}\n"},"knee_scope_coding":{"meta":{"key":"knee_scope_coding","title":"Knee arthroscopy - bundling/modifier denial","label":"Knee arthroscopy (coding/bundling) - strong","practice_id":1,"dates":{"CONSULT":-112,"MRI":-105,"DOS":-84,"CLAIM_SUBMITTED":-80,"DENIAL_DATE":-70,"SUBMITTED":-63,"OUTCOME":-21},"seed_state":{"status":"Closed","outcome":"Overturned","amount_recovered":2850,"approved_by":"M. Alvarez (Billing Lead)","submitted_offset":"SUBMITTED","outcome_offset":"OUTCOME"}},"docs":{"denial_letter":"*** FICTIONAL DOCUMENT - PROTOTYPE DEMONSTRATION ONLY ***\n\nPINNACLE CARE ALLIANCE\nProvider Remittance Advice / Explanation of Benefits\nRemit date: {{DENIAL_DATE}}\n\nPayee: Riverbend Orthopedic Associates\nRendering: Priya Raman, MD\nPatient: Victor Almeda    DOB: 11/21/1973    Member ID: PCA-77310925\nClaim #: PCA-2025-0943317     DOS: {{DOS}}     POS: 24\n\nLine  CPT     Mod  Billed      Allowed     Paid        Adj codes\n1     29881   RT   $5,900.00   $2,214.00   $1,771.20   CO-45, PR-2 (coinsurance $442.80)\n2     29876   RT   $2,850.00   $0.00       $0.00       CO-97, RARC M80\n\nCO-97: The benefit for this service is included in the payment/allowance for another\nservice/procedure that has already been adjudicated.\nM80: Not covered when performed during the same session/date as a previously processed\nservice for the patient.\n\nLine 2 was denied by an NCCI procedure-to-procedure edit (column 1: 29881, column 2: 29876,\nmodifier indicator 1).\n\nReconsideration / appeal: Submit a corrected claim or a written appeal with the operative\nreport within 90 days of this remittance. Pinnacle Care Alliance, Claims Reconsideration,\nPO Box 2290, Westvale, ST 00000, or via the Pinnacle provider portal.\n","clinical_notes":"*** FICTIONAL CLINICAL RECORD - PROTOTYPE DEMONSTRATION ONLY ***\nPatient: Victor Almeda   DOB: 11/21/1973   MRN: RB-38170\n\n=====================================================================\nNOTE 1 - CLINIC VISIT - {{CONSULT}}\nProvider: Priya Raman, MD\nRight knee medial joint-line pain with mechanical catching for 5 months, plus recurrent\ndiffuse swelling. Failed 8 weeks of PT and NSAIDs. Exam: medial joint-line tenderness,\npositive McMurray, moderate effusion, boggy synovium in suprapatellar region.\nPlan: MRI right knee.\n\n=====================================================================\nNOTE 2 - MRI RIGHT KNEE - {{MRI}}\nComplex tear of the posterior horn of the medial meniscus. Moderate joint effusion with\nmarked synovial thickening in the suprapatellar pouch and lateral gutter, consistent with\nproliferative synovitis. Lateral meniscus intact. Cruciate ligaments intact.\n\n=====================================================================\nNOTE 3 - OPERATIVE REPORT - {{DOS}}\nSurgeon: Priya Raman, MD      Facility: Riverbend Surgery Center\nPreoperative diagnosis: Right knee medial meniscus tear; proliferative synovitis.\nPostoperative diagnosis: Same.\nProcedures:\n  1. Right knee arthroscopic partial medial meniscectomy (medial compartment).\n  2. Right knee arthroscopic major synovectomy of the lateral compartment/lateral gutter,\n     suprapatellar pouch and patellofemoral compartment.\nFindings: Complex degenerative tear of the posterior horn of the medial meniscus.\nDiffuse hypertrophic, hyperemic synovitis involving the suprapatellar pouch, the\npatellofemoral compartment and the lateral gutter, separate from the medial compartment.\nThe lateral meniscus and articular cartilage of the lateral compartment are intact.\nDescription: Standard anterolateral and anteromedial portals were established, plus a\nsuperolateral portal for access to the suprapatellar pouch. In the MEDIAL compartment,\nthe unstable posterior horn tear was debrided with a basket and shaver to a stable rim\n(approximately 30% of the posterior horn removed). Attention was then turned to the\nSUPRAPATELLAR POUCH, PATELLOFEMORAL compartment and LATERAL gutter, where an extensive\nsynovectomy was performed with a 4.5 mm full-radius shaver and radiofrequency wand\nthrough the superolateral portal, removing the hypertrophic synovium. This added about\n25 minutes of operative time. No synovectomy was performed in the medial compartment.\nSpecimen: Synovium sent to pathology.\nEBL: Minimal. Complications: None.\n\n=====================================================================\nNOTE 4 - PATHOLOGY - {{DOS}}\nSynovium, right knee: chronic proliferative synovitis with villous hyperplasia. No\ncrystals. Negative for pigmented villonodular synovitis.\n","claim_data":"*** FICTIONAL DATA - PROTOTYPE DEMONSTRATION ONLY ***\n\nCLAIM SUMMARY (CMS-1500 data from practice management system)\nBilling provider: Riverbend Orthopedic Associates\nRendering: Priya Raman, MD (Sports Medicine / Arthroscopy)\nPatient: Victor Almeda   DOB: 11/21/1973   Sex: M\nPayer: Pinnacle Care Alliance   Member ID: PCA-77310925\nClaim #: PCA-2025-0943317   Submitted: {{CLAIM_SUBMITTED}}   POS: 24 (ASC)\n\nLine  DOS          CPT    Mod  ICD-10 pointers     Units  Charge\n1     {{DOS}}  29881  RT   M23.221             1      $5,900.00\n2     {{DOS}}  29876  RT   M65.861             1      $2,850.00\n\nICD-10:\n  M23.221  Derangement of posterior horn of medial meniscus due to old tear or injury,\n           right knee\n  M65.861  Other synovitis and tenosynovitis, right lower leg\n\nTotal billed: $8,750.00   Paid: $1,771.20   Denied: $2,850.00 (line 2)\nCoder note: No distinct-procedure modifier was appended to line 2 at original submission.\n","payer_policy":"*** ILLUSTRATIVE POLICY - FICTIONAL PAYER - NOT A REAL REIMBURSEMENT POLICY ***\n\nPINNACLE CARE ALLIANCE\nReimbursement Policy RP-114: Arthroscopic Knee Procedures (Illustrative)\n\nSection 3 - Bundled services. Pinnacle applies NCCI procedure-to-procedure (PTP) edits.\nLimited synovectomy (29875) and chondroplasty (29877) are included in the meniscectomy\ncodes 29880/29881 and are not separately reimbursed.\n\nSection 4 - Major synovectomy (29876) with meniscectomy. CPT 29876 is eligible for separate\nreimbursement with 29880/29881 only when ALL of the following apply:\n  4.1 the synovectomy is performed in compartment(s) separate from the compartment where\n      the meniscectomy was performed;\n  4.2 the operative report specifically documents the separate compartment(s) treated;\n  4.3 the claim line is billed with modifier XS (separate structure) or 59, and the\n      laterality modifier (RT/LT).\n\nSection 5 - Corrected claims. Corrected claims (frequency code 7) and appeals must be\nreceived within 90 days of the original remittance date. Include the operative report\nwhen billing modifier XS or 59.\n"},"canned":{"intake":"{\n  \"patient_name\": \"Victor Almeda\",\n  \"patient_dob\": \"1973-11-21\",\n  \"member_id\": \"PCA-77310925\",\n  \"payer_name\": \"Pinnacle Care Alliance\",\n  \"claim_or_reference_number\": \"PCA-2025-0943317\",\n  \"rendering_provider\": \"Priya Raman, MD\",\n  \"procedure_description\": \"Right knee arthroscopy: partial medial meniscectomy with major synovectomy\",\n  \"cpt_codes\": [\n    {\"code\": \"29881\", \"description\": \"Arthroscopy, knee, surgical; with meniscectomy (medial OR lateral), including debridement/shaving of articular cartilage, same or separate compartment(s)\", \"modifiers\": [\"RT\"]},\n    {\"code\": \"29876\", \"description\": \"Arthroscopy, knee, surgical; synovectomy, major, 2 or more compartments\", \"modifiers\": [\"RT\"]}\n  ],\n  \"icd10_codes\": [\n    {\"code\": \"M23.221\", \"description\": \"Derangement of posterior horn of medial meniscus due to old tear or injury, right knee\"},\n    {\"code\": \"M65.861\", \"description\": \"Other synovitis and tenosynovitis, right lower leg\"}\n  ],\n  \"date_of_service\": \"{{DOS|iso}}\",\n  \"denial_date\": \"{{DENIAL_DATE|iso}}\",\n  \"billed_amount\": 8750,\n  \"amount_at_stake\": 2850,\n  \"stated_denial_reason\": \"Line 2 (29876-RT) was denied as included in the payment for 29881 under an NCCI procedure-to-procedure edit (modifier indicator 1).\",\n  \"denial_codes\": [\n    {\"code\": \"CO-97\", \"description\": \"Benefit included in the payment/allowance for another service already adjudicated\"},\n    {\"code\": \"RARC M80\", \"description\": \"Not covered when performed during the same session/date as a previously processed service\"}\n  ],\n  \"appeal_window_days\": 90,\n  \"appeal_submission_method\": \"Pinnacle Care Alliance, Claims Reconsideration, PO Box 2290, Westvale, ST 00000, or via the Pinnacle provider portal. A corrected claim is also accepted.\",\n  \"summary\": \"Line 2 major synovectomy (29876) was bundled into the meniscectomy (29881) because no distinct-procedure modifier was billed. The op note documents the synovectomy in compartments separate from the medial meniscectomy.\"\n}\n","triage":"{\n  \"denial_type\": \"coding_billing\",\n  \"denial_type_rationale\": \"Line-level NCCI bundling denial (CO-97) caused by a missing distinct-procedural-service modifier; not a clinical or coverage dispute.\",\n  \"winnability\": \"strong\",\n  \"winnability_score\": 90,\n  \"reasons_for\": [\n    \"The 29881/29876 edit has modifier indicator 1, so it can be bypassed with a supported XS/59 modifier.\",\n    \"The op note explicitly documents synovectomy of the suprapatellar pouch, patellofemoral compartment and lateral gutter, and states 'No synovectomy was performed in the medial compartment.'\",\n    \"The payer's own policy RP-114 Section 4 lists exactly these conditions for separate reimbursement.\",\n    \"Pathology confirms proliferative synovitis, and the MRI documented it beforehand.\"\n  ],\n  \"reasons_against\": [\n    \"A corrected claim must be received within 90 days of the remittance date.\"\n  ],\n  \"recommended_strategy\": \"Submit a corrected claim (frequency code 7) with 29876-XS-RT and the operative report attached, plus a short cover letter citing RP-114 Section 4.\",\n  \"route_to_coding_check\": true\n}\n","evidence":"{\n  \"policy_name\": \"Pinnacle Care Alliance RP-114: Arthroscopic Knee Procedures (illustrative)\",\n  \"criteria\": [\n    {\n      \"criterion\": \"4.1 - Synovectomy performed in compartment(s) separate from the meniscectomy compartment\",\n      \"status\": \"met\",\n      \"evidence\": \"Meniscectomy in the medial compartment; synovectomy in the suprapatellar pouch, patellofemoral compartment and lateral gutter; no medial synovectomy.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 3 - Operative report {{DOS}}\", \"excerpt\": \"No synovectomy was performed in the medial compartment.\"},\n      \"action_needed\": \"None.\"\n    },\n    {\n      \"criterion\": \"4.2 - Operative report specifically documents the separate compartments treated\",\n      \"status\": \"met\",\n      \"evidence\": \"The procedure list and description name each compartment, a separate superolateral portal, and about 25 minutes of added operative time.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 3 - Operative report {{DOS}}\", \"excerpt\": \"Right knee arthroscopic major synovectomy of the lateral compartment/lateral gutter, suprapatellar pouch and patellofemoral compartment.\"},\n      \"action_needed\": \"Attach the operative report.\"\n    },\n    {\n      \"criterion\": \"4.3 - Line billed with modifier XS (or 59) plus laterality\",\n      \"status\": \"not_met\",\n      \"evidence\": \"Line 2 was billed as 29876-RT without XS/59.\",\n      \"citation\": {\"document\": \"claim_data\", \"section\": \"Claim lines\", \"excerpt\": \"Coder note: No distinct-procedure modifier was appended to line 2 at original submission.\"},\n      \"action_needed\": \"Correct line 2 to 29876-XS-RT on a corrected claim.\"\n    },\n    {\n      \"criterion\": \"Section 5 - Corrected claim or appeal within 90 days of the remittance\",\n      \"status\": \"met\",\n      \"evidence\": \"The remittance is dated {{DENIAL_DATE}}; the correction is within the window.\",\n      \"citation\": {\"document\": \"denial_letter\", \"section\": \"Reconsideration / appeal\", \"excerpt\": \"Submit a corrected claim or a written appeal with the operative report within 90 days of this remittance.\"},\n      \"action_needed\": \"Submit before the deadline.\"\n    },\n    {\n      \"criterion\": \"Medical support for major synovectomy\",\n      \"status\": \"met\",\n      \"evidence\": \"The MRI showed marked synovial thickening, and pathology confirmed chronic proliferative synovitis.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 4 - Pathology {{DOS}}\", \"excerpt\": \"chronic proliferative synovitis with villous hyperplasia.\"},\n      \"action_needed\": \"Attach the pathology report (optional).\"\n    }\n  ],\n  \"overall_assessment\": \"The documentation fully satisfies RP-114 Section 4; only the modifier was missing. A corrected claim with XS should resolve the denial.\",\n  \"documents_to_attach\": [\"Operative report ({{DOS}})\", \"Pathology report ({{DOS}})\", \"Copy of the remittance advice ({{DENIAL_DATE}})\"],\n  \"gaps\": []\n}\n","coding":"{\n  \"findings\": [\n    {\"issue\": \"Missing distinct-procedural-service modifier on 29876\", \"severity\": \"high\", \"explanation\": \"29876 is column 2 to 29881 in the NCCI PTP edits, with modifier indicator 1. Without XS or 59 the line bundles automatically. The op note supports XS (separate structure): the synovectomy was performed in the suprapatellar pouch, patellofemoral compartment and lateral gutter, all separate from the medial meniscectomy.\"},\n    {\"issue\": \"Diagnosis pointer for line 2 is correct\", \"severity\": \"low\", \"explanation\": \"M65.861 (synovitis, right lower leg) supports 29876; keep it as the primary pointer for line 2.\"},\n    {\"issue\": \"Laterality present\", \"severity\": \"low\", \"explanation\": \"RT is correctly appended on both lines; keep it.\"}\n  ],\n  \"original_lines\": [\n    {\"cpt\": \"29881\", \"modifiers\": [\"RT\"], \"icd10\": [\"M23.221\"], \"billed\": 5900},\n    {\"cpt\": \"29876\", \"modifiers\": [\"RT\"], \"icd10\": [\"M65.861\"], \"billed\": 2850}\n  ],\n  \"corrected_lines\": [\n    {\"cpt\": \"29881\", \"modifiers\": [\"RT\"], \"icd10\": [\"M23.221\"], \"billed\": 5900},\n    {\"cpt\": \"29876\", \"modifiers\": [\"XS\", \"RT\"], \"icd10\": [\"M65.861\"], \"billed\": 2850}\n  ],\n  \"recommendation\": \"both\",\n  \"appeal_argument\": \"Per Pinnacle RP-114 Section 4, 29876 is separately reimbursable with 29881 when the synovectomy is performed in a separate compartment, the op note documents it, and XS/59 is billed. The operative report documents major synovectomy of the suprapatellar pouch, patellofemoral compartment and lateral gutter through a separate superolateral portal, and states that no synovectomy was performed in the medial compartment where the meniscectomy occurred. Line 2 has been corrected to 29876-XS-RT.\",\n  \"documentation_support\": \"Op note: 'major synovectomy of the lateral compartment/lateral gutter, suprapatellar pouch and patellofemoral compartment'; 'No synovectomy was performed in the medial compartment'; separate superolateral portal; about 25 minutes added. Pathology: chronic proliferative synovitis.\"\n}\n","drafting":"{\n  \"subject_line\": \"Corrected claim and reconsideration - Victor Almeda - Claim PCA-2025-0943317 - 29876-XS-RT\",\n  \"letter_text\": \"@letter.txt\",\n  \"key_arguments\": [\n    \"Line 2 is corrected to 29876-XS-RT; the original claim omitted the distinct-procedure modifier.\",\n    \"RP-114 Section 4 allows separate reimbursement when the synovectomy is in a separate compartment and documented.\",\n    \"The op note documents synovectomy of the suprapatellar pouch, patellofemoral compartment and lateral gutter only, separate from the medial meniscectomy.\",\n    \"Pathology confirms proliferative synovitis.\"\n  ],\n  \"enclosures\": [\"Corrected CMS-1500 (frequency code 7)\", \"Operative report ({{DOS}})\", \"Pathology report ({{DOS}})\", \"Copy of the remittance advice ({{DENIAL_DATE}})\"]\n}\n","qa":"{\n  \"overall\": \"ready\",\n  \"score\": 95,\n  \"flags\": [\n    {\"severity\": \"low\", \"issue\": \"Signature placeholder.\", \"location\": \"Signature block\", \"suggested_fix\": \"Sign before submission.\"}\n  ],\n  \"unsupported_claims\": [],\n  \"attachments_checklist\": [\n    {\"item\": \"Corrected CMS-1500 (frequency code 7) with 29876-XS-RT\", \"source\": \"Practice billing system\", \"required\": true, \"status\": \"needs_upload\"},\n    {\"item\": \"Operative report ({{DOS}})\", \"source\": \"clinical_notes - Note 3\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"Pathology report ({{DOS}})\", \"source\": \"clinical_notes - Note 4\", \"required\": false, \"status\": \"in_file\"},\n    {\"item\": \"Remittance advice ({{DENIAL_DATE}})\", \"source\": \"denial_letter\", \"required\": false, \"status\": \"in_file\"}\n  ],\n  \"summary\": \"Clean coding correction backed by explicit op-note language and the payer's own policy. Generate the corrected claim in the billing system and submit.\"\n}\n"},"letter":"Riverbend Orthopedic Associates\n1200 Riverbend Parkway, Suite 300\nFairhaven, ST 00000\n\n{{TODAY|long}}\n\nPinnacle Care Alliance\nClaims Reconsideration\nPO Box 2290\nWestvale, ST 00000\n\nRE: Corrected claim and request for reconsideration - line 2\nPatient: Victor Almeda    DOB: 11/21/1973    Member ID: PCA-77310925\nClaim #: PCA-2025-0943317    Date of service: {{DOS|long}}\nDenied line: CPT 29876-RT, $2,850.00 (CO-97, RARC M80)\nRemittance date: {{DENIAL_DATE|long}}\n\nDear Claims Reviewer:\n\nEnclosed is a corrected claim for the date of service above, with line 2 rebilled as\n29876-XS-RT. The original submission omitted the distinct-procedural-service modifier, so\nthe line was bundled into 29881 by the NCCI procedure-to-procedure edit. That edit carries\nmodifier indicator 1, and the documentation supports the modifier.\n\nPinnacle Reimbursement Policy RP-114, Section 4, states that 29876 is separately\nreimbursable with 29880/29881 when (4.1) the synovectomy is performed in compartments\nseparate from the meniscectomy, (4.2) the operative report documents those compartments,\nand (4.3) the line is billed with XS or 59 and laterality. All three conditions are met:\n\n4.1 The partial meniscectomy was performed in the MEDIAL compartment. The major\nsynovectomy was performed in the suprapatellar pouch, the patellofemoral compartment and\nthe lateral gutter, through a separate superolateral portal. The operative report states,\n\"No synovectomy was performed in the medial compartment.\"\n\n4.2 The enclosed operative report lists the synovectomy as a separate procedure, names each\ncompartment treated, and notes about 25 minutes of additional operative time. Pathology\nconfirmed chronic proliferative synovitis with villous hyperplasia, consistent with the\npre-operative MRI.\n\n4.3 The corrected line is billed as 29876-XS-RT with diagnosis M65.861.\n\nWe request that line 2 be reprocessed for payment under the corrected claim.\n\nSincerely,\n\n[Signature]\nM. Alvarez, Billing Lead, on behalf of Priya Raman, MD\nRiverbend Orthopedic Associates\n\nEnclosures:\n1. Corrected CMS-1500 (frequency code 7)\n2. Operative report ({{DOS}})\n3. Pathology report ({{DOS}})\n4. Copy of the remittance advice ({{DENIAL_DATE}})\n"},"rotator_cuff_timely":{"meta":{"key":"rotator_cuff_timely","title":"Rotator cuff repair - timely filing denial","label":"Rotator cuff repair (timely filing) - weak","practice_id":1,"dates":{"DOS":-160,"ORIG_SUBMIT":-154,"CH_ACCEPT":-153,"FOLLOWUP_CALL":-66,"RESUBMIT":-63,"PAYER_RECEIVED":-62,"DENIAL_DATE":-48},"seed_state":{"status":"Ready for Review"}},"docs":{"denial_letter":"*** FICTIONAL DOCUMENT - PROTOTYPE DEMONSTRATION ONLY ***\n\nHARBORVIEW HEALTH PARTNERS\nExplanation of Benefits - Claim Denied\nDate: {{DENIAL_DATE}}\n\nProvider: Riverbend Orthopedic Associates - Elena Marsh, MD\nPatient: Lorraine Batiste    DOB: 06/09/1964    Member ID: HHP-51920744\nClaim #: HHP-8820147     DOS: {{DOS}}     Date claim received: {{PAYER_RECEIVED}}\n\nLine  CPT     Mod  Billed       Allowed  Paid   Adj\n1     29827   RT   $11,400.00   $0.00    $0.00  CO-29\n2     29826   RT   $2,800.00    $0.00    $0.00  CO-29\n\nCO-29: The time limit for filing has expired.\n\nYour provider agreement requires that claims be received within 90 days of the date of\nservice. This claim was received 98 days after the date of service.\n\nTo request reconsideration, submit proof of timely filing within 60 days of the date of\nthis notice. Acceptable proof (see Provider Manual section 7.4): a payer-issued\nacknowledgment (277CA) or claim number showing receipt within the filing limit, or a\nclearinghouse report showing the claim was accepted BY HARBORVIEW within the filing\nlimit. Clearinghouse acceptance reports alone (999 / clearinghouse-level acceptance) are\nnot sufficient. Mail: Harborview Health Partners, Claims Review, 410 Pier Street, Port\nEllis, ST 00000.\n","clinical_notes":"*** FICTIONAL CLINICAL RECORD - PROTOTYPE DEMONSTRATION ONLY ***\nPatient: Lorraine Batiste   DOB: 06/09/1964   MRN: RB-29044\n\n=====================================================================\nNOTE 1 - OPERATIVE REPORT - {{DOS}}\nSurgeon: Elena Marsh, MD     Facility: Riverbend Surgery Center\nProcedures: 1) Right shoulder arthroscopic rotator cuff repair (supraspinatus, double-row,\n3 anchors). 2) Arthroscopic subacromial decompression with acromioplasty.\nFindings: Full-thickness 2.5 cm crescent-shaped supraspinatus tear; type II acromion with\nsubacromial spurring. Biceps intact.\nPrior authorization: Approved, Harborview auth #HHP-AUTH-662190 (valid for this DOS).\n\n=====================================================================\nNOTE 2 - BILLING OFFICE MEMO (internal) - {{FOLLOWUP_CALL}}\nFrom: K. Lindqvist, A/R specialist\nThe claim was not on the payer's file when called. Our clearinghouse shows a 999\nacceptance for batch RB-0617-02, but we cannot find a 277CA from Harborview. Possible\npayer-connection outage that month (other Harborview claims from the same week were\nalso delayed). Resubmitting today. Will request the ClearPath payer-connection report.\n","claim_data":"*** FICTIONAL DATA - PROTOTYPE DEMONSTRATION ONLY ***\n\nCLAIM SUMMARY & SUBMISSION HISTORY (practice management system)\nBilling provider: Riverbend Orthopedic Associates\nRendering: Elena Marsh, MD\nPatient: Lorraine Batiste   DOB: 06/09/1964   Sex: F\nPayer: Harborview Health Partners   Member ID: HHP-51920744\nPayer claim # (resubmission): HHP-8820147   POS: 24 (ASC)\n\nLine  DOS          CPT    Mod  ICD-10 pointers   Units  Charge\n1     {{DOS}}  29827  RT   M75.121, M75.41   1      $11,400.00\n2     {{DOS}}  29826  RT   M75.41            1      $2,800.00\nTotal billed: $14,200.00\n\nICD-10:\n  M75.121  Complete rotator cuff tear or rupture of right shoulder, not specified as\n           traumatic\n  M75.41   Impingement syndrome of right shoulder\n\nSUBMISSION HISTORY\n{{ORIG_SUBMIT}}  Original claim sent electronically, batch #RB-0617-02, via ClearPath\n                 Claims (clearinghouse).\n{{CH_ACCEPT}}    ClearPath 999 functional acknowledgment: ACCEPTED (clearinghouse level).\n                 Payer 277CA acknowledgment: NOT FOUND in clearinghouse portal.\n                 (Note: the ClearPath payer-connection report for this period has not\n                 been pulled.)\n{{FOLLOWUP_CALL}} A/R follow-up call to Harborview (rep \"Dana\", ref #HHP-CALL-90411):\n                 \"No claim on file for this DOS.\"\n{{RESUBMIT}}     Claim resubmitted electronically as a new claim.\n{{PAYER_RECEIVED}} Received by Harborview (day 98 after DOS).\n","payer_policy":"*** ILLUSTRATIVE POLICY - FICTIONAL PAYER - NOT A REAL PROVIDER MANUAL ***\n\nHARBORVIEW HEALTH PARTNERS\nProvider Manual, Section 7: Claims Submission (Illustrative)\n\n7.1 Filing limit. Participating providers must submit clean claims so that they are\nreceived by Harborview within 90 days of the date of service.\n\n7.4 Proof of timely filing. A timely filing denial will be overturned when the provider\nsubmits ONE of the following showing receipt within the filing limit:\n  a) a Harborview 277CA claim acknowledgment or a Harborview-issued claim number;\n  b) a clearinghouse payer-connection / acceptance report showing the claim was\n     transmitted to AND accepted by Harborview (not only accepted by the clearinghouse);\n  c) Harborview correspondence (e.g., a request for records) that references the claim.\nA 999 acknowledgment or a clearinghouse-level acceptance alone is NOT sufficient.\n\n7.6 Exceptions. Harborview may waive the filing limit for documented Harborview system or\nconnectivity outages affecting claim receipt, upon review of supporting evidence.\n"},"canned":{"intake":"{\n  \"patient_name\": \"Lorraine Batiste\",\n  \"patient_dob\": \"1964-06-09\",\n  \"member_id\": \"HHP-51920744\",\n  \"payer_name\": \"Harborview Health Partners\",\n  \"claim_or_reference_number\": \"HHP-8820147\",\n  \"rendering_provider\": \"Elena Marsh, MD\",\n  \"procedure_description\": \"Right shoulder arthroscopic rotator cuff repair with subacromial decompression\",\n  \"cpt_codes\": [\n    {\"code\": \"29827\", \"description\": \"Arthroscopy, shoulder, surgical; with rotator cuff repair\", \"modifiers\": [\"RT\"]},\n    {\"code\": \"29826\", \"description\": \"Arthroscopy, shoulder, surgical; decompression of subacromial space with partial acromioplasty (add-on)\", \"modifiers\": [\"RT\"]}\n  ],\n  \"icd10_codes\": [\n    {\"code\": \"M75.121\", \"description\": \"Complete rotator cuff tear or rupture of right shoulder, not specified as traumatic\"},\n    {\"code\": \"M75.41\", \"description\": \"Impingement syndrome of right shoulder\"}\n  ],\n  \"date_of_service\": \"{{DOS|iso}}\",\n  \"denial_date\": \"{{DENIAL_DATE|iso}}\",\n  \"billed_amount\": 14200,\n  \"amount_at_stake\": 14200,\n  \"stated_denial_reason\": \"Timely filing limit expired: the claim was received 98 days after the date of service; the limit is 90 days.\",\n  \"denial_codes\": [{\"code\": \"CO-29\", \"description\": \"The time limit for filing has expired\"}],\n  \"appeal_window_days\": 60,\n  \"appeal_submission_method\": \"Harborview Health Partners, Claims Review, 410 Pier Street, Port Ellis, ST 00000 (mail), with proof of timely filing per Provider Manual 7.4.\",\n  \"summary\": \"The whole claim ($14,200) was denied CO-29 for timely filing. The original electronic submission 6 days after surgery has only a clearinghouse-level 999 acceptance on file; no payer 277CA has been located.\"\n}\n","triage":"{\n  \"denial_type\": \"timely_filing_admin\",\n  \"denial_type_rationale\": \"CO-29 timely filing denial; the dispute is about proof of the original submission, not clinical merit.\",\n  \"winnability\": \"weak\",\n  \"winnability_score\": 28,\n  \"reasons_for\": [\n    \"The original claim was transmitted 6 days after surgery (batch RB-0617-02) and accepted by the clearinghouse the next day.\",\n    \"The billing memo notes other Harborview claims from the same week were also delayed, suggesting a payer-connection problem; Manual 7.6 allows waivers for payer outages.\",\n    \"The procedure was prior-authorized (HHP-AUTH-662190), so medical necessity is not in question.\"\n  ],\n  \"reasons_against\": [\n    \"Manual 7.4 explicitly says a 999 or clearinghouse-level acceptance alone is NOT sufficient proof.\",\n    \"No 277CA or Harborview claim number for the original submission has been located.\",\n    \"The outage theory is unverified; the ClearPath payer-connection report has not been pulled.\"\n  ],\n  \"recommended_strategy\": \"Before appealing, pull the ClearPath payer-connection report for batch RB-0617-02 and any outage notices. If it shows Harborview accepted the claim, the case becomes strong under 7.4(b). Otherwise, request a 7.6 outage waiver with evidence from the other delayed claims.\",\n  \"route_to_coding_check\": false\n}\n","evidence":"{\n  \"policy_name\": \"Harborview Health Partners Provider Manual Section 7: Claims Submission (illustrative)\",\n  \"criteria\": [\n    {\n      \"criterion\": \"7.4(a) - Harborview 277CA or Harborview-issued claim number showing receipt within 90 days\",\n      \"status\": \"missing_documentation\",\n      \"evidence\": \"Claim history shows 'Payer 277CA acknowledgment: NOT FOUND in clearinghouse portal.'\",\n      \"citation\": {\"document\": \"claim_data\", \"section\": \"Submission history {{CH_ACCEPT}}\", \"excerpt\": \"Payer 277CA acknowledgment: NOT FOUND in clearinghouse portal.\"},\n      \"action_needed\": \"Ask ClearPath support to search for a 277CA for batch RB-0617-02.\"\n    },\n    {\n      \"criterion\": \"7.4(b) - Clearinghouse payer-connection report showing the claim was accepted BY Harborview within the limit\",\n      \"status\": \"missing_documentation\",\n      \"evidence\": \"Only a 999 clearinghouse-level acceptance is on file; the payer-connection report has not been pulled.\",\n      \"citation\": {\"document\": \"claim_data\", \"section\": \"Submission history {{CH_ACCEPT}}\", \"excerpt\": \"the ClearPath payer-connection report for this period has not been pulled.\"},\n      \"action_needed\": \"Pull the ClearPath payer-connection report for {{ORIG_SUBMIT}} to {{CH_ACCEPT}}. This is the single most important document.\"\n    },\n    {\n      \"criterion\": \"7.4 - A 999 / clearinghouse acceptance alone is not sufficient\",\n      \"status\": \"not_met\",\n      \"evidence\": \"The only proof currently on file is the 999 acceptance on {{CH_ACCEPT}}.\",\n      \"citation\": {\"document\": \"payer_policy\", \"section\": \"7.4\", \"excerpt\": \"A 999 acknowledgment or a clearinghouse-level acceptance alone is NOT sufficient.\"},\n      \"action_needed\": \"Obtain 7.4(a) or (b) evidence.\"\n    },\n    {\n      \"criterion\": \"7.6 - Waiver for a documented Harborview system or connectivity outage\",\n      \"status\": \"missing_documentation\",\n      \"evidence\": \"The billing memo suggests a possible payer-connection outage affecting other claims from the same week, but provides no evidence.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 2 - Billing office memo {{FOLLOWUP_CALL}}\", \"excerpt\": \"Possible payer-connection outage that month (other Harborview claims from the same week were also delayed).\"},\n      \"action_needed\": \"Gather claim numbers and dates of the other delayed claims and any Harborview outage bulletin.\"\n    },\n    {\n      \"criterion\": \"Service otherwise payable (authorized, documented)\",\n      \"status\": \"met\",\n      \"evidence\": \"Op note documents the procedures and a valid Harborview prior authorization.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 1 - Operative report {{DOS}}\", \"excerpt\": \"Prior authorization: Approved, Harborview auth #HHP-AUTH-662190 (valid for this DOS).\"},\n      \"action_needed\": \"None.\"\n    }\n  ],\n  \"overall_assessment\": \"As filed today, the appeal would likely be upheld, because the only proof is a 999 acceptance, which the policy rejects. The case becomes strong if the ClearPath payer-connection report shows Harborview accepted batch RB-0617-02, or if outage evidence supports a 7.6 waiver.\",\n  \"documents_to_attach\": [\n    \"ClearPath payer-connection / acceptance report for batch RB-0617-02 (to obtain)\",\n    \"ClearPath 999 acknowledgment ({{CH_ACCEPT}})\",\n    \"Claim submission history\",\n    \"A/R call log reference #HHP-CALL-90411\",\n    \"Evidence of other delayed Harborview claims that week (to obtain)\"\n  ],\n  \"gaps\": [\n    \"No payer-level proof of receipt within 90 days.\",\n    \"The outage claim is unsupported.\"\n  ]\n}\n","drafting":"{\n  \"subject_line\": \"Request for reconsideration - timely filing - Lorraine Batiste - Claim HHP-8820147\",\n  \"letter_text\": \"@letter.txt\",\n  \"key_arguments\": [\n    \"The original claim was transmitted electronically 6 days after the date of service and accepted by the clearinghouse the next day.\",\n    \"[Pending] The clearinghouse payer-connection report shows the claim was delivered to Harborview within the filing limit (Manual 7.4(b)).\",\n    \"Alternatively, a payer connectivity issue delayed multiple claims that week, which qualifies for a Manual 7.6 waiver.\",\n    \"The service was prior-authorized (HHP-AUTH-662190) and is otherwise payable.\"\n  ],\n  \"enclosures\": [\n    \"ClearPath payer-connection report for batch RB-0617-02 [TO OBTAIN]\",\n    \"ClearPath 999 acknowledgment ({{CH_ACCEPT}})\",\n    \"Claim submission history\",\n    \"List of other delayed Harborview claims for the same week [TO OBTAIN]\",\n    \"Copy of the EOB dated {{DENIAL_DATE}}\"\n  ]\n}\n","qa":"{\n  \"overall\": \"needs_attention\",\n  \"score\": 54,\n  \"flags\": [\n    {\"severity\": \"high\", \"issue\": \"The core proof is missing. A 999 acceptance alone is explicitly insufficient under Manual 7.4, so without the payer-connection report the appeal will almost certainly be upheld.\", \"location\": \"Paragraph 3 and Enclosure 1\", \"suggested_fix\": \"Pull the ClearPath payer-connection report for batch RB-0617-02 before submitting. If it does not show Harborview acceptance, remove the 7.4(b) paragraph.\"},\n    {\"severity\": \"high\", \"issue\": \"The outage waiver argument (7.6) is unsupported.\", \"location\": \"Paragraph 4 and Enclosure 4\", \"suggested_fix\": \"List the other delayed claims with dates and claim numbers, or delete the paragraph.\"},\n    {\"severity\": \"medium\", \"issue\": \"Bracketed conditional paragraphs must be resolved before sending.\", \"location\": \"Paragraphs 3-4\", \"suggested_fix\": \"Keep only the paragraphs the evidence supports.\"},\n    {\"severity\": \"medium\", \"issue\": \"The deadline is close.\", \"location\": \"Case header\", \"suggested_fix\": \"Request the ClearPath report today.\"}\n  ],\n  \"unsupported_claims\": [\n    \"That Harborview accepted batch RB-0617-02 within the filing limit (no report on file yet).\",\n    \"That a payer connectivity issue affected multiple claims (memo speculation only).\"\n  ],\n  \"attachments_checklist\": [\n    {\"item\": \"ClearPath payer-connection report, batch RB-0617-02\", \"source\": \"ClearPath clearinghouse portal\", \"required\": true, \"status\": \"needs_upload\"},\n    {\"item\": \"ClearPath 999 acknowledgment ({{CH_ACCEPT}})\", \"source\": \"claim_data - Submission history\", \"required\": true, \"status\": \"verify\"},\n    {\"item\": \"Claim submission history\", \"source\": \"claim_data\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"List of other delayed Harborview claims\", \"source\": \"Practice billing system\", \"required\": false, \"status\": \"needs_upload\"},\n    {\"item\": \"EOB ({{DENIAL_DATE}})\", \"source\": \"denial_letter\", \"required\": false, \"status\": \"in_file\"}\n  ],\n  \"summary\": \"Weak as it stands: the letter is well structured, but its winning paragraph depends on a report the office has not yet pulled. Get the ClearPath payer-connection report first; if it shows payer acceptance, this becomes a strong appeal.\"\n}\n"},"letter":"Riverbend Orthopedic Associates\n1200 Riverbend Parkway, Suite 300\nFairhaven, ST 00000\n\n{{TODAY|long}}\n\nHarborview Health Partners\nClaims Review\n410 Pier Street\nPort Ellis, ST 00000\n\nRE: Request for reconsideration - timely filing (CO-29)\nPatient: Lorraine Batiste    DOB: 06/09/1964    Member ID: HHP-51920744\nClaim #: HHP-8820147    Date of service: {{DOS|long}}\nServices: 29827-RT, 29826-RT    Billed: $14,200.00\nPrior authorization: HHP-AUTH-662190\nDenial date: {{DENIAL_DATE|long}}\n\nDear Claims Reviewer:\n\nWe request reconsideration of the timely filing denial for the claim above. Riverbend\nOrthopedic Associates submitted this claim electronically on {{ORIG_SUBMIT|long}}, six days\nafter the date of service and well within the 90-day filing limit.\n\nSubmission timeline:\n- {{ORIG_SUBMIT|long}}: Original claim transmitted via ClearPath Claims, batch RB-0617-02.\n- {{CH_ACCEPT|long}}: ClearPath accepted the batch (999 acknowledgment, Enclosure 2).\n- {{FOLLOWUP_CALL|long}}: During routine follow-up, Harborview (ref #HHP-CALL-90411) advised\n  that no claim was on file.\n- {{RESUBMIT|long}}: Claim resubmitted immediately; received {{PAYER_RECEIVED|long}}.\n\n[INSERT IF OBTAINED - Provider Manual 7.4(b):] The enclosed ClearPath payer-connection report\n(Enclosure 1) shows that batch RB-0617-02, including this claim, was transmitted to and\naccepted by Harborview on [date], within the filing limit.\n\n[INSERT IF APPLICABLE - Provider Manual 7.6:] Several other Riverbend claims to Harborview\nsubmitted during the same week were also not received (Enclosure 4), which indicates a\npayer connectivity issue outside our control. We ask Harborview to waive the filing limit\nunder Section 7.6.\n\nThe service was prior-authorized by Harborview (HHP-AUTH-662190) and is otherwise payable.\nWe respectfully request that the claim be reprocessed for payment.\n\nSincerely,\n\n[Signature]\nK. Lindqvist, Accounts Receivable, on behalf of Elena Marsh, MD\nRiverbend Orthopedic Associates\n\nEnclosures:\n1. ClearPath payer-connection report for batch RB-0617-02 [TO OBTAIN]\n2. ClearPath 999 acknowledgment ({{CH_ACCEPT}})\n3. Claim submission history\n4. List of other delayed Harborview claims for the same week [TO OBTAIN]\n5. Copy of the EOB dated {{DENIAL_DATE}}\n"},"spine_fusion":{"meta":{"key":"spine_fusion","title":"L4-L5 lumbar fusion - prior auth denied","label":"Lumbar spine fusion (prior auth) - borderline","practice_id":1,"dates":{"PT_START":-215,"ESI1":-170,"PT_END":-150,"ESI2":-120,"MRI":-100,"QUIT":-95,"FLEXEX":-60,"CONSULT":-45,"PA_REQUEST":-38,"DENIAL_DATE":-30,"PLANNED_DOS":35,"SUBMITTED":-6},"seed_state":{"status":"Submitted","outcome":"Pending","approved_by":"M. Alvarez (Billing Lead)","submitted_offset":"SUBMITTED"}},"docs":{"denial_letter":"*** FICTIONAL DOCUMENT - PROTOTYPE DEMONSTRATION ONLY ***\n\nMERIDIAN VALLEY HEALTH PLAN\nNotice of Prior Authorization Denial\nDate: {{DENIAL_DATE}}\n\nRequesting provider: Samuel Okafor, MD - Riverbend Orthopedic Associates\nMember: Gerald Whitcomb    DOB: 01/30/1967    Member ID: MVH-60718832\nCase #: MVH-UM-2025-40215\nRequested: L4-L5 transforaminal lumbar interbody fusion with posterolateral fusion and\ninstrumentation - CPT 22633, 22853, 22840\nDiagnoses: M43.16 Spondylolisthesis, lumbar region; M48.062 Spinal stenosis, lumbar\nregion with neurogenic claudication\nRequested date of service: {{PLANNED_DOS}}   Inpatient, est. 2 days\n\nDetermination: NOT APPROVED\n\nRationale: Meridian Valley Medical Policy MVP-SP-07 (Lumbar Spinal Fusion) was applied.\n1) Criterion 1 (instability) is not met: the flexion-extension radiographs show 3.5 mm of\n   translation; the policy requires 4 mm or more, or 10 degrees or more of angulation.\n2) Criterion 5 (nicotine) is not met: the member is a recent former smoker, and a negative\n   cotinine test after at least 6 weeks of abstinence was not provided.\nCriteria 2, 3 and 4 appear to be met based on the submitted records.\n\nAppeal rights: You may file a written appeal within 180 days of this notice. Expedited\nappeals are available if a delay could seriously jeopardize the member's health. Send to:\nMeridian Valley Health Plan, Appeals & Grievances, 3300 Valley Center Dr, Mesa Verde,\nST 00000, or fax (555) 010-7720. A peer-to-peer discussion may be requested at\n(555) 010-7700.\n","clinical_notes":"*** FICTIONAL CLINICAL RECORD - PROTOTYPE DEMONSTRATION ONLY ***\nPatient: Gerald Whitcomb   DOB: 01/30/1967   MRN: RB-51207\n\n=====================================================================\nNOTE 1 - PHYSICAL THERAPY DISCHARGE SUMMARY - {{PT_END}}\nRiverbend in-house PT. Start of care {{PT_START}}; 18 visits over 9 weeks. Core\nstabilization, flexion-based program, aerobic conditioning. Walking tolerance unchanged\nat about 10 minutes before leg symptoms. ODI 46% -> 44%. Discharged to HEP; plateaued.\n\n=====================================================================\nNOTE 2 - EPIDURAL STEROID INJECTIONS\n{{ESI1}}: L4-5 interlaminar ESI - about 40% relief for 3 weeks.\n{{ESI2}}: L4-5 transforaminal ESI, bilateral - relief for less than 2 weeks.\n\n=====================================================================\nNOTE 3 - MRI LUMBAR SPINE - {{MRI}}\nGrade I anterolisthesis of L4 on L5 (about 6 mm) with facet arthropathy and facet\neffusions. Severe central canal stenosis and moderate bilateral foraminal stenosis at\nL4-5. Other levels mild degenerative change.\n\n=====================================================================\nNOTE 4 - FLEXION-EXTENSION RADIOGRAPHS LUMBAR SPINE - {{FLEXEX}}\nRadiologist: D. Ambrose, MD\nNeutral: 6 mm anterolisthesis L4 on L5. Flexion: 8.5 mm. Extension: 5.0 mm.\nDynamic translation: 3.5 mm. Sagittal angulation change at L4-5: 11 degrees between\nflexion and extension.\nImpression: Grade I degenerative spondylolisthesis L4-5 with dynamic translation of 3.5 mm\nand segmental angular motion of 11 degrees, suggestive of instability.\n\n=====================================================================\nNOTE 5 - SURGICAL CONSULTATION - {{CONSULT}}\nProvider: Samuel Okafor, MD\n58-year-old man with 14 months of bilateral buttock and leg pain with standing and walking\n(neurogenic claudication), left worse than right; walking tolerance about 1 block. ODI 48%.\nFailed 9 weeks of PT, NSAIDs, gabapentin and 2 ESIs.\nExam: Strength 5/5, decreased sensation left L5, negative SLR. Reflexes 1+ symmetric.\nSocial: Former smoker (1 pack/day for 30 years). Patient reports he quit about 7 weeks ago\n({{QUIT}}). Using nicotine patch for the first 3 weeks; none since. Cotinine level ordered\ntoday - RESULT PENDING at the time of this note.\nAssessment: L4-5 degenerative spondylolisthesis with stenosis and dynamic instability\n(3.5 mm translation, 11 degrees angular motion), failed more than 6 months of conservative\ncare.\nPlan: L4-5 TLIF with decompression. Smoking cessation reinforced; surgery contingent on a\nnegative cotinine test.\n","claim_data":"*** FICTIONAL DATA - PROTOTYPE DEMONSTRATION ONLY ***\n\nPRIOR AUTHORIZATION REQUEST SUMMARY (practice management system)\nRequesting / rendering surgeon: Samuel Okafor, MD (Orthopaedic Spine)\nPatient: Gerald Whitcomb   DOB: 01/30/1967   Sex: M\nPayer: Meridian Valley Health Plan   Member ID: MVH-60718832\nUM case #: MVH-UM-2025-40215   PA submitted: {{PA_REQUEST}}\nFacility: Fairhaven Regional Medical Center (inpatient, in network)\n\nLine  CPT    Mod  Description                                         ICD-10            Est. charge\n1     22633  -    Lumbar arthrodesis, combined posterior interbody/   M43.16, M48.062   $9,850.00\n                  posterolateral, single interspace (L4-L5)\n2     22853  -    Insertion of interbody biomechanical device          M43.16            $2,150.00\n3     22840  -    Posterior non-segmental instrumentation              M43.16            $3,400.00\n4     Facility (inpatient, 2 days, est.)                                                   $53,100.00\n\nTotal estimated charges: $68,500.00\nPlanned date of service: {{PLANNED_DOS}}\n","payer_policy":"*** ILLUSTRATIVE POLICY - FICTIONAL PAYER - NOT A REAL COVERAGE POLICY ***\n\nMERIDIAN VALLEY HEALTH PLAN\nMedical Policy MVP-SP-07: Lumbar Spinal Fusion (Illustrative)\n\nLumbar fusion for degenerative spondylolisthesis is considered medically necessary when\nALL of the following are met:\n\nCriterion 1 - Instability: spondylolisthesis with translation of 4 mm or more, OR angular\nmotion of 10 degrees or more, on flexion-extension radiographs.\n\nCriterion 2 - Symptoms: neurogenic claudication or radiculopathy with functional\nimpairment (e.g., ODI of 40% or more) for at least 3 months.\n\nCriterion 3 - Conservative care: at least 3 months of non-operative care in the past 12\nmonths, including physical therapy plus one or more of: medications or epidural\ninjections.\n\nCriterion 4 - Imaging correlation: MRI or CT demonstrating stenosis or neural compression\nat the operative level.\n\nCriterion 5 - Nicotine: for current or recent (past 6 months) tobacco users, nicotine\nabstinence for at least 6 weeks before surgery, confirmed by a negative cotinine test.\n"},"canned":{"intake":"{\n  \"patient_name\": \"Gerald Whitcomb\",\n  \"patient_dob\": \"1967-01-30\",\n  \"member_id\": \"MVH-60718832\",\n  \"payer_name\": \"Meridian Valley Health Plan\",\n  \"claim_or_reference_number\": \"MVH-UM-2025-40215\",\n  \"rendering_provider\": \"Samuel Okafor, MD\",\n  \"procedure_description\": \"L4-L5 transforaminal lumbar interbody fusion with posterolateral fusion and instrumentation\",\n  \"cpt_codes\": [\n    {\"code\": \"22633\", \"description\": \"Arthrodesis, combined posterior or posterolateral technique with posterior interbody technique, single interspace; lumbar\", \"modifiers\": []},\n    {\"code\": \"22853\", \"description\": \"Insertion of interbody biomechanical device\", \"modifiers\": []},\n    {\"code\": \"22840\", \"description\": \"Posterior non-segmental instrumentation\", \"modifiers\": []}\n  ],\n  \"icd10_codes\": [\n    {\"code\": \"M43.16\", \"description\": \"Spondylolisthesis, lumbar region\"},\n    {\"code\": \"M48.062\", \"description\": \"Spinal stenosis, lumbar region with neurogenic claudication\"}\n  ],\n  \"date_of_service\": \"{{PLANNED_DOS|iso}}\",\n  \"denial_date\": \"{{DENIAL_DATE|iso}}\",\n  \"billed_amount\": 68500,\n  \"amount_at_stake\": 68500,\n  \"stated_denial_reason\": \"Criterion 1 (instability) not met because translation was 3.5 mm (requires 4 mm or 10 degrees); Criterion 5 (nicotine) not met because there was no negative cotinine test after 6 weeks of abstinence.\",\n  \"denial_codes\": [{\"code\": \"MVP-SP-07 C1, C5\", \"description\": \"Policy criteria 1 and 5 not met\"}],\n  \"appeal_window_days\": 180,\n  \"appeal_submission_method\": \"Meridian Valley Health Plan, Appeals & Grievances, 3300 Valley Center Dr, Mesa Verde, ST 00000; fax (555) 010-7720. Peer-to-peer at (555) 010-7700.\",\n  \"summary\": \"Prior auth for an L4-5 TLIF was denied on the instability and nicotine criteria. The flexion-extension films show 11 degrees of angular motion, which meets the policy's alternative threshold, but the cotinine result was pending.\"\n}\n","triage":"{\n  \"denial_type\": \"prior_authorization\",\n  \"denial_type_rationale\": \"Pre-service authorization for lumbar fusion denied under medical policy MVP-SP-07.\",\n  \"winnability\": \"borderline\",\n  \"winnability_score\": 62,\n  \"reasons_for\": [\n    \"Criterion 1 allows 4 mm translation OR 10 degrees of angular motion; the flexion-extension report documents 11 degrees, so the reviewer applied only half of the criterion.\",\n    \"The payer agreed criteria 2-4 are met (symptoms, more than 3 months of conservative care, imaging correlation).\",\n    \"The patient reports nicotine abstinence since {{QUIT}}, more than 6 weeks before the planned surgery.\"\n  ],\n  \"reasons_against\": [\n    \"No negative cotinine result is in the record; Criterion 5 cannot be met without it.\",\n    \"Translation (3.5 mm) is below the 4 mm threshold, so the instability argument rests entirely on angulation.\"\n  ],\n  \"recommended_strategy\": \"Obtain the cotinine result first. If it is negative, appeal on both points: show the 11-degree angulation under the 'OR' clause of Criterion 1 and attach the negative cotinine test. If it is positive, defer the appeal and reschedule surgery.\",\n  \"route_to_coding_check\": false\n}\n","evidence":"{\n  \"policy_name\": \"Meridian Valley Health Plan MVP-SP-07: Lumbar Spinal Fusion (illustrative)\",\n  \"criteria\": [\n    {\n      \"criterion\": \"Criterion 1 - Instability: 4 mm or more translation OR 10 degrees or more of angular motion on flexion-extension films\",\n      \"status\": \"met\",\n      \"evidence\": \"Translation is 3.5 mm (below 4 mm), but angular motion is 11 degrees, which meets the alternative threshold.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 4 - Flexion-extension radiographs {{FLEXEX}}\", \"excerpt\": \"Sagittal angulation change at L4-5: 11 degrees between flexion and extension.\"},\n      \"action_needed\": \"Quote the angulation finding and the policy's 'OR' language.\"\n    },\n    {\n      \"criterion\": \"Criterion 2 - Neurogenic claudication or radiculopathy with ODI of 40% or more for 3+ months\",\n      \"status\": \"met\",\n      \"evidence\": \"14 months of neurogenic claudication; ODI 48%; walking tolerance about 1 block.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 5 - Surgical consultation {{CONSULT}}\", \"excerpt\": \"14 months of bilateral buttock and leg pain with standing and walking... ODI 48%.\"},\n      \"action_needed\": \"None (the payer agreed).\"\n    },\n    {\n      \"criterion\": \"Criterion 3 - 3+ months of conservative care, including PT plus medications or injections\",\n      \"status\": \"met\",\n      \"evidence\": \"18 PT visits over 9 weeks, NSAIDs, gabapentin and 2 ESIs over more than 6 months.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 1 - PT discharge summary {{PT_END}}\", \"excerpt\": \"18 visits over 9 weeks... Discharged to HEP; plateaued.\"},\n      \"action_needed\": \"None (the payer agreed).\"\n    },\n    {\n      \"criterion\": \"Criterion 4 - MRI/CT showing stenosis at the operative level\",\n      \"status\": \"met\",\n      \"evidence\": \"MRI shows severe central and moderate bilateral foraminal stenosis at L4-5.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 3 - MRI lumbar spine {{MRI}}\", \"excerpt\": \"Severe central canal stenosis and moderate bilateral foraminal stenosis at L4-5.\"},\n      \"action_needed\": \"None (the payer agreed).\"\n    },\n    {\n      \"criterion\": \"Criterion 5 - 6+ weeks nicotine abstinence confirmed by a negative cotinine test\",\n      \"status\": \"missing_documentation\",\n      \"evidence\": \"The patient reports quitting on {{QUIT}} (more than 6 weeks ago); the cotinine test was ordered at the consult but the result was pending.\",\n      \"citation\": {\"document\": \"clinical_notes\", \"section\": \"Note 5 - Surgical consultation {{CONSULT}}\", \"excerpt\": \"Cotinine level ordered today - RESULT PENDING at the time of this note.\"},\n      \"action_needed\": \"Obtain and attach the cotinine result. Do not file without it.\"\n    }\n  ],\n  \"overall_assessment\": \"Criterion 1 was misapplied by the reviewer and is met on angulation (11 degrees). Criteria 2-4 are met. The appeal stands or falls on a negative cotinine result for Criterion 5.\",\n  \"documents_to_attach\": [\n    \"Flexion-extension radiograph report ({{FLEXEX}})\",\n    \"Negative cotinine lab result (to obtain)\",\n    \"Surgical consultation note ({{CONSULT}})\",\n    \"MRI report ({{MRI}})\",\n    \"PT discharge summary and ESI notes\"\n  ],\n  \"gaps\": [\"The cotinine result is not in the record.\", \"Translation alone (3.5 mm) does not meet the threshold.\"]\n}\n","drafting":"{\n  \"subject_line\": \"Pre-service appeal - Gerald Whitcomb - UM case MVH-UM-2025-40215 - L4-5 TLIF\",\n  \"letter_text\": \"@letter.txt\",\n  \"key_arguments\": [\n    \"Criterion 1 is satisfied by 11 degrees of angular motion; the policy requires 4 mm translation OR 10 degrees.\",\n    \"A negative cotinine test confirms more than 6 weeks of nicotine abstinence (Criterion 5).\",\n    \"The payer already found criteria 2-4 met.\"\n  ],\n  \"enclosures\": [\n    \"Flexion-extension radiograph report ({{FLEXEX}})\",\n    \"Cotinine laboratory result\",\n    \"Surgical consultation note ({{CONSULT}})\",\n    \"MRI lumbar spine report ({{MRI}})\",\n    \"Copy of the denial notice dated {{DENIAL_DATE}}\"\n  ]\n}\n","qa":"{\n  \"overall\": \"needs_attention\",\n  \"score\": 70,\n  \"flags\": [\n    {\"severity\": \"high\", \"issue\": \"The letter states the cotinine test is negative, but the record shows the result as PENDING.\", \"location\": \"Criterion 5 paragraph; Enclosure 2\", \"suggested_fix\": \"Confirm a negative result and attach it before submitting. If it is not negative, do not send this letter.\"},\n    {\"severity\": \"low\", \"issue\": \"Surgeon signature placeholder.\", \"location\": \"Signature block\", \"suggested_fix\": \"Have Dr. Okafor sign.\"}\n  ],\n  \"unsupported_claims\": [\"'His cotinine test is negative' - the result is not in the uploaded record.\"],\n  \"attachments_checklist\": [\n    {\"item\": \"Flexion-extension radiograph report ({{FLEXEX}})\", \"source\": \"clinical_notes - Note 4\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"Negative cotinine lab result\", \"source\": \"Lab / EHR\", \"required\": true, \"status\": \"needs_upload\"},\n    {\"item\": \"Surgical consultation note ({{CONSULT}})\", \"source\": \"clinical_notes - Note 5\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"MRI report ({{MRI}})\", \"source\": \"clinical_notes - Note 3\", \"required\": true, \"status\": \"in_file\"},\n    {\"item\": \"Denial notice ({{DENIAL_DATE}})\", \"source\": \"denial_letter\", \"required\": false, \"status\": \"in_file\"}\n  ],\n  \"summary\": \"The instability argument is strong: the reviewer overlooked the 10-degree alternative. The letter cannot be submitted until a negative cotinine result is confirmed and attached.\"\n}\n"},"letter":"Riverbend Orthopedic Associates\n1200 Riverbend Parkway, Suite 300\nFairhaven, ST 00000\n\n{{TODAY|long}}\n\nMeridian Valley Health Plan\nAppeals & Grievances\n3300 Valley Center Dr\nMesa Verde, ST 00000\nVia fax: (555) 010-7720\n\nRE: Appeal of prior authorization denial\nMember: Gerald Whitcomb    DOB: 01/30/1967    Member ID: MVH-60718832\nUM case #: MVH-UM-2025-40215\nRequested: L4-L5 TLIF - CPT 22633, 22853, 22840\nDiagnoses: M43.16, M48.062\nDenial date: {{DENIAL_DATE|long}}\n\nDear Appeals Reviewer:\n\nI request reversal of the denial of the L4-L5 fusion for my patient, Mr. Gerald Whitcomb.\nThe denial cited Criteria 1 and 5 of Medical Policy MVP-SP-07. Your reviewer agreed that\nCriteria 2, 3 and 4 are met. Both remaining criteria are also satisfied.\n\nCriterion 1 - Instability. MVP-SP-07 requires translation of 4 mm or more, OR angular\nmotion of 10 degrees or more, on flexion-extension radiographs. The denial considered only\ntranslation (3.5 mm). The same flexion-extension study dated {{FLEXEX|long}} documents\n\"sagittal angulation change at L4-5: 11 degrees between flexion and extension,\" and the\nradiologist's impression is segmental motion \"suggestive of instability\" (Enclosure 1).\nEleven degrees exceeds the 10-degree threshold, so Criterion 1 is met.\n\nCriterion 5 - Nicotine. Mr. Whitcomb stopped smoking on {{QUIT|long}}, more than six weeks\nbefore the planned surgery, and has used no nicotine replacement since his first three\nweeks. His cotinine test is negative (Enclosure 2), confirming abstinence as the policy\nrequires.\n\nFor completeness: Mr. Whitcomb has 14 months of neurogenic claudication with an ODI of 48%\nand walking tolerance of about one block. He failed 18 physical therapy visits, NSAIDs,\ngabapentin and two epidural steroid injections, and his MRI shows severe L4-5 central\nstenosis with grade I spondylolisthesis (Enclosures 3 and 4).\n\nAll five criteria of MVP-SP-07 are met. I request approval of the procedure and am\navailable for a peer-to-peer discussion.\n\nSincerely,\n\n[Surgeon signature]\nSamuel Okafor, MD\nOrthopaedic Spine Surgery\nRiverbend Orthopedic Associates\n\nEnclosures:\n1. Flexion-extension radiograph report ({{FLEXEX}})\n2. Cotinine laboratory result\n3. Surgical consultation note ({{CONSULT}})\n4. MRI lumbar spine report ({{MRI}})\n5. Copy of the denial notice dated {{DENIAL_DATE}}\n"}},"pricing":{"_note":"Placeholder pricing - edit freely. appeals_per_month: null means unlimited.","tiers":[{"name":"Starter","appeals_per_month":25,"price_per_month":499},{"name":"Pro","appeals_per_month":100,"price_per_month":1499},{"name":"Unlimited","appeals_per_month":null,"price_per_month":2999}],"staff_cost_per_hour":38,"manual_minutes_per_appeal":95,"assisted_minutes_per_appeal":15},"practices":[{"id":1,"name":"Riverbend Orthopedic Associates","surgeons":6,"tier":"Pro","live":true,"baseline":{"appeals_used_this_month":33,"decided_appeals":41,"overturned_appeals":27,"dollars_recovered":148600,"appeals_processed_to_date":58}},{"id":2,"name":"Lakeshore Bone & Joint","surgeons":3,"tier":"Starter","live":false,"baseline":{"appeals_used_this_month":19,"decided_appeals":22,"overturned_appeals":13,"dollars_recovered":61200,"appeals_processed_to_date":31}},{"id":3,"name":"Cedar Ridge Spine & Sports Medicine","surgeons":14,"tier":"Unlimited","live":false,"baseline":{"appeals_used_this_month":143,"decided_appeals":176,"overturned_appeals":118,"dollars_recovered":702300,"appeals_processed_to_date":262}}]};</script>
+<script>
+// In-browser stand-in for the FastAPI backend, used by the browser-only build.
+// It mirrors app/seed.py, app/demo.py, app/orchestrator.py and app/metrics.py in demo mode:
+// the same seed cases, canned agent responses, routing, deadline math and dashboard numbers.
+// Data (seed documents, canned responses, config) is injected by build.py as window.APPEALS_DATA.
+"use strict";
+
+(function () {
+  const DATA = window.APPEALS_DATA;
+  const AGENTS = ["intake", "triage", "evidence", "coding", "drafting", "qa"];
+  const LABELS = { intake: "Intake", triage: "Triage", evidence: "Evidence & Policy Match", coding: "Coding Check", drafting: "Draft Appeal", qa: "QA Review" };
+  const DEFAULT_WINDOW = { prior_authorization: 60, medical_necessity: 60, coding_billing: 90, timely_filing_admin: 60 };
+  const STEP_DELAY_MS = 1600;
+  const STORE_KEY = "appeals-demo-state-v1";
+
+  // ------------------------------------------------------------ dates & templating
+  const pad = (n) => String(n).padStart(2, "0");
+  const isoOf = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const today = () => { const d = new Date(); d.setHours(12, 0, 0, 0); return d; };
+  const parseIso = (s) => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d, 12); };
+  const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+  const daysBetween = (a, b) => Math.round((b - a) / 86400000);
+  const nowIso = () => new Date().toISOString().slice(0, 19);
+  const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  function dateContext(offsets) {
+    const t = today();
+    const ctx = {};
+    for (const [k, v] of Object.entries(offsets)) ctx[k] = isoOf(addDays(t, v));
+    ctx.TODAY = isoOf(t);
+    return ctx;
+  }
+  function fmt(iso, style) {
+    const d = parseIso(iso);
+    if (style === "iso") return iso;
+    if (style === "long") return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+    return `${pad(d.getMonth() + 1)}/${pad(d.getDate())}/${d.getFullYear()}`;
+  }
+  function render(text, ctx) {
+    return text.replace(/\{\{([A-Z0-9_]+)(?:\|(iso|long))?\}\}/g, (m, key, style) => {
+      if (key === "TODAY" && !ctx.TODAY) return fmt(isoOf(today()), style);
+      return ctx[key] ? fmt(ctx[key], style) : m;
+    });
+  }
+  const sampleDocs = (key, ctx) => Object.fromEntries(Object.entries(DATA.samples[key].docs).map(([k, v]) => [k, render(v, ctx)]));
+
+  function canned(key, agent, ctx) {
+    const raw = DATA.samples[key].canned[agent];
+    if (!raw) return null;
+    const data = JSON.parse(render(raw, ctx));
+    if (typeof data.letter_text === "string" && data.letter_text.startsWith("@")) data.letter_text = render(DATA.samples[key].letter, ctx).trim();
+    return data;
+  }
+
+  // ------------------------------------------------------------ generic template output (pasted docs)
+  const NOTE = "Demo-mode template output (pattern matching, not AI). The full app with an API key gives a case-specific analysis.";
+  const field = (text, ...labels) => {
+    for (const l of labels) {
+      const m = new RegExp(l.replace(/[#]/g, "\\#") + "\\s*[:#]\\s*([^\\n|]+?)(?:\\s{2,}|\\n|\\||$)", "i").exec(text || "");
+      if (m) return m[1].trim();
+    }
+    return "";
+  };
+  const firstDate = (t) => {
+    const m = /\b(\d{1,2})\/(\d{1,2})\/(\d{4})\b|\b(\d{4})-(\d{2})-(\d{2})\b/.exec(t || "");
+    if (!m) return "";
+    return m[3] ? `${m[3]}-${pad(m[1])}-${pad(m[2])}` : `${m[4]}-${m[5]}-${m[6]}`;
+  };
+  const sentences = (t) => (t || "").split(/(?<=[.!?])\s+|\n+/).map((s) => s.trim()).filter((s) => s.length > 25);
+  const STOP = new Set(["with", "that", "least", "documented", "within", "following", "criterion", "past", "must"]);
+  const words = (s) => new Set((s.toLowerCase().match(/[a-z]{4,}/g) || []).filter((w) => !STOP.has(w)));
+  function bestMatch(crit, sents) {
+    const w = words(crit); let best = "", score = 0;
+    for (const s of sents) { const hits = [...words(s)].filter((x) => w.has(x)).length; if (hits > score) { best = s; score = hits; } }
+    return [best.slice(0, 220), score];
+  }
+  function classify(t) {
+    t = t.toLowerCase();
+    if (["timely filing", "time limit for filing", "co-29", "filing limit", "eligib"].some((k) => t.includes(k))) return "timely_filing_admin";
+    if (["bundl", "ncci", "modifier", "co-97", "included in the payment"].some((k) => t.includes(k))) return "coding_billing";
+    if (["prior authorization", "prior auth", "pre-service", "precertification"].some((k) => t.includes(k))) return "prior_authorization";
+    return "medical_necessity";
+  }
+
+  function generic(agent, cs, prior) {
+    const d = cs.documents || {};
+    const denial = d.denial_letter || "", notes = d.clinical_notes || "", claim = d.claim_data || "", policy = d.payer_policy || "";
+    const all = denial + "\n" + claim;
+    if (agent === "intake") {
+      const seen = new Set(), cpts = [];
+      for (const m of all.matchAll(/\b(\d{5})(?:-([A-Z0-9]{2}))?\b/g)) {
+        if (!seen.has(m[1]) && !m[1].startsWith("0")) { seen.add(m[1]); cpts.push({ code: m[1], description: "", modifiers: m[2] ? [m[2]] : [] }); }
+      }
+      const icds = [...new Set(all.match(/\b[A-TV-Z]\d{2}\.[0-9A-Z]{1,4}\b/g) || [])].map((c) => ({ code: c, description: "" }));
+      const amounts = [...all.matchAll(/\$\s?([\d,]+(?:\.\d{2})?)/g)].map((m) => Number(m[1].replace(/,/g, "")));
+      const win = /within\s+(\d{2,3})\s+(?:calendar\s+)?days/i.exec(denial);
+      let payer = denial.split("\n").map((l) => l.trim()).find((l) => /health|plan|mutual|insurance|care/i.test(l) && l.length < 60 && !l.startsWith("*")) || "";
+      if (payer && payer === payer.toUpperCase()) payer = payer.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+      const reason = field(denial, "Reason for denial", "Reason", "Rationale", "Reviewer comment") ||
+        sentences(denial).find((s) => /denied|not medically|not met|expired|included/i.test(s)) || "";
+      const max = amounts.length ? Math.max(...amounts) : 0;
+      return {
+        patient_name: field(all, "Patient", "Member"), patient_dob: "", member_id: field(all, "Member ID"), payer_name: payer,
+        claim_or_reference_number: field(all, "Claim #", "Claim", "Reference #", "Authorization reference #"),
+        rendering_provider: field(all, "Rendering", "Provider", "Requesting provider"),
+        procedure_description: cpts[0] ? cpts[0].code : "", cpt_codes: cpts.slice(0, 6), icd10_codes: icds.slice(0, 6),
+        date_of_service: firstDate(field(all, "Date of service", "DOS")), denial_date: firstDate(denial),
+        billed_amount: max, amount_at_stake: max, stated_denial_reason: reason.slice(0, 400),
+        denial_codes: [...new Set(denial.match(/\b(?:CO|PR|OA)-\d{1,3}\b/g) || [])].map((c) => ({ code: c, description: "" })),
+        appeal_window_days: win ? Number(win[1]) : 0, appeal_submission_method: "", summary: NOTE,
+      };
+    }
+    if (agent === "triage") {
+      const t = classify(denial + " " + claim);
+      return { denial_type: t, denial_type_rationale: "Keyword-based classification of the denial letter (demo mode).", winnability: "borderline",
+        winnability_score: 50, reasons_for: ["Clinical documentation was provided for review."], reasons_against: ["Not yet assessed in detail (demo-mode template)."],
+        recommended_strategy: "Review the criteria checklist and attach the supporting records before submitting.", route_to_coding_check: t === "coding_billing" };
+    }
+    if (agent === "evidence") {
+      const lines = policy.split("\n").map((l) => l.trim().replace(/^[-*\s]+/, ""));
+      let crit = lines.filter((l) => /^(criterion|indication|\d+(\.\d+)?[.)]?|[a-e]\))\s/i.test(l) && l.length > 20);
+      if (!crit.length) crit = sentences(policy).slice(0, 5);
+      const sents = sentences(notes);
+      return {
+        policy_name: (policy.trim().split("\n")[0] || "Payer policy").slice(0, 120),
+        criteria: crit.slice(0, 7).map((c) => {
+          const [ex, score] = bestMatch(c, sents);
+          return { criterion: c.slice(0, 200), status: score >= 3 ? "met" : "missing_documentation",
+            evidence: ex ? "Closest matching statement in the clinical notes (demo-mode keyword match)." : "No matching statement found.",
+            citation: { document: ex ? "clinical_notes" : "none", section: "", excerpt: ex },
+            action_needed: score >= 3 ? "Verify against the record." : "Locate supporting documentation." };
+        }),
+        overall_assessment: NOTE, documents_to_attach: ["Relevant clinical notes", "Copy of the denial letter"], gaps: [],
+      };
+    }
+    if (agent === "coding") {
+      const i = prior.intake || {};
+      const ls = (i.cpt_codes || []).map((c) => ({ cpt: c.code, modifiers: c.modifiers, icd10: (i.icd10_codes || []).slice(0, 2).map((x) => x.code), billed: 0 }));
+      return { findings: [{ issue: "Review modifiers and bundling edits", severity: "medium", explanation: "Check NCCI PTP edits and whether a distinct-procedure modifier (59/XS) is supported by the op note." }],
+        original_lines: ls, corrected_lines: ls, recommendation: "appeal_with_argument", appeal_argument: NOTE, documentation_support: "" };
+    }
+    if (agent === "drafting") {
+      const i = prior.intake || {}, ev = prior.evidence || {};
+      const met = (ev.criteria || []).filter((c) => c.status === "met");
+      const bullets = met.map((c) => `- ${c.criterion}: "${c.citation.excerpt}"`).join("\n") || "- [Summarize the supporting clinical evidence]";
+      const codes = (i.cpt_codes || []).map((c) => c.code).join(", ") || "[CPT]";
+      const letter = `Riverbend Orthopedic Associates
+1200 Riverbend Parkway, Suite 300
+Fairhaven, ST 00000
+
+${fmt(isoOf(today()), "long")}
+
+${i.payer_name || "[Payer]"} - Appeals Department
+
+RE: Request for reconsideration
+Patient: ${i.patient_name || "[Patient]"}    Member ID: ${i.member_id || "[Member ID]"}
+Claim / reference #: ${i.claim_or_reference_number || "[Claim #]"}
+Service: ${codes}    Date of service: ${i.date_of_service || "[DOS]"}
+
+Dear Appeals Reviewer:
+
+We request reconsideration and reversal of the denial for the service above. The payer
+stated: "${i.stated_denial_reason || "[denial reason]"}"
+
+The enclosed records show that the applicable policy criteria are met:
+${bullets}
+
+We respectfully request that the denial be overturned and the service approved for payment.
+
+Sincerely,
+
+[Physician signature]
+Riverbend Orthopedic Associates
+
+Enclosures:
+1. Clinical notes
+2. Copy of the denial letter`;
+      return { subject_line: "Request for reconsideration", letter_text: letter,
+        key_arguments: met.map((c) => c.criterion).slice(0, 5).concat(met.length ? [] : ["Policy criteria are met"]),
+        enclosures: ["Clinical notes", "Copy of the denial letter"] };
+    }
+    return { overall: "ready_with_edits", score: 60,
+      flags: [{ severity: "medium", issue: "Template letter generated in demo mode.", location: "Entire letter", suggested_fix: "Review and tailor the arguments." }],
+      unsupported_claims: [],
+      attachments_checklist: [
+        { item: "Clinical notes", source: "clinical_notes", required: true, status: "in_file" },
+        { item: "Copy of the denial letter", source: "denial_letter", required: false, status: "in_file" }],
+      summary: NOTE };
+  }
+
+  function responseFor(agent, cs, prior) {
+    if (cs.sample_key) { const d = canned(cs.sample_key, agent, cs.date_ctx || {}); if (d) return d; }
+    return generic(agent, cs, prior);
+  }
+
+  // ------------------------------------------------------------ state
+  let state = { nextId: 1, cases: [], runs: {} };
+  const save = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ } };
+  const clone = (x) => JSON.parse(JSON.stringify(x));
+  const getCase = (id) => state.cases.find((c) => c.id === Number(id));
+  const update = (cs, fields) => Object.assign(cs, fields, { updated_at: nowIso() });
+
+  function createCase(documents, title, sampleKey, ctx) {
+    const p = generic("intake", { documents }, {});
+    const cs = { id: state.nextId++, practice_id: 1, title, status: "New", sample_key: sampleKey || null, date_ctx: ctx || null,
+      documents, patient_name: p.patient_name || null, payer: p.payer_name || null, procedure: null, denial_type: null, strength: null,
+      amount_at_stake: p.amount_at_stake || null, deadline: null, draft_letter: null, draft_edited: 0, attachments: null,
+      approved_by: null, approved_at: null, submitted_at: null, outcome: null, amount_recovered: null, outcome_at: null,
+      run_mode: null, run_count: 0, created_at: nowIso(), updated_at: nowIso() };
+    state.cases.push(cs);
+    state.runs[cs.id] = [];
+    return cs;
+  }
+  function newFromSample(key) {
+    const meta = DATA.samples[key].meta;
+    const ctx = dateContext(meta.dates);
+    return createCase(sampleDocs(key, ctx), meta.title, key, ctx);
+  }
+  function resetRuns(cs) {
+    state.runs[cs.id] = AGENTS.map((a, i) => ({ case_id: cs.id, agent: a, seq: i, status: "queued", mode: null, output: null, note: null,
+      started_at: null, finished_at: null, updated_at: Date.now(), label: LABELS[a] }));
+  }
+  const runOf = (cs, agent) => state.runs[cs.id].find((r) => r.agent === agent);
+  function setRun(cs, agent, fields) { Object.assign(runOf(cs, agent), fields, { updated_at: Date.now() }); emit(cs.id, "step", clone(runOf(cs, agent))); }
+
+  function computeDeadline(intake, type) {
+    let win = Number(intake.appeal_window_days || 0), basis = "stated in denial letter";
+    if (win <= 0) { win = DEFAULT_WINDOW[type] || 60; basis = "default window for this denial type (not stated in letter)"; }
+    let denial = /^\d{4}-\d{2}-\d{2}$/.test(intake.denial_date || "") ? parseIso(intake.denial_date) : null;
+    if (!denial) { denial = today(); basis += "; denial date not found, counted from today"; }
+    const dl = addDays(denial, win);
+    return { deadline: isoOf(dl), days_remaining: daysBetween(today(), dl), appeal_window_days: win, deadline_basis: `${isoOf(denial)} + ${win} days (${basis})` };
+  }
+  function shouldRunCoding(prior) {
+    const t = prior.triage || {};
+    if (t.denial_type === "coding_billing") return [true, ""];
+    if (t.route_to_coding_check) return [true, ""];
+    return [false, `Skipped - not a coding/billing denial (${t.denial_type || "unknown"})`];
+  }
+  function applyToCase(cs, agent, o) {
+    if (agent === "intake") update(cs, { patient_name: o.patient_name || null, payer: o.payer_name || null, procedure: o.procedure_description || null, amount_at_stake: o.amount_at_stake || o.billed_amount || 0 });
+    else if (agent === "triage") update(cs, { denial_type: o.denial_type, strength: o.winnability, deadline: o.deadline });
+    else if (agent === "drafting") update(cs, { draft_letter: o.letter_text, draft_edited: 0 });
+    else if (agent === "qa") update(cs, { attachments: (o.attachments_checklist || []).map((a) => ({ ...a, checked: a.status === "in_file" })) });
+  }
+
+  // Run synchronously (seeding) or step by step with delays (live demo).
+  async function runPipeline(cs, { mode = "demo", delay = STEP_DELAY_MS } = {}) {
+    resetRuns(cs);
+    if (delay) { update(cs, { status: "Running", run_mode: null }); emit(cs.id, "case", { status: cs.status, run_mode: null }); }
+    const prior = {};
+    for (const agent of AGENTS) {
+      if (agent === "coding") {
+        const [need, reason] = shouldRunCoding(prior);
+        if (!need) { setRun(cs, agent, { status: "skipped", note: reason, finished_at: nowIso() }); continue; }
+      }
+      setRun(cs, agent, { status: "running", started_at: nowIso() });
+      if (delay) await new Promise((r) => setTimeout(r, delay));
+      const out = responseFor(agent, cs, prior);
+      if (agent === "triage") Object.assign(out, computeDeadline(prior.intake || {}, out.denial_type));
+      prior[agent] = out;
+      setRun(cs, agent, { status: "done", mode, output: out, finished_at: nowIso() });
+      applyToCase(cs, agent, out);
+      if (delay) save();
+    }
+    update(cs, { run_mode: mode, run_count: (cs.run_count || 0) + 1, status: delay ? "Ready for Review" : cs.status });
+    save();
+    emit(cs.id, "case", { status: cs.status, run_mode: cs.run_mode });
+    emit(cs.id, "done", { status: cs.status });
+  }
+
+  function reset() {
+    state = { nextId: 1, cases: [], runs: {} };
+    for (const key of DATA.seed_order) {
+      const meta = DATA.samples[key].meta, st = meta.seed_state || {};
+      const cs = newFromSample(key);
+      if ((st.status || "New") === "New") continue;
+      runPipeline(cs, { mode: "seeded", delay: 0 });
+      const f = { status: st.status };
+      if (st.approved_by) { const sub = cs.date_ctx[st.submitted_offset]; Object.assign(f, { approved_by: st.approved_by, approved_at: sub, submitted_at: sub }); }
+      if (st.outcome) f.outcome = st.outcome;
+      if (st.outcome_offset) f.outcome_at = cs.date_ctx[st.outcome_offset];
+      if ("amount_recovered" in st) f.amount_recovered = st.amount_recovered;
+      update(cs, f);
+    }
+    save();
+  }
+
+  // ------------------------------------------------------------ metrics (mirrors app/metrics.py)
+  const daysRemaining = (c) => (c.deadline ? daysBetween(today(), parseIso(c.deadline)) : null);
+  function urgency(c) {
+    if (c.status === "Submitted" || c.status === "Closed") return "none";
+    const d = daysRemaining(c);
+    if (d == null) return "unknown";
+    return d <= 14 ? "red" : d <= 30 ? "yellow" : "green";
+  }
+  const decorate = (c) => ({ ...clone(c), days_remaining: daysRemaining(c), urgency: urgency(c) });
+  const tierOf = (name) => DATA.pricing.tiers.find((t) => t.name === name);
+
+  function practiceNumbers(p, cases) {
+    const pr = DATA.pricing, tier = tierOf(p.tier), base = p.baseline;
+    const mine = p.live ? cases.filter((c) => c.practice_id === p.id) : [];
+    const decided = mine.filter((c) => c.outcome === "Overturned" || c.outcome === "Upheld");
+    const over = decided.filter((c) => c.outcome === "Overturned");
+    const processed = mine.filter((c) => (c.run_count || 0) > 0).length;
+    const nD = base.decided_appeals + decided.length, nO = base.overturned_appeals + over.length;
+    const recovered = base.dollars_recovered + over.reduce((s, c) => s + (c.amount_recovered || 0), 0);
+    const apps = base.appeals_processed_to_date + processed;
+    const hours = (apps * (pr.manual_minutes_per_appeal - pr.assisted_minutes_per_appeal)) / 60;
+    const staff = hours * pr.staff_cost_per_hour, fee90 = tier.price_per_month * 3;
+    return { id: p.id, name: p.name, surgeons: p.surgeons, live: !!p.live, tier: tier.name, price_per_month: tier.price_per_month,
+      appeals_limit: tier.appeals_per_month, appeals_used: base.appeals_used_this_month + processed, decided: nD, overturned: nO,
+      overturn_rate: nD ? Math.round((1000 * nO) / nD) / 10 : 0, dollars_recovered: recovered, appeals_processed: apps,
+      staff_hours_saved: Math.round(hours * 10) / 10, staff_cost_saved: Math.round(staff),
+      roi_multiple: fee90 ? Math.round(((recovered + staff) / fee90) * 10) / 10 : null };
+  }
+  function metrics() {
+    const cases = state.cases.map(decorate);
+    const per = DATA.practices.map((p) => practiceNumbers(p, cases));
+    const me = per.find((p) => p.live);
+    const live = cases.filter((c) => c.practice_id === me.id);
+    const open = live.filter((c) => c.status !== "Closed");
+    const due = open.filter((c) => c.status !== "Submitted" && c.days_remaining != null && c.days_remaining <= 14).sort((a, b) => a.days_remaining - b.days_remaining);
+    const pending = live.filter((c) => c.status === "Submitted");
+    const sum = (xs) => xs.reduce((s, c) => s + (c.amount_at_stake || 0), 0);
+    const mrr = per.reduce((s, p) => s + p.price_per_month, 0);
+    const byType = {};
+    ["prior_authorization", "medical_necessity", "coding_billing", "timely_filing_admin"].forEach((t) => (byType[t] = open.filter((c) => c.denial_type === t).length));
+    return {
+      practice: me,
+      dashboard: { open_denials: open.length, dollars_at_stake: sum(open), awaiting_review: live.filter((c) => c.status === "Ready for Review").length,
+        pending_outcome: pending.length, pending_dollars: sum(pending), deadlines_next_14_days: due.length,
+        due_soon: due.map((c) => ({ id: c.id, title: c.title, patient_name: c.patient_name, deadline: c.deadline, days_remaining: c.days_remaining, status: c.status })),
+        overturn_rate: me.overturn_rate, dollars_recovered: me.dollars_recovered, staff_hours_saved: me.staff_hours_saved,
+        plan: { tier: me.tier, used: me.appeals_used, limit: me.appeals_limit }, by_type: byType },
+      business: { practices: per, mrr, arr: mrr * 12, total_recovered: per.reduce((s, p) => s + p.dollars_recovered, 0),
+        total_hours_saved: Math.round(per.reduce((s, p) => s + p.staff_hours_saved, 0) * 10) / 10, pricing: DATA.pricing },
+    };
+  }
+
+  // ------------------------------------------------------------ subscriptions (stand-in for SSE)
+  const subs = {};
+  function emit(id, type, data) { (subs[id] || new Set()).forEach((fn) => fn(type, data)); }
+  function subscribe(id, fn) {
+    id = Number(id);
+    (subs[id] = subs[id] || new Set()).add(fn);
+    const cs = getCase(id);
+    // Replay current state, like the server stream does on connect.
+    setTimeout(() => {
+      (state.runs[id] || []).forEach((r) => fn("step", clone(r)));
+      if (cs && cs.status !== "Running") fn("done", { status: cs.status });
+    }, 0);
+    return () => subs[id] && subs[id].delete(fn);
+  }
+
+  // ------------------------------------------------------------ request router (mirrors app/main.py)
+  const fail = (msg) => { throw new Error(msg); };
+  const full = (cs) => ({ ...decorate(cs), runs: clone(state.runs[cs.id] || []), running: cs.status === "Running" });
+
+  async function request(method, path, body) {
+    await new Promise((r) => setTimeout(r, 30));
+    let m;
+    if (method === "GET" && path === "/status") return { mode: "demo", browser_only: true, has_key: false, force_demo: false, model: "-", effort: "-" };
+    if (method === "GET" && path === "/metrics") return metrics();
+    if (method === "GET" && path === "/samples") return DATA.seed_order.map((k) => ({ key: k, label: DATA.samples[k].meta.label, title: DATA.samples[k].meta.title }));
+    if (method === "GET" && (m = path.match(/^\/samples\/(\w+)$/))) {
+      const s = DATA.samples[m[1]] || fail("Unknown sample");
+      const ctx = dateContext(s.meta.dates);
+      return { key: m[1], title: s.meta.title, date_ctx: ctx, documents: sampleDocs(m[1], ctx) };
+    }
+    if (method === "POST" && path === "/demo/reset") { reset(); return { reset: true, cases: state.cases.length }; }
+    if (method === "GET" && path === "/cases") return state.cases.map((c) => { const d = decorate(c); delete d.documents; delete d.draft_letter; return d; });
+    if (method === "POST" && path === "/cases") {
+      if (body.sample_key && !DATA.samples[body.sample_key]) fail("Unknown sample_key");
+      const docs = Object.assign({ denial_letter: "", clinical_notes: "", claim_data: "", payer_policy: "" }, body.documents || {});
+      if (!docs.denial_letter.trim()) fail("A denial letter / EOB is required");
+      const cs = createCase(docs, (body.title || "").trim() || "New denial", body.sample_key, body.sample_key ? body.date_ctx : null);
+      save();
+      return full(cs);
+    }
+    if (!(m = path.match(/^\/cases\/(\d+)(\/\w+)?$/))) fail("Not found");
+    const cs = getCase(m[1]) || fail("Case not found");
+    const action = m[2] || "";
+    if (method === "GET" && !action) return full(cs);
+    if (method === "POST" && action === "/run") {
+      if (cs.status === "Submitted" || cs.status === "Closed") fail(`Case is already ${cs.status}`);
+      if (cs.status === "Running") fail("Pipeline already running");
+      update(cs, { status: "Running" });
+      resetRuns(cs);
+      runPipeline(cs);
+      return { started: true, case_id: cs.id };
+    }
+    if (method === "PATCH" && action === "/draft") {
+      if (cs.status === "Submitted" || cs.status === "Closed") fail("Draft is locked after submission");
+      update(cs, { draft_letter: body.draft_letter, draft_edited: 1 }); save(); return full(cs);
+    }
+    if (method === "POST" && action === "/approve") {
+      if (cs.status !== "Ready for Review") fail(`Only cases in 'Ready for Review' can be approved (status: ${cs.status})`);
+      const f = { status: "Submitted", outcome: "Pending", approved_by: body.approved_by || "Office staff", approved_at: nowIso(), submitted_at: nowIso() };
+      if (body.attachments) f.attachments = body.attachments;
+      update(cs, f); save(); return full(cs);
+    }
+    if (method === "PATCH" && action === "/outcome") {
+      if (!["Overturned", "Upheld", "Pending"].includes(body.outcome)) fail("outcome must be Overturned, Upheld or Pending");
+      if (cs.status !== "Submitted" && cs.status !== "Closed") fail("Approve and submit the appeal before recording an outcome");
+      if (body.outcome === "Pending") update(cs, { outcome: "Pending", status: "Submitted", outcome_at: null, amount_recovered: null });
+      else {
+        let rec = body.amount_recovered;
+        if (rec == null) rec = body.outcome === "Overturned" ? cs.amount_at_stake || 0 : 0;
+        update(cs, { outcome: body.outcome, status: "Closed", outcome_at: nowIso(), amount_recovered: body.outcome === "Overturned" ? rec : 0 });
+      }
+      save(); return full(cs);
+    }
+    fail("Not found");
+  }
+
+  // ------------------------------------------------------------ boot
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+    if (saved && saved.cases && saved.cases.length) {
+      state = saved;
+      // A run interrupted by a page reload can't resume; mark it finished on canned data.
+      state.cases.filter((c) => c.status === "Running").forEach((c) => runPipeline(c, { delay: 0 }) && update(c, { status: "Ready for Review" }));
+    } else reset();
+  } catch (e) { reset(); }
+
+  window.APPEALS_BACKEND = { request, subscribe };
+})();
+
+</script>
+<script>
+// Appeals prototype frontend - plain JS, hash routing, no build step.
+// Talks to the FastAPI server, or to an in-page engine (window.APPEALS_BACKEND) in the
+// browser-only build produced by static-demo/build.py.
+"use strict";
+
+const $app = document.getElementById("app");
+const BACKEND = window.APPEALS_BACKEND || null;
+
+// ---------------------------------------------------------------- helpers
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const money = (n) => n == null ? "-" : "$" + Number(n).toLocaleString("en-US", { maximumFractionDigits: 0 });
+const fmtDate = (iso) => {
+  if (!iso) return "-";
+  const d = new Date(iso.length === 10 ? iso + "T12:00:00" : iso);
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+};
+
+async function api(path, opts = {}) {
+  if (BACKEND) return BACKEND.request(opts.method || "GET", path, opts.body);
+  const res = await fetch(path, {
+    headers: { "Content-Type": "application/json" },
+    ...opts,
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.detail || `Request failed (${res.status})`);
+  return data;
+}
+
+// Live pipeline updates: server-sent events, or the in-page engine's subscription.
+function openStream(caseId, on) {
+  if (BACKEND) return { close: BACKEND.subscribe(caseId, (type, data) => on[type] && on[type](data)) };
+  const es = new EventSource(`/cases/${caseId}/stream`);
+  ["step", "case", "done"].forEach((t) => es.addEventListener(t, (ev) => on[t] && on[t](JSON.parse(ev.data))));
+  if (on.done) es.addEventListener("done", () => es.close());
+  return es;
+}
+
+// In-page confirmation (browser dialogs are unavailable in some embedded viewers).
+function confirmBox(message, okLabel = "Continue") {
+  return new Promise((resolve) => {
+    const wrap = document.createElement("div");
+    wrap.className = "modal-backdrop";
+    wrap.innerHTML = `<div class="modal" role="dialog" aria-modal="true"><p>${esc(message).replace(/\n/g, "<br>")}</p>
+      <div class="actions"><button class="btn" id="modal-ok">${esc(okLabel)}</button><button class="btn btn-ghost" id="modal-cancel">Cancel</button></div></div>`;
+    document.body.appendChild(wrap);
+    const done = (v) => { wrap.remove(); resolve(v); };
+    wrap.querySelector("#modal-ok").onclick = () => done(true);
+    wrap.querySelector("#modal-cancel").onclick = () => done(false);
+    wrap.onclick = (e) => { if (e.target === wrap) done(false); };
+    wrap.querySelector("#modal-ok").focus();
+  });
+}
+
+async function copyText(text, fallbackEl) {
+  try { await navigator.clipboard.writeText(text); toast("Copied to clipboard."); }
+  catch { if (fallbackEl) { fallbackEl.focus(); fallbackEl.select(); } toast("Press Cmd+C / Ctrl+C to copy the selected text."); }
+}
+
+function toast(msg, ms = 3200) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.remove("hidden");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => t.classList.add("hidden"), ms);
+}
+
+const TYPE_LABEL = {
+  prior_authorization: "Prior auth",
+  medical_necessity: "Medical necessity",
+  coding_billing: "Coding / billing",
+  timely_filing_admin: "Timely filing / admin",
+};
+const typeBadge = (t) => t ? `<span class="badge b-blue">${esc(TYPE_LABEL[t] || t)}</span>` : `<span class="badge">Not triaged</span>`;
+const strengthBadge = (s) => {
+  const cls = { strong: "b-green", borderline: "b-yellow", weak: "b-red" }[s];
+  return s ? `<span class="badge ${cls}">${esc(s)}</span>` : `<span class="muted">-</span>`;
+};
+const statusBadge = (s, outcome) => {
+  if (s === "Closed") return outcome === "Overturned"
+    ? `<span class="badge b-green">Overturned</span>` : `<span class="badge b-red">${esc(outcome || "Closed")}</span>`;
+  const cls = { New: "", Running: "b-blue", "Ready for Review": "b-purple", Submitted: "b-yellow" }[s] || "";
+  return `<span class="badge ${cls}">${esc(s === "Submitted" ? "Submitted · Pending" : s)}</span>`;
+};
+const modeBadge = (m) => {
+  if (!m) return "";
+  const cls = { live: "b-green", demo: "b-yellow", mixed: "b-yellow", seeded: "" }[m] || "";
+  const label = { live: "LIVE AI", demo: "DEMO", mixed: "MIXED", seeded: "PRE-RUN SAMPLE" }[m] || m;
+  return `<span class="badge ${cls}">${label}</span>`;
+};
+const deadlineCell = (c) => {
+  if (!c.deadline) return `<span class="muted">-</span>`;
+  if (c.urgency === "none") return `<span class="muted">${fmtDate(c.deadline)}</span>`;
+  const d = c.days_remaining;
+  const txt = d < 0 ? `${-d}d overdue` : `${d}d left`;
+  return `<span class="dot ${c.urgency}"></span>${fmtDate(c.deadline)} <span class="muted small">(${txt})</span>`;
+};
+const statusLabel = { met: ["Met", "b-green"], not_met: ["Not met", "b-red"], missing_documentation: ["Missing docs", "b-yellow"] };
+const critBadge = (s) => `<span class="badge ${(statusLabel[s] || ["", ""])[1]}">${esc((statusLabel[s] || [s])[0])}</span>`;
+const sevBadge = (s) => `<span class="badge ${{ high: "b-red", medium: "b-yellow", low: "" }[s] || ""}">${esc(s)}</span>`;
+
+// ---------------------------------------------------------------- mode badge
+let MODE = null;
+async function refreshMode() {
+  MODE = await api("/status");
+  const b = document.getElementById("mode-badge");
+  b.className = "mode-badge " + MODE.mode;
+  b.textContent = MODE.mode === "live" ? `● LIVE · ${MODE.model}`
+    : MODE.browser_only ? "● DEMO · browser version"
+    : (MODE.has_key ? "● DEMO MODE (forced)" : "● DEMO MODE · no API key");
+}
+document.getElementById("mode-badge").onclick = async () => {
+  if (MODE.browser_only) return toast("This browser version uses pre-written agent responses. Live AI runs in the full local app.", 5000);
+  if (!MODE.has_key) return toast("No ANTHROPIC_API_KEY in .env - running on canned demo responses.");
+  await api("/settings/mode", { method: "POST", body: { force_demo: MODE.mode === "live" } });
+  await refreshMode();
+  toast(MODE.mode === "live" ? "Live mode: agents call the Claude API." : "Demo mode: agents use canned responses.");
+};
+document.getElementById("reset-btn").onclick = async () => {
+  if (!(await confirmBox("Reset the demo? This restores the 5 sample cases and deletes any cases you created.", "Reset demo"))) return;
+  await api("/demo/reset", { method: "POST" });
+  toast("Demo data restored.");
+  if (currentPath() === "#/dashboard") route(); else navigate("#/dashboard");
+};
+
+// ---------------------------------------------------------------- router
+// Routing: URL hash with the server; an in-memory path in the browser-only build.
+let activeStream = null;
+let memoryPath = "#/dashboard";
+const currentPath = () => (BACKEND ? memoryPath : location.hash);
+function navigate(path) {
+  if (BACKEND) { memoryPath = path; route(); } else location.hash = path;
+}
+if (BACKEND) {
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#/"]');
+    if (a) { e.preventDefault(); navigate(a.getAttribute("href")); }
+  });
+}
+function route() {
+  if (activeStream) { activeStream.close(); activeStream = null; }
+  const parts = (currentPath().replace(/^#\/?/, "") || "dashboard").split("/");
+  document.querySelectorAll("nav a").forEach((a) =>
+    a.classList.toggle("active", a.dataset.nav === parts[0] || (parts[0] === "case" && a.dataset.nav === "queue")));
+  const views = { dashboard: viewDashboard, queue: viewQueue, new: viewNew, case: viewCase, review: viewReview, business: viewBusiness };
+  const fn = views[parts[0]] || viewDashboard;
+  Promise.resolve(fn(...parts.slice(1))).catch((e) => {
+    $app.innerHTML = `<div class="card"><h2>Something went wrong</h2><p>${esc(e.message)}</p></div>`;
+  });
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+
+// ---------------------------------------------------------------- 1. dashboard
+async function viewDashboard() {
+  const [m, cases] = await Promise.all([api("/metrics"), api("/cases")]);
+  const d = m.dashboard;
+  const plan = d.plan;
+  const pct = plan.limit ? Math.min(100, (100 * plan.used) / plan.limit) : 100;
+  const review = cases.filter((c) => c.status === "Ready for Review");
+  const fresh = cases.filter((c) => c.status === "New");
+  const typeMax = Math.max(1, ...Object.values(d.by_type));
+  $app.innerHTML = `
+    <div class="page-head">
+      <div><h1>Practice dashboard</h1><div class="muted">${esc(m.practice.name)} · ${m.practice.surgeons} surgeons (fictional)</div></div>
+      <a class="btn" href="#/new">+ New denial</a>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="label">Open denials</div><div class="value">${d.open_denials}</div><div class="sub">${d.awaiting_review} awaiting staff review · ${d.pending_outcome} pending payer</div></div>
+      <div class="kpi"><div class="label">Dollars at stake</div><div class="value">${money(d.dollars_at_stake)}</div><div class="sub">across open denials</div></div>
+      <div class="kpi ${d.deadlines_next_14_days ? "alert" : ""}"><div class="label">Deadlines ≤ 14 days</div><div class="value">${d.deadlines_next_14_days}</div><div class="sub">appeals not yet submitted</div></div>
+      <div class="kpi"><div class="label">Overturn rate</div><div class="value">${d.overturn_rate}%</div><div class="sub">last 90 days · ${money(d.dollars_recovered)} recovered</div></div>
+      <div class="kpi"><div class="label">Staff hours saved</div><div class="value">${Math.round(d.staff_hours_saved)}</div><div class="sub">est., last 90 days</div></div>
+      <div class="kpi"><div class="label">Plan usage (${esc(plan.tier)})</div>
+        <div class="value">${plan.used}<span class="muted" style="font-size:15px"> of ${plan.limit ?? "∞"}</span></div>
+        <div class="sub">appeals used this month</div><div class="bar"><span style="width:${pct}%"></span></div></div>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h2>Due in the next 14 days</h2>
+        ${d.due_soon.length ? `<table><tbody>${d.due_soon.map((c) => `
+          <tr class="clickable" data-href="#/case/${c.id}"><td><span class="dot red"></span><b>${esc(c.patient_name || "")}</b><div class="muted small">${esc(c.title)}</div></td>
+          <td>${statusBadge(c.status)}</td><td class="num"><b>${c.days_remaining}d</b><div class="muted small">${fmtDate(c.deadline)}</div></td></tr>`).join("")}</tbody></table>`
+          : `<p class="muted">Nothing due in the next 14 days.</p>`}
+      </div>
+      <div class="card">
+        <h2>Work queue</h2>
+        ${[...fresh, ...review].length ? `<table><tbody>${[...fresh, ...review].map((c) => `
+          <tr class="clickable" data-href="#/case/${c.id}"><td><b>${esc(c.patient_name || "-")}</b><div class="muted small">${esc(c.title)}</div></td>
+          <td>${statusBadge(c.status)}</td><td class="num">${money(c.amount_at_stake)}</td></tr>`).join("")}</tbody></table>`
+          : `<p class="muted">Queue is clear.</p>`}
+        <h3>Open denials by type</h3>
+        ${Object.entries(d.by_type).map(([t, n]) => `
+          <div class="hbar"><div class="lbl">${TYPE_LABEL[t]}</div><div class="track"><div class="fill" style="width:${(100 * n) / typeMax}%"></div></div><div class="val">${n}</div></div>`).join("")}
+        <p class="muted small">Untriaged (new) cases are not counted by type until the pipeline runs.</p>
+      </div>
+    </div>`;
+  bindRowLinks();
+}
+
+function bindRowLinks() {
+  $app.querySelectorAll("[data-href]").forEach((el) => (el.onclick = () => navigate(el.dataset.href)));
+}
+
+// ---------------------------------------------------------------- 2. queue
+const queueFilters = { type: "", status: "open", urgency: "" };
+async function viewQueue() {
+  const cases = await api("/cases");
+  const render = () => {
+    const rows = cases.filter((c) => {
+      if (queueFilters.type && c.denial_type !== queueFilters.type) return false;
+      if (queueFilters.status === "open" && c.status === "Closed") return false;
+      if (queueFilters.status && queueFilters.status !== "open" && c.status !== queueFilters.status) return false;
+      if (queueFilters.urgency && c.urgency !== queueFilters.urgency) return false;
+      return true;
+    });
+    $app.innerHTML = `
+      <div class="page-head"><div><h1>Case queue</h1><div class="muted">${rows.length} of ${cases.length} cases</div></div>
+        <a class="btn" href="#/new">+ New denial</a></div>
+      <div class="filters">
+        <select id="f-type"><option value="">All denial types</option>${Object.entries(TYPE_LABEL).map(([k, v]) => `<option value="${k}">${v}</option>`).join("")}</select>
+        <select id="f-status">
+          <option value="open">Open (not closed)</option><option value="">All statuses</option>
+          ${["New", "Running", "Ready for Review", "Submitted", "Closed"].map((s) => `<option>${s}</option>`).join("")}
+        </select>
+        <select id="f-urg"><option value="">Any deadline</option><option value="red">🔴 ≤ 14 days</option><option value="yellow">🟡 15-30 days</option><option value="green">🟢 &gt; 30 days</option></select>
+      </div>
+      <div class="card" style="padding:0">
+        <table>
+          <thead><tr><th>#</th><th>Patient / case</th><th>Payer</th><th>Denial type</th><th>Strength</th><th class="num">At stake</th><th>Appeal deadline</th><th>Status</th></tr></thead>
+          <tbody>${rows.map((c) => `
+            <tr class="clickable" data-href="#/case/${c.id}">
+              <td class="muted">${c.id}</td>
+              <td><b>${esc(c.patient_name || "-")}</b><div class="muted small">${esc(c.title)}</div></td>
+              <td>${esc(c.payer || "-")}</td>
+              <td>${typeBadge(c.denial_type)}</td>
+              <td>${strengthBadge(c.strength)}</td>
+              <td class="num">${money(c.amount_at_stake)}</td>
+              <td>${deadlineCell(c)}</td>
+              <td>${statusBadge(c.status, c.outcome)}</td>
+            </tr>`).join("") || `<tr><td colspan="8" class="muted">No cases match these filters.</td></tr>`}
+          </tbody>
+        </table>
+      </div>`;
+    document.getElementById("f-type").value = queueFilters.type;
+    document.getElementById("f-status").value = queueFilters.status;
+    document.getElementById("f-urg").value = queueFilters.urgency;
+    document.getElementById("f-type").onchange = (e) => { queueFilters.type = e.target.value; render(); };
+    document.getElementById("f-status").onchange = (e) => { queueFilters.status = e.target.value; render(); };
+    document.getElementById("f-urg").onchange = (e) => { queueFilters.urgency = e.target.value; render(); };
+    bindRowLinks();
+  };
+  render();
+}
+
+// ---------------------------------------------------------------- 3. new case
+const DOCS = [
+  ["denial_letter", "Denial letter / EOB", "Required"],
+  ["clinical_notes", "Clinical notes", "Op notes, imaging reports, PT / conservative treatment history"],
+  ["claim_data", "Claim data", "CPT / ICD codes, dates of service, billed amount"],
+  ["payer_policy", "Payer coverage policy", "The payer's policy for this procedure"],
+];
+async function viewNew() {
+  const samples = await api("/samples");
+  let sample = null; // {key, date_ctx} when loaded from a sample and unedited
+  $app.innerHTML = `
+    <div class="page-head"><div><h1>New denial</h1><div class="muted">Upload text files or paste the four documents, or load a sample case.</div></div></div>
+    <div class="card" style="margin-bottom:16px">
+      <div class="filters" style="margin:0">
+        <b>Load sample case:</b>
+        <select id="sample-select">${samples.map((s) => `<option value="${s.key}">${esc(s.label)}</option>`).join("")}</select>
+        <button class="btn btn-ghost" id="load-sample">Load sample case</button>
+        <span id="sample-note" class="muted small"></span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="doc-box"><label class="field" for="title">Case title</label>
+        <input type="text" id="title" style="width:100%" placeholder="e.g. Total knee arthroplasty - prior auth denied"></div>
+      ${DOCS.map(([k, label, hint]) => `
+        <div class="doc-box">
+          <div class="doc-head"><label class="field" for="doc-${k}">${label} <span class="muted small">· ${hint}</span></label>
+            <input type="file" accept=".txt,.md,.text,text/plain" data-doc="${k}"></div>
+          <textarea id="doc-${k}" rows="7" placeholder="Paste ${label.toLowerCase()} text here, or choose a .txt file"></textarea>
+        </div>`).join("")}
+      <p class="muted small">Prototype note: upload accepts plain-text files. PDF/image parsing (OCR) is out of scope; paste extracted text instead. Use fictional data only.</p>
+      <div class="actions">
+        <button class="btn btn-lg" id="create-run">Create case &amp; run agents →</button>
+        <button class="btn btn-ghost" id="create-only">Create case only</button>
+      </div>
+    </div>`;
+
+  const markEdited = () => {
+    if (sample) { sample = null; document.getElementById("sample-note").textContent = "Edited - demo mode will use generic template output for this case."; }
+  };
+  DOCS.forEach(([k]) => document.getElementById("doc-" + k).addEventListener("input", markEdited));
+  $app.querySelectorAll("input[type=file]").forEach((inp) => (inp.onchange = () => {
+    const f = inp.files[0];
+    if (!f) return;
+    if (!/\.(txt|md|text)$/i.test(f.name) && f.type !== "text/plain") return toast("Please upload a plain-text file (.txt). PDF parsing isn't part of this prototype.");
+    const r = new FileReader();
+    r.onload = () => { document.getElementById("doc-" + inp.dataset.doc).value = r.result; markEdited(); };
+    r.readAsText(f);
+  }));
+  document.getElementById("load-sample").onclick = async () => {
+    const key = document.getElementById("sample-select").value;
+    const s = await api("/samples/" + key);
+    DOCS.forEach(([k]) => (document.getElementById("doc-" + k).value = s.documents[k]));
+    document.getElementById("title").value = s.title;
+    sample = { key: s.key, date_ctx: s.date_ctx };
+    document.getElementById("sample-note").textContent = "Sample loaded (fictional). You can edit any field before creating the case.";
+  };
+  const create = async (run) => {
+    const documents = Object.fromEntries(DOCS.map(([k]) => [k, document.getElementById("doc-" + k).value]));
+    if (!documents.denial_letter.trim()) return toast("A denial letter / EOB is required.");
+    const body = { title: document.getElementById("title").value, documents };
+    if (sample) Object.assign(body, { sample_key: sample.key, date_ctx: sample.date_ctx });
+    const c = await api("/cases", { method: "POST", body });
+    if (run) await api(`/cases/${c.id}/run`, { method: "POST" });
+    navigate(`#/case/${c.id}`);
+  };
+  document.getElementById("create-run").onclick = () => create(true).catch((e) => toast(e.message));
+  document.getElementById("create-only").onclick = () => create(false).catch((e) => toast(e.message));
+}
+
+// ---------------------------------------------------------------- 4. case detail
+const AGENT_ORDER = ["intake", "triage", "evidence", "coding", "drafting", "qa"];
+const AGENT_ICON = { intake: "📥", triage: "🧭", evidence: "📋", coding: "🔢", drafting: "✍️", qa: "🔍" };
+
+function pipelineHTML(c) {
+  const runs = Object.fromEntries((c.runs || []).map((r) => [r.agent, r]));
+  const st = (cls, icon, name, meta = "", agent = false) =>
+    `<div class="stage ${cls} ${agent ? "agent" : ""}"><div class="node">${icon}</div><div class="name">${name}</div><div class="meta">${meta}</div></div>`;
+  const after = {
+    review: c.status === "Ready for Review" ? "running" : ["Submitted", "Closed"].includes(c.status) ? "done" : "",
+    submitted: ["Submitted", "Closed"].includes(c.status) ? "done" : "",
+    outcome: c.status === "Closed" ? (c.outcome === "Overturned" ? "done" : "error") : c.status === "Submitted" ? "running" : "",
+  };
+  return `<div class="pipeline">
+    ${st("done", "⬆", "Upload", '<span class="muted">4 docs</span>')}
+    ${AGENT_ORDER.map((a) => {
+      const r = runs[a];
+      const s = r ? r.status : "";
+      const cls = s === "done" ? "done" : s === "running" ? "running" : s === "skipped" ? "skipped" : s === "error" ? "error" : "";
+      const meta = s === "running" ? '<span class="badge b-blue">working…</span>'
+        : s === "skipped" ? '<span class="muted">skipped</span>' : r && r.mode ? modeBadge(r.mode) : "";
+      return st(cls, AGENT_ICON[a], r ? r.label : a, meta, true);
+    }).join("")}
+    ${st(after.review, "👤", "Staff Review", c.approved_by ? `<span class="muted">${esc(c.approved_by.replace(/\s*\(.*\)$/, ""))}</span>` : "")}
+    ${st(after.submitted, "📨", "Submitted", c.submitted_at ? `<span class="muted">${fmtDate(c.submitted_at)}</span>` : "")}
+    ${st(after.outcome, c.status === "Closed" ? (c.outcome === "Overturned" ? "✔" : "✖") : "⏳", "Outcome",
+      c.outcome ? `<span class="badge ${c.outcome === "Overturned" ? "b-green" : c.outcome === "Upheld" ? "b-red" : "b-yellow"}">${esc(c.outcome)}</span>` : "")}
+  </div>`;
+}
+
+const R = {}; // panel renderers per agent
+R.intake = (o) => `
+  <dl class="kv">
+    <dt>Patient</dt><dd>${esc(o.patient_name)} · DOB ${esc(o.patient_dob || "-")} · Member ID ${esc(o.member_id)}</dd>
+    <dt>Payer</dt><dd>${esc(o.payer_name)}</dd>
+    <dt>Claim / reference #</dt><dd>${esc(o.claim_or_reference_number)}</dd>
+    <dt>Provider</dt><dd>${esc(o.rendering_provider)}</dd>
+    <dt>Procedure</dt><dd>${esc(o.procedure_description)}</dd>
+    <dt>Date of service</dt><dd>${fmtDate(o.date_of_service)}</dd>
+    <dt>Denial date</dt><dd>${fmtDate(o.denial_date)}</dd>
+    <dt>Billed / at stake</dt><dd>${money(o.billed_amount)} / <b>${money(o.amount_at_stake)}</b></dd>
+    <dt>Stated denial reason</dt><dd>${esc(o.stated_denial_reason)}</dd>
+    <dt>Denial codes</dt><dd>${(o.denial_codes || []).map((d) => `<span class="badge">${esc(d.code)}</span> ${esc(d.description)}`).join("<br>") || "-"}</dd>
+    <dt>Appeal window</dt><dd>${o.appeal_window_days ? o.appeal_window_days + " days" : "Not stated"}</dd>
+    <dt>Submit appeal to</dt><dd>${esc(o.appeal_submission_method || "-")}</dd>
+  </dl>
+  <h3>Codes</h3>
+  <table><thead><tr><th>CPT</th><th>Modifiers</th><th>Description</th></tr></thead><tbody>
+    ${(o.cpt_codes || []).map((c) => `<tr><td><b>${esc(c.code)}</b></td><td>${esc((c.modifiers || []).join(", ") || "-")}</td><td>${esc(c.description)}</td></tr>`).join("")}
+  </tbody></table>
+  <table style="margin-top:8px"><thead><tr><th>ICD-10</th><th>Description</th></tr></thead><tbody>
+    ${(o.icd10_codes || []).map((c) => `<tr><td><b>${esc(c.code)}</b></td><td>${esc(c.description)}</td></tr>`).join("")}
+  </tbody></table>
+  <p class="muted">${esc(o.summary)}</p>`;
+R.triage = (o) => `
+  <div class="grid grid-3">
+    <div><div class="muted small">Denial type</div>${typeBadge(o.denial_type)}<div class="small" style="margin-top:4px">${esc(o.denial_type_rationale)}</div></div>
+    <div><div class="muted small">Winnability</div>${strengthBadge(o.winnability)} <b>${o.winnability_score}/100</b></div>
+    <div><div class="muted small">Appeal deadline (computed)</div><b>${fmtDate(o.deadline)}</b> · ${o.days_remaining} days left<div class="muted small">${esc(o.deadline_basis)}</div></div>
+  </div>
+  <div class="grid grid-2" style="margin-top:12px">
+    <div><h3>Reasons for</h3><ul class="tight">${(o.reasons_for || []).map((r) => `<li>${esc(r)}</li>`).join("")}</ul></div>
+    <div><h3>Reasons against</h3><ul class="tight">${(o.reasons_against || []).map((r) => `<li>${esc(r)}</li>`).join("")}</ul></div>
+  </div>
+  <h3>Recommended strategy</h3><p>${esc(o.recommended_strategy)}</p>
+  <p class="muted small">Routing: ${o.denial_type === "coding_billing" || o.route_to_coding_check ? "→ Coding Check will run" : "→ Coding Check skipped"}</p>`;
+R.evidence = (o) => {
+  const counts = { met: 0, not_met: 0, missing_documentation: 0 };
+  (o.criteria || []).forEach((c) => (counts[c.status] = (counts[c.status] || 0) + 1));
+  return `
+  <div class="note info">Policy: <b>${esc(o.policy_name)}</b> · <i>illustrative policy, fictional payer</i></div>
+  <p>${critBadge("met")} ${counts.met} &nbsp; ${critBadge("missing_documentation")} ${counts.missing_documentation} &nbsp; ${critBadge("not_met")} ${counts.not_met}</p>
+  <table><thead><tr><th style="width:30%">Criterion</th><th>Status</th><th>Evidence &amp; citation</th><th style="width:22%">Action needed</th></tr></thead><tbody>
+    ${(o.criteria || []).map((c) => `<tr>
+      <td>${esc(c.criterion)}</td><td>${critBadge(c.status)}</td>
+      <td>${esc(c.evidence)}${c.citation && c.citation.excerpt ? `<blockquote class="cite">"${esc(c.citation.excerpt)}"<br><span class="small">— ${esc(c.citation.document)}${c.citation.section ? ", " + esc(c.citation.section) : ""}</span></blockquote>` : ""}</td>
+      <td class="small">${esc(c.action_needed)}</td></tr>`).join("")}
+  </tbody></table>
+  <p><b>Assessment:</b> ${esc(o.overall_assessment)}</p>
+  ${o.gaps && o.gaps.length ? `<h3>Gaps</h3><ul class="tight">${o.gaps.map((g) => `<li>${esc(g)}</li>`).join("")}</ul>` : ""}
+  <h3>Documents to attach</h3><ul class="tight">${(o.documents_to_attach || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ul>`;
+};
+R.coding = (o) => {
+  const lines = (ls) => `<table><thead><tr><th>CPT</th><th>Modifiers</th><th>ICD-10</th><th class="num">Billed</th></tr></thead><tbody>
+    ${(ls || []).map((l) => `<tr><td><b>${esc(l.cpt)}</b></td><td>${esc((l.modifiers || []).join(", ") || "-")}</td><td>${esc((l.icd10 || []).join(", "))}</td><td class="num">${money(l.billed)}</td></tr>`).join("")}</tbody></table>`;
+  return `
+  ${(o.findings || []).map((f) => `<div class="flag ${f.severity}">${sevBadge(f.severity)} <b>${esc(f.issue)}</b><div class="small">${esc(f.explanation)}</div></div>`).join("")}
+  <div class="grid grid-2" style="margin-top:8px"><div><h3>As billed</h3>${lines(o.original_lines)}</div><div><h3>Corrected</h3>${lines(o.corrected_lines)}</div></div>
+  <p><b>Recommendation:</b> <span class="badge b-blue">${esc((o.recommendation || "").replace(/_/g, " "))}</span></p>
+  <h3>Appeal argument</h3><p>${esc(o.appeal_argument)}</p>
+  <h3>Documentation support</h3><p class="small">${esc(o.documentation_support)}</p>`;
+};
+R.drafting = (o) => `
+  <p><b>Subject:</b> ${esc(o.subject_line)}</p>
+  <h3>Key arguments</h3><ul class="tight">${(o.key_arguments || []).map((k) => `<li>${esc(k)}</li>`).join("")}</ul>
+  <h3>Draft letter (as generated)</h3><pre class="letter">${esc(o.letter_text)}</pre>`;
+R.qa = (o) => `
+  <p><span class="badge ${{ ready: "b-green", ready_with_edits: "b-yellow", needs_attention: "b-red" }[o.overall] || ""}">${esc((o.overall || "").replace(/_/g, " "))}</span> &nbsp; Quality score <b>${o.score}/100</b></p>
+  <p>${esc(o.summary)}</p>
+  <h3>Flags</h3>${(o.flags || []).map((f) => `<div class="flag ${f.severity}">${sevBadge(f.severity)} <b>${esc(f.issue)}</b><div class="small muted">Where: ${esc(f.location)}</div><div class="small">Fix: ${esc(f.suggested_fix)}</div></div>`).join("") || '<p class="muted">No flags.</p>'}
+  ${o.unsupported_claims && o.unsupported_claims.length ? `<h3>Unsupported claims</h3><ul class="tight">${o.unsupported_claims.map((u) => `<li>${esc(u)}</li>`).join("")}</ul>` : ""}
+  <h3>Attachments checklist</h3>
+  <table><tbody>${(o.attachments_checklist || []).map((a) => `<tr><td>${esc(a.item)}${a.required ? ' <span class="badge b-red">required</span>' : ""}</td><td class="small muted">${esc(a.source)}</td><td>${attStatus(a.status)}</td></tr>`).join("")}</tbody></table>`;
+const attStatus = (s) => `<span class="badge ${{ in_file: "b-green", needs_upload: "b-red", verify: "b-yellow" }[s] || ""}">${esc((s || "").replace(/_/g, " "))}</span>`;
+
+function panelsHTML(c, openAgent) {
+  return (c.runs || []).map((r) => {
+    if (r.status === "queued") return "";
+    const head = `${AGENT_ICON[r.agent]} ${esc(r.label)} ${r.status === "running" ? '<span class="badge b-blue">working…</span>' : r.status === "skipped" ? '<span class="badge">skipped</span>' : modeBadge(r.mode)}`;
+    let body;
+    if (r.status === "skipped") body = `<p class="muted">${esc(r.note)}</p>`;
+    else if (r.status === "running") body = `<p class="muted">Agent is working…</p>`;
+    else {
+      try { body = R[r.agent](r.output); } catch (e) { body = `<p class="muted">Could not render this output.</p>`; }
+      body += r.note ? `<div class="note">${esc(r.note)}</div>` : "";
+      body += `<details style="margin-top:10px"><summary class="small muted" style="cursor:pointer">Show raw JSON</summary><pre class="json">${esc(JSON.stringify(r.output, null, 2))}</pre></details>`;
+    }
+    return `<details class="panel" data-agent="${r.agent}" ${openAgent === r.agent ? "open" : ""}><summary>${head}</summary><div class="body">${body}</div></details>`;
+  }).join("");
+}
+
+async function viewCase(id) {
+  let c = await api(`/cases/${id}`);
+  const openPanels = new Set();
+  const render = (focusAgent) => {
+    // While the pipeline runs, keep only the step that just finished expanded.
+    if (focusAgent) { openPanels.clear(); openPanels.add(focusAgent); }
+    else $app.querySelectorAll("details.panel[open]").forEach((d) => openPanels.add(d.dataset.agent));
+    const canRun = ["New", "Ready for Review"].includes(c.status) && !c.running;
+    $app.innerHTML = `
+      <div class="page-head">
+        <div>
+          <div class="muted small"><a href="#/queue">← Case queue</a> · Case #${c.id}</div>
+          <h1>${esc(c.title)}</h1>
+          <div>${esc(c.patient_name || "")} ${c.payer ? "· " + esc(c.payer) : ""} ${c.amount_at_stake ? "· <b>" + money(c.amount_at_stake) + "</b> at stake" : ""}</div>
+          <div style="margin-top:6px">${statusBadge(c.status, c.outcome)} ${typeBadge(c.denial_type)} ${strengthBadge(c.strength)} ${c.deadline ? `<span class="badge">${deadlineCell(c).replace(/<[^>]+>/g, "")}</span>` : ""} ${modeBadge(c.run_mode)}</div>
+        </div>
+        <div class="actions">
+          ${canRun ? `<button class="btn ${c.status === "New" ? "btn-lg" : "btn-ghost"}" id="run-btn">${c.status === "New" ? "▶ Run agent pipeline" : "↻ Re-run agents"}</button>` : ""}
+          ${c.status === "Ready for Review" ? `<a class="btn btn-lg btn-green" href="#/review/${c.id}">Staff review →</a>` : ""}
+        </div>
+      </div>
+      <div class="card">${pipelineHTML(c)}</div>
+      ${c.status === "New" ? `<div class="note info">Documents uploaded. Click <b>Run agent pipeline</b> to start the agent team.</div>` : ""}
+      ${["Submitted", "Closed"].includes(c.status) ? outcomeCardHTML(c) : ""}
+      <div id="panels">${panelsHTML(c, focusAgent)}</div>
+      <details class="panel"><summary>📄 Uploaded documents</summary><div class="body">
+        ${DOCS.map(([k, label]) => `<h3>${label}</h3><pre class="json" style="max-height:220px">${esc((c.documents || {})[k] || "(not provided)")}</pre>`).join("")}
+      </div></details>`;
+    openPanels.forEach((a) => { const d = $app.querySelector(`details.panel[data-agent="${a}"]`); if (d) d.open = true; });
+    const rb = document.getElementById("run-btn");
+    if (rb) rb.onclick = async () => {
+      rb.disabled = true;
+      try { await api(`/cases/${c.id}/run`, { method: "POST" }); c.running = true; c.status = "Running"; listen(); }
+      catch (e) { toast(e.message); rb.disabled = false; }
+    };
+    bindOutcome(c, async () => { c = await api(`/cases/${id}`); render(); });
+  };
+
+  const listen = () => {
+    if (activeStream) activeStream.close();
+    activeStream = openStream(c.id, {
+      step: (r) => {
+        c.runs = AGENT_ORDER.map((a) => (a === r.agent ? r : (c.runs || []).find((x) => x.agent === a) || { agent: a, status: "queued", label: a }));
+        render(r.status === "done" ? r.agent : undefined);
+      },
+      case: (d) => Object.assign(c, d),
+      done: async () => {
+        if (activeStream) { activeStream.close(); activeStream = null; }
+        c = await api(`/cases/${c.id}`);
+        render("qa");
+        toast(`Pipeline finished (${c.run_mode === "live" ? "live AI" : c.run_mode === "mixed" ? "partly demo - see step notes" : "demo mode"}). Ready for staff review.`, 5000);
+        refreshMode();
+      },
+    });
+  };
+
+  render();
+  if (c.running || c.status === "Running") listen();
+}
+
+function outcomeCardHTML(c) {
+  return `<div class="card" style="margin-top:12px">
+    <h2>Payer outcome</h2>
+    <p class="muted small">Submitted ${fmtDate(c.submitted_at)} by ${esc(c.approved_by || "staff")} (mock submission). Record the payer's decision when it arrives.</p>
+    <div class="actions">
+      <label>Amount recovered / approved $ <input type="number" id="rec-amt" value="${c.outcome === "Overturned" ? c.amount_recovered ?? c.amount_at_stake : c.amount_at_stake ?? 0}" style="width:130px"></label>
+      <button class="btn btn-green" data-outcome="Overturned">Overturned ✔</button>
+      <button class="btn btn-red" data-outcome="Upheld">Upheld ✖</button>
+      <button class="btn btn-ghost" data-outcome="Pending">Pending ⏳</button>
+      <span>Current: <b>${esc(c.outcome || "Pending")}</b>${c.outcome === "Overturned" ? ` · ${money(c.amount_recovered)} recovered` : ""}</span>
+    </div></div>`;
+}
+function bindOutcome(c, after) {
+  $app.querySelectorAll("[data-outcome]").forEach((b) => (b.onclick = async () => {
+    const amt = document.getElementById("rec-amt");
+    const body = { outcome: b.dataset.outcome };
+    if (b.dataset.outcome === "Overturned" && amt && amt.value !== "") body.amount_recovered = Number(amt.value);
+    try {
+      await api(`/cases/${c.id}/outcome`, { method: "PATCH", body });
+      toast(b.dataset.outcome === "Overturned" ? "Overturned! Recovery added to the practice and business totals." : `Outcome set to ${b.dataset.outcome}.`);
+      after();
+    } catch (e) { toast(e.message); }
+  }));
+}
+
+// ---------------------------------------------------------------- 5. staff review
+async function viewReview(id) {
+  const c = await api(`/cases/${id}`);
+  const out = Object.fromEntries((c.runs || []).filter((r) => r.output).map((r) => [r.agent, r.output]));
+  const qa = out.qa || {};
+  const ev = out.evidence || {};
+  const atts = c.attachments || (qa.attachments_checklist || []).map((a) => ({ ...a, checked: a.status === "in_file" }));
+  const locked = c.status !== "Ready for Review";
+  const counts = { met: 0, not_met: 0, missing_documentation: 0 };
+  (ev.criteria || []).forEach((x) => (counts[x.status] = (counts[x.status] || 0) + 1));
+  $app.innerHTML = `
+    <div class="page-head">
+      <div><div class="muted small"><a href="#/case/${c.id}">← Case #${c.id}</a></div>
+        <h1>Staff review: ${esc(c.patient_name || c.title)}</h1>
+        <div>${esc(c.title)} · ${esc(c.payer || "")} · ${money(c.amount_at_stake)} · deadline ${deadlineCell(c)}</div></div>
+      <div>${statusBadge(c.status, c.outcome)}</div>
+    </div>
+    ${locked ? `<div class="note">This case is ${esc(c.status)}; the letter is locked.</div>` : ""}
+    <div class="grid" style="grid-template-columns: 1.6fr 1fr">
+      <div class="card">
+        <div class="page-head" style="margin:0 0 8px"><h2 style="margin:0">Appeal letter ${c.draft_edited ? '<span class="badge b-purple">edited by staff</span>' : ""}</h2>
+          <span class="actions" style="margin:0"><button class="btn btn-ghost btn-sm" id="copy-letter">Copy letter</button>
+          ${BACKEND ? "" : `<a class="btn btn-ghost btn-sm" href="/cases/${c.id}/letter.txt">Download .txt</a>`}</span></div>
+        <textarea id="letter" rows="34" ${locked ? "readonly" : ""} style="font-family: var(--font-letter); font-size: 13.5px">${esc(c.draft_letter || "")}</textarea>
+        ${locked ? "" : `<div class="actions"><button class="btn btn-ghost" id="save-draft">Save edits</button><span id="save-state" class="muted small"></span></div>`}
+      </div>
+      <div>
+        <div class="card">
+          <h2>QA review ${qa.score != null ? `<span class="muted" style="font-weight:400">· ${qa.score}/100</span>` : ""}</h2>
+          <p class="small">${esc(qa.summary || "")}</p>
+          ${(qa.flags || []).map((f) => `<div class="flag ${f.severity}">${sevBadge(f.severity)} <b class="small">${esc(f.issue)}</b><div class="small">Fix: ${esc(f.suggested_fix)}</div></div>`).join("")}
+          ${qa.unsupported_claims && qa.unsupported_claims.length ? `<h3>Unsupported claims</h3><ul class="tight small">${qa.unsupported_claims.map((u) => `<li>${esc(u)}</li>`).join("")}</ul>` : ""}
+        </div>
+        <div class="card" style="margin-top:12px">
+          <h2>Attachments checklist</h2>
+          <div class="checklist">${atts.map((a, i) => `
+            <label><input type="checkbox" data-att="${i}" ${a.checked ? "checked" : ""} ${locked ? "disabled" : ""}>
+            <span>${esc(a.item)} ${a.required ? '<span class="badge b-red">required</span>' : ""} ${attStatus(a.status)}<br><span class="muted small">${esc(a.source)}</span></span></label>`).join("") || '<p class="muted">No attachments listed.</p>'}
+          </div>
+        </div>
+        <div class="card" style="margin-top:12px">
+          <h2>Criteria checklist</h2>
+          <p>${critBadge("met")} ${counts.met} &nbsp; ${critBadge("missing_documentation")} ${counts.missing_documentation} &nbsp; ${critBadge("not_met")} ${counts.not_met}</p>
+          <ul class="tight small">${(ev.criteria || []).map((x) => `<li>${critBadge(x.status)} ${esc(x.criterion)}</li>`).join("")}</ul>
+          <a class="small" href="#/case/${c.id}">See full evidence with citations →</a>
+        </div>
+        ${locked ? "" : `<div class="card" style="margin-top:12px">
+          <label class="field" for="approver">Approved by</label>
+          <input type="text" id="approver" value="M. Alvarez (Billing Lead)" style="width:100%">
+          <div class="actions"><button class="btn btn-lg btn-green" id="approve" style="width:100%">✔ Approve &amp; Mark Submitted</button></div>
+          <p class="muted small">Prototype: submission is mocked. Staff send the appeal through the payer's portal, fax or mail.</p>
+        </div>`}
+      </div>
+    </div>`;
+  document.getElementById("copy-letter").onclick = () => copyText(document.getElementById("letter").value, document.getElementById("letter"));
+  if (locked) return;
+  const save = async () => {
+    await api(`/cases/${c.id}/draft`, { method: "PATCH", body: { draft_letter: document.getElementById("letter").value } });
+    document.getElementById("save-state").textContent = "Saved " + new Date().toLocaleTimeString();
+  };
+  document.getElementById("save-draft").onclick = () => save().catch((e) => toast(e.message));
+  document.getElementById("approve").onclick = async () => {
+    $app.querySelectorAll("[data-att]").forEach((cb) => (atts[cb.dataset.att].checked = cb.checked));
+    const missing = atts.filter((a) => a.required && !a.checked);
+    if (missing.length && !(await confirmBox(`${missing.length} required attachment(s) not checked:\n\n- ${missing.map((m) => m.item).join("\n- ")}\n\nApprove anyway?`, "Approve anyway"))) return;
+    try {
+      if (document.getElementById("letter").value !== (c.draft_letter || "")) await save();
+      await api(`/cases/${c.id}/approve`, { method: "POST", body: { approved_by: document.getElementById("approver").value || "Office staff", attachments: atts } });
+      toast("Approved and marked Submitted.");
+      navigate(`#/case/${c.id}`);
+    } catch (e) { toast(e.message); }
+  };
+}
+
+// ---------------------------------------------------------------- 6. outcomes & business
+async function viewBusiness() {
+  const [m, cases] = await Promise.all([api("/metrics"), api("/cases")]);
+  const b = m.business;
+  const pending = cases.filter((c) => c.status === "Submitted");
+  const closed = cases.filter((c) => c.status === "Closed");
+  const maxRec = Math.max(1, ...b.practices.map((p) => p.dollars_recovered));
+  $app.innerHTML = `
+    <div class="page-head"><div><h1>Outcomes &amp; business view</h1><div class="muted">How case outcomes roll up into practice value and our subscription revenue (hypothetical practices, fictional data).</div></div></div>
+
+    <div class="card">
+      <h2>Record outcomes</h2>
+      ${pending.length ? `<table><thead><tr><th>Patient / case</th><th>Payer</th><th class="num">At stake</th><th>Submitted</th><th>Mark result</th></tr></thead><tbody>
+        ${pending.map((c) => `<tr><td><a href="#/case/${c.id}"><b>${esc(c.patient_name || "")}</b></a><div class="muted small">${esc(c.title)}</div></td>
+          <td>${esc(c.payer || "")}</td><td class="num">${money(c.amount_at_stake)}</td><td>${fmtDate(c.submitted_at)}</td>
+          <td><button class="btn btn-green btn-sm" data-q="${c.id}" data-o="Overturned">Overturned</button>
+              <button class="btn btn-red btn-sm" data-q="${c.id}" data-o="Upheld">Upheld</button></td></tr>`).join("")}
+      </tbody></table>` : `<p class="muted">No submitted appeals are awaiting a payer decision.</p>`}
+      ${closed.length ? `<h3>Closed in the app</h3><ul class="tight">${closed.map((c) => `<li><a href="#/case/${c.id}">${esc(c.patient_name || "")}</a>, ${esc(c.title)}: ${statusBadge(c.status, c.outcome)} ${c.outcome === "Overturned" ? money(c.amount_recovered) + " recovered" : ""}</li>`).join("")}</ul>` : ""}
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><div class="label">Our MRR</div><div class="value">${money(b.mrr)}</div><div class="sub">${b.practices.length} practices</div></div>
+      <div class="kpi"><div class="label">Our ARR (run-rate)</div><div class="value">${money(b.arr)}</div><div class="sub">MRR × 12</div></div>
+      <div class="kpi"><div class="label">Recovered for practices</div><div class="value">${money(b.total_recovered)}</div><div class="sub">last 90 days, all practices</div></div>
+      <div class="kpi"><div class="label">Staff hours saved</div><div class="value">${Math.round(b.total_hours_saved).toLocaleString()}</div><div class="sub">last 90 days, all practices</div></div>
+    </div>
+
+    <div class="card">
+      <h2>Practice value (last 90 days)</h2>
+      <table><thead><tr><th>Practice</th><th>Plan</th><th class="num">Fee / mo</th><th class="num">Appeals used (mo)</th><th class="num">Overturn rate</th>
+        <th class="num">$ recovered</th><th class="num">Staff hours saved</th><th class="num">Value ÷ cost</th></tr></thead><tbody>
+        ${b.practices.map((p) => `<tr><td><b>${esc(p.name)}</b> ${p.live ? '<span class="badge b-blue">this demo</span>' : ""}<div class="muted small">${p.surgeons} surgeons</div></td>
+          <td>${esc(p.tier)}</td><td class="num">${money(p.price_per_month)}</td><td class="num">${p.appeals_used} / ${p.appeals_limit ?? "∞"}</td>
+          <td class="num">${p.overturn_rate}%</td><td class="num"><b>${money(p.dollars_recovered)}</b></td>
+          <td class="num">${p.staff_hours_saved} <span class="muted small">(${money(p.staff_cost_saved)})</span></td><td class="num"><b>${p.roi_multiple}×</b></td></tr>`).join("")}
+      </tbody></table>
+      <p class="muted small">Value ÷ cost = (dollars recovered + staff time saved at ${money(b.pricing.staff_cost_per_hour)}/hr) ÷ 3 months of subscription.
+        Staff time assumes ${b.pricing.manual_minutes_per_appeal} min per appeal manually vs ${b.pricing.assisted_minutes_per_appeal} min with the agent team. Riverbend's numbers update live as you record outcomes.</p>
+      <h3>Dollars recovered vs. subscription cost (90 days)</h3>
+      ${b.practices.map((p) => `
+        <div class="hbar"><div class="lbl">${esc(p.name)}</div><div class="track"><div class="fill" style="width:${(100 * p.dollars_recovered) / maxRec}%"></div></div><div class="val">${money(p.dollars_recovered)}</div></div>
+        <div class="hbar"><div class="lbl muted small">subscription (3 mo)</div><div class="track"><div class="fill" style="width:${(100 * p.price_per_month * 3) / maxRec}%; background:var(--red)"></div></div><div class="val muted">${money(p.price_per_month * 3)}</div></div>`).join("")}
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h2>Subscription tiers <span class="muted small" style="font-weight:400">(placeholders: edit config/pricing.json)</span></h2>
+      <table><thead><tr><th>Tier</th><th class="num">Appeals / month</th><th class="num">Price / month</th><th class="num">Practices on tier</th><th class="num">MRR</th></tr></thead><tbody>
+        ${b.pricing.tiers.map((t) => { const n = b.practices.filter((p) => p.tier === t.name).length; return `<tr><td><b>${esc(t.name)}</b></td><td class="num">${t.appeals_per_month ?? "Unlimited"}</td><td class="num">${money(t.price_per_month)}</td><td class="num">${n}</td><td class="num">${money(n * t.price_per_month)}</td></tr>`; }).join("")}
+      </tbody></table>
+    </div>`;
+  $app.querySelectorAll("[data-q]").forEach((btn) => (btn.onclick = async () => {
+    await api(`/cases/${btn.dataset.q}/outcome`, { method: "PATCH", body: { outcome: btn.dataset.o } });
+    toast(`Marked ${btn.dataset.o}.`);
+    viewBusiness();
+  }));
+}
+
+// ---------------------------------------------------------------- boot
+refreshMode().catch(() => {});
+route();
+
+</script>
+</body>
+</html>
