@@ -1,0 +1,17 @@
+{
+  "denial_type": "coding_billing",
+  "denial_type_rationale": "Line-level NCCI bundling denial (CO-97) caused by a missing distinct-procedural-service modifier; not a clinical or coverage dispute.",
+  "winnability": "strong",
+  "winnability_score": 90,
+  "reasons_for": [
+    "The 29881/29876 edit has modifier indicator 1, so it can be bypassed with a supported XS/59 modifier.",
+    "The op note explicitly documents synovectomy of the suprapatellar pouch, patellofemoral compartment and lateral gutter, and states 'No synovectomy was performed in the medial compartment.'",
+    "The payer's own policy RP-114 Section 4 lists exactly these conditions for separate reimbursement.",
+    "Pathology confirms proliferative synovitis, and the MRI documented it beforehand."
+  ],
+  "reasons_against": [
+    "A corrected claim must be received within 90 days of the remittance date."
+  ],
+  "recommended_strategy": "Submit a corrected claim (frequency code 7) with 29876-XS-RT and the operative report attached, plus a short cover letter citing RP-114 Section 4.",
+  "route_to_coding_check": true
+}

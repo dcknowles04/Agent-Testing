@@ -1,0 +1,19 @@
+*** FICTIONAL DATA - PROTOTYPE DEMONSTRATION ONLY ***
+
+CLAIM SUMMARY (CMS-1500 data from practice management system)
+Billing provider: Riverbend Orthopedic Associates (in-office imaging)
+Rendering / ordering provider: Samuel Okafor, MD (Orthopaedic Spine)
+Patient: Raymond Toller   DOB: 08/02/1978   Sex: M
+Payer: Crestview Mutual Health   Member ID: CMH-30219844
+Claim #: CMH-25-7781203   Submitted: {{CLAIM_SUBMITTED}} (electronic)
+Prior authorization: Not required for this plan's in-office MRI at the time of service (per
+payer eligibility check on {{VISIT2}}; reference CMH-ELIG-55120).
+
+Line  DOS          CPT    Mod  ICD-10 pointers     Units  Charge
+1     {{DOS}}  72148  -    M54.16, M51.16      1      $1,850.00
+
+ICD-10:
+  M54.16  Radiculopathy, lumbar region
+  M51.16  Intervertebral disc disorders with radiculopathy, lumbar region
+
+Total billed: $1,850.00   Paid: $0.00   Patient responsibility: $0.00 (pending appeal)

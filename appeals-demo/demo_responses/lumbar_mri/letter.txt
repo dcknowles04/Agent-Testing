@@ -1,0 +1,61 @@
+Riverbend Orthopedic Associates
+1200 Riverbend Parkway, Suite 300
+Fairhaven, ST 00000
+
+{{TODAY|long}}
+
+Crestview Mutual Health
+Provider Appeals
+88 Harbor Row
+Brookfield, ST 00000
+
+RE: First-level provider appeal - medical necessity
+Patient: Raymond Toller    DOB: 08/02/1978    Member ID: CMH-30219844
+Claim #: CMH-25-7781203    Date of service: {{DOS|long}}
+Service: MRI lumbar spine without contrast, CPT 72148
+Diagnoses: M54.16, M51.16
+Denial date: {{DENIAL_DATE|long}} (CARC 50, RARC N115)
+
+Dear Appeals Reviewer:
+
+We request reversal of the medical necessity denial for the lumbar MRI performed on
+{{DOS|long}}. The denial states that no red-flag findings were identified. The enclosed
+records show that Mr. Toller developed a new and progressing motor deficit before the MRI
+was ordered, which meets Clinical Guideline CG-RAD-12, Indication B1, "Progressive or
+severe neurological deficit (e.g., new or worsening motor weakness)." Under Indication B1,
+no conservative-therapy period is required.
+
+Serial examinations document the progression, as the guideline requests:
+- {{VISIT1|long}} (Enclosure 1): strength 5/5 throughout, including the left extensor
+  hallucis longus and ankle dorsiflexion; left L5 sensory change only.
+- {{VISIT2|long}} (Enclosure 2): left EHL 4/5 and left ankle dorsiflexion 4+/5, with the
+  patient reporting that his "foot slaps when tired." Dr. Okafor documented a "NEW motor
+  deficit... progressing since the initial exam despite conservative care."
+
+His treating physical therapist independently recorded new difficulty with heel walking
+on the left on {{PT_LAST|long}} and referred him back to the physician (Enclosure 3).
+This decline occurred despite oral steroids, scheduled naproxen, activity modification and
+six physical therapy visits.
+
+The MRI confirmed the clinical concern: a 9 mm left paracentral L4-5 disc extrusion
+compressing the traversing left L5 nerve root, concordant with his deficit (Enclosure 4).
+The study was ordered to determine whether epidural steroid injection or surgical referral
+was needed, which is also consistent with Indication C (pre-procedural planning).
+
+A new motor deficit from nerve root compression is exactly the situation in which
+CG-RAD-12 calls for prompt imaging rather than waiting out a six-week course of therapy.
+We respectfully request that the claim be reprocessed for payment.
+
+Sincerely,
+
+[Physician signature]
+Samuel Okafor, MD
+Orthopaedic Spine Surgery
+Riverbend Orthopedic Associates
+
+Enclosures:
+1. New patient visit note ({{VISIT1}})
+2. Follow-up visit note ({{VISIT2}})
+3. Physical therapy progress note ({{PT_LAST}})
+4. MRI lumbar spine report ({{DOS}})
+5. Copy of the EOB dated {{DENIAL_DATE}}

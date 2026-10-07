@@ -1,0 +1,22 @@
+*** FICTIONAL DATA - PROTOTYPE DEMONSTRATION ONLY ***
+
+PRIOR AUTHORIZATION REQUEST SUMMARY (from practice management system)
+Practice: Riverbend Orthopedic Associates  |  NPI: 0000000001 (placeholder)
+Rendering surgeon: Elena Marsh, MD (Orthopaedic Surgery - Adult Reconstruction)
+
+Patient: Dorothy Kessler   DOB: 03/14/1958   Sex: F
+Payer: Summit Health Plan   Member ID: SHP-448210937   Group: 77120
+Authorization reference #: SHP-PA-118734
+PA request submitted: {{PA_REQUEST}} via payer portal
+Records attached to original request: Surgical consult note ({{CONSULT}}), Knee X-ray report ({{XRAY}})
+Records NOT attached: Northgate Physical Therapy notes, injection procedure notes
+
+Requested services
+Line  CPT    Mod  Description                                   ICD-10   Est. charge
+1     27447  RT   Arthroplasty, knee, condyle and plateau;     M17.11   $6,850.00
+                  medial AND lateral compartments (TKA)
+2     Facility fee - Riverbend Surgery Center (est.)                  M17.11   $29,950.00
+
+Total estimated charges: $36,800.00
+Planned date of service: {{PLANNED_DOS}}
+Place of service: 24 (Ambulatory surgical center)

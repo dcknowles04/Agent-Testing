@@ -1,0 +1,33 @@
+*** ILLUSTRATIVE POLICY - FICTIONAL PAYER - NOT A REAL COVERAGE POLICY ***
+
+SUMMIT HEALTH PLAN
+Medical Policy MP-ORTHO-031: Total Knee Arthroplasty (Illustrative)
+Effective: 01/01 of current plan year
+
+Summit Health Plan considers primary total knee arthroplasty (CPT 27447) medically
+necessary when ALL of the following criteria are met:
+
+Criterion 1 - Imaging. Weight-bearing radiographs within the past 12 months demonstrate
+advanced arthritis: Kellgren-Lawrence grade 3 or 4, OR bone-on-bone articulation, OR
+severe joint space narrowing.
+
+Criterion 2 - Function. Moderate to severe pain and functional impairment interfering with
+activities of daily living for at least 3 months, documented with a validated outcome
+measure (e.g., KOOS JR, WOMAC) or a detailed functional description.
+
+Criterion 3 - Conservative care. Failure of at least 12 weeks of non-operative treatment
+within the past 12 months, including at least TWO of the following:
+  a) supervised physical therapy or a documented home exercise program;
+  b) NSAIDs or other analgesics, unless contraindicated;
+  c) intra-articular injection (corticosteroid or viscosupplement);
+  d) weight-loss counseling when BMI is 30 or greater; activity modification or an
+     assistive device.
+Documentation must include dates and response to treatment. Physical therapy must be
+supported by therapy notes or a discharge summary.
+
+Criterion 4 - BMI below 40, or a documented optimization plan.
+
+Criterion 5 - No active local or systemic infection; for patients with diabetes, HbA1c
+below 8.0% within the past 3 months.
+
+Criterion 6 - Documented shared decision-making between the surgeon and the patient.

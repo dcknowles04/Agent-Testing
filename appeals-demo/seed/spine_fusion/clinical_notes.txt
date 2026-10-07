@@ -1,0 +1,44 @@
+*** FICTIONAL CLINICAL RECORD - PROTOTYPE DEMONSTRATION ONLY ***
+Patient: Gerald Whitcomb   DOB: 01/30/1967   MRN: RB-51207
+
+=====================================================================
+NOTE 1 - PHYSICAL THERAPY DISCHARGE SUMMARY - {{PT_END}}
+Riverbend in-house PT. Start of care {{PT_START}}; 18 visits over 9 weeks. Core
+stabilization, flexion-based program, aerobic conditioning. Walking tolerance unchanged
+at about 10 minutes before leg symptoms. ODI 46% -> 44%. Discharged to HEP; plateaued.
+
+=====================================================================
+NOTE 2 - EPIDURAL STEROID INJECTIONS
+{{ESI1}}: L4-5 interlaminar ESI - about 40% relief for 3 weeks.
+{{ESI2}}: L4-5 transforaminal ESI, bilateral - relief for less than 2 weeks.
+
+=====================================================================
+NOTE 3 - MRI LUMBAR SPINE - {{MRI}}
+Grade I anterolisthesis of L4 on L5 (about 6 mm) with facet arthropathy and facet
+effusions. Severe central canal stenosis and moderate bilateral foraminal stenosis at
+L4-5. Other levels mild degenerative change.
+
+=====================================================================
+NOTE 4 - FLEXION-EXTENSION RADIOGRAPHS LUMBAR SPINE - {{FLEXEX}}
+Radiologist: D. Ambrose, MD
+Neutral: 6 mm anterolisthesis L4 on L5. Flexion: 8.5 mm. Extension: 5.0 mm.
+Dynamic translation: 3.5 mm. Sagittal angulation change at L4-5: 11 degrees between
+flexion and extension.
+Impression: Grade I degenerative spondylolisthesis L4-5 with dynamic translation of 3.5 mm
+and segmental angular motion of 11 degrees, suggestive of instability.
+
+=====================================================================
+NOTE 5 - SURGICAL CONSULTATION - {{CONSULT}}
+Provider: Samuel Okafor, MD
+58-year-old man with 14 months of bilateral buttock and leg pain with standing and walking
+(neurogenic claudication), left worse than right; walking tolerance about 1 block. ODI 48%.
+Failed 9 weeks of PT, NSAIDs, gabapentin and 2 ESIs.
+Exam: Strength 5/5, decreased sensation left L5, negative SLR. Reflexes 1+ symmetric.
+Social: Former smoker (1 pack/day for 30 years). Patient reports he quit about 7 weeks ago
+({{QUIT}}). Using nicotine patch for the first 3 weeks; none since. Cotinine level ordered
+today - RESULT PENDING at the time of this note.
+Assessment: L4-5 degenerative spondylolisthesis with stenosis and dynamic instability
+(3.5 mm translation, 11 degrees angular motion), failed more than 6 months of conservative
+care.
+Plan: L4-5 TLIF with decompression. Smoking cessation reinforced; surgery contingent on a
+negative cotinine test.

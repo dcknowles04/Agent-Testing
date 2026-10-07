@@ -1,0 +1,18 @@
+{
+  "findings": [
+    {"issue": "Missing distinct-procedural-service modifier on 29876", "severity": "high", "explanation": "29876 is column 2 to 29881 in the NCCI PTP edits, with modifier indicator 1. Without XS or 59 the line bundles automatically. The op note supports XS (separate structure): the synovectomy was performed in the suprapatellar pouch, patellofemoral compartment and lateral gutter, all separate from the medial meniscectomy."},
+    {"issue": "Diagnosis pointer for line 2 is correct", "severity": "low", "explanation": "M65.861 (synovitis, right lower leg) supports 29876; keep it as the primary pointer for line 2."},
+    {"issue": "Laterality present", "severity": "low", "explanation": "RT is correctly appended on both lines; keep it."}
+  ],
+  "original_lines": [
+    {"cpt": "29881", "modifiers": ["RT"], "icd10": ["M23.221"], "billed": 5900},
+    {"cpt": "29876", "modifiers": ["RT"], "icd10": ["M65.861"], "billed": 2850}
+  ],
+  "corrected_lines": [
+    {"cpt": "29881", "modifiers": ["RT"], "icd10": ["M23.221"], "billed": 5900},
+    {"cpt": "29876", "modifiers": ["XS", "RT"], "icd10": ["M65.861"], "billed": 2850}
+  ],
+  "recommendation": "both",
+  "appeal_argument": "Per Pinnacle RP-114 Section 4, 29876 is separately reimbursable with 29881 when the synovectomy is performed in a separate compartment, the op note documents it, and XS/59 is billed. The operative report documents major synovectomy of the suprapatellar pouch, patellofemoral compartment and lateral gutter through a separate superolateral portal, and states that no synovectomy was performed in the medial compartment where the meniscectomy occurred. Line 2 has been corrected to 29876-XS-RT.",
+  "documentation_support": "Op note: 'major synovectomy of the lateral compartment/lateral gutter, suprapatellar pouch and patellofemoral compartment'; 'No synovectomy was performed in the medial compartment'; separate superolateral portal; about 25 minutes added. Pathology: chronic proliferative synovitis."
+}

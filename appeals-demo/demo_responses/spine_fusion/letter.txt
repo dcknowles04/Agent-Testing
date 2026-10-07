@@ -1,0 +1,58 @@
+Riverbend Orthopedic Associates
+1200 Riverbend Parkway, Suite 300
+Fairhaven, ST 00000
+
+{{TODAY|long}}
+
+Meridian Valley Health Plan
+Appeals & Grievances
+3300 Valley Center Dr
+Mesa Verde, ST 00000
+Via fax: (555) 010-7720
+
+RE: Appeal of prior authorization denial
+Member: Gerald Whitcomb    DOB: 01/30/1967    Member ID: MVH-60718832
+UM case #: MVH-UM-2025-40215
+Requested: L4-L5 TLIF - CPT 22633, 22853, 22840
+Diagnoses: M43.16, M48.062
+Denial date: {{DENIAL_DATE|long}}
+
+Dear Appeals Reviewer:
+
+I request reversal of the denial of the L4-L5 fusion for my patient, Mr. Gerald Whitcomb.
+The denial cited Criteria 1 and 5 of Medical Policy MVP-SP-07. Your reviewer agreed that
+Criteria 2, 3 and 4 are met. Both remaining criteria are also satisfied.
+
+Criterion 1 - Instability. MVP-SP-07 requires translation of 4 mm or more, OR angular
+motion of 10 degrees or more, on flexion-extension radiographs. The denial considered only
+translation (3.5 mm). The same flexion-extension study dated {{FLEXEX|long}} documents
+"sagittal angulation change at L4-5: 11 degrees between flexion and extension," and the
+radiologist's impression is segmental motion "suggestive of instability" (Enclosure 1).
+Eleven degrees exceeds the 10-degree threshold, so Criterion 1 is met.
+
+Criterion 5 - Nicotine. Mr. Whitcomb stopped smoking on {{QUIT|long}}, more than six weeks
+before the planned surgery, and has used no nicotine replacement since his first three
+weeks. His cotinine test is negative (Enclosure 2), confirming abstinence as the policy
+requires.
+
+For completeness: Mr. Whitcomb has 14 months of neurogenic claudication with an ODI of 48%
+and walking tolerance of about one block. He failed 18 physical therapy visits, NSAIDs,
+gabapentin and two epidural steroid injections, and his MRI shows severe L4-5 central
+stenosis with grade I spondylolisthesis (Enclosures 3 and 4).
+
+All five criteria of MVP-SP-07 are met. I request approval of the procedure and am
+available for a peer-to-peer discussion.
+
+Sincerely,
+
+[Surgeon signature]
+Samuel Okafor, MD
+Orthopaedic Spine Surgery
+Riverbend Orthopedic Associates
+
+Enclosures:
+1. Flexion-extension radiograph report ({{FLEXEX}})
+2. Cotinine laboratory result
+3. Surgical consultation note ({{CONSULT}})
+4. MRI lumbar spine report ({{MRI}})
+5. Copy of the denial notice dated {{DENIAL_DATE}}

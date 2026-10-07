@@ -1,0 +1,49 @@
+{
+  "policy_name": "Meridian Valley Health Plan MVP-SP-07: Lumbar Spinal Fusion (illustrative)",
+  "criteria": [
+    {
+      "criterion": "Criterion 1 - Instability: 4 mm or more translation OR 10 degrees or more of angular motion on flexion-extension films",
+      "status": "met",
+      "evidence": "Translation is 3.5 mm (below 4 mm), but angular motion is 11 degrees, which meets the alternative threshold.",
+      "citation": {"document": "clinical_notes", "section": "Note 4 - Flexion-extension radiographs {{FLEXEX}}", "excerpt": "Sagittal angulation change at L4-5: 11 degrees between flexion and extension."},
+      "action_needed": "Quote the angulation finding and the policy's 'OR' language."
+    },
+    {
+      "criterion": "Criterion 2 - Neurogenic claudication or radiculopathy with ODI of 40% or more for 3+ months",
+      "status": "met",
+      "evidence": "14 months of neurogenic claudication; ODI 48%; walking tolerance about 1 block.",
+      "citation": {"document": "clinical_notes", "section": "Note 5 - Surgical consultation {{CONSULT}}", "excerpt": "14 months of bilateral buttock and leg pain with standing and walking... ODI 48%."},
+      "action_needed": "None (the payer agreed)."
+    },
+    {
+      "criterion": "Criterion 3 - 3+ months of conservative care, including PT plus medications or injections",
+      "status": "met",
+      "evidence": "18 PT visits over 9 weeks, NSAIDs, gabapentin and 2 ESIs over more than 6 months.",
+      "citation": {"document": "clinical_notes", "section": "Note 1 - PT discharge summary {{PT_END}}", "excerpt": "18 visits over 9 weeks... Discharged to HEP; plateaued."},
+      "action_needed": "None (the payer agreed)."
+    },
+    {
+      "criterion": "Criterion 4 - MRI/CT showing stenosis at the operative level",
+      "status": "met",
+      "evidence": "MRI shows severe central and moderate bilateral foraminal stenosis at L4-5.",
+      "citation": {"document": "clinical_notes", "section": "Note 3 - MRI lumbar spine {{MRI}}", "excerpt": "Severe central canal stenosis and moderate bilateral foraminal stenosis at L4-5."},
+      "action_needed": "None (the payer agreed)."
+    },
+    {
+      "criterion": "Criterion 5 - 6+ weeks nicotine abstinence confirmed by a negative cotinine test",
+      "status": "missing_documentation",
+      "evidence": "The patient reports quitting on {{QUIT}} (more than 6 weeks ago); the cotinine test was ordered at the consult but the result was pending.",
+      "citation": {"document": "clinical_notes", "section": "Note 5 - Surgical consultation {{CONSULT}}", "excerpt": "Cotinine level ordered today - RESULT PENDING at the time of this note."},
+      "action_needed": "Obtain and attach the cotinine result. Do not file without it."
+    }
+  ],
+  "overall_assessment": "Criterion 1 was misapplied by the reviewer and is met on angulation (11 degrees). Criteria 2-4 are met. The appeal stands or falls on a negative cotinine result for Criterion 5.",
+  "documents_to_attach": [
+    "Flexion-extension radiograph report ({{FLEXEX}})",
+    "Negative cotinine lab result (to obtain)",
+    "Surgical consultation note ({{CONSULT}})",
+    "MRI report ({{MRI}})",
+    "PT discharge summary and ESI notes"
+  ],
+  "gaps": ["The cotinine result is not in the record.", "Translation alone (3.5 mm) does not meet the threshold."]
+}

@@ -1,0 +1,19 @@
+*** FICTIONAL CLINICAL RECORD - PROTOTYPE DEMONSTRATION ONLY ***
+Patient: Lorraine Batiste   DOB: 06/09/1964   MRN: RB-29044
+
+=====================================================================
+NOTE 1 - OPERATIVE REPORT - {{DOS}}
+Surgeon: Elena Marsh, MD     Facility: Riverbend Surgery Center
+Procedures: 1) Right shoulder arthroscopic rotator cuff repair (supraspinatus, double-row,
+3 anchors). 2) Arthroscopic subacromial decompression with acromioplasty.
+Findings: Full-thickness 2.5 cm crescent-shaped supraspinatus tear; type II acromion with
+subacromial spurring. Biceps intact.
+Prior authorization: Approved, Harborview auth #HHP-AUTH-662190 (valid for this DOS).
+
+=====================================================================
+NOTE 2 - BILLING OFFICE MEMO (internal) - {{FOLLOWUP_CALL}}
+From: K. Lindqvist, A/R specialist
+The claim was not on the payer's file when called. Our clearinghouse shows a 999
+acceptance for batch RB-0617-02, but we cannot find a 277CA from Harborview. Possible
+payer-connection outage that month (other Harborview claims from the same week were
+also delayed). Resubmitting today. Will request the ClearPath payer-connection report.

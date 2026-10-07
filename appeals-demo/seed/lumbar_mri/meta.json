@@ -1,0 +1,11 @@
+{
+  "key": "lumbar_mri",
+  "title": "Lumbar MRI - medical necessity denial",
+  "label": "Lumbar MRI (medical necessity) - borderline",
+  "practice_id": 1,
+  "dates": {
+    "ONSET": -100, "VISIT1": -92, "PT_START": -88, "PT_LAST": -66, "VISIT2": -63,
+    "DOS": -62, "CLAIM_SUBMITTED": -58, "DENIAL_DATE": -50
+  },
+  "seed_state": {"status": "Ready for Review"}
+}

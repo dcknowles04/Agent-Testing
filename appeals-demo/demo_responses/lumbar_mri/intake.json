@@ -1,0 +1,26 @@
+{
+  "patient_name": "Raymond Toller",
+  "patient_dob": "1978-08-02",
+  "member_id": "CMH-30219844",
+  "payer_name": "Crestview Mutual Health",
+  "claim_or_reference_number": "CMH-25-7781203",
+  "rendering_provider": "Samuel Okafor, MD",
+  "procedure_description": "MRI lumbar spine without contrast",
+  "cpt_codes": [{"code": "72148", "description": "MRI, spinal canal and contents, lumbar; without contrast material", "modifiers": []}],
+  "icd10_codes": [
+    {"code": "M54.16", "description": "Radiculopathy, lumbar region"},
+    {"code": "M51.16", "description": "Intervertebral disc disorders with radiculopathy, lumbar region"}
+  ],
+  "date_of_service": "{{DOS|iso}}",
+  "denial_date": "{{DENIAL_DATE|iso}}",
+  "billed_amount": 1850,
+  "amount_at_stake": 1850,
+  "stated_denial_reason": "Not medically necessary under CG-RAD-12: symptom duration was under 6 weeks of conservative therapy and no red-flag findings were identified.",
+  "denial_codes": [
+    {"code": "CARC 50", "description": "Non-covered: not deemed a medical necessity by the payer"},
+    {"code": "RARC N115", "description": "Decision based on a Local/Plan Clinical Guideline"}
+  ],
+  "appeal_window_days": 60,
+  "appeal_submission_method": "Crestview Mutual Health, Provider Appeals, 88 Harbor Row, Brookfield, ST 00000, or upload via the CrestLink provider portal.",
+  "summary": "A post-service lumbar MRI was denied for medical necessity because the payer saw under 6 weeks of conservative care and no red flags. The chart documents a new, progressive L5 motor deficit on the visit before the MRI."
+}

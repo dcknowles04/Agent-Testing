@@ -1,0 +1,17 @@
+{
+  "overall": "needs_attention",
+  "score": 70,
+  "flags": [
+    {"severity": "high", "issue": "The letter states the cotinine test is negative, but the record shows the result as PENDING.", "location": "Criterion 5 paragraph; Enclosure 2", "suggested_fix": "Confirm a negative result and attach it before submitting. If it is not negative, do not send this letter."},
+    {"severity": "low", "issue": "Surgeon signature placeholder.", "location": "Signature block", "suggested_fix": "Have Dr. Okafor sign."}
+  ],
+  "unsupported_claims": ["'His cotinine test is negative' - the result is not in the uploaded record."],
+  "attachments_checklist": [
+    {"item": "Flexion-extension radiograph report ({{FLEXEX}})", "source": "clinical_notes - Note 4", "required": true, "status": "in_file"},
+    {"item": "Negative cotinine lab result", "source": "Lab / EHR", "required": true, "status": "needs_upload"},
+    {"item": "Surgical consultation note ({{CONSULT}})", "source": "clinical_notes - Note 5", "required": true, "status": "in_file"},
+    {"item": "MRI report ({{MRI}})", "source": "clinical_notes - Note 3", "required": true, "status": "in_file"},
+    {"item": "Denial notice ({{DENIAL_DATE}})", "source": "denial_letter", "required": false, "status": "in_file"}
+  ],
+  "summary": "The instability argument is strong: the reviewer overlooked the 10-degree alternative. The letter cannot be submitted until a negative cotinine result is confirmed and attached."
+}

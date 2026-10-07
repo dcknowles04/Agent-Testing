@@ -1,0 +1,17 @@
+{
+  "subject_line": "First-level appeal - Raymond Toller - Claim CMH-25-7781203 - MRI lumbar spine (72148)",
+  "letter_text": "@letter.txt",
+  "key_arguments": [
+    "CG-RAD-12 Indication B1 waives the 6-week conservative therapy requirement for a progressive neurological deficit.",
+    "Serial exams document new left EHL (5/5 to 4/5) and dorsiflexion (5/5 to 4+/5) weakness between {{VISIT1}} and {{VISIT2}}.",
+    "The physical therapist independently documented new heel-walk difficulty.",
+    "The MRI found a 9 mm L4-5 extrusion compressing the left L5 root, concordant with the deficit, and was ordered to plan intervention."
+  ],
+  "enclosures": [
+    "New patient visit note ({{VISIT1}})",
+    "Follow-up visit note ({{VISIT2}})",
+    "Physical therapy progress note ({{PT_LAST}})",
+    "MRI lumbar spine report ({{DOS}})",
+    "Copy of the EOB dated {{DENIAL_DATE}}"
+  ]
+}

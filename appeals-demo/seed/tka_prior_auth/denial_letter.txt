@@ -1,0 +1,39 @@
+*** FICTIONAL DOCUMENT - PROTOTYPE DEMONSTRATION ONLY ***
+
+SUMMIT HEALTH PLAN
+Utilization Management Department
+PO Box 4400, Lakemont, ST 00000   |   Fax (555) 010-4471
+
+NOTICE OF ADVERSE DETERMINATION - PRIOR AUTHORIZATION
+
+Date of notice: {{DENIAL_DATE}}
+
+To: Elena Marsh, MD - Riverbend Orthopedic Associates
+Member: Dorothy Kessler          DOB: 03/14/1958
+Member ID: SHP-448210937          Group: 77120
+Authorization reference #: SHP-PA-118734
+Requested service: Total knee arthroplasty, right knee (CPT 27447-RT)
+Diagnosis: M17.11 Unilateral primary osteoarthritis, right knee
+Requested date of service: {{PLANNED_DOS}}
+Facility: Riverbend Surgery Center (in network)
+
+DETERMINATION: DENIED
+
+Reason for denial (denial code PA-DN-14 - Clinical criteria not met / insufficient documentation):
+Summit Health Plan reviewed the request against Medical Policy MP-ORTHO-031, Total Knee
+Arthroplasty. The policy requires documented failure of at least 12 weeks of non-operative
+treatment within the past 12 months (Criterion 3). The records submitted reference prior
+physical therapy, but no physical therapy notes were provided documenting the dates,
+frequency, duration or response to therapy. The reviewer was unable to confirm that
+Criterion 3 was met. All other criteria were not evaluated in full because Criterion 3 was
+not met.
+
+This decision was made by a licensed physician reviewer (Board certified, Orthopaedic Surgery).
+
+YOUR RIGHT TO APPEAL
+You or the member may request an appeal within 60 calendar days of the date of this notice.
+Submit the appeal with any additional medical records that support the request to:
+  Summit Health Plan - Appeals Unit, PO Box 4410, Lakemont, ST 00000
+  Fax: (555) 010-4480   |   Provider portal: Appeals > New pre-service appeal
+Standard pre-service appeals are decided within 30 calendar days. A peer-to-peer review may
+be requested within 14 days of this notice by calling (555) 010-4400.

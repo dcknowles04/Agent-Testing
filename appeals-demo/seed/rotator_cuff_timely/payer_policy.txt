@@ -1,0 +1,18 @@
+*** ILLUSTRATIVE POLICY - FICTIONAL PAYER - NOT A REAL PROVIDER MANUAL ***
+
+HARBORVIEW HEALTH PARTNERS
+Provider Manual, Section 7: Claims Submission (Illustrative)
+
+7.1 Filing limit. Participating providers must submit clean claims so that they are
+received by Harborview within 90 days of the date of service.
+
+7.4 Proof of timely filing. A timely filing denial will be overturned when the provider
+submits ONE of the following showing receipt within the filing limit:
+  a) a Harborview 277CA claim acknowledgment or a Harborview-issued claim number;
+  b) a clearinghouse payer-connection / acceptance report showing the claim was
+     transmitted to AND accepted by Harborview (not only accepted by the clearinghouse);
+  c) Harborview correspondence (e.g., a request for records) that references the claim.
+A 999 acknowledgment or a clearinghouse-level acceptance alone is NOT sufficient.
+
+7.6 Exceptions. Harborview may waive the filing limit for documented Harborview system or
+connectivity outages affecting claim receipt, upon review of supporting evidence.

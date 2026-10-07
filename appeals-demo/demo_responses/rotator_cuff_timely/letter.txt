@@ -1,0 +1,55 @@
+Riverbend Orthopedic Associates
+1200 Riverbend Parkway, Suite 300
+Fairhaven, ST 00000
+
+{{TODAY|long}}
+
+Harborview Health Partners
+Claims Review
+410 Pier Street
+Port Ellis, ST 00000
+
+RE: Request for reconsideration - timely filing (CO-29)
+Patient: Lorraine Batiste    DOB: 06/09/1964    Member ID: HHP-51920744
+Claim #: HHP-8820147    Date of service: {{DOS|long}}
+Services: 29827-RT, 29826-RT    Billed: $14,200.00
+Prior authorization: HHP-AUTH-662190
+Denial date: {{DENIAL_DATE|long}}
+
+Dear Claims Reviewer:
+
+We request reconsideration of the timely filing denial for the claim above. Riverbend
+Orthopedic Associates submitted this claim electronically on {{ORIG_SUBMIT|long}}, six days
+after the date of service and well within the 90-day filing limit.
+
+Submission timeline:
+- {{ORIG_SUBMIT|long}}: Original claim transmitted via ClearPath Claims, batch RB-0617-02.
+- {{CH_ACCEPT|long}}: ClearPath accepted the batch (999 acknowledgment, Enclosure 2).
+- {{FOLLOWUP_CALL|long}}: During routine follow-up, Harborview (ref #HHP-CALL-90411) advised
+  that no claim was on file.
+- {{RESUBMIT|long}}: Claim resubmitted immediately; received {{PAYER_RECEIVED|long}}.
+
+[INSERT IF OBTAINED - Provider Manual 7.4(b):] The enclosed ClearPath payer-connection report
+(Enclosure 1) shows that batch RB-0617-02, including this claim, was transmitted to and
+accepted by Harborview on [date], within the filing limit.
+
+[INSERT IF APPLICABLE - Provider Manual 7.6:] Several other Riverbend claims to Harborview
+submitted during the same week were also not received (Enclosure 4), which indicates a
+payer connectivity issue outside our control. We ask Harborview to waive the filing limit
+under Section 7.6.
+
+The service was prior-authorized by Harborview (HHP-AUTH-662190) and is otherwise payable.
+We respectfully request that the claim be reprocessed for payment.
+
+Sincerely,
+
+[Signature]
+K. Lindqvist, Accounts Receivable, on behalf of Elena Marsh, MD
+Riverbend Orthopedic Associates
+
+Enclosures:
+1. ClearPath payer-connection report for batch RB-0617-02 [TO OBTAIN]
+2. ClearPath 999 acknowledgment ({{CH_ACCEPT}})
+3. Claim submission history
+4. List of other delayed Harborview claims for the same week [TO OBTAIN]
+5. Copy of the EOB dated {{DENIAL_DATE}}

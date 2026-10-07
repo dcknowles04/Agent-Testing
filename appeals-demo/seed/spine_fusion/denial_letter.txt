@@ -1,0 +1,29 @@
+*** FICTIONAL DOCUMENT - PROTOTYPE DEMONSTRATION ONLY ***
+
+MERIDIAN VALLEY HEALTH PLAN
+Notice of Prior Authorization Denial
+Date: {{DENIAL_DATE}}
+
+Requesting provider: Samuel Okafor, MD - Riverbend Orthopedic Associates
+Member: Gerald Whitcomb    DOB: 01/30/1967    Member ID: MVH-60718832
+Case #: MVH-UM-2025-40215
+Requested: L4-L5 transforaminal lumbar interbody fusion with posterolateral fusion and
+instrumentation - CPT 22633, 22853, 22840
+Diagnoses: M43.16 Spondylolisthesis, lumbar region; M48.062 Spinal stenosis, lumbar
+region with neurogenic claudication
+Requested date of service: {{PLANNED_DOS}}   Inpatient, est. 2 days
+
+Determination: NOT APPROVED
+
+Rationale: Meridian Valley Medical Policy MVP-SP-07 (Lumbar Spinal Fusion) was applied.
+1) Criterion 1 (instability) is not met: the flexion-extension radiographs show 3.5 mm of
+   translation; the policy requires 4 mm or more, or 10 degrees or more of angulation.
+2) Criterion 5 (nicotine) is not met: the member is a recent former smoker, and a negative
+   cotinine test after at least 6 weeks of abstinence was not provided.
+Criteria 2, 3 and 4 appear to be met based on the submitted records.
+
+Appeal rights: You may file a written appeal within 180 days of this notice. Expedited
+appeals are available if a delay could seriously jeopardize the member's health. Send to:
+Meridian Valley Health Plan, Appeals & Grievances, 3300 Valley Center Dr, Mesa Verde,
+ST 00000, or fax (555) 010-7720. A peer-to-peer discussion may be requested at
+(555) 010-7700.

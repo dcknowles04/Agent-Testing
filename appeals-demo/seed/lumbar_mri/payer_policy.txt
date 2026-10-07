@@ -1,0 +1,24 @@
+*** ILLUSTRATIVE POLICY - FICTIONAL PAYER - NOT A REAL COVERAGE POLICY ***
+
+CRESTVIEW MUTUAL HEALTH
+Clinical Guideline CG-RAD-12: MRI of the Lumbar Spine (Illustrative)
+
+Lumbar spine MRI (CPT 72148, 72149, 72158) is considered medically necessary for ONE of the
+following indications:
+
+Indication A - Persistent low back pain with or without radiculopathy after at least 6
+weeks of documented conservative therapy in the past 6 months (e.g., physical therapy,
+medication, activity modification), with continued symptoms, in a patient who is a
+candidate for intervention.
+
+Indication B - Red-flag findings, for which no conservative-therapy period is required:
+  B1. Progressive or severe neurological deficit (e.g., new or worsening motor weakness);
+  B2. Suspected cauda equina syndrome;
+  B3. Suspected infection, malignancy or fracture.
+
+Indication C - Pre-operative or pre-procedural planning (e.g., epidural steroid injection
+or surgery) once a procedure is being actively considered.
+
+Documentation requirements: Office notes must describe symptom duration, conservative
+treatments and their dates, and the neurological examination. When Indication B1 is used,
+the notes should document the progression (comparison of serial examinations).

@@ -1,0 +1,20 @@
+*** ILLUSTRATIVE POLICY - FICTIONAL PAYER - NOT A REAL REIMBURSEMENT POLICY ***
+
+PINNACLE CARE ALLIANCE
+Reimbursement Policy RP-114: Arthroscopic Knee Procedures (Illustrative)
+
+Section 3 - Bundled services. Pinnacle applies NCCI procedure-to-procedure (PTP) edits.
+Limited synovectomy (29875) and chondroplasty (29877) are included in the meniscectomy
+codes 29880/29881 and are not separately reimbursed.
+
+Section 4 - Major synovectomy (29876) with meniscectomy. CPT 29876 is eligible for separate
+reimbursement with 29880/29881 only when ALL of the following apply:
+  4.1 the synovectomy is performed in compartment(s) separate from the compartment where
+      the meniscectomy was performed;
+  4.2 the operative report specifically documents the separate compartment(s) treated;
+  4.3 the claim line is billed with modifier XS (separate structure) or 59, and the
+      laterality modifier (RT/LT).
+
+Section 5 - Corrected claims. Corrected claims (frequency code 7) and appeals must be
+received within 90 days of the original remittance date. Include the operative report
+when billing modifier XS or 59.

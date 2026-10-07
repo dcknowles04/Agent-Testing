@@ -1,0 +1,11 @@
+{
+  "subject_line": "Corrected claim and reconsideration - Victor Almeda - Claim PCA-2025-0943317 - 29876-XS-RT",
+  "letter_text": "@letter.txt",
+  "key_arguments": [
+    "Line 2 is corrected to 29876-XS-RT; the original claim omitted the distinct-procedure modifier.",
+    "RP-114 Section 4 allows separate reimbursement when the synovectomy is in a separate compartment and documented.",
+    "The op note documents synovectomy of the suprapatellar pouch, patellofemoral compartment and lateral gutter only, separate from the medial meniscectomy.",
+    "Pathology confirms proliferative synovitis."
+  ],
+  "enclosures": ["Corrected CMS-1500 (frequency code 7)", "Operative report ({{DOS}})", "Pathology report ({{DOS}})", "Copy of the remittance advice ({{DENIAL_DATE}})"]
+}

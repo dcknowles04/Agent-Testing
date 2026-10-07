@@ -1,0 +1,54 @@
+Riverbend Orthopedic Associates
+1200 Riverbend Parkway, Suite 300
+Fairhaven, ST 00000
+
+{{TODAY|long}}
+
+Pinnacle Care Alliance
+Claims Reconsideration
+PO Box 2290
+Westvale, ST 00000
+
+RE: Corrected claim and request for reconsideration - line 2
+Patient: Victor Almeda    DOB: 11/21/1973    Member ID: PCA-77310925
+Claim #: PCA-2025-0943317    Date of service: {{DOS|long}}
+Denied line: CPT 29876-RT, $2,850.00 (CO-97, RARC M80)
+Remittance date: {{DENIAL_DATE|long}}
+
+Dear Claims Reviewer:
+
+Enclosed is a corrected claim for the date of service above, with line 2 rebilled as
+29876-XS-RT. The original submission omitted the distinct-procedural-service modifier, so
+the line was bundled into 29881 by the NCCI procedure-to-procedure edit. That edit carries
+modifier indicator 1, and the documentation supports the modifier.
+
+Pinnacle Reimbursement Policy RP-114, Section 4, states that 29876 is separately
+reimbursable with 29880/29881 when (4.1) the synovectomy is performed in compartments
+separate from the meniscectomy, (4.2) the operative report documents those compartments,
+and (4.3) the line is billed with XS or 59 and laterality. All three conditions are met:
+
+4.1 The partial meniscectomy was performed in the MEDIAL compartment. The major
+synovectomy was performed in the suprapatellar pouch, the patellofemoral compartment and
+the lateral gutter, through a separate superolateral portal. The operative report states,
+"No synovectomy was performed in the medial compartment."
+
+4.2 The enclosed operative report lists the synovectomy as a separate procedure, names each
+compartment treated, and notes about 25 minutes of additional operative time. Pathology
+confirmed chronic proliferative synovitis with villous hyperplasia, consistent with the
+pre-operative MRI.
+
+4.3 The corrected line is billed as 29876-XS-RT with diagnosis M65.861.
+
+We request that line 2 be reprocessed for payment under the corrected claim.
+
+Sincerely,
+
+[Signature]
+M. Alvarez, Billing Lead, on behalf of Priya Raman, MD
+Riverbend Orthopedic Associates
+
+Enclosures:
+1. Corrected CMS-1500 (frequency code 7)
+2. Operative report ({{DOS}})
+3. Pathology report ({{DOS}})
+4. Copy of the remittance advice ({{DENIAL_DATE}})

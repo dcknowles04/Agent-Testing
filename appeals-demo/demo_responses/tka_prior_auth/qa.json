@@ -1,0 +1,19 @@
+{
+  "overall": "ready_with_edits",
+  "score": 91,
+  "flags": [
+    {"severity": "medium", "issue": "The HbA1c lab result is cited as Enclosure 5 but is not in the uploaded documents.", "location": "Criteria 4 through 6 paragraph; Enclosure 5", "suggested_fix": "Pull the HbA1c result from the chart and attach it, and confirm the draw date is within 3 months of the planned surgery."},
+    {"severity": "low", "issue": "The signature and practice phone placeholders still need to be filled in.", "location": "Signature block", "suggested_fix": "Have Dr. Marsh sign, and add the practice phone number."},
+    {"severity": "low", "issue": "The peer-to-peer window (14 days from the notice) is still open.", "location": "Closing paragraph", "suggested_fix": "Consider scheduling a peer-to-peer in parallel to speed approval before the planned surgery date."}
+  ],
+  "unsupported_claims": [],
+  "attachments_checklist": [
+    {"item": "Northgate PT discharge summary ({{PT_END}})", "source": "clinical_notes - Note 2", "required": true, "status": "in_file"},
+    {"item": "Injection procedure notes ({{INJ1}}, {{INJ2}})", "source": "clinical_notes - Notes 1 and 4", "required": true, "status": "in_file"},
+    {"item": "Surgical consultation note ({{CONSULT}})", "source": "clinical_notes - Note 5", "required": true, "status": "in_file"},
+    {"item": "Weight-bearing X-ray report ({{XRAY}})", "source": "clinical_notes - Note 3", "required": true, "status": "in_file"},
+    {"item": "HbA1c laboratory result", "source": "Practice EHR - labs", "required": true, "status": "needs_upload"},
+    {"item": "Copy of denial notice ({{DENIAL_DATE}})", "source": "denial_letter", "required": false, "status": "in_file"}
+  ],
+  "summary": "Strong, well-supported letter that directly cures the stated denial reason and addresses all six policy criteria. Before submitting: attach the HbA1c result, sign, and fill in the phone placeholder."
+}

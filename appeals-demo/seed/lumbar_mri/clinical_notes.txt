@@ -1,0 +1,45 @@
+*** FICTIONAL CLINICAL RECORD - PROTOTYPE DEMONSTRATION ONLY ***
+Patient: Raymond Toller   DOB: 08/02/1978   MRN: RB-44812
+
+=====================================================================
+NOTE 1 - NEW PATIENT VISIT (SPINE) - {{VISIT1}}
+Provider: Samuel Okafor, MD
+HPI: 47-year-old warehouse supervisor with low back pain radiating down the left leg to
+the dorsum of the foot since a lifting episode on about {{ONSET}}. Pain 7/10, worse with
+sitting. No bowel/bladder changes, no saddle anesthesia, no fever, no weight loss, no
+history of cancer.
+Exam: Positive straight-leg raise on the left at 40 deg. Decreased light-touch sensation in
+the left L5 dermatome. Strength 5/5 throughout, including left EHL and ankle dorsiflexion.
+Reflexes symmetric.
+Assessment: Acute left L5 radiculopathy, likely disc herniation.
+Plan: Naproxen 500 mg twice daily, methylprednisolone dose pack, physical therapy 2x/week,
+activity modification and work restrictions. Return in 4 weeks or sooner if weakness.
+
+=====================================================================
+NOTE 2 - PHYSICAL THERAPY PROGRESS NOTE - {{PT_LAST}}
+Therapist: A. Brandt, PT (Riverbend in-house PT)
+Visits to date: 6 (start of care {{PT_START}}). McKenzie extension protocol, core
+stabilization, neural glides. Patient reports no centralization; leg pain unchanged 6-7/10.
+Notes new difficulty with heel walking on the left at today's visit. Recommended that the
+patient follow up with the physician before next visit.
+
+=====================================================================
+NOTE 3 - FOLLOW-UP VISIT - {{VISIT2}}
+Provider: Samuel Okafor, MD
+Interval: About 5 weeks since symptom onset; completed oral steroids, on naproxen, 6 PT
+visits. Leg pain persistent 7/10; new subjective weakness ("foot slaps when tired").
+Exam: Left EHL 4/5 (previously 5/5), left ankle dorsiflexion 4+/5 (previously 5/5).
+Positive SLR left at 35 deg. Diminished L5 sensation unchanged. No saddle anesthesia.
+Assessment: Left L5 radiculopathy with NEW motor deficit (EHL and dorsiflexion weakness),
+progressing since the initial exam despite conservative care.
+Plan: MRI lumbar spine without contrast to evaluate for a compressive lesion and guide
+possible epidural steroid injection or surgical referral. Continue PT and naproxen.
+
+=====================================================================
+NOTE 4 - MRI LUMBAR SPINE WITHOUT CONTRAST - {{DOS}}
+Radiologist: L. Fennimore, MD
+Findings: L4-5 left paracentral disc extrusion (9 mm) with caudal migration compressing
+the traversing left L5 nerve root in the lateral recess. Mild facet arthropathy L4-5 and
+L5-S1. No fracture, no marrow-replacing lesion. Conus normal.
+Impression: L4-5 left paracentral extrusion with compression of the left L5 nerve root,
+concordant with the clinical presentation.

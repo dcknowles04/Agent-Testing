@@ -1,0 +1,45 @@
+*** FICTIONAL CLINICAL RECORD - PROTOTYPE DEMONSTRATION ONLY ***
+Patient: Victor Almeda   DOB: 11/21/1973   MRN: RB-38170
+
+=====================================================================
+NOTE 1 - CLINIC VISIT - {{CONSULT}}
+Provider: Priya Raman, MD
+Right knee medial joint-line pain with mechanical catching for 5 months, plus recurrent
+diffuse swelling. Failed 8 weeks of PT and NSAIDs. Exam: medial joint-line tenderness,
+positive McMurray, moderate effusion, boggy synovium in suprapatellar region.
+Plan: MRI right knee.
+
+=====================================================================
+NOTE 2 - MRI RIGHT KNEE - {{MRI}}
+Complex tear of the posterior horn of the medial meniscus. Moderate joint effusion with
+marked synovial thickening in the suprapatellar pouch and lateral gutter, consistent with
+proliferative synovitis. Lateral meniscus intact. Cruciate ligaments intact.
+
+=====================================================================
+NOTE 3 - OPERATIVE REPORT - {{DOS}}
+Surgeon: Priya Raman, MD      Facility: Riverbend Surgery Center
+Preoperative diagnosis: Right knee medial meniscus tear; proliferative synovitis.
+Postoperative diagnosis: Same.
+Procedures:
+  1. Right knee arthroscopic partial medial meniscectomy (medial compartment).
+  2. Right knee arthroscopic major synovectomy of the lateral compartment/lateral gutter,
+     suprapatellar pouch and patellofemoral compartment.
+Findings: Complex degenerative tear of the posterior horn of the medial meniscus.
+Diffuse hypertrophic, hyperemic synovitis involving the suprapatellar pouch, the
+patellofemoral compartment and the lateral gutter, separate from the medial compartment.
+The lateral meniscus and articular cartilage of the lateral compartment are intact.
+Description: Standard anterolateral and anteromedial portals were established, plus a
+superolateral portal for access to the suprapatellar pouch. In the MEDIAL compartment,
+the unstable posterior horn tear was debrided with a basket and shaver to a stable rim
+(approximately 30% of the posterior horn removed). Attention was then turned to the
+SUPRAPATELLAR POUCH, PATELLOFEMORAL compartment and LATERAL gutter, where an extensive
+synovectomy was performed with a 4.5 mm full-radius shaver and radiofrequency wand
+through the superolateral portal, removing the hypertrophic synovium. This added about
+25 minutes of operative time. No synovectomy was performed in the medial compartment.
+Specimen: Synovium sent to pathology.
+EBL: Minimal. Complications: None.
+
+=====================================================================
+NOTE 4 - PATHOLOGY - {{DOS}}
+Synovium, right knee: chronic proliferative synovitis with villous hyperplasia. No
+crystals. Negative for pigmented villonodular synovitis.

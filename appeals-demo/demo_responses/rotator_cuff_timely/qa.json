@@ -1,0 +1,22 @@
+{
+  "overall": "needs_attention",
+  "score": 54,
+  "flags": [
+    {"severity": "high", "issue": "The core proof is missing. A 999 acceptance alone is explicitly insufficient under Manual 7.4, so without the payer-connection report the appeal will almost certainly be upheld.", "location": "Paragraph 3 and Enclosure 1", "suggested_fix": "Pull the ClearPath payer-connection report for batch RB-0617-02 before submitting. If it does not show Harborview acceptance, remove the 7.4(b) paragraph."},
+    {"severity": "high", "issue": "The outage waiver argument (7.6) is unsupported.", "location": "Paragraph 4 and Enclosure 4", "suggested_fix": "List the other delayed claims with dates and claim numbers, or delete the paragraph."},
+    {"severity": "medium", "issue": "Bracketed conditional paragraphs must be resolved before sending.", "location": "Paragraphs 3-4", "suggested_fix": "Keep only the paragraphs the evidence supports."},
+    {"severity": "medium", "issue": "The deadline is close.", "location": "Case header", "suggested_fix": "Request the ClearPath report today."}
+  ],
+  "unsupported_claims": [
+    "That Harborview accepted batch RB-0617-02 within the filing limit (no report on file yet).",
+    "That a payer connectivity issue affected multiple claims (memo speculation only)."
+  ],
+  "attachments_checklist": [
+    {"item": "ClearPath payer-connection report, batch RB-0617-02", "source": "ClearPath clearinghouse portal", "required": true, "status": "needs_upload"},
+    {"item": "ClearPath 999 acknowledgment ({{CH_ACCEPT}})", "source": "claim_data - Submission history", "required": true, "status": "verify"},
+    {"item": "Claim submission history", "source": "claim_data", "required": true, "status": "in_file"},
+    {"item": "List of other delayed Harborview claims", "source": "Practice billing system", "required": false, "status": "needs_upload"},
+    {"item": "EOB ({{DENIAL_DATE}})", "source": "denial_letter", "required": false, "status": "in_file"}
+  ],
+  "summary": "Weak as it stands: the letter is well structured, but its winning paragraph depends on a report the office has not yet pulled. Get the ClearPath payer-connection report first; if it shows payer acceptance, this becomes a strong appeal."
+}

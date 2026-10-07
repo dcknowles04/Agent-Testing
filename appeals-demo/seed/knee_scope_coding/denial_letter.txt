@@ -1,0 +1,26 @@
+*** FICTIONAL DOCUMENT - PROTOTYPE DEMONSTRATION ONLY ***
+
+PINNACLE CARE ALLIANCE
+Provider Remittance Advice / Explanation of Benefits
+Remit date: {{DENIAL_DATE}}
+
+Payee: Riverbend Orthopedic Associates
+Rendering: Priya Raman, MD
+Patient: Victor Almeda    DOB: 11/21/1973    Member ID: PCA-77310925
+Claim #: PCA-2025-0943317     DOS: {{DOS}}     POS: 24
+
+Line  CPT     Mod  Billed      Allowed     Paid        Adj codes
+1     29881   RT   $5,900.00   $2,214.00   $1,771.20   CO-45, PR-2 (coinsurance $442.80)
+2     29876   RT   $2,850.00   $0.00       $0.00       CO-97, RARC M80
+
+CO-97: The benefit for this service is included in the payment/allowance for another
+service/procedure that has already been adjudicated.
+M80: Not covered when performed during the same session/date as a previously processed
+service for the patient.
+
+Line 2 was denied by an NCCI procedure-to-procedure edit (column 1: 29881, column 2: 29876,
+modifier indicator 1).
+
+Reconsideration / appeal: Submit a corrected claim or a written appeal with the operative
+report within 90 days of this remittance. Pinnacle Care Alliance, Claims Reconsideration,
+PO Box 2290, Westvale, ST 00000, or via the Pinnacle provider portal.

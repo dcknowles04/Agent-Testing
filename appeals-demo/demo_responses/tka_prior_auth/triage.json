@@ -1,0 +1,18 @@
+{
+  "denial_type": "prior_authorization",
+  "denial_type_rationale": "Pre-service authorization for 27447 was denied under the payer's TKA medical policy (PA-DN-14) before surgery was performed.",
+  "winnability": "strong",
+  "winnability_score": 88,
+  "reasons_for": [
+    "The denial rests solely on missing PT documentation; a Northgate PT discharge summary documents 14 visits over about 12 weeks with no improvement (KOOS JR 48.0 to 46.5).",
+    "Conservative care far exceeds the two-modality minimum: NSAIDs for more than 12 months, two corticosteroid injections, PT with HEP, cane, and weight counseling.",
+    "Weight-bearing X-rays show KL grade 4 bone-on-bone medial OA, meeting the imaging criterion.",
+    "BMI 31.4, HbA1c 6.4%, never smoker and documented shared decision-making satisfy the remaining criteria."
+  ],
+  "reasons_against": [
+    "The payer did not evaluate criteria 1, 2 and 4-6 in full, so it could raise new issues on appeal.",
+    "The HbA1c date should be confirmed as within 3 months of the planned surgery date."
+  ],
+  "recommended_strategy": "File a standard pre-service appeal with the Northgate PT discharge summary and both injection notes attached, walking through all six MP-ORTHO-031 criteria. Consider requesting a peer-to-peer within the 14-day window to speed up approval before the planned surgery date.",
+  "route_to_coding_check": false
+}

@@ -1,0 +1,25 @@
+*** FICTIONAL DOCUMENT - PROTOTYPE DEMONSTRATION ONLY ***
+
+CRESTVIEW MUTUAL HEALTH
+Explanation of Benefits / Provider Remittance - Medical Necessity Denial
+Notice date: {{DENIAL_DATE}}
+
+Provider: Riverbend Orthopedic Associates - Samuel Okafor, MD
+Patient: Raymond Toller     DOB: 08/02/1978     Member ID: CMH-30219844
+Claim #: CMH-25-7781203      Date of service: {{DOS}}
+
+Line 1  CPT 72148  MRI lumbar spine without contrast
+        Billed: $1,850.00   Allowed: $0.00   Paid: $0.00
+        CARC 50 - These are non-covered services because this is not deemed a "medical
+        necessity" by the payer.
+        RARC N115 - This decision was based on a Local/Plan Clinical Guideline.
+
+Reviewer comment: Per Clinical Guideline CG-RAD-12 (Lumbar Spine MRI), advanced imaging
+for low back pain with radiculopathy requires at least 6 weeks of documented conservative
+therapy unless red-flag findings are present. The records show symptom duration of less
+than 6 weeks and no red-flag findings were identified. Not medically necessary.
+
+APPEAL RIGHTS: A first-level provider appeal must be received within 60 days of the date
+of this notice. Send a written appeal with supporting medical records to:
+Crestview Mutual Health, Provider Appeals, 88 Harbor Row, Brookfield, ST 00000,
+or upload via the CrestLink provider portal.

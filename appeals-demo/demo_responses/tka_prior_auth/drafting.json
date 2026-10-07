@@ -1,0 +1,19 @@
+{
+  "subject_line": "Pre-service appeal - Dorothy Kessler - Auth ref SHP-PA-118734 - Right TKA (27447-RT)",
+  "letter_text": "@letter.txt",
+  "key_arguments": [
+    "The denial was based only on missing PT documentation; the enclosed Northgate PT discharge summary documents 14 visits over about 12 weeks with no functional improvement.",
+    "The patient failed four conservative modalities within 12 months: PT with HEP, NSAIDs, two corticosteroid injections, and activity modification with a cane plus weight counseling.",
+    "Weight-bearing X-rays show KL grade 4 bone-on-bone medial osteoarthritis (Criterion 1).",
+    "Severe functional limitation is documented with KOOS JR 44.8 and walking tolerance under 1 block (Criterion 2).",
+    "BMI 31.4, HbA1c 6.4%, no infection, and documented shared decision-making satisfy Criteria 4-6."
+  ],
+  "enclosures": [
+    "Northgate Physical Therapy discharge summary ({{PT_END}})",
+    "Injection procedure notes ({{INJ1}} and {{INJ2}})",
+    "Surgical consultation note, Elena Marsh, MD ({{CONSULT}})",
+    "Weight-bearing right knee X-ray report ({{XRAY}})",
+    "HbA1c laboratory result",
+    "Copy of the denial notice dated {{DENIAL_DATE}}"
+  ]
+}

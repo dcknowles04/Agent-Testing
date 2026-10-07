@@ -1,0 +1,15 @@
+{
+  "key": "spine_fusion",
+  "title": "L4-L5 lumbar fusion - prior auth denied",
+  "label": "Lumbar spine fusion (prior auth) - borderline",
+  "practice_id": 1,
+  "dates": {
+    "PT_START": -215, "ESI1": -170, "PT_END": -150, "ESI2": -120, "MRI": -100,
+    "QUIT": -95, "FLEXEX": -60, "CONSULT": -45, "PA_REQUEST": -38, "DENIAL_DATE": -30,
+    "PLANNED_DOS": 35, "SUBMITTED": -6
+  },
+  "seed_state": {
+    "status": "Submitted", "outcome": "Pending",
+    "approved_by": "M. Alvarez (Billing Lead)", "submitted_offset": "SUBMITTED"
+  }
+}

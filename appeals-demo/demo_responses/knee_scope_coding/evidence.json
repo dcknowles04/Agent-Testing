@@ -1,0 +1,43 @@
+{
+  "policy_name": "Pinnacle Care Alliance RP-114: Arthroscopic Knee Procedures (illustrative)",
+  "criteria": [
+    {
+      "criterion": "4.1 - Synovectomy performed in compartment(s) separate from the meniscectomy compartment",
+      "status": "met",
+      "evidence": "Meniscectomy in the medial compartment; synovectomy in the suprapatellar pouch, patellofemoral compartment and lateral gutter; no medial synovectomy.",
+      "citation": {"document": "clinical_notes", "section": "Note 3 - Operative report {{DOS}}", "excerpt": "No synovectomy was performed in the medial compartment."},
+      "action_needed": "None."
+    },
+    {
+      "criterion": "4.2 - Operative report specifically documents the separate compartments treated",
+      "status": "met",
+      "evidence": "The procedure list and description name each compartment, a separate superolateral portal, and about 25 minutes of added operative time.",
+      "citation": {"document": "clinical_notes", "section": "Note 3 - Operative report {{DOS}}", "excerpt": "Right knee arthroscopic major synovectomy of the lateral compartment/lateral gutter, suprapatellar pouch and patellofemoral compartment."},
+      "action_needed": "Attach the operative report."
+    },
+    {
+      "criterion": "4.3 - Line billed with modifier XS (or 59) plus laterality",
+      "status": "not_met",
+      "evidence": "Line 2 was billed as 29876-RT without XS/59.",
+      "citation": {"document": "claim_data", "section": "Claim lines", "excerpt": "Coder note: No distinct-procedure modifier was appended to line 2 at original submission."},
+      "action_needed": "Correct line 2 to 29876-XS-RT on a corrected claim."
+    },
+    {
+      "criterion": "Section 5 - Corrected claim or appeal within 90 days of the remittance",
+      "status": "met",
+      "evidence": "The remittance is dated {{DENIAL_DATE}}; the correction is within the window.",
+      "citation": {"document": "denial_letter", "section": "Reconsideration / appeal", "excerpt": "Submit a corrected claim or a written appeal with the operative report within 90 days of this remittance."},
+      "action_needed": "Submit before the deadline."
+    },
+    {
+      "criterion": "Medical support for major synovectomy",
+      "status": "met",
+      "evidence": "The MRI showed marked synovial thickening, and pathology confirmed chronic proliferative synovitis.",
+      "citation": {"document": "clinical_notes", "section": "Note 4 - Pathology {{DOS}}", "excerpt": "chronic proliferative synovitis with villous hyperplasia."},
+      "action_needed": "Attach the pathology report (optional)."
+    }
+  ],
+  "overall_assessment": "The documentation fully satisfies RP-114 Section 4; only the modifier was missing. A corrected claim with XS should resolve the denial.",
+  "documents_to_attach": ["Operative report ({{DOS}})", "Pathology report ({{DOS}})", "Copy of the remittance advice ({{DENIAL_DATE}})"],
+  "gaps": []
+}

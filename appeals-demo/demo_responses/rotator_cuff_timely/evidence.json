@@ -1,0 +1,52 @@
+{
+  "policy_name": "Harborview Health Partners Provider Manual Section 7: Claims Submission (illustrative)",
+  "criteria": [
+    {
+      "criterion": "7.4(a) - Harborview 277CA or Harborview-issued claim number showing receipt within 90 days",
+      "status": "missing_documentation",
+      "evidence": "Claim history shows 'Payer 277CA acknowledgment: NOT FOUND in clearinghouse portal.'",
+      "citation": {"document": "claim_data", "section": "Submission history {{CH_ACCEPT}}", "excerpt": "Payer 277CA acknowledgment: NOT FOUND in clearinghouse portal."},
+      "action_needed": "Ask ClearPath support to search for a 277CA for batch RB-0617-02."
+    },
+    {
+      "criterion": "7.4(b) - Clearinghouse payer-connection report showing the claim was accepted BY Harborview within the limit",
+      "status": "missing_documentation",
+      "evidence": "Only a 999 clearinghouse-level acceptance is on file; the payer-connection report has not been pulled.",
+      "citation": {"document": "claim_data", "section": "Submission history {{CH_ACCEPT}}", "excerpt": "the ClearPath payer-connection report for this period has not been pulled."},
+      "action_needed": "Pull the ClearPath payer-connection report for {{ORIG_SUBMIT}} to {{CH_ACCEPT}}. This is the single most important document."
+    },
+    {
+      "criterion": "7.4 - A 999 / clearinghouse acceptance alone is not sufficient",
+      "status": "not_met",
+      "evidence": "The only proof currently on file is the 999 acceptance on {{CH_ACCEPT}}.",
+      "citation": {"document": "payer_policy", "section": "7.4", "excerpt": "A 999 acknowledgment or a clearinghouse-level acceptance alone is NOT sufficient."},
+      "action_needed": "Obtain 7.4(a) or (b) evidence."
+    },
+    {
+      "criterion": "7.6 - Waiver for a documented Harborview system or connectivity outage",
+      "status": "missing_documentation",
+      "evidence": "The billing memo suggests a possible payer-connection outage affecting other claims from the same week, but provides no evidence.",
+      "citation": {"document": "clinical_notes", "section": "Note 2 - Billing office memo {{FOLLOWUP_CALL}}", "excerpt": "Possible payer-connection outage that month (other Harborview claims from the same week were also delayed)."},
+      "action_needed": "Gather claim numbers and dates of the other delayed claims and any Harborview outage bulletin."
+    },
+    {
+      "criterion": "Service otherwise payable (authorized, documented)",
+      "status": "met",
+      "evidence": "Op note documents the procedures and a valid Harborview prior authorization.",
+      "citation": {"document": "clinical_notes", "section": "Note 1 - Operative report {{DOS}}", "excerpt": "Prior authorization: Approved, Harborview auth #HHP-AUTH-662190 (valid for this DOS)."},
+      "action_needed": "None."
+    }
+  ],
+  "overall_assessment": "As filed today, the appeal would likely be upheld, because the only proof is a 999 acceptance, which the policy rejects. The case becomes strong if the ClearPath payer-connection report shows Harborview accepted batch RB-0617-02, or if outage evidence supports a 7.6 waiver.",
+  "documents_to_attach": [
+    "ClearPath payer-connection / acceptance report for batch RB-0617-02 (to obtain)",
+    "ClearPath 999 acknowledgment ({{CH_ACCEPT}})",
+    "Claim submission history",
+    "A/R call log reference #HHP-CALL-90411",
+    "Evidence of other delayed Harborview claims that week (to obtain)"
+  ],
+  "gaps": [
+    "No payer-level proof of receipt within 90 days.",
+    "The outage claim is unsupported."
+  ]
+}

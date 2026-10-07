@@ -1,0 +1,11 @@
+{
+  "key": "tka_prior_auth",
+  "title": "Total knee arthroplasty - prior auth denied",
+  "label": "Total knee replacement (prior auth) - strong",
+  "practice_id": 1,
+  "dates": {
+    "INJ1": -240, "PT_START": -205, "PT_END": -118, "XRAY": -120, "INJ2": -95,
+    "CONSULT": -30, "PA_REQUEST": -16, "DENIAL_DATE": -9, "PLANNED_DOS": 21
+  },
+  "seed_state": {"status": "New"}
+}

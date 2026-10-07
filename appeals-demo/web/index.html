@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Appeals Prototype</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%A6%B4%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="banner">PROTOTYPE &ndash; FICTIONAL DATA &middot; No real patients, payers or PHI. All policy and clinical-criteria content is illustrative.</div>
+  <header class="topbar">
+    <div class="brand">Denial&rarr;Appeal <span class="muted">for Riverbend Orthopedic Associates</span></div>
+    <nav>
+      <a href="#/dashboard" data-nav="dashboard">Dashboard</a>
+      <a href="#/queue" data-nav="queue">Case Queue</a>
+      <a href="#/new" data-nav="new">New Case</a>
+      <a href="#/business" data-nav="business">Outcomes &amp; Business</a>
+    </nav>
+    <div class="top-actions">
+      <button id="mode-badge" class="mode-badge" title="Click to switch between live and demo mode">&hellip;</button>
+      <button id="reset-btn" class="btn btn-ghost btn-sm" title="Restore the seed data">Reset demo</button>
+    </div>
+  </header>
+  <main id="app"><p class="muted">Loading&hellip;</p></main>
+  <div id="toast" class="toast hidden"></div>
+  <script src="app.js"></script>
+</body>
+</html>

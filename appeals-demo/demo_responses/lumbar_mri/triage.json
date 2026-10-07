@@ -1,0 +1,18 @@
+{
+  "denial_type": "medical_necessity",
+  "denial_type_rationale": "Post-service claim denied with CARC 50 under the payer's imaging clinical guideline; no prior authorization was required.",
+  "winnability": "borderline",
+  "winnability_score": 58,
+  "reasons_for": [
+    "The follow-up note documents a NEW motor deficit (EHL 5/5 to 4/5, dorsiflexion 5/5 to 4+/5) compared with the initial exam, which is the red flag under Indication B1.",
+    "The PT note independently records new heel-walk difficulty, which corroborates the progression.",
+    "The MRI found a 9 mm extrusion compressing the L5 root, concordant with the deficit, and was used to plan intervention (Indication C)."
+  ],
+  "reasons_against": [
+    "Documented conservative care lasted about 4.3 weeks (about 5.4 weeks from symptom onset), short of Indication A's 6 weeks.",
+    "The motor deficit is mild (4/5 and 4+/5) and documented on a single follow-up exam, so a reviewer may not consider it 'progressive or severe'.",
+    "The payer's reviewer explicitly stated that no red flags were found, so the appeal must point them to the specific exam comparison."
+  ],
+  "recommended_strategy": "Appeal under Indication B1 (progressive neurological deficit) with a side-by-side comparison of the {{VISIT1}} and {{VISIT2}} exams, the PT note corroborating the decline, and Indication C as a secondary basis. File quickly: the deadline is close.",
+  "route_to_coding_check": false
+}

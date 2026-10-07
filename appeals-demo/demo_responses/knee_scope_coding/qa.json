@@ -1,0 +1,15 @@
+{
+  "overall": "ready",
+  "score": 95,
+  "flags": [
+    {"severity": "low", "issue": "Signature placeholder.", "location": "Signature block", "suggested_fix": "Sign before submission."}
+  ],
+  "unsupported_claims": [],
+  "attachments_checklist": [
+    {"item": "Corrected CMS-1500 (frequency code 7) with 29876-XS-RT", "source": "Practice billing system", "required": true, "status": "needs_upload"},
+    {"item": "Operative report ({{DOS}})", "source": "clinical_notes - Note 3", "required": true, "status": "in_file"},
+    {"item": "Pathology report ({{DOS}})", "source": "clinical_notes - Note 4", "required": false, "status": "in_file"},
+    {"item": "Remittance advice ({{DENIAL_DATE}})", "source": "denial_letter", "required": false, "status": "in_file"}
+  ],
+  "summary": "Clean coding correction backed by explicit op-note language and the payer's own policy. Generate the corrected claim in the billing system and submit."
+}

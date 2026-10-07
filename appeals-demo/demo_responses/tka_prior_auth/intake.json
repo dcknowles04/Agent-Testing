@@ -1,0 +1,26 @@
+{
+  "patient_name": "Dorothy Kessler",
+  "patient_dob": "1958-03-14",
+  "member_id": "SHP-448210937",
+  "payer_name": "Summit Health Plan",
+  "claim_or_reference_number": "SHP-PA-118734",
+  "rendering_provider": "Elena Marsh, MD",
+  "procedure_description": "Right total knee arthroplasty (pre-service prior authorization)",
+  "cpt_codes": [
+    {"code": "27447", "description": "Arthroplasty, knee, condyle and plateau; medial and lateral compartments (total knee arthroplasty)", "modifiers": ["RT"]}
+  ],
+  "icd10_codes": [
+    {"code": "M17.11", "description": "Unilateral primary osteoarthritis, right knee"}
+  ],
+  "date_of_service": "{{PLANNED_DOS|iso}}",
+  "denial_date": "{{DENIAL_DATE|iso}}",
+  "billed_amount": 36800,
+  "amount_at_stake": 36800,
+  "stated_denial_reason": "Insufficient documentation of conservative therapy: the request referenced prior physical therapy, but no PT notes documenting dates, frequency, duration or response were provided, so Criterion 3 of MP-ORTHO-031 could not be confirmed.",
+  "denial_codes": [
+    {"code": "PA-DN-14", "description": "Clinical criteria not met / insufficient documentation"}
+  ],
+  "appeal_window_days": 60,
+  "appeal_submission_method": "Summit Health Plan Appeals Unit, PO Box 4410, Lakemont, ST 00000; fax (555) 010-4480; or provider portal (Appeals > New pre-service appeal). Peer-to-peer available within 14 days at (555) 010-4400.",
+  "summary": "Pre-service prior authorization for a right TKA (27447-RT) was denied because PT documentation was not included with the request. The Northgate PT discharge summary and injection notes exist in the chart but were not sent."
+}

@@ -1,0 +1,26 @@
+{
+  "patient_name": "Lorraine Batiste",
+  "patient_dob": "1964-06-09",
+  "member_id": "HHP-51920744",
+  "payer_name": "Harborview Health Partners",
+  "claim_or_reference_number": "HHP-8820147",
+  "rendering_provider": "Elena Marsh, MD",
+  "procedure_description": "Right shoulder arthroscopic rotator cuff repair with subacromial decompression",
+  "cpt_codes": [
+    {"code": "29827", "description": "Arthroscopy, shoulder, surgical; with rotator cuff repair", "modifiers": ["RT"]},
+    {"code": "29826", "description": "Arthroscopy, shoulder, surgical; decompression of subacromial space with partial acromioplasty (add-on)", "modifiers": ["RT"]}
+  ],
+  "icd10_codes": [
+    {"code": "M75.121", "description": "Complete rotator cuff tear or rupture of right shoulder, not specified as traumatic"},
+    {"code": "M75.41", "description": "Impingement syndrome of right shoulder"}
+  ],
+  "date_of_service": "{{DOS|iso}}",
+  "denial_date": "{{DENIAL_DATE|iso}}",
+  "billed_amount": 14200,
+  "amount_at_stake": 14200,
+  "stated_denial_reason": "Timely filing limit expired: the claim was received 98 days after the date of service; the limit is 90 days.",
+  "denial_codes": [{"code": "CO-29", "description": "The time limit for filing has expired"}],
+  "appeal_window_days": 60,
+  "appeal_submission_method": "Harborview Health Partners, Claims Review, 410 Pier Street, Port Ellis, ST 00000 (mail), with proof of timely filing per Provider Manual 7.4.",
+  "summary": "The whole claim ($14,200) was denied CO-29 for timely filing. The original electronic submission 6 days after surgery has only a clearinghouse-level 999 acceptance on file; no payer 277CA has been located."
+}

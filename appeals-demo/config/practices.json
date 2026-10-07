@@ -1,0 +1,47 @@
+{
+  "_note": "Three hypothetical, fictional practices for the business view. Baseline figures cover the last 90 days (appeals_used_this_month is the current month). Practice 1 is the live demo practice: its numbers combine the baseline below with the cases in the app. Practices 2 and 3 are static illustrative figures.",
+  "practices": [
+    {
+      "id": 1,
+      "name": "Riverbend Orthopedic Associates",
+      "surgeons": 6,
+      "tier": "Pro",
+      "live": true,
+      "baseline": {
+        "appeals_used_this_month": 33,
+        "decided_appeals": 41,
+        "overturned_appeals": 27,
+        "dollars_recovered": 148600,
+        "appeals_processed_to_date": 58
+      }
+    },
+    {
+      "id": 2,
+      "name": "Lakeshore Bone & Joint",
+      "surgeons": 3,
+      "tier": "Starter",
+      "live": false,
+      "baseline": {
+        "appeals_used_this_month": 19,
+        "decided_appeals": 22,
+        "overturned_appeals": 13,
+        "dollars_recovered": 61200,
+        "appeals_processed_to_date": 31
+      }
+    },
+    {
+      "id": 3,
+      "name": "Cedar Ridge Spine & Sports Medicine",
+      "surgeons": 14,
+      "tier": "Unlimited",
+      "live": false,
+      "baseline": {
+        "appeals_used_this_month": 143,
+        "decided_appeals": 176,
+        "overturned_appeals": 118,
+        "dollars_recovered": 702300,
+        "appeals_processed_to_date": 262
+      }
+    }
+  ]
+}

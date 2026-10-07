@@ -1,0 +1,11 @@
+{
+  "key": "rotator_cuff_timely",
+  "title": "Rotator cuff repair - timely filing denial",
+  "label": "Rotator cuff repair (timely filing) - weak",
+  "practice_id": 1,
+  "dates": {
+    "DOS": -160, "ORIG_SUBMIT": -154, "CH_ACCEPT": -153, "FOLLOWUP_CALL": -66,
+    "RESUBMIT": -63, "PAYER_RECEIVED": -62, "DENIAL_DATE": -48
+  },
+  "seed_state": {"status": "Ready for Review"}
+}

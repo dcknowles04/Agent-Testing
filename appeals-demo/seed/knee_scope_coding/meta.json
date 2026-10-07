@@ -1,0 +1,14 @@
+{
+  "key": "knee_scope_coding",
+  "title": "Knee arthroscopy - bundling/modifier denial",
+  "label": "Knee arthroscopy (coding/bundling) - strong",
+  "practice_id": 1,
+  "dates": {
+    "CONSULT": -112, "MRI": -105, "DOS": -84, "CLAIM_SUBMITTED": -80, "DENIAL_DATE": -70,
+    "SUBMITTED": -63, "OUTCOME": -21
+  },
+  "seed_state": {
+    "status": "Closed", "outcome": "Overturned", "amount_recovered": 2850,
+    "approved_by": "M. Alvarez (Billing Lead)", "submitted_offset": "SUBMITTED", "outcome_offset": "OUTCOME"
+  }
+}

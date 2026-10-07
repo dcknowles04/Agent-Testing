@@ -1,0 +1,69 @@
+Riverbend Orthopedic Associates
+1200 Riverbend Parkway, Suite 300
+Fairhaven, ST 00000
+
+{{TODAY|long}}
+
+Summit Health Plan - Appeals Unit
+PO Box 4410
+Lakemont, ST 00000
+Via fax: (555) 010-4480
+
+RE: Request for reconsideration - pre-service prior authorization
+Member: Dorothy Kessler    DOB: 03/14/1958    Member ID: SHP-448210937
+Authorization reference #: SHP-PA-118734
+Requested service: Right total knee arthroplasty, CPT 27447-RT
+Diagnosis: M17.11 Unilateral primary osteoarthritis, right knee
+Planned date of service: {{PLANNED_DOS|long}}
+Date of denial: {{DENIAL_DATE|long}}
+
+Dear Appeals Reviewer:
+
+On behalf of my patient, Ms. Dorothy Kessler, I request reconsideration and reversal of the
+denial dated {{DENIAL_DATE|long}} for a right total knee arthroplasty. The denial states that
+Criterion 3 of Medical Policy MP-ORTHO-031 could not be confirmed because physical therapy
+notes were not provided. Those records are enclosed and confirm that Ms. Kessler meets every
+criterion of the policy.
+
+Criterion 3 - Failure of at least 12 weeks of non-operative treatment. Within the past 12
+months Ms. Kessler completed supervised physical therapy at Northgate Physical Therapy from
+{{PT_START|long}} to {{PT_END|long}}, attending 14 visits with a home exercise program. Her
+therapist documented that she "participated fully but plateaued," with KOOS JR essentially
+unchanged (48.0 to 46.5) and pain still 7/10 on stairs (Enclosure 1). In addition, she has
+taken meloxicam 15 mg daily for more than 12 months, received ultrasound-guided corticosteroid
+injections on {{INJ1|long}} and {{INJ2|long}} with only about five weeks of relief
+(Enclosure 2), uses a cane, and has received weight-loss counseling. This exceeds the policy's
+requirement of at least two modalities.
+
+Criterion 1 - Imaging. Weight-bearing radiographs dated {{XRAY|long}} show severe medial
+compartment narrowing with bone-on-bone apposition, Kellgren-Lawrence grade 4 (Enclosure 4).
+
+Criterion 2 - Function. Ms. Kessler has had right knee pain for more than three years, now
+8/10, with night pain most nights, walking tolerance under one block, and difficulty with
+stairs and car transfers. Her KOOS JR score on {{CONSULT|long}} was 44.8 (Enclosure 3).
+
+Criteria 4 through 6. Her BMI is 31.4, below the policy threshold, with documented weight
+loss. Her diabetes is well controlled (HbA1c 6.4%, Enclosure 5), she has no history of
+infection, and she has never smoked. Shared decision-making regarding risks, benefits and
+alternatives is documented in my consultation note.
+
+Ms. Kessler has exhausted appropriate non-operative care and has end-stage osteoarthritis
+that limits her daily activities. Total knee arthroplasty is the medically necessary next
+step. Because surgery is planned for {{PLANNED_DOS|long}}, we respectfully ask for a timely
+decision. I am available for a peer-to-peer discussion at your convenience.
+
+Sincerely,
+
+[Surgeon signature]
+Elena Marsh, MD
+Orthopaedic Surgery - Adult Reconstruction
+Riverbend Orthopedic Associates
+Phone: [Practice phone]
+
+Enclosures:
+1. Northgate Physical Therapy discharge summary ({{PT_END}})
+2. Injection procedure notes ({{INJ1}} and {{INJ2}})
+3. Surgical consultation note ({{CONSULT}})
+4. Weight-bearing right knee X-ray report ({{XRAY}})
+5. HbA1c laboratory result
+6. Copy of the denial notice dated {{DENIAL_DATE}}

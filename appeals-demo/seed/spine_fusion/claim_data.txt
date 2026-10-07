@@ -1,0 +1,18 @@
+*** FICTIONAL DATA - PROTOTYPE DEMONSTRATION ONLY ***
+
+PRIOR AUTHORIZATION REQUEST SUMMARY (practice management system)
+Requesting / rendering surgeon: Samuel Okafor, MD (Orthopaedic Spine)
+Patient: Gerald Whitcomb   DOB: 01/30/1967   Sex: M
+Payer: Meridian Valley Health Plan   Member ID: MVH-60718832
+UM case #: MVH-UM-2025-40215   PA submitted: {{PA_REQUEST}}
+Facility: Fairhaven Regional Medical Center (inpatient, in network)
+
+Line  CPT    Mod  Description                                         ICD-10            Est. charge
+1     22633  -    Lumbar arthrodesis, combined posterior interbody/   M43.16, M48.062   $9,850.00
+                  posterolateral, single interspace (L4-L5)
+2     22853  -    Insertion of interbody biomechanical device          M43.16            $2,150.00
+3     22840  -    Posterior non-segmental instrumentation              M43.16            $3,400.00
+4     Facility (inpatient, 2 days, est.)                                                   $53,100.00
+
+Total estimated charges: $68,500.00
+Planned date of service: {{PLANNED_DOS}}

@@ -1,0 +1,27 @@
+{
+  "patient_name": "Gerald Whitcomb",
+  "patient_dob": "1967-01-30",
+  "member_id": "MVH-60718832",
+  "payer_name": "Meridian Valley Health Plan",
+  "claim_or_reference_number": "MVH-UM-2025-40215",
+  "rendering_provider": "Samuel Okafor, MD",
+  "procedure_description": "L4-L5 transforaminal lumbar interbody fusion with posterolateral fusion and instrumentation",
+  "cpt_codes": [
+    {"code": "22633", "description": "Arthrodesis, combined posterior or posterolateral technique with posterior interbody technique, single interspace; lumbar", "modifiers": []},
+    {"code": "22853", "description": "Insertion of interbody biomechanical device", "modifiers": []},
+    {"code": "22840", "description": "Posterior non-segmental instrumentation", "modifiers": []}
+  ],
+  "icd10_codes": [
+    {"code": "M43.16", "description": "Spondylolisthesis, lumbar region"},
+    {"code": "M48.062", "description": "Spinal stenosis, lumbar region with neurogenic claudication"}
+  ],
+  "date_of_service": "{{PLANNED_DOS|iso}}",
+  "denial_date": "{{DENIAL_DATE|iso}}",
+  "billed_amount": 68500,
+  "amount_at_stake": 68500,
+  "stated_denial_reason": "Criterion 1 (instability) not met because translation was 3.5 mm (requires 4 mm or 10 degrees); Criterion 5 (nicotine) not met because there was no negative cotinine test after 6 weeks of abstinence.",
+  "denial_codes": [{"code": "MVP-SP-07 C1, C5", "description": "Policy criteria 1 and 5 not met"}],
+  "appeal_window_days": 180,
+  "appeal_submission_method": "Meridian Valley Health Plan, Appeals & Grievances, 3300 Valley Center Dr, Mesa Verde, ST 00000; fax (555) 010-7720. Peer-to-peer at (555) 010-7700.",
+  "summary": "Prior auth for an L4-5 TLIF was denied on the instability and nicotine criteria. The flexion-extension films show 11 degrees of angular motion, which meets the policy's alternative threshold, but the cotinine result was pending."
+}

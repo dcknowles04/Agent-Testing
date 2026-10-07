@@ -1,0 +1,17 @@
+{
+  "subject_line": "Request for reconsideration - timely filing - Lorraine Batiste - Claim HHP-8820147",
+  "letter_text": "@letter.txt",
+  "key_arguments": [
+    "The original claim was transmitted electronically 6 days after the date of service and accepted by the clearinghouse the next day.",
+    "[Pending] The clearinghouse payer-connection report shows the claim was delivered to Harborview within the filing limit (Manual 7.4(b)).",
+    "Alternatively, a payer connectivity issue delayed multiple claims that week, which qualifies for a Manual 7.6 waiver.",
+    "The service was prior-authorized (HHP-AUTH-662190) and is otherwise payable."
+  ],
+  "enclosures": [
+    "ClearPath payer-connection report for batch RB-0617-02 [TO OBTAIN]",
+    "ClearPath 999 acknowledgment ({{CH_ACCEPT}})",
+    "Claim submission history",
+    "List of other delayed Harborview claims for the same week [TO OBTAIN]",
+    "Copy of the EOB dated {{DENIAL_DATE}}"
+  ]
+}

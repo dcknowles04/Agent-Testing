@@ -1,0 +1,18 @@
+{
+  "denial_type": "timely_filing_admin",
+  "denial_type_rationale": "CO-29 timely filing denial; the dispute is about proof of the original submission, not clinical merit.",
+  "winnability": "weak",
+  "winnability_score": 28,
+  "reasons_for": [
+    "The original claim was transmitted 6 days after surgery (batch RB-0617-02) and accepted by the clearinghouse the next day.",
+    "The billing memo notes other Harborview claims from the same week were also delayed, suggesting a payer-connection problem; Manual 7.6 allows waivers for payer outages.",
+    "The procedure was prior-authorized (HHP-AUTH-662190), so medical necessity is not in question."
+  ],
+  "reasons_against": [
+    "Manual 7.4 explicitly says a 999 or clearinghouse-level acceptance alone is NOT sufficient proof.",
+    "No 277CA or Harborview claim number for the original submission has been located.",
+    "The outage theory is unverified; the ClearPath payer-connection report has not been pulled."
+  ],
+  "recommended_strategy": "Before appealing, pull the ClearPath payer-connection report for batch RB-0617-02 and any outage notices. If it shows Harborview accepted the claim, the case becomes strong under 7.4(b). Otherwise, request a 7.6 outage waiver with evidence from the other delayed claims.",
+  "route_to_coding_check": false
+}

@@ -1,0 +1,30 @@
+*** FICTIONAL DATA - PROTOTYPE DEMONSTRATION ONLY ***
+
+CLAIM SUMMARY & SUBMISSION HISTORY (practice management system)
+Billing provider: Riverbend Orthopedic Associates
+Rendering: Elena Marsh, MD
+Patient: Lorraine Batiste   DOB: 06/09/1964   Sex: F
+Payer: Harborview Health Partners   Member ID: HHP-51920744
+Payer claim # (resubmission): HHP-8820147   POS: 24 (ASC)
+
+Line  DOS          CPT    Mod  ICD-10 pointers   Units  Charge
+1     {{DOS}}  29827  RT   M75.121, M75.41   1      $11,400.00
+2     {{DOS}}  29826  RT   M75.41            1      $2,800.00
+Total billed: $14,200.00
+
+ICD-10:
+  M75.121  Complete rotator cuff tear or rupture of right shoulder, not specified as
+           traumatic
+  M75.41   Impingement syndrome of right shoulder
+
+SUBMISSION HISTORY
+{{ORIG_SUBMIT}}  Original claim sent electronically, batch #RB-0617-02, via ClearPath
+                 Claims (clearinghouse).
+{{CH_ACCEPT}}    ClearPath 999 functional acknowledgment: ACCEPTED (clearinghouse level).
+                 Payer 277CA acknowledgment: NOT FOUND in clearinghouse portal.
+                 (Note: the ClearPath payer-connection report for this period has not
+                 been pulled.)
+{{FOLLOWUP_CALL}} A/R follow-up call to Harborview (rep "Dana", ref #HHP-CALL-90411):
+                 "No claim on file for this DOS."
+{{RESUBMIT}}     Claim resubmitted electronically as a new claim.
+{{PAYER_RECEIVED}} Received by Harborview (day 98 after DOS).

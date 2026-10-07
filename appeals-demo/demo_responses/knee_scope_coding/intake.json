@@ -1,0 +1,29 @@
+{
+  "patient_name": "Victor Almeda",
+  "patient_dob": "1973-11-21",
+  "member_id": "PCA-77310925",
+  "payer_name": "Pinnacle Care Alliance",
+  "claim_or_reference_number": "PCA-2025-0943317",
+  "rendering_provider": "Priya Raman, MD",
+  "procedure_description": "Right knee arthroscopy: partial medial meniscectomy with major synovectomy",
+  "cpt_codes": [
+    {"code": "29881", "description": "Arthroscopy, knee, surgical; with meniscectomy (medial OR lateral), including debridement/shaving of articular cartilage, same or separate compartment(s)", "modifiers": ["RT"]},
+    {"code": "29876", "description": "Arthroscopy, knee, surgical; synovectomy, major, 2 or more compartments", "modifiers": ["RT"]}
+  ],
+  "icd10_codes": [
+    {"code": "M23.221", "description": "Derangement of posterior horn of medial meniscus due to old tear or injury, right knee"},
+    {"code": "M65.861", "description": "Other synovitis and tenosynovitis, right lower leg"}
+  ],
+  "date_of_service": "{{DOS|iso}}",
+  "denial_date": "{{DENIAL_DATE|iso}}",
+  "billed_amount": 8750,
+  "amount_at_stake": 2850,
+  "stated_denial_reason": "Line 2 (29876-RT) was denied as included in the payment for 29881 under an NCCI procedure-to-procedure edit (modifier indicator 1).",
+  "denial_codes": [
+    {"code": "CO-97", "description": "Benefit included in the payment/allowance for another service already adjudicated"},
+    {"code": "RARC M80", "description": "Not covered when performed during the same session/date as a previously processed service"}
+  ],
+  "appeal_window_days": 90,
+  "appeal_submission_method": "Pinnacle Care Alliance, Claims Reconsideration, PO Box 2290, Westvale, ST 00000, or via the Pinnacle provider portal. A corrected claim is also accepted.",
+  "summary": "Line 2 major synovectomy (29876) was bundled into the meniscectomy (29881) because no distinct-procedure modifier was billed. The op note documents the synovectomy in compartments separate from the medial meniscectomy."
+}

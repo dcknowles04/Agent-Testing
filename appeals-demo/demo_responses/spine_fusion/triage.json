@@ -1,0 +1,17 @@
+{
+  "denial_type": "prior_authorization",
+  "denial_type_rationale": "Pre-service authorization for lumbar fusion denied under medical policy MVP-SP-07.",
+  "winnability": "borderline",
+  "winnability_score": 62,
+  "reasons_for": [
+    "Criterion 1 allows 4 mm translation OR 10 degrees of angular motion; the flexion-extension report documents 11 degrees, so the reviewer applied only half of the criterion.",
+    "The payer agreed criteria 2-4 are met (symptoms, more than 3 months of conservative care, imaging correlation).",
+    "The patient reports nicotine abstinence since {{QUIT}}, more than 6 weeks before the planned surgery."
+  ],
+  "reasons_against": [
+    "No negative cotinine result is in the record; Criterion 5 cannot be met without it.",
+    "Translation (3.5 mm) is below the 4 mm threshold, so the instability argument rests entirely on angulation."
+  ],
+  "recommended_strategy": "Obtain the cotinine result first. If it is negative, appeal on both points: show the 11-degree angulation under the 'OR' clause of Criterion 1 and attach the negative cotinine test. If it is positive, defer the appeal and reschedule surgery.",
+  "route_to_coding_check": false
+}

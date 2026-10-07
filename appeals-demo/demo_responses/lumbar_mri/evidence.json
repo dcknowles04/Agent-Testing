@@ -1,0 +1,52 @@
+{
+  "policy_name": "Crestview Mutual Health CG-RAD-12: MRI of the Lumbar Spine (illustrative)",
+  "criteria": [
+    {
+      "criterion": "Indication A - At least 6 weeks of documented conservative therapy with persistent symptoms",
+      "status": "not_met",
+      "evidence": "Symptoms began about {{ONSET}}; conservative care (NSAIDs, oral steroids, 6 PT visits) is documented from {{VISIT1}}, about 4.3 weeks before the MRI on {{DOS}}.",
+      "citation": {"document": "clinical_notes", "section": "Note 3 - Follow-up visit {{VISIT2}}", "excerpt": "About 5 weeks since symptom onset; completed oral steroids, on naproxen, 6 PT visits."},
+      "action_needed": "Do not rely on Indication A; argue Indication B1."
+    },
+    {
+      "criterion": "Indication B1 - Progressive or severe neurological deficit, documented by comparing serial examinations",
+      "status": "met",
+      "evidence": "Initial exam {{VISIT1}}: strength 5/5 including left EHL and dorsiflexion. Follow-up {{VISIT2}}: left EHL 4/5 and dorsiflexion 4+/5, documented by the physician as a new motor deficit progressing despite conservative care.",
+      "citation": {"document": "clinical_notes", "section": "Note 3 - Follow-up visit {{VISIT2}}", "excerpt": "Left EHL 4/5 (previously 5/5), left ankle dorsiflexion 4+/5 (previously 5/5)."},
+      "action_needed": "Quote both exams side by side in the appeal."
+    },
+    {
+      "criterion": "Corroborating documentation of progression",
+      "status": "met",
+      "evidence": "PT progress note on {{PT_LAST}} records new difficulty heel-walking on the left and refers the patient back to the physician.",
+      "citation": {"document": "clinical_notes", "section": "Note 2 - PT progress note {{PT_LAST}}", "excerpt": "Notes new difficulty with heel walking on the left at today's visit."},
+      "action_needed": "Attach the PT progress note."
+    },
+    {
+      "criterion": "Indication C - Pre-procedural planning once a procedure is actively considered",
+      "status": "missing_documentation",
+      "evidence": "The MRI order states it will 'guide possible epidural steroid injection or surgical referral', but no injection or surgical plan is documented afterward in the uploaded records.",
+      "citation": {"document": "clinical_notes", "section": "Note 3 - Follow-up visit {{VISIT2}}", "excerpt": "MRI... to evaluate for a compressive lesion and guide possible epidural steroid injection or surgical referral."},
+      "action_needed": "If an ESI or surgical consult followed the MRI, attach that note to strengthen Indication C."
+    },
+    {
+      "criterion": "No red flags for cauda equina, infection, malignancy or fracture (B2/B3)",
+      "status": "not_met",
+      "evidence": "The notes explicitly document no bowel/bladder change, no saddle anesthesia, no fever, weight loss or cancer history. B2/B3 do not apply.",
+      "citation": {"document": "clinical_notes", "section": "Note 1 - New patient visit {{VISIT1}}", "excerpt": "No bowel/bladder changes, no saddle anesthesia, no fever, no weight loss, no history of cancer."},
+      "action_needed": "None - do not argue B2/B3."
+    }
+  ],
+  "overall_assessment": "The case turns on Indication B1. Serial exams document a new motor deficit, which the policy explicitly lists as a red flag, and the MRI confirmed a concordant compressive lesion. The deficit is mild and was seen on one follow-up, so the outcome depends on the reviewer accepting it as 'progressive'.",
+  "documents_to_attach": [
+    "New patient visit note ({{VISIT1}}) - baseline 5/5 strength",
+    "Follow-up visit note ({{VISIT2}}) - new 4/5 EHL weakness",
+    "PT progress note ({{PT_LAST}})",
+    "MRI report ({{DOS}})",
+    "Any post-MRI ESI or surgical referral note"
+  ],
+  "gaps": [
+    "Conservative care is under 6 weeks, so Indication A cannot be used.",
+    "No post-MRI treatment plan is documented in the uploaded record."
+  ]
+}

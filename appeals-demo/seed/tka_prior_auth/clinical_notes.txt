@@ -1,0 +1,60 @@
+*** FICTIONAL CLINICAL RECORD - PROTOTYPE DEMONSTRATION ONLY ***
+Patient: Dorothy Kessler   DOB: 03/14/1958   MRN: RB-20931
+
+=====================================================================
+NOTE 1 - INJECTION PROCEDURE NOTE - {{INJ1}}
+Provider: Elena Marsh, MD
+Procedure: Right knee intra-articular corticosteroid injection (triamcinolone 40 mg +
+lidocaine), ultrasound guided. Indication: right knee osteoarthritis with persistent pain
+despite oral NSAIDs (meloxicam 15 mg daily since about 9 months ago). Tolerated well.
+Plan: start formal physical therapy; follow up in 3 months.
+
+=====================================================================
+NOTE 2 - NORTHGATE PHYSICAL THERAPY - DISCHARGE SUMMARY - {{PT_END}}
+Therapist: Jordan Pell, PT, DPT  (Northgate Physical Therapy - outside facility)
+Referral: Right knee OA, Dr. E. Marsh
+Plan of care: 2x/week x 12 weeks. Start of care: {{PT_START}}. Discharge: {{PT_END}}.
+Visits attended: 14 of 16 scheduled (2 cancellations due to pain flare).
+Interventions: quadriceps/hip strengthening, ROM, gait training, aquatic therapy x 4,
+home exercise program (HEP) issued and reviewed at each visit.
+Outcome: Initial KOOS JR 48.0 -> discharge KOOS JR 46.5 (no meaningful change).
+Pain 7/10 -> 7/10 with stairs. ROM right knee 5-105 deg (unchanged).
+Assessment: Patient participated fully but plateaued with persistent pain and functional
+limitation. Discharged to HEP. Recommend orthopedic follow-up for surgical consideration.
+
+=====================================================================
+NOTE 3 - X-RAY REPORT - RIGHT KNEE, 3 VIEWS WEIGHT-BEARING - {{XRAY}}
+Radiologist: K. Osei, MD
+Findings: Severe medial compartment joint space narrowing with bone-on-bone apposition.
+Large marginal osteophytes, subchondral sclerosis and subchondral cysts. Moderate
+patellofemoral narrowing. Mild varus alignment (approx. 6 deg).
+Impression: Severe tricompartmental osteoarthritis, medial predominant,
+Kellgren-Lawrence grade 4.
+
+=====================================================================
+NOTE 4 - INJECTION PROCEDURE NOTE - {{INJ2}}
+Provider: Elena Marsh, MD
+Procedure: Repeat right knee corticosteroid injection, ultrasound guided.
+Patient reports relief from prior injection lasted about 5 weeks. PT completed without
+improvement. Continues meloxicam 15 mg daily and uses a cane for community distances.
+
+=====================================================================
+NOTE 5 - SURGICAL CONSULTATION - {{CONSULT}}
+Provider: Elena Marsh, MD
+HPI: 66-year-old woman with right knee pain for more than 3 years, progressively worse.
+Pain 8/10, worse with stairs and standing more than 15 minutes; night pain 4-5 nights/week.
+Walking tolerance under 1 block. Uses a cane. Difficulty with stairs, getting in and out of
+a car and grocery shopping. KOOS JR today: 44.8.
+Non-operative treatment to date: meloxicam 15 mg daily (more than 12 months), activity
+modification and cane, 2 corticosteroid injections ({{INJ1}}, {{INJ2}}), formal PT at
+Northgate PT {{PT_START}} to {{PT_END}} (14 visits) with HEP, without lasting benefit.
+Weight counseling provided (BMI 31.4); patient lost 9 lb over 6 months.
+PMH: Type 2 diabetes (HbA1c 6.4% two months ago), hypertension (controlled).
+Never smoker. No history of knee infection. Skin intact.
+Exam: Antalgic gait, varus deformity, medial joint-line tenderness, small effusion,
+ROM 5-100 deg, crepitus. Stable ligaments. Neurovascularly intact.
+Imaging: Weight-bearing X-rays from {{XRAY}} reviewed; KL grade 4 medial, bone on bone.
+Assessment: End-stage primary OA right knee (M17.11) that has failed more than 12 weeks of
+comprehensive non-operative management.
+Plan: Right total knee arthroplasty. Risks, benefits and alternatives discussed; shared
+decision-making completed and the patient wishes to proceed. Medical clearance requested.

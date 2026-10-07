@@ -1,0 +1,16 @@
+{
+  "subject_line": "Pre-service appeal - Gerald Whitcomb - UM case MVH-UM-2025-40215 - L4-5 TLIF",
+  "letter_text": "@letter.txt",
+  "key_arguments": [
+    "Criterion 1 is satisfied by 11 degrees of angular motion; the policy requires 4 mm translation OR 10 degrees.",
+    "A negative cotinine test confirms more than 6 weeks of nicotine abstinence (Criterion 5).",
+    "The payer already found criteria 2-4 met."
+  ],
+  "enclosures": [
+    "Flexion-extension radiograph report ({{FLEXEX}})",
+    "Cotinine laboratory result",
+    "Surgical consultation note ({{CONSULT}})",
+    "MRI lumbar spine report ({{MRI}})",
+    "Copy of the denial notice dated {{DENIAL_DATE}}"
+  ]
+}

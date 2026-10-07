@@ -1,0 +1,26 @@
+*** FICTIONAL DOCUMENT - PROTOTYPE DEMONSTRATION ONLY ***
+
+HARBORVIEW HEALTH PARTNERS
+Explanation of Benefits - Claim Denied
+Date: {{DENIAL_DATE}}
+
+Provider: Riverbend Orthopedic Associates - Elena Marsh, MD
+Patient: Lorraine Batiste    DOB: 06/09/1964    Member ID: HHP-51920744
+Claim #: HHP-8820147     DOS: {{DOS}}     Date claim received: {{PAYER_RECEIVED}}
+
+Line  CPT     Mod  Billed       Allowed  Paid   Adj
+1     29827   RT   $11,400.00   $0.00    $0.00  CO-29
+2     29826   RT   $2,800.00    $0.00    $0.00  CO-29
+
+CO-29: The time limit for filing has expired.
+
+Your provider agreement requires that claims be received within 90 days of the date of
+service. This claim was received 98 days after the date of service.
+
+To request reconsideration, submit proof of timely filing within 60 days of the date of
+this notice. Acceptable proof (see Provider Manual section 7.4): a payer-issued
+acknowledgment (277CA) or claim number showing receipt within the filing limit, or a
+clearinghouse report showing the claim was accepted BY HARBORVIEW within the filing
+limit. Clearinghouse acceptance reports alone (999 / clearinghouse-level acceptance) are
+not sufficient. Mail: Harborview Health Partners, Claims Review, 410 Pier Street, Port
+Ellis, ST 00000.

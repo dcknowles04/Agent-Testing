@@ -1,0 +1,59 @@
+{
+  "policy_name": "Summit Health Plan MP-ORTHO-031: Total Knee Arthroplasty (illustrative)",
+  "criteria": [
+    {
+      "criterion": "Criterion 1 - Weight-bearing X-rays within 12 months show KL grade 3-4, bone-on-bone or severe joint space narrowing",
+      "status": "met",
+      "evidence": "3-view weight-bearing right knee X-rays on {{XRAY}} show severe medial narrowing with bone-on-bone apposition, KL grade 4.",
+      "citation": {"document": "clinical_notes", "section": "Note 3 - X-ray report {{XRAY}}", "excerpt": "Severe tricompartmental osteoarthritis, medial predominant, Kellgren-Lawrence grade 4."},
+      "action_needed": "None - the report was included in the original request."
+    },
+    {
+      "criterion": "Criterion 2 - Moderate-severe pain and functional impairment for 3+ months, documented with a validated measure",
+      "status": "met",
+      "evidence": "Pain 8/10 for more than 3 years, walking tolerance under 1 block, cane use, night pain; KOOS JR 44.8 at the surgical consult.",
+      "citation": {"document": "clinical_notes", "section": "Note 5 - Surgical consultation {{CONSULT}}", "excerpt": "Walking tolerance under 1 block. Uses a cane... KOOS JR today: 44.8."},
+      "action_needed": "None."
+    },
+    {
+      "criterion": "Criterion 3 - Failure of 12+ weeks of non-operative treatment in the past 12 months, including at least two modalities, with PT supported by therapy notes",
+      "status": "missing_documentation",
+      "evidence": "The chart documents PT {{PT_START}} to {{PT_END}} (14 visits, about 12 weeks, plateaued), meloxicam for more than 12 months, and corticosteroid injections on {{INJ1}} and {{INJ2}}. The PT discharge summary was NOT sent with the original request, which is the stated reason for the denial.",
+      "citation": {"document": "clinical_notes", "section": "Note 2 - Northgate PT discharge summary {{PT_END}}", "excerpt": "Visits attended: 14 of 16 scheduled... Patient participated fully but plateaued with persistent pain and functional limitation."},
+      "action_needed": "Attach the Northgate PT discharge summary and both injection procedure notes; once attached, this criterion is met."
+    },
+    {
+      "criterion": "Criterion 4 - BMI below 40 or a documented optimization plan",
+      "status": "met",
+      "evidence": "BMI 31.4 with weight counseling and a 9 lb weight loss documented.",
+      "citation": {"document": "clinical_notes", "section": "Note 5 - Surgical consultation {{CONSULT}}", "excerpt": "Weight counseling provided (BMI 31.4); patient lost 9 lb over 6 months."},
+      "action_needed": "None."
+    },
+    {
+      "criterion": "Criterion 5 - No active infection; HbA1c below 8.0% within 3 months for diabetic patients",
+      "status": "met",
+      "evidence": "HbA1c 6.4% about 2 months before the consult; no history of knee infection; skin intact.",
+      "citation": {"document": "clinical_notes", "section": "Note 5 - Surgical consultation {{CONSULT}}", "excerpt": "Type 2 diabetes (HbA1c 6.4% two months ago)... No history of knee infection. Skin intact."},
+      "action_needed": "Attach the HbA1c lab result; confirm it falls within 3 months of the surgery date or repeat it at pre-op."
+    },
+    {
+      "criterion": "Criterion 6 - Documented shared decision-making",
+      "status": "met",
+      "evidence": "The consult documents a risks/benefits/alternatives discussion and the patient's decision to proceed.",
+      "citation": {"document": "clinical_notes", "section": "Note 5 - Surgical consultation {{CONSULT}}", "excerpt": "Risks, benefits and alternatives discussed; shared decision-making completed and the patient wishes to proceed."},
+      "action_needed": "None."
+    }
+  ],
+  "overall_assessment": "Every MP-ORTHO-031 criterion is supported by the chart. The denial resulted from a documentation gap (PT notes not sent), not from a clinical shortfall. With the PT discharge summary and injection notes attached, all six criteria are met.",
+  "documents_to_attach": [
+    "Northgate Physical Therapy discharge summary ({{PT_END}})",
+    "Injection procedure notes ({{INJ1}} and {{INJ2}})",
+    "Surgical consultation note ({{CONSULT}})",
+    "Weight-bearing right knee X-ray report ({{XRAY}})",
+    "HbA1c lab result"
+  ],
+  "gaps": [
+    "HbA1c lab report is referenced but not in the uploaded record.",
+    "The PT plan of care called for 16 visits and 14 were attended; frame this as full participation with a plateau."
+  ]
+}

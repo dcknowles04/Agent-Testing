@@ -1,0 +1,11 @@
+{
+  "_note": "Placeholder pricing - edit freely. appeals_per_month: null means unlimited.",
+  "tiers": [
+    {"name": "Starter",   "appeals_per_month": 25,   "price_per_month": 499},
+    {"name": "Pro",       "appeals_per_month": 100,  "price_per_month": 1499},
+    {"name": "Unlimited", "appeals_per_month": null, "price_per_month": 2999}
+  ],
+  "staff_cost_per_hour": 38,
+  "manual_minutes_per_appeal": 95,
+  "assisted_minutes_per_appeal": 15
+}

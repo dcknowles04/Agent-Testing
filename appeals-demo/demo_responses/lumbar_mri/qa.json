@@ -1,0 +1,19 @@
+{
+  "overall": "ready_with_edits",
+  "score": 82,
+  "flags": [
+    {"severity": "high", "issue": "The appeal deadline is close; submit this week.", "location": "Case header", "suggested_fix": "Prioritize approval and send via the CrestLink portal for a time-stamped receipt."},
+    {"severity": "medium", "issue": "The Indication C argument is thin: no post-MRI ESI or surgical referral is documented in the uploaded record.", "location": "Paragraph 5", "suggested_fix": "Attach the post-MRI plan if one exists; otherwise keep Indication C as a single supporting sentence (as drafted)."},
+    {"severity": "low", "issue": "Physician signature placeholder.", "location": "Signature block", "suggested_fix": "Have Dr. Okafor sign before submission."}
+  ],
+  "unsupported_claims": [],
+  "attachments_checklist": [
+    {"item": "New patient visit note ({{VISIT1}})", "source": "clinical_notes - Note 1", "required": true, "status": "in_file"},
+    {"item": "Follow-up visit note ({{VISIT2}})", "source": "clinical_notes - Note 3", "required": true, "status": "in_file"},
+    {"item": "PT progress note ({{PT_LAST}})", "source": "clinical_notes - Note 2", "required": true, "status": "in_file"},
+    {"item": "MRI report ({{DOS}})", "source": "clinical_notes - Note 4", "required": true, "status": "in_file"},
+    {"item": "Post-MRI ESI or surgical referral note (if any)", "source": "Practice EHR", "required": false, "status": "verify"},
+    {"item": "Copy of EOB ({{DENIAL_DATE}})", "source": "denial_letter", "required": false, "status": "in_file"}
+  ],
+  "summary": "The letter correctly pivots from the 6-week rule to the red-flag exception and supports it with a serial-exam comparison. The facts all match the record. The outcome is uncertain because the deficit is mild; the timing is the main risk."
+}

@@ -1,0 +1,20 @@
+*** FICTIONAL DATA - PROTOTYPE DEMONSTRATION ONLY ***
+
+CLAIM SUMMARY (CMS-1500 data from practice management system)
+Billing provider: Riverbend Orthopedic Associates
+Rendering: Priya Raman, MD (Sports Medicine / Arthroscopy)
+Patient: Victor Almeda   DOB: 11/21/1973   Sex: M
+Payer: Pinnacle Care Alliance   Member ID: PCA-77310925
+Claim #: PCA-2025-0943317   Submitted: {{CLAIM_SUBMITTED}}   POS: 24 (ASC)
+
+Line  DOS          CPT    Mod  ICD-10 pointers     Units  Charge
+1     {{DOS}}  29881  RT   M23.221             1      $5,900.00
+2     {{DOS}}  29876  RT   M65.861             1      $2,850.00
+
+ICD-10:
+  M23.221  Derangement of posterior horn of medial meniscus due to old tear or injury,
+           right knee
+  M65.861  Other synovitis and tenosynovitis, right lower leg
+
+Total billed: $8,750.00   Paid: $1,771.20   Denied: $2,850.00 (line 2)
+Coder note: No distinct-procedure modifier was appended to line 2 at original submission.
