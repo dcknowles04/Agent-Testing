@@ -261,11 +261,30 @@ const DOCS = [
   ["claim_data", "Claim data", "CPT / ICD codes, dates of service, billed amount"],
   ["payer_policy", "Payer coverage policy", "The payer's policy for this procedure"],
 ];
+const DOC_LABEL = Object.fromEntries(DOCS.map(([k, label]) => [k, label]));
+
+// Guess a document's type from its file name, then its content. Staff can change it.
+function guessDocType(name, text) {
+  const n = (name || "").toLowerCase();
+  if (/denial|eob|remit|adverse|notice|determination/.test(n)) return "denial_letter";
+  if (/polic|coverage|guideline|manual|criteria/.test(n)) return "payer_policy";
+  if (/claim|cms|1500|837|billing|charges|ub04/.test(n)) return "claim_data";
+  if (/note|clinic|op[-_ ]?report|operative|imaging|mri|x-?ray|radiolog|therapy|pt[-_ ]|consult|patholog/.test(n)) return "clinical_notes";
+  const t = (text || "").slice(0, 4000).toLowerCase();
+  if (/medical policy|reimbursement policy|clinical guideline|provider manual|considered medically necessary when|criterion 1/.test(t)) return "payer_policy";
+  if (/appeal rights|right to appeal|adverse determination|explanation of benefits|remittance|carc|denied|not approved/.test(t)) return "denial_letter";
+  if (/cms-1500|claim summary|request summary|est\. charge|total billed|icd-10 pointers/.test(t)) return "claim_data";
+  return "clinical_notes";
+}
+
 async function viewNew() {
   const samples = await api("/samples");
   let sample = null; // {key, date_ctx} when loaded from a sample and unedited
+  let files = [];    // {id, name, type, text, typeSetByUser, open}
+  let nextId = 1;
+
   $app.innerHTML = `
-    <div class="page-head"><div><h1>New denial</h1><div class="muted">Upload text files or paste the four documents, or load a sample case.</div></div></div>
+    <div class="page-head"><div><h1>New denial</h1><div class="muted">Add the denial letter / EOB, clinical notes, claim data and payer policy, or load a sample case.</div></div></div>
     <div class="card" style="margin-bottom:16px">
       <div class="filters" style="margin:0">
         <b>Load sample case:</b>
@@ -277,13 +296,16 @@ async function viewNew() {
     <div class="card">
       <div class="doc-box"><label class="field" for="title">Case title</label>
         <input type="text" id="title" style="width:100%" placeholder="e.g. Total knee arthroplasty - prior auth denied"></div>
-      ${DOCS.map(([k, label, hint]) => `
-        <div class="doc-box">
-          <div class="doc-head"><label class="field" for="doc-${k}">${label} <span class="muted small">· ${hint}</span></label>
-            <input type="file" accept=".txt,.md,.text,text/plain" data-doc="${k}"></div>
-          <textarea id="doc-${k}" rows="7" placeholder="Paste ${label.toLowerCase()} text here, or choose a .txt file"></textarea>
-        </div>`).join("")}
-      <p class="muted small">Prototype note: upload accepts plain-text files. PDF/image parsing (OCR) is out of scope; paste extracted text instead. Use fictional data only.</p>
+      <label class="field">Case documents</label>
+      <div class="dropzone" id="dropzone">
+        <div><b>Drag files here</b> <span class="muted">or</span>
+          <label class="btn btn-ghost btn-sm" for="file-input">Choose files</label>
+          <input type="file" id="file-input" multiple accept=".txt,.md,.text,text/plain" class="visually-hidden">
+          <span class="muted">or</span> <button class="btn btn-ghost btn-sm" id="paste-btn" type="button">Paste text</button></div>
+        <div class="muted small">Add as many files as you need. Each one is sorted by type automatically; change the type if it's wrong. Plain-text files only in this prototype.</div>
+      </div>
+      <div id="coverage" class="coverage"></div>
+      <div id="file-list" class="file-list"></div>
       <div class="actions">
         <button class="btn btn-lg" id="create-run">Create case &amp; run agents →</button>
         <button class="btn btn-ghost" id="create-only">Create case only</button>
@@ -293,26 +315,90 @@ async function viewNew() {
   const markEdited = () => {
     if (sample) { sample = null; document.getElementById("sample-note").textContent = "Edited - demo mode will use generic template output for this case."; }
   };
-  DOCS.forEach(([k]) => document.getElementById("doc-" + k).addEventListener("input", markEdited));
-  $app.querySelectorAll("input[type=file]").forEach((inp) => (inp.onchange = () => {
-    const f = inp.files[0];
-    if (!f) return;
-    if (!/\.(txt|md|text)$/i.test(f.name) && f.type !== "text/plain") return toast("Please upload a plain-text file (.txt). PDF parsing isn't part of this prototype.");
-    const r = new FileReader();
-    r.onload = () => { document.getElementById("doc-" + inp.dataset.doc).value = r.result; markEdited(); };
-    r.readAsText(f);
-  }));
+
+  const renderFiles = () => {
+    const have = new Set(files.filter((f) => f.text.trim()).map((f) => f.type));
+    document.getElementById("coverage").innerHTML = DOCS.map(([k, label]) =>
+      `<span class="badge ${have.has(k) ? "b-green" : k === "denial_letter" ? "b-red" : ""}">${have.has(k) ? "✓" : "○"} ${esc(label)}${k === "denial_letter" && !have.has(k) ? " (required)" : ""}</span>`).join(" ");
+    document.getElementById("file-list").innerHTML = files.map((f) => `
+      <div class="file-row" data-id="${f.id}">
+        <div class="file-main">
+          <span class="file-name">📄 ${esc(f.name)}</span>
+          <span class="muted small">${f.text.split("\n").length} lines</span>
+          <select class="file-type" aria-label="Document type for ${esc(f.name)}">
+            ${DOCS.map(([k, label]) => `<option value="${k}" ${k === f.type ? "selected" : ""}>${esc(label)}</option>`).join("")}
+          </select>
+          <button class="btn btn-ghost btn-sm file-toggle" type="button">${f.open ? "Hide text" : "View / edit"}</button>
+          <button class="btn btn-ghost btn-sm file-remove" type="button" aria-label="Remove ${esc(f.name)}">Remove</button>
+        </div>
+        ${f.open ? `<textarea class="file-text" rows="10" placeholder="Paste document text here">${esc(f.text)}</textarea>` : ""}
+      </div>`).join("") || `<p class="muted small" style="margin:8px 0 0">No documents added yet.</p>`;
+
+    $app.querySelectorAll(".file-row").forEach((row) => {
+      const f = files.find((x) => x.id === Number(row.dataset.id));
+      row.querySelector(".file-type").onchange = (e) => { f.type = e.target.value; f.typeSetByUser = true; markEdited(); renderFiles(); };
+      row.querySelector(".file-toggle").onclick = () => { f.open = !f.open; renderFiles(); };
+      row.querySelector(".file-remove").onclick = () => { files = files.filter((x) => x !== f); markEdited(); renderFiles(); };
+      const ta = row.querySelector(".file-text");
+      if (ta) {
+        ta.oninput = () => { f.text = ta.value; markEdited(); };
+        ta.onchange = () => { if (!f.typeSetByUser) f.type = guessDocType(f.name, f.text); renderFiles(); };
+      }
+    });
+  };
+
+  const addFiles = (list) => {
+    const rejected = [];
+    const reads = [...list].map((file) => new Promise((resolve) => {
+      if (!/\.(txt|md|text)$/i.test(file.name) && file.type !== "text/plain") { rejected.push(file.name); return resolve(); }
+      const r = new FileReader();
+      r.onload = () => {
+        files.push({ id: nextId++, name: file.name, type: guessDocType(file.name, r.result), text: String(r.result), typeSetByUser: false, open: false });
+        resolve();
+      };
+      r.onerror = () => { rejected.push(file.name); resolve(); };
+      r.readAsText(file);
+    }));
+    Promise.all(reads).then(() => {
+      markEdited();
+      renderFiles();
+      if (rejected.length) toast(`Skipped ${rejected.join(", ")}: this prototype reads plain-text (.txt) files only. Paste the text instead.`, 5000);
+    });
+  };
+
+  const input = document.getElementById("file-input");
+  input.onchange = () => { addFiles(input.files); input.value = ""; };
+  const dz = document.getElementById("dropzone");
+  dz.addEventListener("dragover", (e) => { e.preventDefault(); dz.classList.add("dragging"); });
+  dz.addEventListener("dragleave", () => dz.classList.remove("dragging"));
+  dz.addEventListener("drop", (e) => { e.preventDefault(); dz.classList.remove("dragging"); addFiles(e.dataTransfer.files); });
+  document.getElementById("paste-btn").onclick = () => {
+    files.push({ id: nextId++, name: `Pasted text ${files.filter((f) => f.name.startsWith("Pasted")).length + 1}`, type: "clinical_notes", text: "", typeSetByUser: false, open: true });
+    markEdited();
+    renderFiles();
+    const tas = $app.querySelectorAll(".file-text");
+    tas[tas.length - 1].focus();
+  };
+
   document.getElementById("load-sample").onclick = async () => {
     const key = document.getElementById("sample-select").value;
     const s = await api("/samples/" + key);
-    DOCS.forEach(([k]) => (document.getElementById("doc-" + k).value = s.documents[k]));
+    files = DOCS.map(([k]) => ({ id: nextId++, name: `${k}.txt`, type: k, text: s.documents[k], typeSetByUser: true, open: false }));
     document.getElementById("title").value = s.title;
     sample = { key: s.key, date_ctx: s.date_ctx };
-    document.getElementById("sample-note").textContent = "Sample loaded (fictional). You can edit any field before creating the case.";
+    renderFiles();
+    document.getElementById("sample-note").textContent = "Sample loaded (fictional). You can add, remove or edit files before creating the case.";
   };
+
   const create = async (run) => {
-    const documents = Object.fromEntries(DOCS.map(([k]) => [k, document.getElementById("doc-" + k).value]));
-    if (!documents.denial_letter.trim()) return toast("A denial letter / EOB is required.");
+    // Combine files of the same type; label each one when there are several.
+    const documents = Object.fromEntries(DOCS.map(([k]) => {
+      const group = files.filter((f) => f.type === k && f.text.trim());
+      const text = group.length === 1 ? group[0].text
+        : group.map((f) => `----- ${f.name} -----\n${f.text.trim()}`).join("\n\n");
+      return [k, text];
+    }));
+    if (!documents.denial_letter.trim()) return toast("Add the denial letter / EOB (or mark one of your files as the denial letter).");
     const body = { title: document.getElementById("title").value, documents };
     if (sample) Object.assign(body, { sample_key: sample.key, date_ctx: sample.date_ctx });
     const c = await api("/cases", { method: "POST", body });
@@ -321,6 +407,7 @@ async function viewNew() {
   };
   document.getElementById("create-run").onclick = () => create(true).catch((e) => toast(e.message));
   document.getElementById("create-only").onclick = () => create(false).catch((e) => toast(e.message));
+  renderFiles();
 }
 
 // ---------------------------------------------------------------- 4. case detail

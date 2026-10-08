@@ -200,7 +200,19 @@ ul.tight { margin: 4px 0; padding-left: 18px; }
 .checklist label { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
 .doc-box { margin-bottom: 14px; }
-.doc-box .doc-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; gap: 8px; }
+.dropzone {
+  border: 2px dashed var(--line-strong); border-radius: 10px; padding: 22px 16px; text-align: center;
+  background: var(--subtle); display: grid; gap: 8px; justify-items: center;
+}
+.dropzone > div:first-child { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.dropzone.dragging { border-color: var(--accent); background: var(--accent-soft); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.coverage { display: flex; gap: 6px; flex-wrap: wrap; margin: 12px 0 4px; }
+.file-list { display: grid; gap: 8px; margin-top: 8px; }
+.file-row { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--card); }
+.file-main { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.file-name { font-weight: 600; flex: 1 1 200px; min-width: 0; overflow-wrap: anywhere; }
+.file-row textarea { margin-top: 8px; }
 .toast {
   position: fixed; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); right: 16px; left: auto; background: var(--toast-bg); color: var(--toast-fg); padding: 10px 16px;
   border-radius: 8px; box-shadow: 0 6px 20px var(--shadow); z-index: 50; max-width: min(420px, calc(100vw - 32px));

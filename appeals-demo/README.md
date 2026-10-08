@@ -111,7 +111,7 @@ shows a yellow note explaining why.
 |---|---|---|
 | Practice dashboard | **Dashboard** | Open denials, dollars at stake, deadlines due in ≤14 days, overturn rate, staff hours saved, plan usage ("37 of 100 appeals used this month") |
 | Case queue | **Case Queue** | Filter by denial type, status and deadline urgency (🔴 ≤14 days, 🟡 15-30, 🟢 >30) |
-| New case | **New Case** | Upload `.txt` files or paste the 4 documents, or use **Load sample case** |
+| New case | **New Case** | One upload area: drop in any number of `.txt` files (each is auto-sorted as denial letter, clinical notes, claim data or policy, and you can change it), paste text, or use **Load sample case** |
 | Case detail | click any case | Live pipeline (each agent lights up as it runs, via server-sent events), expandable panels per agent, criteria checklist with Met / Missing docs / Not met badges and citations |
 | Staff review | **Staff review →** | Editable letter, QA flags, attachments checklist, **Approve & Mark Submitted** |
 | Outcomes & business | **Outcomes & Business** | Mark results; practice value across 3 practices; our MRR/ARR and tiers |
