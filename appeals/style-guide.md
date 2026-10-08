@@ -86,6 +86,20 @@ This is a starting point, not a finished style. It will get more specific and mo
       because of it. If a typo could plausibly be two words with different meanings,
       pick the reading that fits this letter's own facts, and note that reading in
       `04-draft/changelog.md`.
+    - **Cuts are adoptable signal too.** When the user's hand revision cuts something
+      the pipeline's draft had (a sentence, a clause, a whole paragraph, a quoted block),
+      treat the cut like an added or reworded phrase: learn to omit that kind of content
+      in similar future situations. Learn the context the same way. Note what was cut,
+      which section it sat in, and what job it did, then omit it in the same kind of
+      spot, not as a blanket ban everywhere. Example: the Khurana castmods round's cut of
+      a closing rhetorical line, "A provider cannot correct a deficiency the payer has
+      not identified" (see Changelog). The boundary below covers cuts too. Cutting a
+      general self-qualifier is already what "Tone" asks for, so adopt it. But if a cut
+      removes the caveat or narrower tier wording attached to a specific low-confidence
+      citation while the claim itself stays, the cut would raise that claim's certainty.
+      That isn't a style lesson: flag it as a `case-file.md` certainty-tier question and
+      record it in `04-draft/changelog.md` by the specific citation, the same split
+      "Mixed sentences" below makes for additions.
   - **Boundary: this governs wording and register only, never what the letter asserts as
     fact.** It widens the latitude the user's wording and tone get. It gives unsupported
     facts no new latitude. Every citation-fidelity rule in this file stays exactly as
@@ -150,6 +164,40 @@ This is a starting point, not a finished style. It will get more specific and mo
   or "the practice and payer agree on the standard" — those restate structure without
   adding a citation or a fact. State each criterion, its citation, and its bolded
   conclusion; let them stand on their own.
+- **Once a conclusion is clearly stated, don't re-explain it: default to the shorter
+  assertion.** When a point's conclusion is already stated plainly and confidently
+  (typically its bolded holding sentence), don't also walk through the reasoning that
+  gets there: the "because ... which means ... so" chain explaining *why* the point
+  holds. That says the same point a second time in more words. Assert it directly and
+  move on. This is the same family as the rule just above (cut sentences that don't add
+  a new fact), applied to explanatory reasoning. It makes the "Citations" latitude below
+  (a shorter, confident conclusion can stand in for a detailed reasoning chain) the
+  default once the conclusion is clear, not just an option. `case-file.md` still records
+  and cites the full reasoning: this changes what the letter displays, not what the case
+  file verifies. Example: in the Paimany-Kenzie round (see Changelog), the pipeline's
+  draft backed its argument that the payer's own non-coverage codes don't appear on this
+  claim with detailed explanatory reasoning. The user's revision replaced that with a
+  shorter, direct assertion of the same point. The conclusion stayed; the walk-through
+  of *why* was cut, because the conclusion already said it plainly.
+  - **Scope: explanatory reasoning only.** Everything below stays exactly as the rest of
+    this file requires:
+    - **The argument itself.** Shorten a thread's explanation, never drop the thread.
+      "Argument breadth" still applies in full, and each supported disjunctive criterion
+      still gets its own beat.
+    - **Citations and record references**: record and page cites; policy, CPT, and payer
+      citations; CPT descriptors; verbatim denial-code quotes; and "based on the fact
+      that X, Y, Z" chains of cited record facts. These are evidence, not explanation.
+      Documentation-checklist bulleted lists and the prong-by-prong showing "Medical
+      necessity argument" requires stay too.
+    - **Repetition for emphasis.** Restating key facts and repeating a multi-sentence
+      argument block nearly verbatim later in the letter both stay deliberate, per
+      "Repetition is deliberate" above. Restating a conclusion is emphasis. Re-deriving
+      it in more words is what this rule cuts.
+    - **Tier-matched wording.** If the "reasoning" next to a claim is really the narrower
+      wording or caveat attached to a low-confidence citation, it isn't redundant
+      explanation, so keep it. A shorter assertion never states a point more strongly
+      than its `case-file.md` tier supports, the same boundary "Cuts are adoptable signal
+      too" draws.
 - **Denial-code rebuttal pattern, unified by default**: quote the denial code(s) and
   stated reason(s) verbatim, then respond directly: *"Contrary to denial code X: ..."*.
   Default to **one unified rebuttal covering every disputed line**, even when the
@@ -383,12 +431,18 @@ This is a starting point, not a finished style. It will get more specific and mo
   the quoted denial-code ANC boilerplate about submitting documentation via the payer's
   portal, kept only the substantive "additional information is required" reason, and
   changed a bare "99214" to "99214-25" in the RE-block dispute line. **One deeper finding
-  from this same comparison is still under user review and deliberately not yet
-  encoded**: how aggressively to cut explanatory reasoning once a conclusion is stated
-  (the revision also dropped a clever "the payer's own non-coverage codes don't appear on
-  this claim" argument, replacing detailed reasoning with a shorter assertion) — that
-  broader question is still open. This letter has not yet been added to the examples
-  corpus pending that.
+  from this same comparison was held for user review and is now resolved**: how
+  aggressively to cut explanatory reasoning once a conclusion is stated. The revision cut
+  a clever "the payer's own non-coverage codes don't appear on this claim" argument down
+  from detailed reasoning to a shorter assertion of the same point. The user later
+  confirmed this is a general standing rule, not a one-letter choice. It's now encoded as
+  "Once a conclusion is clearly stated, don't re-explain it," directly after "State each
+  criterion's citation and conclusion directly" above (see the last changelog entry). The
+  user also confirmed this letter should be added to the examples corpus, but it can't be
+  added yet: its source file no longer exists anywhere in this environment. It was
+  supplied in an earlier session, and a filesystem-wide search found no Paimany-Kenzie
+  file, most likely lost to a container reset. Add it, redacted per `examples/README.md`,
+  if and when the user re-uploads the source file.
 - Follow-up to the entry above: the user confirmed the other two open items from the same
   Paimany-Kenzie comparison. (1) "The patient failed extensive first-line conservative
   treatment" is accurate — the records do support a sequential failure, not merely
@@ -511,3 +565,35 @@ This is a starting point, not a finished style. It will get more specific and mo
     facts the record doesn't support: the unattributed "performed by the physician," and
     another claim's carried-over DOS, payer, or denial code. A third was intensifiers on
     a low-confidence time route, which the full-confidence boundary still bars.
+- Added "Cuts are adoptable signal too" under "The user's own wording is adopted by
+  default" in "Tone." PLAYBOOK.md §7's comparison-rounds bullet gets a matching
+  sub-point.
+  - **Source.** Asked directly, the user confirmed that deletions in a hand revision
+    should be adopted too, not just additions and rewording.
+  - **What it changes.** A cut (a sentence, a clause, a whole paragraph, a quoted block)
+    is now adoptable signal, under the same "learn the context" rule as an added phrase:
+    omit that kind of content in the same kind of spot, not everywhere. This generalizes
+    the Khurana castmods entry above, which confirmed the cut of a closing rhetorical
+    line ("A provider cannot correct a deficiency the payer has not identified") as
+    intentional but deliberately didn't make a rule of it.
+  - **What it doesn't change.** The wording-only boundary covers cuts as well. A cut that
+    strips the caveat or tier-matched wording from a specific low-confidence citation,
+    while the claim stays, is flagged as a `case-file.md` certainty-tier question, not
+    adopted as style. Quote precision, the disjunctive-criteria tier matching, the
+    full-confidence register's boundary, and "Citations" are unchanged.
+- Added "Once a conclusion is clearly stated, don't re-explain it" directly after "State
+  each criterion's citation and conclusion directly," resolving the open question in the
+  Paimany-Kenzie entry above.
+  - **Source.** Asked directly, the user confirmed that preferring a shorter assertion
+    over detailed explanatory reasoning, once the conclusion is clearly stated, is a
+    general standing rule, not a choice for that one letter. The Paimany-Kenzie revision
+    is the example: it kept the "the payer's own non-coverage codes don't appear on this
+    claim" argument and cut its detailed reasoning down to a shorter assertion.
+  - **What it changes.** The "Citations" latitude (a shorter confident conclusion can
+    stand in for a detailed reasoning chain) becomes the default once the conclusion is
+    already clear, instead of only an option.
+  - **What it doesn't change.** Arguments themselves, citations and record references,
+    verbatim quotes, checklist blocks, "based on the fact that" chains, the
+    prong-by-prong medical-necessity showing, "Repetition is deliberate," and
+    tier-matched wording on low-confidence points all stay exactly as before.
+    `case-file.md` still records and cites the full reasoning.

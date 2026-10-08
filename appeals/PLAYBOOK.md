@@ -328,6 +328,12 @@ cap on genuine, substantive disagreement between reviewers.
     the sentence does. That way the drafter reuses it in the same kind of spot.
   - **Read past typos** to the phrase the user meant. A typo is a reason to fix the
     spelling, never a reason to discard the phrase.
+  - **Cuts count too.** When a hand revision cuts something the pipeline's draft had (a
+    sentence, a clause, a whole paragraph, a quoted block), adopt the cut by default as
+    well: the drafter learns to omit that kind of content in the same kind of spot, not
+    as a blanket ban everywhere. The boundary below still applies. A cut that strips the
+    caveat from a specific low-confidence citation while the claim stays is a
+    `case-file.md` certainty-tier question to flag, not a style lesson.
   - **Boundary: wording and register only, never facts.** This changes how much latitude
     the user's wording gets. It doesn't change what a letter may assert. A phrasing
     choice attached to an unsupported claim is still adopted: keep the wording, decline
