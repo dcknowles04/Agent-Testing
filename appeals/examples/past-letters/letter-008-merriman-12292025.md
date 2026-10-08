@@ -17,8 +17,7 @@ Case context (not part of the letter itself):
   field — the single most specific, structured field in the letter, even though other
   passages disagree with it.
 - **This is NOT the same claim as the pipeline case run for Merriman DOS 02/24/2025**
-  (`appeals/cases/2026-09-03-merriman-shawne-022425/`, git-ignored PHI), despite this
-  letter's own header naming that date. Already established directly with the user: this
+  (a separate, git-ignored PHI case), despite this letter's own header naming that date. Already established directly with the user: this
   letter's own claim number and billed amount ($15,750.00) don't match that case's real
   claim number and billed amount ($11,950.00), and two independent sources tied to the
   actual 02/24/2025 claim (the real EOB, and the practice's own contemporaneous note on

@@ -96,8 +96,8 @@ patient/payer, and letter-010 answers an Optum Payment Integrity pre-payment rev
 and **Cigna Health** (letter-007-merriman and
 letter-008-merriman — 2 examples). Not yet represented: Humana, Blue Shield,
 Medicare/Medicare Advantage, or any state Medicaid plan. Cigna has also been worked as a
-live case (`appeals/cases/2026-09-03-merriman-shawne-022425/`, git-ignored PHI) — that
-case's own claim (DOS 02/24/2025) is a **different claim** from both letter-007 (DOS
+live pipeline case for this same patient/payer (a separate, git-ignored PHI case, DOS
+02/24/2025) — that case's own claim is a **different claim** from both letter-007 (DOS
 08/18/2025) and letter-008 (DOS 12/29/2025 per its RE block); don't conflate any of these
 just because they're all Merriman/Cigna. Anthem's own
 house style (verbatim EXPL/ANSI legend quoting, the `out_of_network_rate_dispute`

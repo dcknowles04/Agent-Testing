@@ -2,8 +2,8 @@
 Case context (not part of the letter itself):
 - Payer: Cigna Health (Claims Department, P.O. Box 182223, Chattanooga, TN 37422-7223).
   **First Cigna example in the corpus** — Cigna has been worked as a live pipeline case
-  (`appeals/cases/2026-09-03-merriman-shawne-022425/`, git-ignored PHI) but had no
-  corresponding redacted corpus example until now.
+  for this same patient/payer (a separate, git-ignored PHI case, DOS 02/24/2025) but had
+  no corresponding redacted corpus example until now.
 - Dispute type: two-pronged, both against the same EOB — a frequency/unit-limit
   coding-edit denial on one code (`bundling_coding_edit`) plus a
   documentation/duplicate-submission dispute on another (`missing_documentation`), argued
