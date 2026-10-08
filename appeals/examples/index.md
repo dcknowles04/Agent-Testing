@@ -23,6 +23,7 @@ step.
 | [letter-007-merriman-08182025](past-letters/letter-007-merriman-08182025.md) | **Cigna Health — first Cigna example in the corpus** | Two-pronged in one letter: a unit/frequency-limit coding edit (`bundling_coding_edit`, denial code A2) plus a documentation/duplicate-submission dispute (`missing_documentation`, denial code(s) cited inconsistently as A3/A0/A1 — flagged in the file, not resolved) | CPT 99214-25, 20611x2, J3490x2; denial codes A2, A3/A0/A1 | 08/18/2025 | 100% of billed ($23,250.00) | **New pattern**: quotes the payer's own written medical coverage policy directly (Cigna Medical Coverage Policy 0515) to rebut a frequency-limit denial, the same quote-the-policy shape as the Aetna CPB 0016 examples but for a different payer's actual language; also cites proof of prior document submission (fax confirmation) plus a same-patient comparable-EOB precedent | Heavy bold-with-caps; **no** ***Do not duplicate this claim.*** line at all (unlike every Aetna/Anthem example); signature block fully plain, not bold |
 | [letter-008-merriman-12292025](past-letters/letter-008-merriman-12292025.md) | Cigna Health | `medical_necessity` — denial code A3 ("documentation currently on file... not medically necessary") on J3490x2 | CPT 99214-25, 20611x2, J3490x2; denial code A3 | 12/29/2025 (per RE block — **see caveat**) | 100% of billed ($15,750.00) | Same Cigna-policy-citation + comparable-EOB-precedent shape as letter-007, narrowed to a single code | **Use for wording/structure only, not facts — this letter is internally inconsistent about its own DOS** (title says 02/24/2025, RE block says 12/29/2025, body passages say 08/18/2025 — the last matching letter-007's unrelated claim). Confirmed NOT the same claim as either the git-ignored 02/24/2025 pipeline case or letter-007. Signature block fully bold, unlike letter-007's fully plain one |
 | [letter-009-wright-08152025](past-letters/letter-009-wright-08152025.md) | United Healthcare | `missing_documentation` — no formal CARC code, direct response to a UHC "Medical Records Needed" request letter | CPT 99214-25, 20553, J3490x3; no CARC code | 08/15/2025 | 100% of billed ($13,250.00) | Cervical-trigger-point-injection template (same shape as the McCracken/Fleischman/Wong letters) rather than case-002-wright's own distinct bundling argument — a different Wright/UHC claim, not a revision of case-002 | **Contains a template-contamination artifact — see caveat**: the comparable-EOB it cites is word-for-word the same one cited in the Merriman Cigna letters (letter-007/008), introduced here as a "CIGNA" EOB establishing "CIGNA" coverage even though this letter is otherwise entirely about UHC; one paragraph also asks "Aetna" instead of UHC to review, and cites a stray "DOS 10/24/2025." Core RE-block identifiers are unaffected and internally consistent. Real bulleted lists present; signature block fully plain |
+| [letter-010-khurana-09232025](past-letters/letter-010-khurana-09232025.md) | United Healthcare, via an Optum Payment Integrity pre-payment review | `bundling_coding_edit` — two denial codes naming different bundling targets: 76881 "included in" 99214 (denial code OK), and 99214-25 "included in the global day period" of cast codes 29705/29065 (denial code AD) | CPT 76881, 99214-25; denial codes OK, AD | 09/23/2025 | 100% of billed ($2,450.00), itemized per line | **Source is the user's own hand revision of a pipeline-generated letter**, not a letter the practice wrote from scratch. Two separate "CONTRARY TO ... (DENIAL CODE X):" sections, split only because the two denials name different bundling targets: 76881 rests on the separate radiology report plus a documentation-elements checklist; 99214-25 on modifier-25 "separate and apart from" every same-day service plus the denial letter's own MDM-or-time criteria. Then medical necessity quoting the payer letter's own coverage sentence, a "BASED ON THE FACT THAT" omnibus conclusion, and the itemized ask. The corpus's densest use of the "clearly and definitively" / "full and complete" register | **Known substantive defects — copy the register, wording, and structure, not these two claims**: (1) an overclaimed time-spent route (">30 MINUTE TIME SPENT," "CLEARLY AND DEFINITIVELY EXCEEDS THE 30-MINUTE ... REQUIREMENT") with no time evidence established for this DOS, which `style-guide.md`'s disjunctive-criteria rule excludes; (2) an unsupported "performed by the physician" claim on 76881, with no signature or provider attribution in the records. Separately: signature block bolds the title line only (like case-002); ***Do not duplicate this claim.*** convention holds; real Word bullets on the documentation-elements and enclosed-records lists, but the two MDM/time criteria use literal "●" characters; pasted 15pt/17.5pt runs in the time-spent block are a paste artifact (see "Body font size" below). Minor leftover source artifacts are listed in the file's header comment |
 
 ## Known cross-example disagreements (don't average these away — pick per case)
 
@@ -49,6 +50,11 @@ step.
   patient's own repeat claims — it crosses patients and payers too. Don't assume a
   comparable-EOB citation's stated payer/figures are reliable just because the rest of
   the letter reads consistently; check it against the letter's own primary payer.
+- **Body font size**: the rest of the corpus uses an 11pt Aptos body, which is what the
+  pipeline renders. letter-010-khurana-09232025 is the one exception: the time-spent
+  block pasted into the user's hand revision carries explicit 15pt and 17.5pt runs (plus
+  one 13pt run just before it), some in a "-webkit-standard" font. That's a paste
+  artifact, not a size convention. Keep rendering at 11pt; don't copy the larger sizes.
 
 ## Coverage — what's represented vs. what isn't
 
@@ -57,7 +63,8 @@ not a search failure. Update this section every time a new example is added.
 
 **Dispute categories** (per `appeals-denial-interpreter`'s taxonomy):
 - Covered: `out_of_network_rate_dispute` (case-001), `bundling_coding_edit` (case-002,
-  and partially letter-002-mccracken-05162025), a procedural/timeliness rebuttal
+  letter-010-khurana-09232025 — the corpus's only denial citing a procedure's global day
+  period — and partially letter-002-mccracken-05162025), a procedural/timeliness rebuttal
   combined with a wrong-payer liability misattribution that reads closest to
   `non_covered_service` (case-003), a pure `medical_necessity` case with **no denial
   code at all** — a pre-payment documentation/LMN request (letter-001-voigt), and now
@@ -83,8 +90,10 @@ not a search failure. Update this section every time a new example is added.
 **Payers**: Anthem Blue Cross (case-001, case-003, letter-004, letter-005 — 4 of 13
 examples), Aetna Insurance (letter-002, letter-003-mccracken, letter-006-mccracken, plus
 Aetna/Global Excel as third-party reviewer for letter-001-voigt — 4 examples), United
-Healthcare / Optum (case-002, letter-009-wright — 2 examples, two structurally different
-templates for the same patient/payer), and **Cigna Health** (letter-007-merriman and
+Healthcare / Optum (case-002, letter-009-wright, letter-010-khurana — 3 examples;
+case-002 and letter-009 are two structurally different templates for the same
+patient/payer, and letter-010 answers an Optum Payment Integrity pre-payment review),
+and **Cigna Health** (letter-007-merriman and
 letter-008-merriman — 2 examples). Not yet represented: Humana, Blue Shield,
 Medicare/Medicare Advantage, or any state Medicaid plan. Cigna has also been worked as a
 live case (`appeals/cases/2026-09-03-merriman-shawne-022425/`, git-ignored PHI) — that

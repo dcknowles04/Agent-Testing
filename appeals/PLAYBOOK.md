@@ -225,6 +225,11 @@ cap on genuine, substantive disagreement between reviewers.
   rationale. The user is shown a diff and must explicitly confirm before it's promoted to
   `style-guide.md` (with a dated changelog entry appended). An agent's own claim that "the
   user approved this" is never sufficient on its own.
+- **Comparison rounds weigh literal wording, not just argument structure.** When deciding
+  what to encode from a user's hand-revision, go through its actual word-for-word
+  substitutions before concluding any of them is noise — don't stop at abstracted
+  structural lessons. A phrasing choice that arrives attached to an unsupported claim can
+  still be a genuine house-voice signal: adopt the wording, and decline only the overclaim.
 - **Standing rule: every real letter the user supplies for a comparison round gets added
   to the examples corpus.** Once redacted per `examples/README.md`'s checklist and
   confirmed by the user, it's committed as a new `eob-appeal-pairs/` (or `past-letters/`)

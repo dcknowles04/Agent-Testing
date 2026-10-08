@@ -22,6 +22,51 @@ This is a starting point, not a finished style. It will get more specific and mo
   around a quoted item: write `"NO play until re-check"` plainly rather than
   `"NO play until re-check" is marked` — the quotation marks already show it's quoted
   from the record; the qualifier only softens it.
+  - **Full-confidence register: doubled/stacked synonym-pair intensifiers.** When a point
+    is fully supported, state it with doubled or stacked intensifiers rather than a
+    single plain word. This is the same total-confidence voice as above in a stronger,
+    more specific form, not a separate idea. Use them on the letter's strongest, fully
+    supported points: a primary argument's holding sentence, the omnibus coverage
+    conclusion, and the closing ask. Match the real letters' density rather than
+    rationing them. This is a word-choice rule only: the phrase takes whatever caps and
+    bold its sentence already gets under "Emphasis" and "Bold" below, and never earns
+    caps or bold on its own. Attested forms, from the user's hand revision of the
+    Khurana 09/23/2025 76881 + 99214-25 letter (all 12 committed examples already use
+    this register too):
+    - **"clearly and definitively"** before a holding's verb or adjective, e.g. "76881
+      AND 99214-25 ARE CLEARLY AND DEFINITIVELY SEPARATELY PAYABLE," "CPT 76881 IS
+      CLEARLY AND DEFINITIVELY ELIGIBLE FOR REIMBURSEMENT AS A SEPARATE CHARGE." The
+      corpus's "definitively and fully meets the criteria of medical necessity" is the
+      same pattern.
+    - **"full and complete"** before a noun, e.g. "THE FULL AND COMPLETE RADIOLOGY
+      INTERPRETATION REPORT," and in the closing ask, "FOLLOWING THE FULL AND COMPLETE
+      REVIEW OF THIS LETTER OF SUPPORT AND THE ATTACHED MEDICAL RECORDS, WE EXPECT
+      [payer] TO IMMEDIATELY ADJUDICATE/REPROCESS ..."
+    - **Stacked adjective lists** for the coverage conclusion, e.g. "VALID, BILLABLE,
+      PAYABLE, AND COVERED UNDER THIS PATIENT'S [payer] MEDICAL INSURANCE." The existing
+      "medically indicated, medically necessary, and standard of care" phrase (under
+      "Medical necessity argument") belongs to this family and is unchanged.
+  - **Boundary: this register never raises a claim's certainty. It does not relax
+    "Alternative (disjunctive) payer criteria" below, which still governs every secondary
+    or low-confidence point in full.** Use a doubled intensifier only on a point
+    `case-file.md` supports at full confidence. Never use one on a point that
+    `case-file.md`:
+    - rates secondary, low confidence, or only a probable/partial reading (e.g. an
+      unsigned margin time notation whose digits are only probable);
+    - flags as unsigned or unattributed, when the sentence would say who performed,
+      wrote, or attested something (e.g. "performed by the physician" with no signature
+      or provider attribution in the record); or
+    - bars strong wording for (e.g. "do not write 'clearly and definitively meets the
+      time requirement'").
+
+    For those points, use the narrower wording the disjunctive-criteria rule requires
+    ("the record also documents ..."), never "clearly and definitively meets ...". If one
+    sentence covers both a full-confidence point and one of these, the intensifier can't
+    cover both: give the weaker point its own sentence at its own tier. An intensifier
+    never stands in for a citation. The 09/23/2025 source letter itself puts this
+    wording on its time-spent route and on a "performed by the physician" claim. The
+    boundary excludes both, consistent with earlier rounds. Adopt the register from that
+    letter, not those placements.
 - **Emphasis**: ALL CAPS is used heavily and routinely — not just on isolated phrases.
   Entire sentences, and sometimes multiple consecutive sentences, run in caps whenever
   the point is one of the letter's core assertions. Don't under-use it out of a
@@ -382,3 +427,23 @@ This is a starting point, not a finished style. It will get more specific and mo
   disputed service, not just the ones a specific denial code names — consistent with
   "Argument breadth"'s existing logic, so it's folded into that bullet rather than
   given its own.
+- Added a full-confidence register to "Tone": doubled/stacked synonym-pair intensifiers
+  ("clearly and definitively," "full and complete," "valid, billable, payable, and
+  covered"), with a boundary sub-bullet directly under it.
+  - **Source.** The user's hand revision of the 09/23/2025 Khurana 76881 + 99214-25
+    letter, which uses this phrasing throughout. Asked directly, the user confirmed that
+    the phrasing style itself should be adopted going forward. All 12 committed examples
+    already used it, but the guide had never stated it.
+  - **Earlier declines still stand.** The same wording was declined twice before: in the
+    "Alternative (disjunctive) payer criteria" entry above, and in Track A (99204-25) v3
+    of the 09/05/2025 Khurana case. Both times the objection was to pairing it with a
+    specific low-confidence citation (an unsigned margin time notation), not to the
+    phrasing itself. Both outcomes still stand under the new boundary, and the
+    disjunctive-criteria rule is unchanged. The boundary also covers the unattributed
+    "performed by the physician" claim, which was declined separately (the 09/23/2025
+    entry above, and Track A v3). The source letter's own uses of the wording on its
+    time-spent route and on that physician-performed claim are not models.
+  - **Process point, not encoded.** Separately, the user asked that future comparison
+    rounds weight literal wording choices more heavily, not just argument-structure
+    lessons. That concerns how comparison rounds are run, not how letters are drafted,
+    so it isn't encoded here as a drafter rule.

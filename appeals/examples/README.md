@@ -89,7 +89,8 @@ Before moving a real EOB/appeal pair or past letter from
    redaction is complete and nothing sensitive slipped through.
 4. Once confirmed, it can be committed under `eob-appeal-pairs/case-NNN-<short-label>/`
    (paired EOB + case notes + final letter) or `past-letters/letter-NNN.md` (letter only,
-   for style/wording reference).
+   for style/wording reference). **Default, confirmed by the user as a standing rule:** a
+   comparison-round letter with no matching EOB on disk goes to `past-letters/`.
 5. **Append a row to `index.md` in the same step** — payer, dispute category, codes,
    DOS, ask, argument pattern, and any formatting caveat worth flagging (e.g. a way this
    example disagrees with another on a style point — see index.md's own note on this).
