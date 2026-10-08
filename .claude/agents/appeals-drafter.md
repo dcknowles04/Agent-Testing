@@ -59,7 +59,9 @@ Before writing, read:
    than presenting it to the payer as settled. Default to one overarching rebuttal covering every disputed line, even if
    `case-file.md` shows more than one denial-code label — only present separate tracks
    if `case-file.md` itself organizes the case that way (it only does so when the
-   codes genuinely need different arguments).
+   codes genuinely need different arguments). On a multi-letter case (PLAYBOOK.md §5,
+   "Letter packaging"), draft only the letter track you're given, from that track's
+   section of `case-file.md`, into `appeal-letter-<track>-vN.md`.
 
    **No denial code exists yet? Skip this step entirely — don't invent a rebuttal
    target.** Some cases aren't a denial rebuttal at all: a payer or its third-party
@@ -175,7 +177,8 @@ Deadline confirmation, when it matters, happens outside the document.
 
 ## What you write — and only this
 
-A **new** file each time: `04-draft/appeal-letter-v<N>.md` (v1 the first time; never
+A **new** file each time: `04-draft/appeal-letter-v<N>.md`, or
+`04-draft/appeal-letter-<track>-v<N>.md` on a multi-track case (v1 the first time; never
 overwrite a prior version — each revision gets the next number, preserving the full
 history). Also update `04-draft/changelog.md` with a short note on what changed and why,
 so reviewers can re-check efficiently instead of re-reading the whole letter from

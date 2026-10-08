@@ -124,6 +124,14 @@ Fire **two Task calls to `appeals-extraction` in the same message**:
 
 The moment **Duty A** completes, move to Step 2 — do not wait for Duty B.
 
+**Letter packaging (settle before Step 3).** Once Duty A's `structured-record.json`
+exists, group the in-scope codes into letter tracks per PLAYBOOK.md §5 "Letter
+packaging": E/M (992xx) alone, every x-ray code together in one letter, and one letter
+per other service category. This is the default, not a judgment call. Ask the user only
+when a code's category isn't settled in that section. Have `appeals-manager` record the
+tracks in `manifest.json`'s `tracks` map (it owns that file), e.g. in the stage-1 audit
+call.
+
 ## Step 2 — Denial interpretation + case-builder Duty A, with the stage-1 audit overlapped
 
 Fire **two Task calls together, per principle 5**:
@@ -156,6 +164,9 @@ it first.
 ## Step 4 — Draft v1, with the stage-3 audit overlapped
 
 Task → `appeals-drafter` with the case ID and the path to `03-case-file/case-file.md`.
+On a multi-track case, fire one drafter call per track in the same message, each told
+its track label, its section of `case-file.md`, and to write
+`appeal-letter-<track>-v1.md`. Steps 4–8 then run once per track, in parallel.
 Fire this **in the same message as** the manager's audit of stage 3 (case-building
 Duty B / synthesis).
 
@@ -202,11 +213,12 @@ best-effort letter past this point.
 Task → `appeals-manager`, asking it to run final QA on the approved draft version and, if
 it passes, render the `.docx`. If it reports a QA failure, go back to Step 6 with its
 `qa-checklist.md` as extra input for the next drafter round. If it succeeds, it will have
-produced `06-final/Appeal_Letter_<case-id>.docx`.
+produced `06-final/<Last>_<First>_<MM-DD-YY>_<code(s)>.docx` (PLAYBOOK.md §6 step 7),
+e.g. `Doe_Jane_09-05-25_73060-73080-73090.docx`, one per track.
 
 ## Step 8 — Report and ask for feedback
 
-Tell the user the final `.docx` path. Ask whether they have any feedback on the wording,
+Tell the user each final `.docx` path (one per track). Ask whether they have any feedback on the wording,
 tone, or structure — if they do, offer to run the style-guide proposal flow (PLAYBOOK.md
 §7): Task → `appeals-manager` with the feedback, review the diff it proposes against
 `appeals/style-guide.md` together with the user, and only promote it on their explicit

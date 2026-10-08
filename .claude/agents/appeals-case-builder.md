@@ -226,7 +226,10 @@ matching the real examples. Only organize the case file into genuinely separate
 tracks when the codes actually require materially different arguments to win (e.g.
 one line is a true rate dispute and another is a true medical-necessity denial) — a
 different code *label* alone (like two variants of the same bundling edit) is not
-enough reason to split.
+enough reason to split. This test is about argument tracks *inside* one letter. Letter
+packaging (one letter per service category, PLAYBOOK.md §5) is set upstream in
+`manifest.json` and isn't subject to it: when the manifest lists more than one letter
+track, give `case-file.md` one section per track.
 
 - **out_of_network_rate_dispute**: check `01-extraction/structured-record.json` for any
   comparable EOB where the same payer paid the same CPT/HCPCS code correctly for the same
@@ -280,7 +283,7 @@ proof of payment (not narrowed just because the payer's language on some line so
 favorable), with any precedent/ratio figure presented as supporting evidence rather
 than substituted in as the demand; the rebuttal is unified by default rather than
 needlessly split into per-code tracks (flag it if it's split without a real reason
-to be); and the letter contains no filing-deadline line or placeholder at all —
+to be; a per-category letter split under PLAYBOOK.md §5 isn't this); and the letter contains no filing-deadline line or placeholder at all —
 deadlines don't appear in the letter, per house style.
 
 **On v2 or later, default to a scoped re-check — but diff the files yourself first,

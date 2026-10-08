@@ -67,6 +67,51 @@ This is a starting point, not a finished style. It will get more specific and mo
     wording on its time-spent route and on a "performed by the physician" claim. The
     boundary excludes both, consistent with earlier rounds. Adopt the register from that
     letter, not those placements.
+  - **The user's own wording is adopted by default.** When the user hand-revises a
+    letter, adopt their literal wording and phrasing as the default. This applies whether
+    a delivered letter comes back revised or a user-revised letter is given to
+    `appeals-drafter` as a reference. It includes choices that raise intensity or may
+    seem to "overemphasize": heavier caps, a stronger verb, a stacked intensifier, a
+    repeated phrase. Don't soften, dilute, or paraphrase them into something blander,
+    and don't trim them as redundant. Not fully understanding why the user chose a phrase
+    is not a reason to drop it. In the user's words: "Trust the way I word things, even
+    if you don't quite understand or believe that my wording overemphasizes things."
+    This is the standing posture, not a one-off.
+    - **Learn the context, not just the phrase.** Note where the user used it: which
+      section, and what job the sentence does (a holding sentence, the coverage
+      conclusion, the ask, a denial rebuttal). Reuse it in the same kind of spot rather
+      than scattering it everywhere.
+    - **Read past typos.** When a new phrase has an obvious typo, adopt the phrase the
+      user meant, spelled correctly. Never copy the typo, and never drop the phrase
+      because of it. If a typo could plausibly be two words with different meanings,
+      pick the reading that fits this letter's own facts, and note that reading in
+      `04-draft/changelog.md`.
+  - **Boundary: this governs wording and register only, never what the letter asserts as
+    fact.** It widens the latitude the user's wording and tone get. It gives unsupported
+    facts no new latitude. Every citation-fidelity rule in this file stays exactly as
+    strict as before: verbatim quote precision, the "Alternative (disjunctive) payer
+    criteria" tier matching, the full-confidence register's own boundary above, and
+    "Citations" below. A user revision's wording alone never establishes:
+    - **who performed, wrote, signed, or attested something** the record leaves unsigned
+      or unattributed (e.g. "performed by the physician");
+    - **a figure more precise than the record shows** (e.g. "52 minutes" where the record
+      shows only "> 52 min");
+    - **an activity, finding, or service the record doesn't document**;
+    - **an identifier that differs from `structured-record.json`**: DOS, payer name,
+      claim number, code, or dollar amount. Text carried over from another claim's letter
+      (another DOS, another denial code) is a factual error, not a wording choice. Its
+      phrasing can still be adopted, re-pointed at this letter's own facts; or
+    - **different words inside quotation marks** attributed to the payer or the record.
+      Quoted text follows the source, character for character.
+
+    The one existing route for a fact the user supplies is unchanged: a clinical
+    characterization the user gives directly as the treating physician, tagged as such in
+    `case-file.md` (see "Citations" below). **Mixed sentences:** if one sentence pairs an
+    adoptable wording or emphasis choice with an unsupported factual claim, adopt the
+    wording and decline only that specific claim. This is the split already made with
+    "clearly and definitively": the register was adopted, and the unattributed "performed
+    by the physician" claim was declined. Record each decline in `04-draft/changelog.md`
+    by the specific unsupported fact, not as a style disagreement.
 - **Emphasis**: ALL CAPS is used heavily and routinely — not just on isolated phrases.
   Entire sentences, and sometimes multiple consecutive sentences, run in caps whenever
   the point is one of the letter's core assertions. Don't under-use it out of a
@@ -447,3 +492,22 @@ This is a starting point, not a finished style. It will get more specific and mo
     rounds weight literal wording choices more heavily, not just argument-structure
     lessons. That concerns how comparison rounds are run, not how letters are drafted,
     so it isn't encoded here as a drafter rule.
+- Added "The user's own wording is adopted by default" to "Tone," with its own boundary
+  sub-bullet directly under it. PLAYBOOK.md §7's comparison-rounds bullet was
+  strengthened to match.
+  - **Source.** A direct standing instruction from the user, not a hand-revision to
+    interpret: "Any wording changes i make, adopt. Make sure to learn proper context of
+    when I use specific phrases and words. Trust the way I word things, even if you
+    don't quite understand or believe that my wording overemphasizes things. If new
+    phrase has typos, use your better judgement to see what I am saying without typos."
+  - **What it changes.** The previous entry's "process point, not encoded" is now
+    encoded, as a drafter posture and not only a comparison-round habit. The default for
+    the user's hand-revised wording, including register and intensity, is adoption.
+    Earlier rounds already fixed typos rather than encoding them. What's new is that a
+    typo is never a reason to drop the phrase around it.
+  - **What it doesn't change.** It covers wording and register only. Quote precision,
+    the disjunctive-criteria tier matching, the full-confidence register's boundary, and
+    "Citations" are unchanged. Earlier declines of specific claims still stand. Two were
+    facts the record doesn't support: the unattributed "performed by the physician," and
+    another claim's carried-over DOS, payer, or denial code. A third was intensifiers on
+    a low-confidence time route, which the full-confidence boundary still bars.

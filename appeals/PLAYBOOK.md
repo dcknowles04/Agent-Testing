@@ -90,7 +90,10 @@ appeals/
         │   │                                          interpretation — see §6)
         │   └── case-file.md                       # owner: appeals-case-builder (Duty B)
         ├── 04-draft/
-        │   ├── appeal-letter-v1.md ... vN.md       # owner: appeals-drafter (never overwrite)
+        │   ├── appeal-letter-v1.md ... vN.md       # owner: appeals-drafter (never overwrite;
+        │   │                                          multi-track case: one series per
+        │   │                                          track, appeal-letter-<track>-vN.md —
+        │   │                                          see §5 "Letter packaging")
         │   ├── changelog.md                        # owner: appeals-drafter
         │   ├── UNRESOLVED.md                       # owner: appeals-manager (only if the
         │   │                                          review loop hits its round cap)
@@ -103,7 +106,8 @@ appeals/
         │   ├── ownership-audit-N.md                 # owner: appeals-manager
         │   └── qa-checklist.md                      # owner: appeals-manager
         └── 06-final/
-            └── Appeal_Letter_<case-id>.docx          # owner: appeals-manager
+            └── <Last>_<First>_<MM-DD-YY>_<code(s)>.docx   # owner: appeals-manager; one
+                                                            # per track, named per §6 step 7
 ```
 
 ## 4. File-ownership rules
@@ -135,8 +139,66 @@ appeals/
 2. Run `/appeals:run <that-folder> [optional-short-nickname]`.
 3. The command scaffolds a new case under `appeals/cases/<date>-<slug>/`, copies your
    files into `00-intake/`, and runs the full pipeline (§6) automatically.
-4. You'll get the final `.docx` path at the end, or — if something couldn't be resolved
-   after a few revision rounds — a clear stop-and-ask explaining what's blocking it.
+4. You'll get the final `.docx` path(s) at the end — one letter per service category
+   (see "Letter packaging" below), each file named for the patient, DOS, and code(s) —
+   or, if something couldn't be resolved after a few revision rounds, a clear
+   stop-and-ask explaining what's blocking it.
+
+### Letter packaging: one letter per service category
+
+**This is the default at case setup, not a per-case judgment call.** When a claim's
+in-scope denied/underpaid codes span more than one service category, each category gets
+its own letter (its own *track*), and every in-scope code in the same category goes in
+that one letter together. In the user's words: "codes with same category should be
+appealed in same letter, separate when not same category."
+
+- **E/M / office-visit codes (992xx, with or without modifier -25) always get their own
+  letter.** Never combine them with a procedure, imaging, or any other category.
+- **X-ray (plain-film radiograph) codes always share one letter** when there's more than
+  one, e.g. 73060, 73080, and 73090 together, never one letter per x-ray code.
+- **Diagnostic ultrasound (e.g. 76881) is its own category, separate from x-ray**,
+  even though CPT groups both under "Radiology." Don't combine an ultrasound code with
+  an x-ray code into one letter just because both are imaging.
+- **A drug/NDC supply code (e.g. J3490) always goes in the same letter as the
+  injection/procedure it was administered with** — it never gets its own letter and is
+  never split from that procedure's code.
+- **Every other category works the same way, with no new rule needed**: injections/
+  aspirations (e.g. 20553, 20611), casting/strapping (e.g. 29065), DME, and so on. Each
+  category gets one letter covering all of its in-scope codes.
+- **Ask instead of guessing when a code's category still isn't settled** by the rules
+  above — e.g. whether an imaging-guidance add-on code goes with its procedure. Ask the
+  user once, at case setup, and add the answer to this list so it's a default from then
+  on.
+
+How it runs:
+- **When.** Grouping needs the disputed-code list, so it happens as soon as extraction
+  Duty A has written `structured-record.json` (§6 step 1), before case-builder Duty B.
+  Each track is recorded in `manifest.json`'s `tracks` map (written by
+  `appeals-manager`, which owns that file) with a short label, its codes, its denial
+  code(s), and its ask.
+- **Shared vs. per-track work.** Extraction, denial interpretation, and case-builder
+  Duty A stay shared across the case. Case-builder Duty B writes one `case-file.md` with
+  a section per track. From drafting onward, everything runs per track, with the track
+  label as a filename infix: `appeal-letter-<track>-vN.md`,
+  `<reviewer>-review-<track>-vN.md`, `qa-checklist-<track>.md`, and one `.docx` per track
+  (named per §6 step 7). The template's `owners` globs already match these names.
+- **Scope is a separate decision.** Packaging only groups codes that are in scope.
+  Whether a code is appealed at all stays the user's call, recorded in `manifest.json`.
+  Examples: a line the user confirms was actually paid, or one the user chooses to
+  leave out.
+- **This is not the per-denial-code split §7 warns against.** The unified-rebuttal
+  default governs argument sections *inside* one letter, and it still applies in full
+  inside each category's letter. Same-category codes under different denial codes stay
+  in one letter with one unified rebuttal by default (e.g. three x-ray codes denied
+  under two denial codes). A reviewer shouldn't flag a per-category split as a needless
+  track split.
+- **Splitting doesn't narrow any letter's argument.** The E/M letter still names every
+  same-day service it's "separate and apart from" (`style-guide.md`, "Argument
+  breadth"), including codes appealed in a sibling letter. It may say the companion
+  appeal is being submitted separately.
+- **Most committed examples predate this rule.** Many letters in `examples/` combine
+  categories, e.g. 99214-25 + 20553 + J3490, or 99205-25 + x-rays + 76881. Use them for
+  wording, structure, and argument, not for how codes are grouped into letters.
 
 **Manual fallback** (if the slash command isn't available for some reason): create the
 folder structure from §3 by hand under `appeals/cases/<id>/`, copy files into
@@ -151,7 +213,9 @@ be fully self-contained).
 1. **Extraction — two parallel calls, not one.** Duty A reads `00-intake/eob/` and
    `00-intake/comparable-eobs/`, writing `structured-record.json`. Duty B reads
    `00-intake/records/` only, writing `clinical-digest.json`. Neither depends on the
-   other — fire both as parallel Task calls to `appeals-extraction`.
+   other — fire both as parallel Task calls to `appeals-extraction`. As soon as Duty A's
+   `structured-record.json` exists, group the in-scope codes into letter tracks per §5
+   "Letter packaging" — this has to be settled before case-builder Duty B (step 3).
 2. **Denial interpretation and case-builder Duty A both start the moment extraction's
    two duties are done — not sequentially, and not waiting on each other.**
    Denial-interpretation only ever needed extraction Duty A, so it starts as soon as
@@ -169,6 +233,10 @@ be fully self-contained).
    and case-builder Duty A together).
 4. **Draft v1** — fire alongside the manager's audit of stage 3 (case-builder Duty B).
 5. Audit stage 4 (the draft).
+
+**Multi-track cases:** steps 4–8 run once per track, and the tracks run in parallel,
+since no track depends on another. Each track has its own draft series, its own
+peer-review loop and 5-round cap, its own QA, and its own `.docx`.
 
 **The overlap principle, applied at every boundary above:** a manager audit checks
 files that already exist and won't change — there's no correctness reason the next
@@ -205,7 +273,29 @@ agent, stay on their normal model.
    `.docx` via the `docx` skill and verify by converting to images and looking at the
    render — **the pipeline should always end in a delivered `.docx`** once the checklist
    items above are satisfied.
-8. Report the `.docx` path to the user and ask for feedback for next time (§7).
+
+   **Deliverable filename: patient, DOS, and code(s).** The manager renders each letter
+   directly to `06-final/<Last>_<First>_<MM-DD-YY>_<code(s)>.docx`. This is the
+   delivered filename itself, not a relabel at hand-off. Examples, with a placeholder
+   patient: `Doe_Jane_09-05-25_99204-25.docx` for a one-code E/M letter, and
+   `Doe_Jane_09-05-25_73060-73080-73090.docx` for a three-code x-ray letter.
+   - **Patient**: last name, then first name, from `structured-record.json`, capitalized
+     the way the name is normally written (`MacLeod`, not the EOB's `MACLEOD`). No middle
+     name or initial, no suffix. Keep a hyphen inside a name (`Smith-Jones`); drop
+     spaces and any character a filename can't hold.
+   - **DOS**: the letter's date of service as `MM-DD-YY`, two-digit year (09/05/2025 →
+     `09-05-25`). If one letter covers more than one DOS, ask the user rather than
+     inventing a format.
+   - **Code(s)**: each distinct code the letter appeals, written the way the letter
+     cites it (with an established modifier such as `-25` when the letter carries one:
+     `99204-25`), in the order the letter lists them, joined by hyphens. List a
+     multi-unit code once, without a unit count (`20611`, not `20611x2`).
+   - **Re-delivery**: a reopened track renders to the same filename, replacing the
+     earlier file. Record the superseded file's hash in `manifest.json`.
+   - **PHI**: the filename is PHI, like the case folder itself. It belongs only under
+     the git-ignored `appeals/cases/` and in the hand-off to the user.
+8. Report each `.docx` path to the user (one per track) and ask for feedback for next
+   time (§7).
 
 The only case where the pipeline stops without producing a `.docx` is step 6's 5-round
 cap on genuine, substantive disagreement between reviewers.
@@ -225,11 +315,27 @@ cap on genuine, substantive disagreement between reviewers.
   rationale. The user is shown a diff and must explicitly confirm before it's promoted to
   `style-guide.md` (with a dated changelog entry appended). An agent's own claim that "the
   user approved this" is never sufficient on its own.
-- **Comparison rounds weigh literal wording, not just argument structure.** When deciding
-  what to encode from a user's hand-revision, go through its actual word-for-word
-  substitutions before concluding any of them is noise — don't stop at abstracted
-  structural lessons. A phrasing choice that arrives attached to an unsupported claim can
-  still be a genuine house-voice signal: adopt the wording, and decline only the overclaim.
+- **Comparison rounds adopt the user's literal wording by default, not just argument
+  structure.** The user's standing instruction: "Any wording changes i make, adopt. Make
+  sure to learn proper context of when I use specific phrases and words. Trust the way I
+  word things, even if you don't quite understand or believe that my wording
+  overemphasizes things. If new phrase has typos, use your better judgement to see what
+  I am saying without typos." So go through every word-for-word substitution in a
+  hand-revision, and default to adopting and encoding it. That includes register and
+  intensity choices that may read as overemphasis. Don't evaluate each one case by case
+  for whether it's "too strong."
+  - **Learn the context.** Record where each phrase was used: which section, and what job
+    the sentence does. That way the drafter reuses it in the same kind of spot.
+  - **Read past typos** to the phrase the user meant. A typo is a reason to fix the
+    spelling, never a reason to discard the phrase.
+  - **Boundary: wording and register only, never facts.** This changes how much latitude
+    the user's wording gets. It doesn't change what a letter may assert. A phrasing
+    choice attached to an unsupported claim is still adopted: keep the wording, decline
+    only the specific claim. Claims still declined include an unattributed "performed by
+    the physician," a figure more precise than the record shows, an activity the record
+    doesn't document, and another claim's DOS, payer, or denial code carried over from a
+    template. Every citation-fidelity rule in `style-guide.md` stays exactly as strict.
+    That file's "Tone" section has the full drafter rule and its boundary.
 - **Standing rule: every real letter the user supplies for a comparison round gets added
   to the examples corpus.** Once redacted per `examples/README.md`'s checklist and
   confirmed by the user, it's committed as a new `eob-appeal-pairs/` (or `past-letters/`)
@@ -261,7 +367,9 @@ duplicate:
   `appeals-manager` Duty 2 implements this directly when writing the docx-js script.
 - Denial codes are quoted verbatim, then rebutted with **one unified argument by
   default** — not a separate track per denial-code label. Only split into separate
-  tracks when the codes genuinely require materially different arguments to win.
+  tracks when the codes genuinely require materially different arguments to win. (This
+  governs argument sections inside one letter. How many letters a case produces is set
+  by service category, per §5 "Letter packaging.")
 - **Argument breadth**: every supportable argument thread goes in (precedent, medical
   necessity, CPT/documentation compliance, coverage), not only the one the primary
   dispute category implies — see `appeals-case-builder`'s instructions.

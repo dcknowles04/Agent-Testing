@@ -87,8 +87,12 @@ output for a case that reaches this duty should always be a Word document, never
 with nothing delivered.
 
 Once the checklist passes, produce the deliverable:
-1. Use the `docx` skill to render the approved `appeal-letter-vN.md` into
-   `06-final/Appeal_Letter_<case-id>.docx`, following that skill's own instructions for
+1. Use the `docx` skill to render the approved `appeal-letter-vN.md` (on a multi-track
+   case, `appeal-letter-<track>-vN.md`) into
+   `06-final/<Last>_<First>_<MM-DD-YY>_<code(s)>.docx`: patient, DOS, and code(s), named
+   exactly per PLAYBOOK.md §6 step 7 (e.g. `Doe_Jane_09-05-25_99204-25.docx`; several
+   codes joined by hyphens, e.g. `73060-73080-73090`), following that skill's own
+   instructions for
    creating a properly formatted business letter (correct page size, no literal `\n`,
    proper paragraph structure). Two formatting rules are house style, not docx-js
    choices left to your judgment:
